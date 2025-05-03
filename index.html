@@ -361,5 +361,194 @@
       switchLanguage(); // appliquer la langue initiale
     });
   </script>
+  <script>
+  const translations = {
+    en: {
+      tagline: "Guaranteed privacy. Phones stay with guests. No photos allowed.",
+      download_catalogue: "Download Catalogue",
+      order_now: "Order Now",
+      concept_title: "Our Concept",
+      concept_text: "With SecurityNoPhone, your guests keep their phones – but cannot use them for photos. Total comfort for them, total privacy for you.",
+      usecases_title: "Use Cases",
+      usecase1: "Weddings",
+      usecase1_desc: "Give your guests an intimate moment, without visible phones or photos.",
+      usecase2: "Conferences",
+      usecase2_desc: "Prevent leaks of confidential content during professional events.",
+      usecase3: "Private Parties",
+      usecase3_desc: "Keep your event exclusive, with no unauthorized recordings.",
+      offers_title: "Our Offers",
+      offer_custom: "Custom Pouches",
+      offer1: "250 pouches with logo",
+      offer2: "Delivery included",
+      offer3: "€850 incl. VAT",
+      offer_rental: "All-Inclusive Rental",
+      rental1: "Up to 200 pouches",
+      rental2: "Delivery & return included",
+      rental3: "From €390/day",
+      rental_title: "All-Inclusive Rental",
+      rental_intro: "Simplify your event: guests keep their phones but can't take pictures. Privacy + comfort guaranteed.",
+      adv_org1: "Guaranteed confidentiality",
+      adv_org2: "Controlled premium experience",
+      adv_org3: "No logistics to manage",
+      adv_guest1: "Keep phones with them",
+      adv_guest2: "Can't take photos",
+      adv_guest3: "Relaxed, respected atmosphere",
+      ask_quote: "Request a Quote",
+      carousel_title: "Gallery",
+      testimonials_title: "Testimonials",
+      contact_title: "Contact",
+      label_name: "Name",
+      label_email: "Email",
+      label_message: "Message",
+      btn_send: "Send"
+    },
+    de: {
+      tagline: "Garantierte Privatsphäre. Handys bleiben bei den Gästen. Keine Fotos möglich.",
+      download_catalogue: "Katalog herunterladen",
+      order_now: "Jetzt bestellen",
+      concept_title: "Unser Konzept",
+      concept_text: "Mit SecurityNoPhone behalten Ihre Gäste ihr Handy – aber können keine Fotos machen. Totale Privatsphäre für Sie, Komfort für sie.",
+      usecases_title: "Anwendungsfälle",
+      usecase1: "Hochzeiten",
+      usecase1_desc: "Erleben Sie intime Momente ohne Kameras oder Handys.",
+      usecase2: "Konferenzen",
+      usecase2_desc: "Vertrauliche Inhalte bleiben sicher – keine Aufnahmen möglich.",
+      usecase3: "Private Feiern",
+      usecase3_desc: "Bewahren Sie Exklusivität ohne unerlaubte Bilder.",
+      offers_title: "Unsere Angebote",
+      offer_custom: "Individuelle Taschen",
+      offer1: "250 Taschen mit Logo",
+      offer2: "Lieferung inklusive",
+      offer3: "850€ inkl. MwSt.",
+      offer_rental: "Komplettvermietung",
+      rental1: "Bis zu 200 Taschen",
+      rental2: "Lieferung & Rückgabe inklusive",
+      rental3: "Ab 390€/Tag",
+      rental_title: "Komplettvermietung",
+      rental_intro: "Vereinfachen Sie Ihre Veranstaltung: Gäste behalten ihr Handy, können aber keine Fotos machen.",
+      adv_org1: "Garantierte Vertraulichkeit",
+      adv_org2: "Premium-Erlebnis unter Kontrolle",
+      adv_org3: "Kein logistischer Aufwand",
+      adv_guest1: "Behalten ihr Handy",
+      adv_guest2: "Keine Fotos möglich",
+      adv_guest3: "Entspannte Atmosphäre",
+      ask_quote: "Angebot anfordern",
+      carousel_title: "Galerie",
+      testimonials_title: "Erfahrungsberichte",
+      contact_title: "Kontakt",
+      label_name: "Name",
+      label_email: "E-Mail",
+      label_message: "Nachricht",
+      btn_send: "Senden"
+    }
+  };
+
+  function switchLanguage() {
+    const lang = document.getElementById('langSwitcher').value;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const text = translations[lang]?.[key];
+      if (text) el.innerHTML = text;
+    });
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    switchLanguage(); // Appliquer la langue par défaut
+  });
+  </script><script>
+  const translations = {
+    en: {
+      tagline: "Guaranteed privacy. Phones stay with guests. No photos allowed.",
+      download_catalogue: "Download Catalogue",
+      order_now: "Order Now",
+      concept_title: "Our Concept",
+      concept_text: "With SecurityNoPhone, your guests keep their phones – but cannot use them for photos. Total comfort for them, total privacy for you.",
+      usecases_title: "Use Cases",
+      usecase1: "Weddings",
+      usecase1_desc: "Give your guests an intimate moment, without visible phones or photos.",
+      usecase2: "Conferences",
+      usecase2_desc: "Prevent leaks of confidential content during professional events.",
+      usecase3: "Private Parties",
+      usecase3_desc: "Keep your event exclusive, with no unauthorized recordings.",
+      offers_title: "Our Offers",
+      offer_custom: "Custom Pouches",
+      offer1: "250 pouches with logo",
+      offer2: "Delivery included",
+      offer3: "€850 incl. VAT",
+      offer_rental: "All-Inclusive Rental",
+      rental1: "Up to 200 pouches",
+      rental2: "Delivery & return included",
+      rental3: "From €390/day",
+      rental_title: "All-Inclusive Rental",
+      rental_intro: "Simplify your event: guests keep their phones but can't take pictures. Privacy + comfort guaranteed.",
+      adv_org1: "Guaranteed confidentiality",
+      adv_org2: "Controlled premium experience",
+      adv_org3: "No logistics to manage",
+      adv_guest1: "Keep phones with them",
+      adv_guest2: "Can't take photos",
+      adv_guest3: "Relaxed, respected atmosphere",
+      ask_quote: "Request a Quote",
+      carousel_title: "Gallery",
+      testimonials_title: "Testimonials",
+      contact_title: "Contact",
+      label_name: "Name",
+      label_email: "Email",
+      label_message: "Message",
+      btn_send: "Send"
+    },
+    de: {
+      tagline: "Garantierte Privatsphäre. Handys bleiben bei den Gästen. Keine Fotos möglich.",
+      download_catalogue: "Katalog herunterladen",
+      order_now: "Jetzt bestellen",
+      concept_title: "Unser Konzept",
+      concept_text: "Mit SecurityNoPhone behalten Ihre Gäste ihr Handy – aber können keine Fotos machen. Totale Privatsphäre für Sie, Komfort für sie.",
+      usecases_title: "Anwendungsfälle",
+      usecase1: "Hochzeiten",
+      usecase1_desc: "Erleben Sie intime Momente ohne Kameras oder Handys.",
+      usecase2: "Konferenzen",
+      usecase2_desc: "Vertrauliche Inhalte bleiben sicher – keine Aufnahmen möglich.",
+      usecase3: "Private Feiern",
+      usecase3_desc: "Bewahren Sie Exklusivität ohne unerlaubte Bilder.",
+      offers_title: "Unsere Angebote",
+      offer_custom: "Individuelle Taschen",
+      offer1: "250 Taschen mit Logo",
+      offer2: "Lieferung inklusive",
+      offer3: "850€ inkl. MwSt.",
+      offer_rental: "Komplettvermietung",
+      rental1: "Bis zu 200 Taschen",
+      rental2: "Lieferung & Rückgabe inklusive",
+      rental3: "Ab 390€/Tag",
+      rental_title: "Komplettvermietung",
+      rental_intro: "Vereinfachen Sie Ihre Veranstaltung: Gäste behalten ihr Handy, können aber keine Fotos machen.",
+      adv_org1: "Garantierte Vertraulichkeit",
+      adv_org2: "Premium-Erlebnis unter Kontrolle",
+      adv_org3: "Kein logistischer Aufwand",
+      adv_guest1: "Behalten ihr Handy",
+      adv_guest2: "Keine Fotos möglich",
+      adv_guest3: "Entspannte Atmosphäre",
+      ask_quote: "Angebot anfordern",
+      carousel_title: "Galerie",
+      testimonials_title: "Erfahrungsberichte",
+      contact_title: "Kontakt",
+      label_name: "Name",
+      label_email: "E-Mail",
+      label_message: "Nachricht",
+      btn_send: "Senden"
+    }
+  };
+
+  function switchLanguage() {
+    const lang = document.getElementById('langSwitcher').value;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const text = translations[lang]?.[key];
+      if (text) el.innerHTML = text;
+    });
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    switchLanguage(); // Appliquer la langue par défaut
+  });
+  </script>
 </body>
 </html>
