@@ -1,49 +1,40 @@
-<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SecurityNoPhone</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <style>
     body {
-      font-family: 'Cairo', sans-serif;
-      background-color: #fdfaf5;
-      color: #2d1f14;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fdfaf6;
+      color: #2b2b2b;
     }
     header {
-      background: linear-gradient(135deg, #3a1c1c, #af8654);
+      background: linear-gradient(to right, #1e1e1e, #5c2d2d);
       color: white;
       text-align: center;
-      padding: 60px 20px;
-    }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-    }
-    .navbar {
-      background-color: #462a20;
-    }
-    .navbar a {
-      color: #fef6e4 !important;
+      padding: 80px 20px;
     }
     .section-title {
-      font-family: 'Playfair Display', serif;
       font-size: 2rem;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #cba135;
-      display: inline-block;
+      font-weight: bold;
+      color: #4a2c2a;
+      margin-bottom: 1.5rem;
     }
-    .card {
-      border-radius: 12px;
-      border: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    .btn-primary {
+      background-color: #b28d48;
+      border-color: #b28d48;
     }
-    footer {
-      background-color: #2e1f1c;
-      color: #ddd;
-      text-align: center;
-      padding: 30px;
+    .btn-outline-warning {
+      border-color: #b28d48;
+      color: #b28d48;
+    }
+    .btn-outline-warning:hover {
+      background-color: #b28d48;
+      color: white;
     }
     .whatsapp-btn {
       position: fixed;
@@ -57,29 +48,35 @@
       text-decoration: none;
       z-index: 999;
     }
-    .gallery-img {
-      max-height: 300px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .lang-switcher {
+    #language-select {
       position: absolute;
-      top: 20px;
+      top: 10px;
       right: 20px;
+      background: white;
+      border-radius: 5px;
+      padding: 5px;
     }
   </style>
 </head>
 <body>
-  <div class="lang-switcher">
-    <select id="lang" onchange="switchLanguage()">
-      <option value="fr">FR</option>
-      <option value="en">EN</option>
-      <option value="de">DE</option>
+  <div id="language-select">
+    <select id="langSwitcher" onchange="switchLanguage()" class="form-select form-select-sm">
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
     </select>
-  </div>  <header>
+  </div>
+
+  <header data-aos="fade-down">
     <h1>SecurityNoPhone</h1>
-    <p>Événements privés, confidentialité garantie</p>
-  </header>  <nav class="navbar navbar-expand-lg navbar-dark">
+    <p class="lead" data-i18n="tagline">Confidentialité garantie. Téléphones conservés. Aucune photo possible.</p>
+    <div class="mt-4">
+      <a href="catalogue.pdf" class="btn btn-outline-warning m-2" data-i18n="download_catalogue">Télécharger le catalogue</a>
+      <a href="https://wa.me/33700000000" class="btn btn-primary m-2" data-i18n="order_now">Passer commande</a>
+    </div>
+  </header>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">SNP</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -88,88 +85,281 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="#concept">Concept</a></li>
-          <li class="nav-item"><a class="nav-link" href="#offres">Offres</a></li>
-          <li class="nav-item"><a class="nav-link" href="#location">Location</a></li>
+          <li class="nav-item"><a class="nav-link" href="#usecases">Utilisations</a></li>
+          <li class="nav-item"><a class="nav-link" href="#offers">Offres</a></li>
+          <li class="nav-item"><a class="nav-link" href="#location-advantages">Location</a></li>
           <li class="nav-item"><a class="nav-link" href="#galerie">Galerie</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonials">Témoignages</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
       </div>
     </div>
-  </nav>  <section class="container my-5" id="concept">
-    <h2 class="section-title">Notre Concept</h2>
-    <p>Chez SecurityNoPhone, nous savons à quel point la confidentialité est devenue essentielle, que ce soit dans un cadre professionnel, familial ou festif. C’est pourquoi nous avons conçu des pochettes de sécurité uniques et élégantes, dotées d’un système antivol intelligent. Celui-ci empêche toute sortie du téléphone pendant l’événement, évitant ainsi les prises de photos ou vidéos non autorisées. Grâce à leur fenêtre tactile, les utilisateurs peuvent consulter leurs messages sans compromettre la confidentialité de votre événement. 
-    <br><br>
-    Nos produits sont utilisés par des organisateurs de mariages, des entreprises, des artistes, des producteurs et des institutions culturelles qui ont un point commun : offrir une expérience respectueuse et sécurisée à leurs invités. Avec SecurityNoPhone, vous montrez un vrai souci du détail et inspirez confiance.</p>
-  </section>  <section class="container my-5" id="offres">
-    <h2 class="section-title">Nos Offres</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card p-4">
-          <h4>Pochettes personnalisées</h4>
-          <ul>
-            <li>250 pochettes avec logo personnalisé</li>
-            <li>Fenêtre tactile et finition haut de gamme</li>
-            <li>Système antivol discret et efficace</li>
-            <li>Livraison gratuite incluse</li>
+  </nav>
+  <section class="container my-5" id="concept" data-aos="fade-up">
+    <h2 class="section-title text-center" data-i18n="concept_title">Notre Concept</h2>
+    <p class="fs-5 text-center" data-i18n="concept_text">
+      Avec SecurityNoPhone, vos invités gardent leur téléphone sur eux – mais ne peuvent pas s’en servir pour prendre des photos. Résultat : une tranquillité totale pour eux, et une confidentialité garantie pour vous.
+    </p>
+  </section>
+
+  <section class="container my-5" id="usecases" data-aos="fade-up">
+    <h2 class="section-title text-center" data-i18n="usecases_title">Cas d'utilisation</h2>
+    <div class="row text-center">
+      <div class="col-md-4 mb-3">
+        <h5 data-i18n="usecase1">Mariages</h5>
+        <p data-i18n="usecase1_desc">Offrez à vos invités un moment intime sans téléphones visibles ni photos surprises.</p>
+      </div>
+      <div class="col-md-4 mb-3">
+        <h5 data-i18n="usecase2">Conférences</h5>
+        <p data-i18n="usecase2_desc">Empêchez la fuite d’informations confidentielles pendant vos événements pros.</p>
+      </div>
+      <div class="col-md-4 mb-3">
+        <h5 data-i18n="usecase3">Soirées privées</h5>
+        <p data-i18n="usecase3_desc">Préservez l’ambiance et l’exclusivité de vos événements haut de gamme.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container my-5" id="offers" data-aos="fade-up">
+    <h2 class="section-title text-center" data-i18n="offers_title">Nos Offres</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-5 mb-4">
+        <div class="card p-4 shadow-sm h-100 text-center">
+          <h4 data-i18n="offer_custom">Pochettes personnalisées</h4>
+          <ul class="list-unstyled">
+            <li data-i18n="offer1">250 pochettes avec logo</li>
+            <li data-i18n="offer2">Livraison incluse</li>
+            <li data-i18n="offer3">850€ TTC</li>
           </ul>
-          <p><strong>850€ TTC</strong></p>
-          <p class="text-muted">Idéal pour les marques, institutions et événements de prestige.</p>
+        </div>
+      </div>
+      <div class="col-md-5 mb-4">
+        <div class="card p-4 shadow-sm h-100 text-center">
+          <h4 data-i18n="offer_rental">Location clé-en-main</h4>
+          <ul class="list-unstyled">
+            <li data-i18n="rental1">Jusqu’à 200 pochettes</li>
+            <li data-i18n="rental2">Livraison + retour inclus</li>
+            <li data-i18n="rental3">À partir de 390€ / jour</li>
+          </ul>
         </div>
       </div>
     </div>
-  </section>  <section class="container my-5" id="location">
-    <h2 class="section-title">Location d'équipements</h2>
-    <div class="card p-4">
-      <h4>Pack Événement temporaire</h4>
-      <ul>
-        <li>Jusqu’à 200 pochettes livrées partout en France</li>
-        <li>Retour facile via étiquette prépayée</li>
-        <li>Option agent de distribution sur site</li>
-        <li>Usage recommandé : mariages, séminaires, conférences, soirées privées</li>
-      </ul>
-      <p><strong>À partir de 390€ TTC / jour</strong></p>
-      <p class="text-muted">Nous vous accompagnons de la logistique à la mise en place pour garantir le succès de votre événement.</p>
-    </div>
-  </section>  <section class="container my-5" id="galerie">
-    <h2 class="section-title">Galerie</h2>
-    <div class="row g-3">
-      <div class="col-md-6">
-        <img src="https://tse2.mm.bing.net/th?id=OIP.ilDJ505YMwVQe4pNwjgjLwHaHa&pid=Api" alt="Pochette" class="img-fluid gallery-img">
+  </section>
+  <section class="container my-5 py-4 bg-light rounded shadow-sm" id="location-advantages" data-aos="fade-up">
+    <h2 class="section-title text-center" data-i18n="rental_title">Location tout compris</h2>
+    <p class="text-center fs-5" data-i18n="rental_intro">
+      Simplifiez l'organisation : vos invités gardent leur téléphone sur eux sans pouvoir prendre de photos. Confidentialité + confort garantis.
+    </p>
+    <div class="accordion" id="accordionAvantages">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+            Avantages pour l'organisateur
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show">
+          <div class="accordion-body">
+            <ul>
+              <li data-i18n="adv_org1">Confidentialité garantie</li>
+              <li data-i18n="adv_org2">Expérience premium maîtrisée</li>
+              <li data-i18n="adv_org3">Aucune gestion logistique à prévoir</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="col-md-6">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.tiktok.com/embed/v2/7471266049443319095" frameborder="0" allowfullscreen></iframe>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+            Avantages pour les invités
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <ul>
+              <li data-i18n="adv_guest1">Ils gardent leur téléphone sur eux</li>
+              <li data-i18n="adv_guest2">Ils ne peuvent pas prendre de photos</li>
+              <li data-i18n="adv_guest3">Ambiance détendue et respectée</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </section>  <section class="container my-5" id="contact">
-    <h2 class="section-title">Contact</h2>
-    <p class="mb-4">Vous avez un projet, une demande de devis ou une question ? Notre équipe se tient à votre disposition pour vous conseiller avec sérieux, réactivité et discrétion.</p>
-    <form>
-      <div class="mb-3">
-        <label for="nom" class="form-label">Nom</label>
-        <input type="text" class="form-control" id="nom" required>
+    <div class="text-center mt-4">
+      <a href="#contact" class="btn btn-primary" data-i18n="ask_quote">Demander un devis</a>
+    </div>
+  </section>
+
+  <section class="container my-5" id="galerie" data-aos="fade-up">
+    <h2 class="section-title text-center" data-i18n="carousel_title">Galerie</h2>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
       </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
+      <div class="carousel-inner rounded shadow">
+        <div class="carousel-item active">
+          <img src="https://tse2.mm.bing.net/th?id=OIP.ilDJ505YMwVQe4pNwjgjLwHaHa&pid=Api" class="d-block w-100" alt="Photo 1">
+        </div>
+        <div class="carousel-item">
+          <img src="https://tse3.mm.bing.net/th?id=OIP.uJbKatw-d402URFtRPvDsAHaHe&pid=Api" class="d-block w-100" alt="Photo 2">
+        </div>
+        <div class="carousel-item">
+          <div class="ratio ratio-16x9">
+            <iframe src="https://www.tiktok.com/embed/v2/7471266049443319095" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </section>
+
+  <section class="container my-5 text-center" id="testimonials" data-aos="fade-up">
+    <h2 class="section-title" data-i18n="testimonials_title">Témoignages</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-5 mb-3">
+        <div class="card p-3 text-center">
+          <p class="mb-1">“Les invités ont été soulagés : ils avaient leur téléphone mais sans pression de prendre des photos.”</p>
+          <small>- Élodie, organisatrice</small>
+        </div>
+      </div>
+      <div class="col-md-5 mb-3">
+        <div class="card p-3 text-center">
+          <p class="mb-1">“Ambiance détendue, 0 photo, 100% confidentialité. C'était exactement ce qu'on voulait.”</p>
+          <small>- Karim, séminaire privé</small>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="container my-5" id="contact" data-aos="fade-up">
+    <h2 class="section-title text-center" data-i18n="contact_title">Contact</h2>
+    <form class="row g-3 justify-content-center">
+      <div class="col-md-6">
+        <label for="name" class="form-label" data-i18n="label_name">Nom</label>
+        <input type="text" class="form-control" id="name" required>
+      </div>
+      <div class="col-md-6">
+        <label for="email" class="form-label" data-i18n="label_email">Email</label>
         <input type="email" class="form-control" id="email" required>
       </div>
-      <div class="mb-3">
-        <label for="message" class="form-label">Message</label>
+      <div class="col-md-12">
+        <label for="message" class="form-label" data-i18n="label_message">Message</label>
         <textarea class="form-control" id="message" rows="4" required></textarea>
       </div>
-      <button type="submit" class="btn btn-dark">Envoyer</button>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-dark" data-i18n="btn_send">Envoyer</button>
+      </div>
     </form>
-  </section><a class="whatsapp-btn" href="https://wa.me/33700000000" target="_blank">✉</a>
+  </section>
 
-  <footer>
-    <p>&copy; 2025 SecurityNoPhone. Tous droits réservés.</p>
-  </footer>  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>  <script>
+  <footer class="text-center py-4 bg-dark text-light mt-5">
+    <p>&copy; 2025 SecurityNoPhone – Tous droits réservés.</p>
+  </footer>
+
+  <a class="whatsapp-btn" href="https://wa.me/33700000000" target="_blank" aria-label="WhatsApp">&#x2709;</a>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+
+  <script>
+    const translations = {
+      en: {
+        tagline: "Guaranteed privacy. Phones stay with guests. No photos allowed.",
+        download_catalogue: "Download Catalogue",
+        order_now: "Order Now",
+        concept_title: "Our Concept",
+        concept_text: "With SecurityNoPhone, your guests keep their phones – but cannot use them for photos. Total comfort for them, total privacy for you.",
+        usecases_title: "Use Cases",
+        usecase1: "Weddings",
+        usecase1_desc: "Give your guests an intimate moment, without visible phones or photos.",
+        usecase2: "Conferences",
+        usecase2_desc: "Prevent leaks of confidential content during professional events.",
+        usecase3: "Private Parties",
+        usecase3_desc: "Keep your event exclusive, with no unauthorized recordings.",
+        offers_title: "Our Offers",
+        offer_custom: "Custom Pouches",
+        offer1: "250 pouches with logo",
+        offer2: "Delivery included",
+        offer3: "€850 incl. VAT",
+        offer_rental: "All-Inclusive Rental",
+        rental1: "Up to 200 pouches",
+        rental2: "Delivery & return included",
+        rental3: "From €390/day",
+        rental_title: "All-Inclusive Rental",
+        rental_intro: "Simplify your event: guests keep their phones but can't take pictures. Privacy + comfort guaranteed.",
+        adv_org1: "Guaranteed confidentiality",
+        adv_org2: "Controlled premium experience",
+        adv_org3: "No logistics to manage",
+        adv_guest1: "Keep phones with them",
+        adv_guest2: "Can't take photos",
+        adv_guest3: "Relaxed, respected atmosphere",
+        ask_quote: "Request a Quote",
+        carousel_title: "Gallery",
+        testimonials_title: "Testimonials",
+        contact_title: "Contact",
+        label_name: "Name",
+        label_email: "Email",
+        label_message: "Message",
+        btn_send: "Send"
+      },
+      de: {
+        tagline: "Garantierte Privatsphäre. Handys bleiben bei den Gästen. Keine Fotos möglich.",
+        download_catalogue: "Katalog herunterladen",
+        order_now: "Jetzt bestellen",
+        concept_title: "Unser Konzept",
+        concept_text: "Mit SecurityNoPhone behalten Ihre Gäste ihr Handy – aber können keine Fotos machen. Totale Privatsphäre für Sie, Komfort für sie.",
+        usecases_title: "Anwendungsfälle",
+        usecase1: "Hochzeiten",
+        usecase1_desc: "Erleben Sie intime Momente ohne Kameras oder Handys.",
+        usecase2: "Konferenzen",
+        usecase2_desc: "Vertrauliche Inhalte bleiben sicher – keine Aufnahmen möglich.",
+        usecase3: "Private Feiern",
+        usecase3_desc: "Bewahren Sie Exklusivität ohne unerlaubte Bilder.",
+        offers_title: "Unsere Angebote",
+        offer_custom: "Individuelle Taschen",
+        offer1: "250 Taschen mit Logo",
+        offer2: "Lieferung inklusive",
+        offer3: "850€ inkl. MwSt.",
+        offer_rental: "Komplettvermietung",
+        rental1: "Bis zu 200 Taschen",
+        rental2: "Lieferung & Rückgabe inklusive",
+        rental3: "Ab 390€/Tag",
+        rental_title: "Komplettvermietung",
+        rental_intro: "Vereinfachen Sie Ihre Veranstaltung: Gäste behalten ihr Handy, können aber keine Fotos machen.",
+        adv_org1: "Garantierte Vertraulichkeit",
+        adv_org2: "Premium-Erlebnis unter Kontrolle",
+        adv_org3: "Kein logistischer Aufwand",
+        adv_guest1: "Behalten ihr Handy",
+        adv_guest2: "Keine Fotos möglich",
+        adv_guest3: "Entspannte Atmosphäre",
+        ask_quote: "Angebot anfordern",
+        carousel_title: "Galerie",
+        testimonials_title: "Erfahrungsberichte",
+        contact_title: "Kontakt",
+        label_name: "Name",
+        label_email: "E-Mail",
+        label_message: "Nachricht",
+        btn_send: "Senden"
+      }
+    };
+
     function switchLanguage() {
-      const lang = document.getElementById('lang').value;
-      document.querySelectorAll('[data-lang-fr]').forEach(el => {
-        el.textContent = el.getAttribute(`data-lang-${lang}`);
+      const lang = document.getElementById('langSwitcher').value;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const text = translations[lang]?.[key];
+        if (text) el.innerHTML = text;
       });
     }
-  </script></body>
+
+    window.addEventListener("DOMContentLoaded", () => {
+      switchLanguage(); // appliquer la langue initiale
+    });
+  </script>
+</body>
 </html>
