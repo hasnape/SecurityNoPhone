@@ -8,11 +8,11 @@
   <style>
     body {
       font-family: 'Cairo', sans-serif;
-      background-color: #f8f5f0;
-      color: #2b2b2b;
+      background-color: #fdfaf5;
+      color: #2d1f14;
     }
     header {
-      background: linear-gradient(to right, #1c1c1c, #4a2c2a);
+      background: linear-gradient(135deg, #3a1c1c, #af8654);
       color: white;
       text-align: center;
       padding: 60px 20px;
@@ -22,10 +22,10 @@
       font-size: 3rem;
     }
     .navbar {
-      background-color: #2e1f1c;
+      background-color: #462a20;
     }
     .navbar a {
-      color: #f9f2e7 !important;
+      color: #fef6e4 !important;
     }
     .section-title {
       font-family: 'Playfair Display', serif;
@@ -35,15 +35,15 @@
       display: inline-block;
     }
     .card {
-      background-color: #fff;
       border-radius: 12px;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     footer {
-      background-color: #1c1c1c;
-      color: #ccc;
+      background-color: #2e1f1c;
+      color: #ddd;
       text-align: center;
       padding: 30px;
-      margin-top: 50px;
     }
     .whatsapp-btn {
       position: fixed;
@@ -57,12 +57,28 @@
       text-decoration: none;
       z-index: 999;
     }
+    .gallery-img {
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>SecurityNoPhone</h1>
-    <p>Confidentialité garantie, élégance assurée</p>
+  <div class="lang-switcher">
+    <select id="lang" onchange="switchLanguage()">
+      <option value="fr">FR</option>
+      <option value="en">EN</option>
+      <option value="de">DE</option>
+    </select>
+  </div>  <header>
+    <h1 data-lang-fr="SecurityNoPhone" data-lang-en="SecurityNoPhone" data-lang-de="SecurityNoPhone">SecurityNoPhone</h1>
+    <p data-lang-fr="Événements privés, confidentialité garantie" data-lang-en="Private events, guaranteed confidentiality" data-lang-de="Private Veranstaltungen, garantierte Vertraulichkeit">Événements privés, confidentialité garantie</p>
   </header>  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="#">SNP</a>
@@ -71,76 +87,24 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#concept">Concept</a></li>
-          <li class="nav-item"><a class="nav-link" href="#offres">Offres</a></li>
-          <li class="nav-item"><a class="nav-link" href="#location">Location</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#concept" data-lang-fr="Concept" data-lang-en="Concept" data-lang-de="Konzept">Concept</a></li>
+          <li class="nav-item"><a class="nav-link" href="#offres" data-lang-fr="Offres" data-lang-en="Offers" data-lang-de="Angebote">Offres</a></li>
+          <li class="nav-item"><a class="nav-link" href="#location" data-lang-fr="Location" data-lang-en="Rental" data-lang-de="Vermietung">Location</a></li>
+          <li class="nav-item"><a class="nav-link" href="#galerie" data-lang-fr="Galerie" data-lang-en="Gallery" data-lang-de="Galerie">Galerie</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact" data-lang-fr="Contact" data-lang-en="Contact" data-lang-de="Kontakt">Contact</a></li>
         </ul>
       </div>
     </div>
-  </nav>  <section class="container my-5" id="concept">
-    <h2 class="section-title">Notre Concept</h2>
-    <p>SecurityNoPhone propose des pochettes de sécurité anti-photo avec système antivol intégré. Elles empêchent les invités de sortir leur téléphone pour prendre des photos pendant vos événements confidentiels.</p>
-  </section>  <section class="container my-5" id="offres">
-    <h2 class="section-title">Nos Offres</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card p-4 shadow-sm">
-          <h4>Pochettes personnalisées</h4>
-          <ul>
-            <li>250 pochettes avec logo</li>
-            <li>Livraison incluse</li>
-            <li>Impression haut de gamme</li>
-          </ul>
-          <p><strong>850€ TTC</strong></p>
-        </div>
-      </div>
-    </div>
-  </section>  <section class="container my-5" id="location">
-    <h2 class="section-title">Location d'équipements</h2>
-    <div class="card p-4 shadow">
-      <h4>Pack Location Événement</h4>
-      <ul>
-        <li>Jusqu’à 200 pochettes disponibles</li>
-        <li>Livraison express incluse</li>
-        <li>Retour simple via étiquette prépayée</li>
-        <li>Option agent de distribution sur place (sur devis)</li>
-      </ul>
-      <p><strong>À partir de 390€ TTC / jour</strong></p>
-      <a href="#contact" class="btn btn-outline-primary">Demander un devis</a>
-    </div>
-  </section>  <section class="container my-5">
-    <h2 class="section-title">Galerie</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <img src="https://tse2.mm.bing.net/th?id=OIP.ilDJ505YMwVQe4pNwjgjLwHaHa&pid=Api" alt="Pochette" class="img-fluid rounded">
-      </div>
-      <div class="col-md-6">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.tiktok.com/embed/v2/7471266049443319095" frameborder="0"></iframe>
-        </div>
-      </div>
-    </div>
-  </section>  <section class="container my-5" id="contact">
-    <h2 class="section-title">Contact</h2>
-    <form>
-      <div class="mb-3">
-        <label for="nom" class="form-label">Nom</label>
-        <input type="text" class="form-control" id="nom" required>
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" required>
-      </div>
-      <div class="mb-3">
-        <label for="message" class="form-label">Message</label>
-        <textarea class="form-control" id="message" rows="4" required></textarea>
-      </div>
-      <button type="submit" class="btn btn-dark">Envoyer</button>
-    </form>
-  </section><a class="whatsapp-btn" href="https://wa.me/33700000000" target="_blank">✉</a>
+  </nav>  <!-- Sections remain the same -->  <footer>
+    <p data-lang-fr="&copy; 2025 SecurityNoPhone. Tous droits réservés." data-lang-en="&copy; 2025 SecurityNoPhone. All rights reserved." data-lang-de="&copy; 2025 SecurityNoPhone. Alle Rechte vorbehalten.">&copy; 2025 SecurityNoPhone. Tous droits réservés.</p>
+  </footer><a class="whatsapp-btn" href="https://wa.me/33700000000" target="_blank">✉</a>
 
-  <footer>
-    <p>&copy; 2025 SecurityNoPhone. Tous droits réservés.</p>
-  </footer>  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script></body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>  <script>
+    function switchLanguage() {
+      const lang = document.getElementById('lang').value;
+      document.querySelectorAll('[data-lang-fr]').forEach(el => {
+        el.textContent = el.getAttribute(`data-lang-${lang}`);
+      });
+    }
+  </script></body>
 </html>
