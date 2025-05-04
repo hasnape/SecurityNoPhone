@@ -12,30 +12,53 @@
       background-color: #fdfaf6;
       color: #2b2b2b;
     }
+
     header {
       background: linear-gradient(to right, #1e1e1e, #5c2d2d);
       color: white;
       text-align: center;
       padding: 80px 20px;
+      position: relative;
     }
+
+    .header-logo {
+      display: block;
+      margin: 0 auto 20px auto;
+      max-height: 100px;
+    }
+
+    #language-select {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      background: white;
+      border-radius: 5px;
+      padding: 5px;
+      z-index: 1000;
+    }
+
     .section-title {
       font-size: 2rem;
       font-weight: bold;
       color: #4a2c2a;
       margin-bottom: 1.5rem;
     }
+
     .btn-primary {
       background-color: #b28d48;
       border-color: #b28d48;
     }
+
     .btn-outline-warning {
       border-color: #b28d48;
       color: #b28d48;
     }
+
     .btn-outline-warning:hover {
       background-color: #b28d48;
       color: white;
     }
+
     .whatsapp-btn {
       position: fixed;
       bottom: 20px;
@@ -48,17 +71,11 @@
       text-decoration: none;
       z-index: 999;
     }
-    #language-select {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      background: white;
-      border-radius: 5px;
-      padding: 5px;
-    }
   </style>
-</head
+</head>
 <body>
+
+  <!-- Sélecteur de langue en haut à gauche -->
   <div id="language-select">
     <select id="langSwitcher" onchange="switchLanguage()" class="form-select form-select-sm">
       <option value="fr">Français</option>
@@ -67,9 +84,13 @@
     </select>
   </div>
 
+  <!-- Logo et en-tête -->
   <header data-aos="fade-down">
+    <img src="logo-securitynophone.png" alt="Logo SecurityNoPhone" class="header-logo" />
     <h1>SecurityNoPhone</h1>
-    <p class="lead" data-i18n="tagline">Confidentialité garantie. Téléphones conservés. Aucune photo possible.</p>
+    <p class="lead" data-i18n="tagline">
+      Confidentialité garantie. Téléphones conservés. Aucune photo possible.
+    </p>
     <div class="mt-4">
       <a href="catalogue.pdf" class="btn btn-outline-warning m-2" data-i18n="download_catalogue">Télécharger le catalogue</a>
       <a href="https://wa.me/33700000000" class="btn btn-primary m-2" data-i18n="order_now">Passer commande</a>
