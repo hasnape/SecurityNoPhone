@@ -1,0 +1,24 @@
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fdfaf6;
+  color: #2b2b2b;
+}
+header {
+  background: linear-gradient(to right, #1e1e1e, #5c2d2d);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  position: relative;
+}
+.header-logo {
+  display: block;
+  margin: 0 auto 20px;
+  max-height: 100px;
+}
+#language-select { position: absolute; top: 10px; left: 20px; background: white; border-radius: 5px; padding: 5px; z-index:1000; }
+.section-title { font-size:2rem; font-weight:bold; color:#4a2c2a; margin-bottom:1.5rem; }
+.btn-primary { background-color:#b28d48; border-color:#b28d48; }
+.btn-outline-warning { border-color:#b28d48; color:#b28d48; }
+.btn-outline-warning:hover { background-color:#b28d48; color:white; }
+.whatsapp-btn { position:fixed; bottom:20px; right:20px; background-color:#25d366; color:white; padding:12px 16px; border-radius:50%; font-size:24px; text-decoration:none; z-index:999; }
