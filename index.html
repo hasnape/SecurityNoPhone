@@ -13,7 +13,12 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 <link href="css/style.css" rel="stylesheet"/>
-</head>
+<style>
+.carousel-inner img {
+  max-height: 500px;
+  object-fit: cover;
+}
+</style></head>
 <body data-aos-once="true">
 <!-- Sélecteur de langue -->
 <div id="language-select">
@@ -48,6 +53,18 @@
 </div>
 </section>
 <!-- Contact -->
+<section class="container my-5" data-aos="fade-up" id="about">
+<h2 class="section-title text-center">Notre Engagement</h2>
+<p class="fs-5 text-center">
+    Chez <strong>SecurityNoPhone</strong>, nous croyons en des événements sereins, où les souvenirs se vivent pleinement sans la pression des réseaux sociaux. Notre mission est de garantir à chaque organisateur une confidentialité totale, tout en assurant aux invités un confort absolu : ils conservent leur téléphone, sans pouvoir prendre de photos.
+  </p>
+<p class="fs-5 text-center">
+    Ce concept innovant est né d’un constat simple : trop d’événements sont gâchés par les flashs intempestifs, les enregistrements non désirés et la fuite d’informations. Avec nos pochettes intelligentes et esthétiques, vous reprenez le contrôle de l’expérience.
+  </p>
+<p class="fs-5 text-center">
+    Depuis notre lancement, des dizaines d’organisateurs d’événements privés, de séminaires ou de mariages nous font confiance pour créer une bulle de sérénité, loin des caméras.
+  </p>
+</section>
 <section class="container my-5 text-center" data-aos="fade-up" id="testimonials">
 <h2 class="section-title" data-i18n="testimonials_title">Témoignages</h2>
 <div class="row justify-content-center">
@@ -63,7 +80,7 @@
 <small>- Karim, séminaire privé</small>
 </div>
 </div>
-</div>
+<div class="col-md-5 mb-3"><div class="card p-3"><p class="mb-1">“J’ai adoré l’expérience : aucune photo prise pendant notre mariage. Nos invités étaient sereins.”</p><small>- Fatou, mariée</small></div></div><div class="col-md-5 mb-3"><div class="card p-3"><p class="mb-1">“Nos conférences sont maintenant totalement confidentielles. Merci pour ce système pratique et fiable.”</p><small>- Jean-Luc, responsable événementiel</small></div></div><div class="col-md-5 mb-3"><div class="card p-3"><p class="mb-1">“Une solution élégante qui ne gêne pas les invités et rassure l’organisateur. Je recommande à 100%.”</p><small>- Leïla, organisatrice de soirée privée</small></div></div></div>
 </section>
 <section class="container my-5" data-aos="fade-up" id="offers">
 <h2 class="section-title text-center" data-i18n="offers_title">Nos Offres</h2>
@@ -144,4 +161,5 @@
 <script src="js/main.js"></script>
 <script src="js/translations.js"></script>
 </body>
-</html>
+    </html>
+    
