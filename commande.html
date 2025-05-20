@@ -79,7 +79,7 @@
 
     <div class="mb-3">
       <label for="quantity" class="form-label">Quantité de pochettes :</label>
-      <input type="number" class="form-control" name="quantite" id="quantity" min="50" value="100" required />
+      <input type="number" class="form-control" name="quantite" id="quantity" min="50" value="50" required />
     </div>
 
     <div class="mb-3">
@@ -134,7 +134,7 @@
     const offreText = type === 'location' ? 'Location clé-en-main'
                       : type === 'achat' ? 'Pochettes personnalisées'
                       : type === 'abonnement' ? 'Abonnement Starter (19€/mois)' : '–';
-    const quantityText = type === 'achat' ? qty : type === 'location' ? '200' : '–';
+    const quantityText = type === 'achat' ? qty : type === 'location' ? '500' : '–';
     orderSummary.innerHTML = `
       <li><strong>Offre :</strong> ${offreText}</li>
       <li><strong>Quantité :</strong> ${quantityText}</li>
