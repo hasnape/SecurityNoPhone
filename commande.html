@@ -9,14 +9,11 @@
   <style>
     html { scroll-behavior: smooth; }
     .section-title { font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem; }
-    .form-section { max-width: 700px; margin: auto; padding: 1rem; }
-    .price-box {
-      background: #fffbe6;
-      border: 1px solid #b28d48;
-      padding: 1rem;
-      border-radius: 8px;
-      margin-top: 1rem;
-      font-weight: bold;
+    .form-section { max-width: 600px; margin: auto; padding: 1rem; }
+    .price-box { background: #fffbe6; border: 1px solid #b28d48; padding: 1rem; border-radius: 8px; margin-top: 1rem; font-weight: bold; }
+    @media (max-width: 768px) {
+      .form-section { padding: 1rem; }
+      .navbar-nav .nav-link { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -30,17 +27,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html#galerie">Galerie</a></li>
-        <li class="nav-item"><a class="nav-link" href="index.html#concept">Concept</a></li>
-        <li class="nav-item"><a class="nav-link" href="index.html#offers">Offres</a></li>
-        <li class="nav-item"><a class="nav-link" href="index.html#usecases">Utilisations</a></li>
-        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="#galerie">Galerie</a></li>
+        <li class="nav-item"><a class="nav-link" href="#concept">Concept</a></li>
+        <li class="nav-item"><a class="nav-link" href="#offers">Offres</a></li>
+        <li class="nav-item"><a class="nav-link" href="#usecases">Utilisations</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<div style="margin-top: 90px;"></div>
+<div style="margin-top: 80px;"></div>
 
 <div class="form-section">
   <h1 class="text-center mb-4">Passer une commande</h1>
@@ -59,39 +56,27 @@
 
     <div class="mb-3">
       <label for="quantity" class="form-label">Quantité de pochettes :</label>
-      <input type="number" class="form-control" name="quantite" id="quantity" min="1" value="100" required />
+      <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="100" required />
     </div>
 
     <div class="mb-3">
       <label for="date" class="form-label">Date de l'événement :</label>
-      <input type="date" name="date" id="date" class="form-control" required/>
+      <input type="date" name="date" id="date" class="form-control" required />
     </div>
 
     <div class="mb-3">
       <label for="nom" class="form-label">Nom complet :</label>
-      <input type="text" name="nom" id="nom" class="form-control" required/>
+      <input type="text" name="nom" id="nom" class="form-control" required />
     </div>
 
     <div class="mb-3">
       <label for="email" class="form-label">Email :</label>
-      <input type="email" name="email" id="email" class="form-control" required/>
+      <input type="email" name="email" id="email" class="form-control" required />
     </div>
 
     <div class="mb-3">
       <label for="adresse" class="form-label">Adresse de facturation :</label>
       <textarea name="adresse" id="adresse" class="form-control" required></textarea>
-    </div>
-
-    <div class="card my-4">
-      <div class="card-body">
-        <h5 class="card-title">Résumé de la commande</h5>
-        <ul class="list-unstyled mb-0" id="orderSummary">
-          <li><strong>Offre :</strong> –</li>
-          <li><strong>Quantité :</strong> –</li>
-          <li><strong>Date :</strong> –</li>
-          <li><strong>Total :</strong> 0 €</li>
-        </ul>
-      </div>
     </div>
 
     <div class="price-box text-center" id="priceDisplay">Total : 0 €</div>
@@ -106,50 +91,44 @@
   const offerType = document.getElementById('offerType');
   const quantity = document.getElementById('quantity');
   const priceDisplay = document.getElementById('priceDisplay');
-  const dateField = document.getElementById('date');
-  const orderSummary = document.getElementById('orderSummary');
-
-  function updateSummary(type, qty, date, total) {
-    let offreText = "–";
-    if (type === "location_sans") offreText = "Location sans personnel (290€/24h)";
-    else if (type === "location_avec") offreText = "Location avec personnel (390€/4h)";
-    else if (type === "achat") offreText = "Pochettes personnalisées";
-    else if (type === "abonnement") offreText = "Abonnement Starter (19€/mois)";
-
-    orderSummary.innerHTML = `
-      <li><strong>Offre :</strong> ${offreText}</li>
-      <li><strong>Quantité :</strong> ${qty}</li>
-      <li><strong>Date :</strong> ${date || "–"}</li>
-      <li><strong>Total :</strong> ${total.toFixed(2)} €</li>
-    `;
-  }
 
   function updatePrice() {
     const type = offerType.value;
     const qty = parseInt(quantity.value) || 0;
-    const date = dateField.value;
+    if (type === 'location' || type === 'abonnement') {
+      if (qty > 250) {
+        quantity.value = 250;
+        alert("La quantité maximale autorisée pour cette offre est de 250 pochettes.");
+        return;
+      }
+    }
     let total = 0;
 
     if (type === 'location_sans') {
       total = 290;
+      quantity.disabled = false;
     } else if (type === 'location_avec') {
       total = 390;
+      quantity.disabled = false;
     } else if (type === 'achat') {
-      total = Math.max(qty, 50) * 3.5;
+      total = qty >= 50 ? qty * 3.5 : 0;
+      quantity.min = 50;
+      quantity.disabled = false;
     } else if (type === 'abonnement') {
-      total = 19;
+      total = Math.ceil(qty / 50) * 19;
+      quantity.min = 50;
+      quantity.step = 50;
+      quantity.disabled = false;
     }
 
-    quantity.disabled = (type !== 'achat');
     priceDisplay.innerText = `Total : ${total.toFixed(2)} €`;
-    updateSummary(type, qty, date, total);
   }
 
   offerType.addEventListener('change', updatePrice);
   quantity.addEventListener('input', updatePrice);
-  dateField.addEventListener('input', updatePrice);
   document.addEventListener('DOMContentLoaded', updatePrice);
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
