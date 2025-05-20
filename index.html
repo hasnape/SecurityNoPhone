@@ -1,6 +1,4 @@
-
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="utf-8"/>
@@ -18,7 +16,8 @@
   max-height: 500px;
   object-fit: cover;
 }
-</style></head>
+</style>
+</head>
 <body data-aos-once="true">
 <!-- Sélecteur de langue -->
 <div id="language-select">
@@ -35,7 +34,7 @@
 <p class="lead" data-i18n="tagline">Confidentialité garantie. Téléphones conservés. Aucune photo possible.</p>
 <div class="mt-4">
 <a class="btn btn-outline-warning m-2" data-i18n="download_catalogue" href="catalogue.pdf">Télécharger le catalogue</a>
-<a class="btn btn-primary m-2" data-i18n="order_now" href="https://wa.me/33700000000">Passer commande</a>
+<a class="btn btn-primary m-2" data-i18n="order_now" href="commande.html">Passer commande</a>
 </div>
 </header>
 <!-- Galerie -->
@@ -83,29 +82,36 @@
 <div class="col-md-5 mb-3"><div class="card p-3"><p class="mb-1">“J’ai adoré l’expérience : aucune photo prise pendant notre mariage. Nos invités étaient sereins.”</p><small>- Fatou, mariée</small></div></div><div class="col-md-5 mb-3"><div class="card p-3"><p class="mb-1">“Nos conférences sont maintenant totalement confidentielles. Merci pour ce système pratique et fiable.”</p><small>- Jean-Luc, responsable événementiel</small></div></div><div class="col-md-5 mb-3"><div class="card p-3"><p class="mb-1">“Une solution élégante qui ne gêne pas les invités et rassure l’organisateur. Je recommande à 100%.”</p><small>- Leïla, organisatrice de soirée privée</small></div></div></div>
 </section>
 <section class="container my-5" data-aos="fade-up" id="offers">
-<h2 class="section-title text-center" data-i18n="offers_title">Nos Offres</h2>
-<div class="row justify-content-center">
-<div class="col-md-5 mb-4">
-<div class="card p-4 shadow-sm h-100 text-center">
-<h4 data-i18n="offer_custom">Pochettes personnalisées</h4>
-<ul class="list-unstyled">
-<li data-i18n="offer1">250 pochettes avec logo</li>
-<li data-i18n="offer2">Livraison incluse</li>
-<li data-i18n="offer3">850€ TTC</li>
-</ul>
-</div>
-</div>
-<div class="col-md-5 mb-4">
-<div class="card p-4 shadow-sm h-100 text-center">
-<h4 data-i18n="offer_rental">Location clé-en-main</h4>
-<ul class="list-unstyled">
-<li data-i18n="rental1">Jusqu’à 200 pochettes</li>
-<li data-i18n="rental2">Livraison + retour inclus</li>
-<li data-i18n="rental3">À partir de 390€ / jour</li>
-</ul>
-</div>
-</div>
-</div>
+  <h2 class="section-title text-center" data-i18n="offers_title">Nos Offres</h2>
+  <div class="row justify-content-center">
+
+    <!-- Offre personnalisée -->
+    <div class="col-md-5 mb-4">
+      <div class="card p-4 shadow-sm h-100 text-center">
+        <h4 data-i18n="offer_custom">Pochettes personnalisées</h4>
+        <ul class="list-unstyled">
+          <li data-i18n="offer1">À partir de 3,50€ / pochette</li>
+          <li data-i18n="offer2">Minimum 100 unités</li>
+          <li data-i18n="offer3">Avec votre logo – livraison incluse</li>
+        </ul>
+        <a href="commande.html" class="btn btn-outline-warning mt-3">Commander</a>
+      </div>
+    </div>
+
+    <!-- Offre location -->
+    <div class="col-md-5 mb-4">
+      <div class="card p-4 shadow-sm h-100 text-center">
+        <h4 data-i18n="offer_rental">Location clé-en-main</h4>
+        <ul class="list-unstyled">
+          <li data-i18n="rental1">Jusqu’à 200 pochettes incluses</li>
+          <li data-i18n="rental2">Livraison + retour offerts</li>
+          <li data-i18n="rental3">390€ TTC / jour</li>
+        </ul>
+        <a href="commande.html" class="btn btn-outline-warning mt-3">Réserver</a>
+      </div>
+    </div>
+
+  </div>
 </section>
 <section class="container my-5" data-aos="fade-up" id="usecases">
 <h2 class="section-title text-center" data-i18n="usecases_title">Cas d'utilisation</h2>
@@ -161,5 +167,4 @@
 <script src="js/main.js"></script>
 <script src="js/translations.js"></script>
 </body>
-    </html>
-    
+</html>
