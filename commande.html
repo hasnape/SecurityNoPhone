@@ -15,7 +15,7 @@
       font-weight: bold;
       margin-bottom: 1.5rem;
     }
-      .form-section {
+    .form-section {
       max-width: 600px;
       margin: auto;
     }
@@ -53,92 +53,114 @@
 <!-- Spacing for fixed navbar -->
 <div style="margin-top: 80px;"></div>
 
-<body>
+<div class="form-section">
+  <h1 class="text-center mb-4">Passer une commande</h1>
 
-  <div class="form-section">
-    <h1 class="text-center mb-4">Passer une commande</h1>
+  <form action="https://formspree.io/f/xayrzjov" method="POST" id="orderForm">
+    <div class="mb-3">
+      <label class="form-label">Type d’offre :</label>
+      <select class="form-select" name="offre" id="offerType" required>
+        <option value="">-- Choisir une offre --</option>
+        <option value="location">Location clé-en-main</option>
+        <option value="achat">Pochettes personnalisées</option>
+        <option value="abonnement">Abonnement Pro</option>
+      </select>
+    </div>
 
-    <form action="https://formspree.io/f/xayrzjov" method="POST" id="orderForm">
-      <!-- Type d'offre -->
-      <div class="mb-3">
-        <label class="form-label">Type d’offre :</label>
-        <select class="form-select" name="offre" id="offerType" required>
-          <option value="">-- Choisir une offre --</option>
-          <option value="location">Location clé-en-main</option>
-          <option value="achat">Pochettes personnalisées</option>
-          <option value="abonnement">Abonnement Pro</option>
-        </select>
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantité de pochettes :</label>
+      <input type="number" class="form-control" name="quantite" id="quantity" min="50" value="100" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="date" class="form-label">Date de l'événement :</label>
+      <input type="date" name="date" id="date" class="form-control" required/>
+    </div>
+
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom complet :</label>
+      <input type="text" name="nom" id="nom" class="form-control" required/>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email :</label>
+      <input type="email" name="email" id="email" class="form-control" required/>
+    </div>
+
+    <div class="mb-3">
+      <label for="adresse" class="form-label">Adresse de facturation :</label>
+      <textarea name="adresse" id="adresse" class="form-control" required></textarea>
+    </div>
+
+    <!-- Résumé -->
+    <div class="card my-4">
+      <div class="card-body">
+        <h5 class="card-title">Résumé de la commande</h5>
+        <ul class="list-unstyled mb-0" id="orderSummary">
+          <li><strong>Offre :</strong> –</li>
+          <li><strong>Quantité :</strong> –</li>
+          <li><strong>Date :</strong> –</li>
+          <li><strong>Total :</strong> 0 €</li>
+        </ul>
       </div>
+    </div>
 
-      <!-- Quantité -->
-      <div class="mb-3">
-        <label for="quantity" class="form-label">Quantité de pochettes :</label>
-        <input type="number" class="form-control" name="quantite" id="quantity" min="50" value="100" required />
-      </div>
+    <div class="price-box text-center" id="priceDisplay">Total : 0 €</div>
 
-      <!-- Date de l'événement -->
-      <div class="mb-3">
-        <label for="date" class="form-label">Date de l'événement :</label>
-        <input type="date" name="date" id="date" class="form-control" required/>
-      </div>
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary">Valider la commande</button>
+    </div>
+  </form>
+</div>
 
-      <!-- Coordonnées -->
-      <div class="mb-3">
-        <label for="nom" class="form-label">Nom complet :</label>
-        <input type="text" name="nom" id="nom" class="form-control" required/>
-      </div>
+<script>
+  const offerType = document.getElementById('offerType');
+  const quantity = document.getElementById('quantity');
+  const priceDisplay = document.getElementById('priceDisplay');
+  const dateField = document.getElementById('date');
+  const orderSummary = document.getElementById('orderSummary');
 
-      <div class="mb-3">
-        <label for="email" class="form-label">Email :</label>
-        <input type="email" name="email" id="email" class="form-control" required/>
-      </div>
+  function updateSummary(type, qty, date, total) {
+    const offreText = type === 'location' ? 'Location clé-en-main'
+                      : type === 'achat' ? 'Pochettes personnalisées'
+                      : type === 'abonnement' ? 'Abonnement Pro'
+                      : '–';
+    orderSummary.innerHTML = `
+      <li><strong>Offre :</strong> ${offreText}</li>
+      <li><strong>Quantité :</strong> ${type === 'achat' ? qty : type === 'location' ? '200' : '-'}</li>
+      <li><strong>Date :</strong> ${date || '–'}</li>
+      <li><strong>Total :</strong> ${total.toFixed(2)} €</li>
+    `;
+  }
 
-      <div class="mb-3">
-        <label for="adresse" class="form-label">Adresse de facturation :</label>
-        <textarea name="adresse" id="adresse" class="form-control" required></textarea>
-      </div>
+  function updatePrice() {
+    const type = offerType.value;
+    const qty = parseInt(quantity.value) || 0;
+    const date = dateField.value;
+    let total = 0;
 
-      <!-- Prix calculé -->
-      <div class="price-box text-center" id="priceDisplay">Total : 0 €</div>
-
-      <!-- Submit -->
-      <div class="text-center mt-4">
-        <button type="submit" class="btn btn-primary">Valider la commande</button>
-      </div>
-    </form>
-  </div>
-
-  <script>
-    const offerType = document.getElementById('offerType');
-    const quantity = document.getElementById('quantity');
-    const priceDisplay = document.getElementById('priceDisplay');
-
-    function updatePrice() {
-      const type = offerType.value;
-      const qty = parseInt(quantity.value) || 0;
-      let total = 0;
-
-      if (type === 'location') {
-        total = 390;
-        quantity.disabled = true;
-      } else if (type === 'achat') {
-        total = qty * 3.5;
-        quantity.disabled = false;
-      } else if (type === 'abonnement') {
-        total = 29;
-        quantity.disabled = true;
-      } else {
-        quantity.disabled = false;
-      }
-
-      priceDisplay.innerText = `Total : ${total.toFixed(2)} €`;
+    if (type === 'location') {
+      total = 390;
+      quantity.disabled = true;
+    } else if (type === 'achat') {
+      total = qty * 3.5;
+      quantity.disabled = false;
+    } else if (type === 'abonnement') {
+      total = 29;
+      quantity.disabled = true;
+    } else {
+      quantity.disabled = false;
     }
 
-    offerType.addEventListener('change', updatePrice);
-    quantity.addEventListener('input', updatePrice);
+    priceDisplay.innerText = `Total : ${total.toFixed(2)} €`;
+    updateSummary(type, qty, date, total);
+  }
 
-    document.addEventListener('DOMContentLoaded', updatePrice);
-  </script>
+  offerType.addEventListener('change', updatePrice);
+  quantity.addEventListener('input', updatePrice);
+  dateField.addEventListener('input', updatePrice);
+  document.addEventListener('DOMContentLoaded', updatePrice);
+</script>
 
 </body>
 </html>
