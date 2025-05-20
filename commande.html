@@ -38,6 +38,7 @@
           <option value="">-- Choisir une offre --</option>
           <option value="location">Location clé-en-main</option>
           <option value="achat">Pochettes personnalisées</option>
+          <option value="abonnement">Abonnement Pro</option>
         </select>
       </div>
 
@@ -49,24 +50,24 @@
 
       <!-- Date de l'événement -->
       <div class="mb-3">
-        <label class="form-label">Date de l'événement :</label>
-        <input type="date" name="date" class="form-control" required/>
+        <label for="date" class="form-label">Date de l'événement :</label>
+        <input type="date" name="date" id="date" class="form-control" required/>
       </div>
 
       <!-- Coordonnées -->
       <div class="mb-3">
-        <label class="form-label">Nom complet :</label>
-        <input type="text" name="nom" class="form-control" required/>
+        <label for="nom" class="form-label">Nom complet :</label>
+        <input type="text" name="nom" id="nom" class="form-control" required/>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Email :</label>
-        <input type="email" name="email" class="form-control" required/>
+        <label for="email" class="form-label">Email :</label>
+        <input type="email" name="email" id="email" class="form-control" required/>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Adresse de livraison :</label>
-        <textarea name="adresse" class="form-control" required></textarea>
+        <label for="adresse" class="form-label">Adresse de facturation :</label>
+        <textarea name="adresse" id="adresse" class="form-control" required></textarea>
       </div>
 
       <!-- Prix calculé -->
@@ -90,9 +91,16 @@
       let total = 0;
 
       if (type === 'location') {
-        total = 390; // prix fixe pour location
+        total = 390;
+        quantity.disabled = true;
       } else if (type === 'achat') {
-        total = qty * 3.5; // 3,50 € par pochette personnalisée
+        total = qty * 3.5;
+        quantity.disabled = false;
+      } else if (type === 'abonnement') {
+        total = 29;
+        quantity.disabled = true;
+      } else {
+        quantity.disabled = false;
       }
 
       priceDisplay.innerText = `Total : ${total.toFixed(2)} €`;
@@ -100,6 +108,8 @@
 
     offerType.addEventListener('change', updatePrice);
     quantity.addEventListener('input', updatePrice);
+
+    document.addEventListener('DOMContentLoaded', updatePrice);
   </script>
 
 </body>
