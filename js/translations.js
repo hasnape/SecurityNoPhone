@@ -1,3 +1,4 @@
+
 // Fichier de traduction multilingue – SecurityNoPhone
 window.translations = {
   fr: {

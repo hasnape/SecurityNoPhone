@@ -1,0 +1,21 @@
+
+/* Style pour select avec icônes de drapeaux */
+.flag-select {
+  background-position: 0.5em center;
+  background-repeat: no-repeat;
+  background-size: 1.5em auto;
+  padding-left: 2.5em;
+}
+
+option[data-flag]:before {
+  content: "";
+  display: inline-block;
+  margin-right: 8px;
+  width: 20px;
+  height: 14px;
+  background-size: cover;
+  vertical-align: middle;
+}
+
+/* Ce CSS est principalement compatible avec des plugins JS comme Select2 ou d'autres hacks.
+   Pour le HTML natif, il est recommandé de styliser dynamiquement le <select> via JS. */
