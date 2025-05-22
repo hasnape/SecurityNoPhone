@@ -15,7 +15,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #b28d48;
+  color: rgb(178, 141, 72);
 }
 
 .section-title {
@@ -64,17 +64,17 @@ header {
 
 /* BOUTONS */
 .btn-primary {
-  background-color: #b28d48;
-  border-color: #b28d48;
+  background-color: rgb(178, 141, 72);
+  border-color: rgb(178, 141, 72);
 }
 
 .btn-outline-warning {
-  border-color: #b28d48;
-  color: #b28d48;
+  border-color: rgb(178, 141, 72);
+  color: rgb(178, 141, 72);
 }
 
 .btn-outline-warning:hover {
-  background-color: #b28d48;
+  background-color: rgb(178, 141, 72);
   color: white;
 }
 
