@@ -2,13 +2,14 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+html, body {
+  /* utilise le bon nom */
   background-image: url("/images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d");
-  /* ton image ici */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
+  /* plus compatible mobile */
 }
 
 /* TITRES GÉNÉRAUX */
@@ -18,7 +19,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: rgb(178, 141, 72);
+  color: rgb(14, 13, 13);
 }
 
 .section-title {
