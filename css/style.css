@@ -9,6 +9,7 @@ html, body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
+  background-color: black 
   /* plus compatible mobile */
 }
 
