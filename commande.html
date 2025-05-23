@@ -25,11 +25,53 @@
       margin-top: 1rem;
       font-weight: bold;
     }
+    @media (max-width: 768px) {
+      .form-section {
+        padding: 1rem;
+      }
+
+      .navbar-nav .nav-link {
+        font-size: 0.9rem;
+      }
+    }
   </style>
+  </head>
+  
+  <body>
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+          <img alt="SecurityNoPhone Logo" src="images/IMG_20250421_182622.jpg"
+            style="height: 40px; margin-right: 10px;" />
+          <span>SecurityNoPhone</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html#galerie">Galerie</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#concept">Concept</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#offers">Offres</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#usecases">Utilisations</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+          </ul>
+  
+          <div class="ms-3 d-flex align-items-center gap-2">
+            <a href="index.html" class="text-decoration-none">French</a>
+            <a href="/index_fully_translated_en.html" class="text-decoration-none">English</a>
+            <a href="/index_fully_translated_de.html" class="text-decoration-none">German</a>
+            <a href="/index_fully_translated_ar_.html" class="text-decoration-none">العربية</a>
+          </div>
+  
+        </div>
+      </div>
+    </nav>
 </head>
 
 <body>
-  <div class="container my-5">
+  <div class="container my-5"><br><br>
     <h1 class="text-center mb-5">Passer une commande</h1>
     <div class="row">
       <!-- Formulaire à gauche -->
@@ -77,11 +119,10 @@
       <!-- Paiement à droite -->
       <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
         <p class="text-center text-muted mt-3">
-          ⚠️ La validation de la commande n'entraîne pas de paiement immédiat. Veuillez finaliser votre achat via PayPal après
-          avoir envoyé le formulaire.
+          
         </p>
         
-        <button type="button" class="btn btn-success" onclick="payerAvecPayPal()">Payer avec PayPal</button>
+        
         <small class="text-muted d-block mt-2 text-center">
           💳 Paiement en 4 fois sans frais possible avec PayPal (si éligible)
         </small>

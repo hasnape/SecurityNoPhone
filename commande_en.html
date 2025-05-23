@@ -4,8 +4,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SecurityNoPhone – Place an Order</title>
+  <title>SecurityNoPhone – Order</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    .price-box {
+      background: #fffbe6;
+      border: 1px solid #b28d48;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .form-section {
+        padding: 1rem;
+      }
+
+      .navbar-nav .nav-link {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -16,18 +46,17 @@
           style="height: 40px; margin-right: 10px;" />
         <span>SecurityNoPhone</span>
       </a>
-      <button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#galerie">Gallery</a></li>
-          <li class="nav-item"><a class="nav-link" href="#concept">Concept</a></li>
-          <li class="nav-item"><a class="nav-link" href="#offers">Offers</a></li>
-          <li class="nav-item"><a class="nav-link" href="#usecases">Use Cases</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#galerie">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#concept">Concept</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#offers">Offers</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#usecases">Use Cases</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
         </ul>
-
         <div class="ms-3 d-flex align-items-center gap-2">
           <a href="index.html" class="text-decoration-none">French</a>
           <a href="/index_fully_translated_en.html" class="text-decoration-none">English</a>
@@ -38,53 +67,133 @@
     </div>
   </nav>
 
-  <div class="form-section container my-5">
-    <h1 class="text-center mb-4">Place an Order</h1>
-    <form action="#" method="POST">
-      <div class="mb-3">
-        <label class="form-label">Offer Type:</label>
-        <select class="form-select" required>
-          <option>-- Select an offer --</option>
-          <option>Rental without staff</option>
-          <option>Rental with staff</option>
-          <option>Custom Pouches</option>
-          <option>Starter Subscription</option>
-        </select>
+  <div class="container my-5"><br><br>
+    <h1 class="text-center mb-5">Place an Order</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm">
+          <input type="text" name="_gotcha" style="display:none">
+          <div class="mb-3">
+            <label class="form-label">Offer Type:</label>
+            <select class="form-select" name="offre" id="offerType" required>
+              <option value="">-- Select an Offer --</option>
+              <option value="location_sans">Rental without Staff</option>
+              <option value="location_avec">Rental with Staff</option>
+              <option value="achat">Custom Pouches</option>
+              <option value="abonnement">Starter Subscription</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="quantity" class="form-label">Pouch Quantity:</label>
+            <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="100"
+              required />
+          </div>
+          <div class="mb-3">
+            <label for="date" class="form-label">Event Date:</label>
+            <input type="date" name="date" id="date" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="nom" class="form-label">Full Name:</label>
+            <input type="text" name="nom" id="nom" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" name="email" id="email" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="adresse" class="form-label">Billing Address:</label>
+            <textarea name="adresse" id="adresse" class="form-control" required></textarea>
+          </div>
+          <div class="price-box text-center" id="priceDisplay">Total: 0 €</div>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Submit Order</button>
+          </div>
+        </form>
       </div>
-      <div class="mb-3">
-        <label class="form-label">Quantity of pouches:</label>
-        <input type="number" class="form-control" min="1" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Event Date:</label>
-        <input type="date" class="form-control" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Full Name:</label>
-        <input type="text" class="form-control" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Email:</label>
-        <input type="email" class="form-control" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Billing Address:</label>
-        <textarea class="form-control"></textarea>
-      </div>
-      <div class="price-box text-center fw-bold my-4">Total: 0 €</div>
-      <div class="text-center">
-        <button class="btn btn-primary" type="submit">Submit Order</button>
-      </div>
-      <div class="text-center mt-4">
-        <button type="button" class="btn btn-success" onclick="payerAvecPayPal()">Pay with PayPal</button>
+      <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+        <p class="text-center text-muted mt-3"></p>
         <small class="text-muted d-block mt-2 text-center">
-          💳 4x interest-free payments available with PayPal (if eligible)
+          💳 Pay in 4 interest-free installments with PayPal (if eligible)
         </small>
       </div>
-      
-      
-    </form>
+    </div>
   </div>
+
+  <script>
+    const offerType = document.getElementById('offerType');
+    const quantity = document.getElementById('quantity');
+    const priceDisplay = document.getElementById('priceDisplay');
+
+    function updatePrice() {
+      const type = offerType.value;
+      const qty = parseInt(quantity.value) || 0;
+      let total = 0;
+
+      if (type === 'location_sans') {
+        total = 290;
+      } else if (type === 'location_avec') {
+        total = 390;
+      } else if (type === 'achat') {
+        total = qty >= 50 ? qty * 3.5 : 0;
+      } else if (type === 'abonnement') {
+        total = Math.ceil(qty / 50) * 19;
+      }
+
+      priceDisplay.innerText = `Total: ${total.toFixed(2)} €`;
+    }
+
+    function payerAvecPayPal() {
+      const offer = offerType.value;
+      const qty = parseInt(quantity.value) || 0;
+      let total = 0;
+      let label = "";
+
+      if (offer === "location_sans") {
+        total = 290;
+        label = "Rental without Staff";
+      } else if (offer === "location_avec") {
+        total = 390;
+        label = "Rental with Staff";
+      } else if (offer === "achat") {
+        if (qty < 50) return alert("Minimum 50 pouches required.");
+        total = qty * 3.5;
+        label = `Purchase of ${qty} pouches`;
+      } else if (offer === "abonnement") {
+        if (qty < 50) return alert("Minimum 50 pouches required.");
+        total = Math.ceil(qty / 50) * 19;
+        label = `Subscription for ${qty} pouches`;
+      } else {
+        return alert("Please select an offer.");
+      }
+
+      const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=harbi.mail.a@gmail.com&currency_code=EUR&item_name=${encodeURIComponent(label)}&amount=${total.toFixed(2)}`;
+      window.open(url, "_blank");
+    }
+
+    offerType.addEventListener('change', updatePrice);
+    quantity.addEventListener('input', updatePrice);
+    document.addEventListener('DOMContentLoaded', updatePrice);
+
+    document.getElementById("orderForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = new FormData(form);
+
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { Accept: "application/json" }
+      });
+
+      if (response.ok) {
+        payerAvecPayPal();
+      } else {
+        alert("An error occurred while submitting the form.");
+      }
+    });
+  </script>
+
 </body>
 
 </html>
