@@ -20,51 +20,34 @@
 </head>
 
 <body data-aos-once="true">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-    <div class="container-fluid">
-
-      <!-- Bouton mobile -->
-      <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+        <img alt="Logo SecurityNoPhone" src="images/IMG_20250421_182622-removebg-preview.png"
+          style="height: 40px; margin-right: 10px;" />
+        <span>SecurityNoPhone</span>
+      </a>
+      <button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <!-- Menu à gauche -->
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a class="nav-link" href="#galerie" data-i18n="auto_key_2">Galerie</a></li>
-          <li class="nav-item"><a class="nav-link" href="#concept" data-i18n="auto_key_4">Concept</a></li>
-          <li class="nav-item"><a class="nav-link" href="#offers" data-i18n="auto_key_6">Offres</a></li>
-          <li class="nav-item"><a class="nav-link" href="#usecases" data-i18n="auto_key_8">Utilisations</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="auto_key_10">Contact</a></li>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#galerie">Galerie</a></li>
+          <li class="nav-item"><a class="nav-link" href="#concept">Concept</a></li>
+          <li class="nav-item"><a class="nav-link" href="#offers">Offres</a></li>
+          <li class="nav-item"><a class="nav-link" href="#usecases">Utilisations</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
-
-        <!-- Logo centré avec position absolue -->
-        <div class="position-absolute start-50 translate-middle-x d-none d-lg-block">
-          <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-            <img src="images/IMG_20250421_182622-removebg-preview.png" alt="Logo SecurityNoPhone"
-              style="height: 40px; margin-right: 10px;" />
-            <span>SecurityNoPhone</span>
-          </a>
+        <div class="ms-3 d-flex align-items-center gap-2">
+          <a href="index.html" class="text-decoration-none">French</a>
+          <a href="/index_fully_translated_en.html" class="text-decoration-none">English</a>
+          <a href="/index_fully_translated_de.html" class="text-decoration-none">German</a>
+          <a href="/index_fully_translated_ar_.html" class="text-decoration-none">العربية</a>
         </div>
-        
-
-        <!-- Langues à droite -->
-        <div class="d-flex align-items-center gap-2 ms-auto">
-          <select id="langSwitcher" class="form-select form-select-sm">
-            <option value="fr">Français</option>
-            <option value="en">English</option>
-            <option value="de">Deutsch</option>
-            <option value="ar">العربية</option>
-          </select>
-          <a href="index.html" class="text-decoration-none">FR</a>
-          <a href="/index_fully_translated_en.html" class="text-decoration-none">EN</a>
-          <a href="/index_fully_translated_de.html" class="text-decoration-none">DE</a>
-          <a href="/index_fully_translated_ar_.html" class="text-decoration-none">AR</a>
-        </div>
-
       </div>
     </div>
   </nav>
+  
 
 
 
