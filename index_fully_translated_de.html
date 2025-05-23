@@ -13,28 +13,38 @@
 
 <body data-aos-once="true">
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
-    <div class="container">
-      <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-        <img alt="SecurityNoPhone Logo" src="images/IMG_20250421_182622.jpg"
-          style="height: 40px; margin-right: 10px;" />
-        <span>SecurityNoPhone</span>
-      </a>
-      <button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+    <div class="container-fluid">
+      <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav me-auto">
+  
           <li class="nav-item"><a class="nav-link" href="#galerie">Galerie</a></li>
           <li class="nav-item"><a class="nav-link" href="#concept">Konzept</a></li>
           <li class="nav-item"><a class="nav-link" href="#offers">Angebote</a></li>
-          <li class="nav-item"><a class="nav-link" href="#usecases">Anwendungsfälle</a></li>
+          <li class="nav-item"><a class="nav-link" href="#usecases">Anwendungen</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
+  
         </ul>
-        <div class="ms-3 d-flex align-items-center gap-2">
-          <a href="index.html" class="text-decoration-none">French</a>
-          <a href="/index_fully_translated_en.html" class="text-decoration-none">English</a>
-          <a href="/index_fully_translated_de.html" class="text-decoration-none">German</a>
-          <a href="/index_fully_translated_ar_.html" class="text-decoration-none">العربية</a>
+        <div class="position-absolute start-50 translate-middle-x d-none d-lg-block">
+          <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+            <img src="images/IMG_20250421_182622-removebg-preview.png" alt="Logo SecurityNoPhone"
+              style="height: 40px; margin-right: 10px;" />
+            <span>SecurityNoPhone</span>
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-2 ms-auto">
+          <select id="langSwitcher" class="form-select form-select-sm">
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+            <option value="ar">العربية</option>
+          </select>
+          <a href="index.html" class="text-decoration-none">FR</a>
+          <a href="/index_fully_translated_en.html" class="text-decoration-none">EN</a>
+          <a href="/index_fully_translated_de.html" class="text-decoration-none">DE</a>
+          <a href="/index_fully_translated_ar_.html" class="text-decoration-none">AR</a>
         </div>
       </div>
     </div>
@@ -89,6 +99,8 @@
       </div>
 
       <div class="col-lg-6" id="concept">
+        <div class="border rounded-4 shadow-sm p-4 bg-white">
+
         <h2 class="section-title text-center text-dark">Konzept</h2>
         <p class="fs-5 text-center">
           SecurityNoPhone ist viel mehr als nur ein Zubehör: Es ist eine Lösung für Ruhe und Sicherheit bei privaten,
@@ -106,6 +118,7 @@
         <small class="text-muted d-block mt-2 text-center">
           💳 Zahlung in 4 zinsfreien Raten mit PayPal möglich (bei Berechtigung)
         </small>
+       </div>
       </div>
     </div>
   </section>
