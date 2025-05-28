@@ -22,34 +22,8 @@
 </head>
 
 <body data-aos-once="true">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
-    <div class="container">
-      <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-        <img alt="Logo SecurityNoPhone" src="images/IMG_20250421_182622-removebg-preview.png"
-          style="height: 40px; margin-right: 10px;" />
-        <span>SecurityNoPhone</span>
-      </a>
+  <div id="navbar-container"></div>
 
-      <button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#galerie">المعرض</a></li>
-          <li class="nav-item"><a class="nav-link" href="#concept">المفهوم</a></li>
-          <li class="nav-item"><a class="nav-link" href="#offers">العروض</a></li>
-          <li class="nav-item"><a class="nav-link" href="#usecases">حالات الاستخدام</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">اتصال</a></li>
-        </ul>
-        <div class="ms-3 d-flex align-items-center gap-2">
-          <a href="index.html" class="text-decoration-none">French</a>
-          <a href="index_fully_translated_en.html" class="text-decoration-none">English</a>
-          <a href="index_fully_translated_de.html" class="text-decoration-none">German</a>
-          <a href="index_fully_translated_ar_.html" class="text-decoration-none">العربية</a>
-        </div>
-      </div>
-    </div>
-  </nav>
 
   <div style="margin-top: 80px;"></div>
   <section class="container my-5" data-aos="fade-up" id="galerie-concept">
@@ -248,13 +222,21 @@
     </form>
   </section>
 
-  <footer class="text-center py-4 bg-dark text-light mt-5">
-    <p class="mb-0">© 2025 SecurityNoPhone – جميع الحقوق محفوظة.</p>
-  </footer>
+<!-- Bandeau Cookie (une seule version, bien stylée) -->
+<div id="footer-container"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init();</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
+
+<script src="js/translations.js"></script>
+
+<!-- Forcer la langue allemande -->
+<script>
+  localStorage.setItem("lang", "ar");
+</script>
+
+<script src="js/main.js"></script>
 </body>
 
 </html>
