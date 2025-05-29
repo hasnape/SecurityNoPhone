@@ -5,7 +5,7 @@ body {
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  background-image: url("/images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d");
+  background-image: url("images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

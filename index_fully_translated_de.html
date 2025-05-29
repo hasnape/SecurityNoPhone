@@ -3,248 +3,230 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SecurityNoPhone – Angebote & Konzept</title>
+
+  <!-- Styles -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="flags/flags.css">
-  <style>
-    body {
-      background-image: url("images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d");
-      /* ton image ici */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-  </style>
 </head>
 
 <body data-aos-once="true">
-  <!-- Navbar dynamiquement insérée -->
   <div id="navbar-container"></div>
-  
+  <main>
+    <section class="container my-5 text-center" id="intro">
+      <h1 class="section-title">Willkommen bei SecurityNoPhone</h1>
+      <p class="fs-5">Maximale Privatsphäre für Ihre Veranstaltungen – ohne Handy-Störungen, aber mit Stil.</p>
+    </section>
 
-  <div style="margin-top: 80px;"></div>
-  <section class="container my-5" data-aos="fade-up" id="galerie-concept">
-    <div class="row align-items-center">
-      <div class="col-lg-6 mb-4" id="galerie">
-        <h2 class="section-title text-center">Galerie</h2>
-        <!-- Carousel-->
-        <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
-          <div class="carousel-inner rounded shadow">
-            <div class="carousel-item active">
-              <img alt="Exemple 1" class="d-block w-100" src="images/2986967587606.PNM.jpg" />
-            </div>
-            <div class="carousel-item">
-              <img alt="Exemple 2" class="d-block w-100" src="images/3352798400086.PNM.jpg" />
-            </div>
-            <div class="carousel-item">
-              <img alt="Exemple 3" class="d-block w-100" src="images/3469191228188.PNM.jpg" />
-            </div>
-            <div class="carousel-item">
-              <img alt="Exemple 4" class="d-block w-100" src="images/3470635691117.PNM.jpg" />
-            </div>
-            <div class="carousel-item">
-              <img alt="Exemple 5" class="d-block w-100"
-                src="images/Alibaba8645a3326b4a8432872212d54008259b_original.png" />
-            </div>
-            <div class="carousel-item">
-              <img alt="Exemple 6" class="d-block w-100"
-                src="images/Alibabab1f46257725ce9f58fef719d6e28de07_original.png" />
-            </div>
-            <div class="carousel-item">
-              <img alt="Exemple 7" class="d-block w-100" src="images/IMG_20250421_182622.jpg" />
-            </div>
-            <div class="carousel-item">
-              <div class="ratio ratio-1x1">
-                <iframe allowfullscreen="" src="https://www.tiktok.com/embed/v2/7471266049443319095"></iframe>
+    <section class="container my-5" data-aos="fade-up" id="galerie-concept">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4" id="galerie">
+          <div class="border rounded-4 shadow-sm p-4 bg-white">
+            <h2 class="section-title text-center">Galerie</h2>
+            <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
+              <div class="carousel-inner rounded shadow">
+                <div class="carousel-item active">
+                  <img class="d-block w-100" src="images/2986967587606.PNM.jpg" alt="Beispiel 1" />
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="images/3352798400086.PNM.jpg" alt="Beispiel 2" />
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="images/3469191228188.PNM.jpg" alt="Beispiel 3" />
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="images/3470635691117.PNM.jpg" alt="Beispiel 4" />
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="images/Alibaba8645a3326b4a8432872212d54008259b_original.png"
+                    alt="Beispiel 5" />
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="images/Alibabab1f46257725ce9f58fef719d6e28de07_original.png"
+                    alt="Beispiel 6" />
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="images/IMG_20250421_182622.jpg" alt="Beispiel 7" />
+                </div>
+                <div class="carousel-item">
+                  <div class="ratio ratio-1x1">
+                    <iframe allowfullscreen src="https://www.tiktok.com/embed/v2/7471266049443319095"></iframe>
+                  </div>
+                </div>
               </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </button>
             </div>
           </div>
-          <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators"
-            type="button">
-            <span class="carousel-control-prev-icon"></span>
-          </button>
-          <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators"
-            type="button">
-            <span class="carousel-control-next-icon"></span>
-          </button>
+        </div>
+
+        <div class="col-lg-6" id="concept">
+          <div class="card p-4 shadow-sm h-100 text-center bg-white">
+            <h2 class="section-title text-center text-dark">Konzept</h2>
+            <p class="fs-5">SecurityNoPhone ist mehr als ein Accessoire – es ist eine Lösung für ruhige, sichere Events.
+              Ihre Gäste behalten ihr Handy, können es aber nicht benutzen – ohne Stress, ohne Fotos, ohne Aufnahmen.
+            </p>
+            <p class="fs-5">Keine unerwünschten Blitze, keine ungewollten Videos oder Datenlecks. Jede Hülle schafft
+              eine respektvolle, vertrauliche Atmosphäre.</p>
+            <p class="fs-5">Ideal für Hochzeiten, Seminare, VIP-Events, Prüfungen oder vertrauliche Meetings.</p>
+            <small class="text-muted d-block mt-2">💳 Zahlung in 4 zinsfreien Raten mit PayPal möglich (bei
+              Berechtigung)</small>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="col-lg-6" id="concept">
-        <div class="border rounded-4 shadow-sm p-4 bg-white">
-
-        <h2 class="section-title text-center text-dark">Konzept</h2>
-        <p class="fs-5 text-center">
-          SecurityNoPhone ist viel mehr als nur ein Zubehör: Es ist eine Lösung für Ruhe und Sicherheit bei privaten,
-          beruflichen oder vertraulichen Veranstaltungen. Dank unserer sicheren Hülle behalten Ihre Gäste ihr Telefon
-          bei sich, ohne es benutzen zu können – kein Stress, keine Fotos, keine Aufnahmen.
-        </p>
-        <p class="fs-5 text-center">
-          Keine unerwünschten Blitze mehr, keine Videos ohne Zustimmung oder Datenlecks. Jede Hülle schafft eine
-          respektvolle und vertrauliche Atmosphäre – ideal für Hochzeiten, Seminare oder exklusive Veranstaltungen.
-        </p>
-        <p class="fs-5 text-center">
-          Mit SecurityNoPhone schützen Sie die Erfahrung Ihrer Gäste, stärken Ihr professionelles Image und schaffen
-          eine vertrauliche Atmosphäre in einer vernetzten Welt.
-        </p>
-        <small class="text-muted d-block mt-2 text-center">
-          💳 Zahlung in 4 zinsfreien Raten mit PayPal möglich (bei Berechtigung)
-        </small>
-       </div>
+    <section class="container my-5" data-aos="fade-up" id="cta-banner">
+      <div class="border rounded-4 shadow-sm p-4 bg-white text-center">
+        <h3 class="mb-3">Bieten Sie Ihren Gästen unvergleichliche Ruhe</h3>
+        <p class="mb-4 fs-5">Bestellen Sie Ihre Hüllen, mieten Sie oder entdecken Sie unser einfaches und praktisches
+          Abonnement.</p>
+        <a class="btn btn-dark me-2" href="/commande_de.html">Bestellen</a>
+        <a class="btn btn-outline-dark me-2" href="/commande_de.html">Reservieren</a>
+        <a class="btn btn-outline-dark" href="/commande_de.html">Abonnieren</a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="container my-5" data-aos="fade-up" id="usecases">
-    <div class="container text-center">
-      <h3 class="mb-3">Bieten Sie Ihren Gästen unvergleichliche Ruhe</h3>
-      <p class="mb-4 fs-5">Bestellen Sie Ihre Hüllen, mieten Sie oder entdecken Sie unser einfaches und praktisches
-        Abonnement.</p>
-      <a class="btn btn-dark me-2" href="/commande_de.html">Bestellen</a>
-      <a class="btn btn-outline-dark me-2" href="/commande_de.html">Reservieren</a>
-      <a class="btn btn-outline-dark" href="/commande_de.html">Abonnieren</a>
-    </div>
-  </section>
-
-  <!-- Angebote Section -->
-  <section class="container my-5" id="offers">
-    <h2 class="section-title text-center">Our Angebote</h2><br>
-    <div class="row gy-4 justify-content-center">
-      <div class="col-md-4 mb-4">
-        <div class="card p-4 shadow-sm h-100 text-center">
-          <h4>Personalisierte Hüllen</h4><br>
-          <ul class="list-unstyled text-center">
-            <li>Ab 3,50 € inkl. MwSt. pro Hülle</li>
-            <li>Mindestens 50 Stück</li>
-            <li>Mit Ihrem Logo personalisiert</li>
-            <li>Mit Diebstahlsicherung</li>
-            <li>Magnetische Öffnung inklusive</li>
-            <li>Lieferung spätestens 30 Tage nach Bestätigung</li>
-            <li>Lieferung innerhalb Frankreichs inbegriffen</li>
-          </ul>
-          <a class="btn btn-outline-warning mt-3" href="/commande_de.html">Bestellen</a>
+    <section class="container my-5" id="offers">
+      <div class="border rounded-4 shadow-sm p-4 bg-white">
+        <h2 class="section-title text-center">Unsere Angebote</h2>
+        <div class="row gy-4 justify-content-center">
+          <div class="col-md-4 mb-4">
+            <div class="card p-4 shadow-sm h-100 text-center bg-white">
+              <h4>Personalisierte Hüllen</h4><br>
+              <ul class="list-unstyled text-center">
+                <li>Ab 3,50 € inkl. MwSt. pro Hülle</li>
+                <li>Mindestens 50 Stück</li>
+                <li>Mit Ihrem Logo personalisiert</li>
+                <li>Mit Diebstahlsicherung</li>
+                <li>Magnetische Öffnung inklusive</li>
+                <li>Lieferung spätestens 30 Tage nach Bestätigung</li>
+                <li>Lieferung innerhalb Frankreichs inbegriffen</li>
+              </ul>
+              <a class="btn btn-outline-warning mt-3" href="/commande_de.html">Bestellen</a>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card p-4 shadow-sm h-100 text-center bg-white">
+              <h4>Rundum-sorglos Miete</h4><br>
+              <ul class="list-unstyled text-center">
+                <li>Bis zu 250 Hüllen</li>
+                <li>Lieferung innerhalb Frankreichs inbegriffen</li>
+                <li>Rückversand mit vorausbezahltem Etikett</li>
+                <li>Mit Personal vor Ort (max. 6 Std.): 390 € inkl. MwSt.</li>
+                <li>Ohne Personal (24 Std.): 150 € inkl. MwSt.</li>
+              </ul>
+              <a class="btn btn-outline-warning mt-3" href="/commande_de.html">Reservieren</a>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card p-4 shadow-sm h-100 text-center bg-white">
+              <h4>Starter-Abonnement</h4><br>
+              <ul class="list-unstyled text-center">
+                <li>Bis zu 50 Hüllen</li>
+                <li>30 Tage Nutzungshistorie</li>
+                <li>Rechnungsverfolgung als PDF</li>
+                <li>Support per E-Mail innerhalb von 48h</li>
+                <li>19 €/Monat inkl. MwSt. – Keine Bindung</li>
+                <li>Automatische Verlängerung</li>
+                <li>Jederzeit kündbar</li>
+              </ul>
+              <a class="btn btn-outline-warning mt-3" href="/commande_de.html">Abonnieren</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-4 mb-4">
-        <div class="card p-4 shadow-sm h-100 text-center">
-          <h4>Rundum-sorglos Miete</h4><br>
-          <ul class="list-unstyled text-center">
-            <li>Bis zu 250 Hüllen</li>
-            <li>Lieferung innerhalb Frankreichs inbegriffen</li>
-            <li>Rückversand mit vorausbezahltem Etikett</li>
-            <li>Mit Personal vor Ort (max. 6 Std.): 390 € inkl. MwSt.</li>
-            <li>Ohne Personal (24 Std.): 150 € inkl. MwSt.</li>
-          </ul>
-          <a class="btn btn-outline-warning mt-3" href="/commande_de.html">Reservieren</a>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card p-4 shadow-sm h-100 text-center">
-          <h4>Starter-Abonnement</h4><br>
-          <ul class="list-unstyled text-center">
-            <li>Bis zu 50 Hüllen</li>
-            <li>30 Tage Nutzungshistorie</li>
-            <li>Rechnungsverfolgung als PDF</li>
-            <li>Support per E-Mail innerhalb von 48h</li>
-            <li>19 €/Monat inkl. MwSt. – Keine Bindung</li>
-            <li>Automatische Verlängerung</li>
-            <li>Jederzeit kündbar</li>
-          </ul>
-          <a class="btn btn-outline-warning mt-3" href="/commande_de.html">Abonnieren</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Anwendungsfälle -->
-  <section class="container my-5" data-aos="fade-up" id="usecases">
-    <h2 class="section-title text-center mb-5">Anwendungsfälle</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
-          <h5 class="fw-bold">Hochzeiten</h5>
-          <p class="text-muted">100 % vertrauliche Zeremonien ohne Handys oder Ablenkungen. Ideal zur Wahrung der
-            Intimität.</p>
+    <section class="container my-5" data-aos="fade-up" id="usecases">
+      <div class="border rounded-4 shadow-sm p-4 bg-white">
+        <h2 class="section-title text-center mb-5">Anwendungsfälle</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
+              <h5 class="fw-bold">Hochzeiten</h5>
+              <p class="text-muted">100 % vertrauliche Zeremonien ohne Handys oder Ablenkungen. Ideal zur Wahrung der
+                Intimität.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
+              <h5 class="fw-bold">Konferenzen</h5>
+              <p class="text-muted">Schützen Sie sensible Gespräche und verhindern Sie Bild- oder Tonaufnahmen bei
+                wichtigen Treffen.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
+              <h5 class="fw-bold">VIP-Veranstaltungen</h5>
+              <p class="text-muted">Wahren Sie die Privatsphäre privater Events: Modenschauen, Premieren, exklusive
+                Afterworks.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
+              <h5 class="fw-bold">Prüfungen</h5>
+              <p class="text-muted">Verhindern Sie Schummeln durch Blockierung von Telefonen während Prüfungen.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
+              <h5 class="fw-bold">Gesundheitseinrichtungen</h5>
+              <p class="text-muted">Sorgen Sie für Privatsphäre und Ruhe in Wartebereichen oder OP-Zonen.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
+              <h5 class="fw-bold">Gerichte & Institutionen</h5>
+              <p class="text-muted">Sichern Sie Gerichtsverhandlungen oder vertrauliche Besprechungen ohne
+                Handy-Nutzung.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
-          <h5 class="fw-bold">Konferenzen</h5>
-          <p class="text-muted">Schützen Sie sensible Gespräche und verhindern Sie Bild- oder Tonaufnahmen bei wichtigen
-            Treffen.</p>
-        </div>
+    </section>
+    <section class="container my-5" data-aos="fade-up" id="contact">
+      <div class="card p-4 shadow-sm h-100 text-center bg-white">
+        <h2 class="section-title text-center">Kontakt</h2>
+        <p class="text-center mb-4">Fragen? Brauchen Sie ein Angebot oder eine Beratung? Schreiben Sie uns:</p>
+        <form action="https://formspree.io/f/xayrzjov" class="row g-3 justify-content-center" method="POST">
+          <div class="col-md-6">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-control" name="name" required type="text" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="email">E-Mail</label>
+            <input class="form-control" name="email" required type="email" />
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="message">Nachricht</label>
+            <textarea class="form-control" name="message" required rows="4"></textarea>
+          </div>
+          <div class="col-12 text-center">
+            <button class="btn btn-dark" type="submit">Senden</button>
+          </div>
+        </form>
       </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
-          <h5 class="fw-bold">VIP-Veranstaltungen</h5>
-          <p class="text-muted">Wahren Sie die Privatsphäre privater Events: Modenschauen, Premieren, exklusive
-            Afterworks.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
-          <h5 class="fw-bold">Prüfungen</h5>
-          <p class="text-muted">Verhindern Sie Schummeln durch Blockierung von Telefonen während Prüfungen.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
-          <h5 class="fw-bold">Gesundheitseinrichtungen</h5>
-          <p class="text-muted">Sorgen Sie für Privatsphäre und Ruhe in Wartebereichen oder OP-Zonen.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
-          <h5 class="fw-bold">Gerichte & Institutionen</h5>
-          <p class="text-muted">Sichern Sie Gerichtsverhandlungen oder vertrauliche Besprechungen ohne Handy-Nutzung.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
+  <div id="footer-container"></div>
 
-  <!-- Kontakt -->
-  <section class="container my-5" data-aos="fade-up" id="contact">
-    <h2 class="section-title text-center">Kontakt</h2>
-    <p class="text-center mb-4">Fragen? Brauchen Sie ein Angebot oder eine Beratung? Schreiben Sie uns:</p>
-    <form action="https://formspree.io/f/xayrzjov" class="row g-3 justify-content-center" method="POST">
-      <div class="col-md-6">
-        <label class="form-label" for="name">Name</label>
-        <input class="form-control" name="name" required type="text" />
-      </div>
-      <div class="col-md-6">
-        <label class="form-label" for="email">E-Mail</label>
-        <input class="form-control" name="email" required type="email" />
-      </div>
-      <div class="col-12">
-        <label class="form-label" for="message">Nachricht</label>
-        <textarea class="form-control" name="message" required rows="4"></textarea>
-      </div>
-      <div class="col-12 text-center">
-        <button class="btn btn-dark" type="submit">Senden</button>
-      </div>
-    </form>
-  </section>
-
-<!-- Bandeau Cookie (une seule version, bien stylée) -->
-<div id="footer-container"></div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init();</script>
-
-<script src="js/translations.js"></script>
-
-<!-- Forcer la langue allemande -->
-<script>
-  localStorage.setItem("lang", "de");
-</script>
-
-<script src="js/main.js"></script>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+  <script src="js/translations.js"></script>
+  <script>localStorage.setItem("lang", "de");</script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
