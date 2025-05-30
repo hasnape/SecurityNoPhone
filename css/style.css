@@ -1,165 +1,300 @@
-html,
+/* css/style.css */
+
+/* Variables de Couleur Thématiques (inchangées par rapport à la version précédente) */
+:root {
+  --brand-primary: rgb(178, 141, 72);
+  --brand-primary-hover: rgb(160, 125, 60);
+  --brand-dark: #212529;
+  --brand-light-bg: #f8f9fa;
+  --brand-white: #ffffff;
+  --text-body: #333;
+  --text-headings: rgb(14, 13, 13);
+  --text-muted-custom: #555;
+  --text-on-primary: var(--brand-white);
+  --text-on-dark-bg: #f0f0f0;
+  --border-standard: #dee2e6;
+  --card-bg: var(--brand-white);
+  --card-border: var(--border-standard);
+}
+
+/* Styles Généraux du Body (inchangés) */
 body {
   height: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  background-image: url("images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d");
+  background-image: url("../images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   font-family: 'Segoe UI', sans-serif;
-  color: #222;
+  color: var(--text-body);
 }
 
 main {
   flex: 1;
 }
 
-/* Responsive fix for mobile background */
 @media (max-width: 768px) {
   body {
     background-attachment: scroll;
   }
 }
 
-/* TITRES GÉNÉRAUX */
+/* Titres Généraux (inchangés) */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  color: rgb(14, 13, 13);
+  color: var(--text-headings);
 }
 
 .section-title {
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-/* HEADER */
-header {
-  background: linear-gradient(to right, #1e1e1e, #5c2d2d);
-  color: white;
+/* Section Héros (MODIFIÉE pour réduire l'espace) */
+#hero {
+  background-image: url('../images/hero-background.jpg');
+  background-size: cover;
+  background-position: center;
+  color: var(--text-on-dark-bg);
+  /* min-height: 70vh; /* Ancienne valeur */
+  min-height: 50vh;
+  /* NOUVELLE VALEUR : Réduction de la hauteur minimale */
+  /* OU vous pourriez utiliser une valeur fixe : min-height: 400px; */
+  /* OU rendre la hauteur plus dépendante du contenu en réduisant encore plus ou en utilisant juste le padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem;
+  /* Ajusté pour un padding vertical un peu plus équilibré si min-height est réduit */
+  padding-bottom: 2rem;
+  /* Ajusté */
+}
+
+#hero .hero-content-overlay {
+  background-color: rgba(0, 0, 0, 0.55);
+  padding: 1.5rem;
+  /* Votre valeur existante, semble correcte pour un hero plus petit */
+  border-radius: 0.5rem;
+  max-width: 78%;
+  /* Votre valeur existante */
   text-align: center;
-  padding: 80px 20px;
-  position: relative;
 }
 
-.header-logo {
-  display: block;
-  margin: 0 auto 20px;
-  max-height: 100px;
+#hero h1 {
+  color: var(--brand-white);
+  font-size: calc(0.5rem + 2vw);
+  /* Votre valeur existante, adaptée pour un hero plus compact */
+  margin-bottom: 0.75rem;
+  /* Ajuster l'espacement si nécessaire */
 }
 
-/* CARROUSEL carré et responsive */
-.carousel-container {
-  width: 100%;
-  max-width: 600px;
-  aspect-ratio: 1 / 1;
-  margin: 0 auto;
-  overflow: hidden;
+#hero p.lead {
+  color: var(--text-on-dark-bg);
+  font-size: calc(0.8rem + 0.3vw);
+  /* Légèrement ajusté pour un hero plus compact, votre calc(1rem + 0.5vw) était peut-être un peu grand */
+  margin-bottom: 1.25rem;
+  /* Ajuster l'espacement */
 }
 
-.carousel-inner,
-.carousel-inner .carousel-item,
-.carousel-inner img {
+/* Carrousel (inchangé) */
+#galerie-concept .carousel-inner,
+#galerie-concept .carousel-inner .carousel-item,
+#galerie-concept .carousel-inner img,
+#galerie-concept .carousel-inner iframe {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 0.375rem;
 }
 
-/* NAVBAR */
+#galerie-concept .carousel {
+  border-radius: 0.5rem;
+}
+
+/* Barre de Navigation (inchangée) */
 .navbar-brand img {
   height: 40px;
   margin-right: 10px;
 }
 
-/* BOUTONS */
+/* Boutons Thématiques (inchangés par rapport à la version précédente que vous avez) */
+.btn-brand-primary,
 .btn-primary {
-  background-color: rgb(178, 141, 72);
-  border-color: rgb(178, 141, 72);
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-on-primary);
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.btn-brand-primary:hover,
+.btn-brand-primary:focus,
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--brand-primary-hover);
+  border-color: var(--brand-primary-hover);
+  color: var(--text-on-primary);
+  box-shadow: 0 0 0 0.25rem rgba(178, 141, 72, 0.35);
+}
+
+.btn-outline-brand-primary {
+  color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.btn-outline-brand-primary:hover,
+.btn-outline-brand-primary:focus {
+  background-color: var(--brand-primary);
+  color: var(--text-on-primary);
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 0.25rem rgba(178, 141, 72, 0.35);
 }
 
 .btn-outline-warning {
-  border-color: rgb(178, 141, 72);
-  color: rgb(178, 141, 72);
+  color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.btn-outline-warning:hover {
-  background-color: rgb(178, 141, 72);
-  color: white;
+.btn-outline-warning:hover,
+.btn-outline-warning:focus {
+  background-color: var(--brand-primary);
+  color: var(--text-on-primary);
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 0.25rem rgba(178, 141, 72, 0.35);
 }
 
-/* LANGUE (sélecteur) */
-#language-select {
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  background: white;
-  border-radius: 5px;
-  padding: 5px;
-  z-index: 1000;
+.btn-dark,
+.btn-outline-dark {
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
 }
 
-/* BOUTON WHATSAPP FLOTTANT */
+/* Bouton Flottant WhatsApp (inchangé) */
 .whatsapp-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
   background-color: #25d366;
-  color: white;
+  color: var(--brand-white);
   padding: 12px 16px;
   border-radius: 50%;
   font-size: 24px;
   text-decoration: none;
   z-index: 999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* CARTES UTILISATION */
+.whatsapp-btn:hover {
+  background-color: #1ebe57;
+  color: var(--brand-white);
+}
+
+/* Cartes (Offres, Cas d'utilisation, Contact) */
+/* La classe .card est stylée comme vous l'aviez.
+   Pour que les sections Galerie et Concept bénéficient de ces styles et aient la même hauteur,
+   il faudra leur ajouter la classe .card et .h-100 dans le HTML.
+*/
 .card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #fdf8f0;
-  border: 1px solid #e6d8b3;
-  border-radius: 1rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(178, 141, 72, 0.3);
+  box-shadow: 0 0.5rem 1rem rgba(178, 141, 72, 0.15);
 }
 
-.card svg {
-  transition: transform 0.3s ease;
-}
-
-.card:hover svg {
-  transform: scale(1.1);
-}
-
+.card h4,
 .card h5 {
   font-weight: bold;
   margin-top: 1rem;
   margin-bottom: 0.75rem;
+  color: var(--text-headings);
 }
 
 .card p {
-  color: #555;
+  color: var(--text-muted-custom);
   font-size: 0.95rem;
   line-height: 1.5;
 }
 
-/* FOOTER */
+/* Style pour s'assurer que les cartes dans une rangée flex ont la même hauteur */
+/* Ceci s'appliquera si vous ajoutez .d-flex aux colonnes ou si la rangée est align-items-stretch */
+#galerie-concept .card.h-100 {
+  display: flex;
+  flex-direction: column;
+}
+
+#galerie-concept .card.h-100 .card-body {
+  /* Si vous structurez avec card-body */
+  flex-grow: 1;
+}
+
+
+/* Footer (inchangé) */
 footer {
   margin-top: auto;
-  background-color: #1e1e1e;
-  color: white;
-  padding: 20px 0;
+  background-color: var(--brand-dark);
+  color: var(--text-on-dark-bg);
+  padding: 2rem 0;
   text-align: center;
+}
+
+footer a {
+  color: var(--brand-white);
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--brand-primary);
+  text-decoration: underline;
+}
+
+/* Styles pour les formulaires (inchangés) */
+.form-error-message {
+  font-size: 0.875em;
+}
+
+#formSubmissionFeedback div.alert,
+#contactFormFeedback div.alert {
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: .375rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: rgba(178, 141, 72, 0.8);
+  box-shadow: 0 0 0 0.25rem rgba(178, 141, 72, 0.25);
+}
+
+.price-box {
+  background-color: var(--brand-light-bg);
+  padding: 10px 15px;
+  border-radius: 0.375rem;
+  border: 1px solid var(--border-standard);
+}
+
+.btn.is-loading .spinner-border {
+  margin-right: 0.5rem;
 }

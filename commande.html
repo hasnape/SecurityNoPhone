@@ -22,35 +22,42 @@
         <div class="col-md-6">
           <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm">
             <input type="text" name="_gotcha" style="display:none">
-            <div class="mb-3"><label class="form-label">Type d’offre :</label>
+            <div class="mb-3">
+              <label class="form-label" data-i18n="label_offer_type">Type d’offre :</label>
               <select class="form-select" name="offre" id="offerType" required>
-                <option value="">-- Choisir une offre --</option>
-                <option value="location_sans">Location sans personnel</option>
-                <option value="location_avec">Location avec personnel</option>
-                <option value="achat">Pochettes personnalisées</option>
-                <option value="abonnement">Abonnement Starter</option>
+                <option value="" data-i18n="option_choose_offer">-- Choisir une offre --</option>
+                <option value="location_sans" data-i18n="option_location_without">Location sans personnel</option>
+                <option value="location_avec" data-i18n="option_location_with">Location avec personnel</option>
+                <option value="achat" data-i18n="option_custom_pouches">Pochettes personnalisées</option>
+                <option value="abonnement" data-i18n="option_subscription">Abonnement Starter</option>
               </select>
             </div>
-            <div class="mb-3"><label for="quantity" class="form-label">Quantité de pochettes :</label>
-              <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="100"
-                required />
+            <div class="mb-3">
+              <label for="quantity" class="form-label" data-i18n="label_quantity">Quantité de pochettes :</label>
+              <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="50" required />
+              <div id="quantityError" class="text-danger mt-1" style="display: none;"></div>
             </div>
-            <div class="mb-3"><label for="date" class="form-label">Date de l'événement :</label>
+            <div class="mb-3">
+              <label for="date" class="form-label" data-i18n="label_date">Date de l'événement :</label>
               <input type="date" name="date" id="date" class="form-control" required />
+              <div id="dateError" class="text-danger mt-1" style="display: none;"></div>
             </div>
-            <div class="mb-3"><label for="nom" class="form-label">Nom complet :</label>
+            <div class="mb-3"><label for="nom" class="form-label" data-i18n="label_fullname">Nom complet :</label>
               <input type="text" name="nom" id="nom" class="form-control" required />
             </div>
-            <div class="mb-3"><label for="email" class="form-label">Email :</label>
-              <input type="email" name="email" id="email" class="form-control" required />
+            <div class="mb-3"><label for="email" class="form-label" data-i18n="label_email_form">Email :</label> <input
+                type="email" name="email" id="email" class="form-control" required />
             </div>
-            <div class="mb-3"><label for="adresse" class="form-label">Adresse de facturation :</label>
+            <div class="mb-3"><label for="adresse" class="form-label" data-i18n="label_address">Adresse de facturation :</label>
               <textarea name="adresse" id="adresse" class="form-control" required></textarea>
             </div>
-            <div class="price-box text-center" id="priceDisplay">Total : 0 €</div>
-            <div class="text-center mt-4"><button type="submit" class="btn btn-primary">Valider la commande</button>
-            </div>
-          </form>
+            <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" data-i18n-base-text="price_total"></div>
+          
+            <div id="formSubmissionFeedback" class="mt-3"></div>
+          
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order">Valider la commande</button>
+            </div> </form>
         </div>
         <div class="col-md-6 d-flex flex-column justify-content-center align-items-center px-3">
           <div class="bg-light rounded-4 shadow-sm p-4 w-100">
@@ -101,29 +108,143 @@
 <script src="js/main.js"></script>
 
 <!-- Mise à jour dynamique du prix (si formulaire présent sur la page) -->
-<script>
+<script>// DANS LE SCRIPT DE commande.html
   document.addEventListener("DOMContentLoaded", () => {
     const offerType = document.getElementById('offerType');
-    const quantity = document.getElementById('quantity');
+    const quantityInput = document.getElementById('quantity'); // Renommé pour clarté
     const priceDisplay = document.getElementById('priceDisplay');
+    const dateInput = document.getElementById('date');
+    const orderForm = document.getElementById('orderForm');
+    const quantityError = document.getElementById('quantityError');
+    const dateError = document.getElementById('dateError');
+    const formSubmissionFeedback = document.getElementById('formSubmissionFeedback');
+    const basePriceText = priceDisplay.getAttribute('data-i18n-base-text') || "price_total"; // Utilise la clé i18n
 
-    if (offerType && quantity && priceDisplay) {
-      function updatePrice() {
-        const type = offerType.value;
-        const qty = parseInt(quantity.value) || 0;
-        let total = 0;
+    function validateQuantity() {
+      const qty = parseInt(quantityInput.value);
+      const type = offerType.value;
+      let isValid = true;
+      let errorMessage = "";
+      const currentTranslations = window.translations[localStorage.getItem('lang') || 'fr'] || {};
 
-        if (type === 'location_sans') total = 290;
-        else if (type === 'location_avec') total = 390;
-        else if (type === 'achat') total = qty >= 50 ? qty * 3.5 : 0;
-        else if (type === 'abonnement') total = Math.ceil(qty / 50) * 19;
-
-        priceDisplay.innerText = `Total : ${total.toFixed(2)} €`;
+      if (type === 'achat' && qty < 50) {
+        isValid = false;
+        errorMessage = currentTranslations["alert_min_quantity_achat"] || "Pour les pochettes personnalisées, le minimum est de 50 unités."; // Ajoutez cette clé à translations.js
+      } else if (qty > 250) {
+        isValid = false;
+        errorMessage = currentTranslations["alert_max_quantity"] || "La quantité maximale autorisée est de 250 pochettes.";
       }
 
-      offerType.addEventListener('change', updatePrice);
-      quantity.addEventListener('input', updatePrice);
+      quantityError.textContent = errorMessage;
+      quantityError.style.display = isValid ? "none" : "block";
+      return isValid;
+    }
+
+    function validateDate() {
+      const today = new Date().toISOString().split('T')[0];
+      let isValid = true;
+      let errorMessage = "";
+      const currentTranslations = window.translations[localStorage.getItem('lang') || 'fr'] || {};
+
+      if (dateInput.value < today) {
+        isValid = false;
+        errorMessage = currentTranslations["alert_date_past"] || "La date de l'événement ne peut pas être dans le passé."; // Ajoutez à translations.js
+      }
+      dateError.textContent = errorMessage;
+      dateError.style.display = isValid ? "none" : "block";
+      return isValid;
+    }
+
+    function updatePrice() {
+      const type = offerType.value;
+      const qty = parseInt(quantityInput.value) || 0;
+      let total = 0;
+      const currentTranslations = window.translations[localStorage.getItem('lang') || 'fr'] || {};
+
+      if (qty <= 0 && type !== 'abonnement' && type !== 'location_sans' && type !== 'location_avec') { // Ne pas calculer si quantité invalide sauf pour abo/loc fixe
+        priceDisplay.innerHTML = ""; // Ou un message invitant à sélectionner
+        return;
+      }
+
+      if (type === 'location_sans') total = 150; // Prix corrigé comme sur la page d'accueil
+      else if (type === 'location_avec') total = 390;
+      else if (type === 'achat') total = qty >= 50 ? qty * 3.5 : 0; // Le prix est 0 si < 50, mais la validation l'empêchera
+      else if (type === 'abonnement') total = qty > 0 ? Math.ceil(qty / 50) * 19 : 19; // Si qté non précisée pour abo, on prend 1 pack de 50? Ou rendre qté non applicable pour abo.
+      // Ici, j'assume que qté pour abo = nb de lots de 50 pochettes. Si 0, 19€ par défaut.
+
+      const priceTextTemplate = currentTranslations[basePriceText] || "Total : {price} €";
+      priceDisplay.innerHTML = priceTextTemplate.replace("{price}", total.toFixed(2));
+    }
+
+    if (offerType && quantityInput && priceDisplay) {
+      offerType.addEventListener('change', () => { validateQuantity(); updatePrice(); });
+      quantityInput.addEventListener('input', () => { validateQuantity(); updatePrice(); });
+      if (dateInput) dateInput.addEventListener('change', validateDate);
+
+      // Appel initial
+      validateQuantity();
+      validateDate(); // Si vous voulez valider la date au chargement (si elle est pré-remplie)
       updatePrice();
+    }
+
+    if (orderForm) {
+      orderForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Empêche la soumission classique
+        formSubmissionFeedback.innerHTML = ""; // Reset feedback
+
+        const isQtyValid = validateQuantity();
+        const isDateValid = dateInput ? validateDate() : true;
+
+        if (!isQtyValid || !isDateValid || !orderForm.checkValidity()) {
+          // Bootstrap gère déjà l'affichage des erreurs pour les champs `required` via checkValidity()
+          // Mais on peut forcer un message général si besoin
+          const currentTranslations = window.translations[localStorage.getItem('lang') || 'fr'] || {};
+          formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_invalid"] || "Veuillez corriger les erreurs dans le formulaire."}</div>`; // Ajoutez à translations.js
+          return;
+        }
+
+        // Indicateur de chargement
+        const submitButton = orderForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        const currentTranslations = window.translations[localStorage.getItem('lang') || 'fr'] || {};
+        submitButton.disabled = true;
+        submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ${currentTranslations["text_sending"] || "Envoi..."}`; // Ajoutez à translations.js
+
+
+        const formData = new FormData(orderForm);
+        fetch(orderForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        }).then(response => {
+          if (response.ok) {
+            formSubmissionFeedback.innerHTML = `<div class="alert alert-success">${currentTranslations["alert_form_success"] || "Commande envoyée avec succès ! Nous vous contacterons bientôt."}</div>`; // Ajoutez à translations.js
+            orderForm.reset(); // Vide le formulaire
+            updatePrice(); // Remet le prix à son état initial
+          } else {
+            response.json().then(data => {
+              let errorMessage = currentTranslations["alert_form_error_generic"] || "Une erreur s'est produite."; // Ajoutez
+              if (data.errors) {
+                errorMessage = data.errors.map(error => error.message).join(", ");
+              }
+              formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${errorMessage}</div>`;
+            })
+          }
+        }).catch(error => {
+          formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_error_network"] || "Erreur réseau. Veuillez réessayer."}</div>`; // Ajoutez
+        }).finally(() => {
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalButtonText;
+        });
+      });
+    }
+    // Assurer que la langue est appliquée aux éléments dynamiques du formulaire au chargement
+    if (typeof switchLanguage === "function") {
+      // Il faut s'assurer que switchLanguage peut aussi traduire les options des <select> si nécessaire,
+      // ou que les data-i18n sur les <option> suffisent.
+      // switchLanguage(); // Déjà appelé globalement par main.js
     }
   });
 </script>
