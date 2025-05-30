@@ -3,7 +3,7 @@
         <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
             <img alt="Logo SecurityNoPhone" src="images/IMG_20250421_182622-removebg-preview.png"
                 style="height: 40px; margin-right: 10px;" />
-            <span data-i18n="nav_brand_name">SecurityNoPhone</span>
+            <span>SecurityNoPhone</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -24,16 +24,24 @@
                 <li class="nav-item"><a class="nav-link" href="suivi.html" data-i18n="nav_tracking">Suivi</a></li>
             </ul>
 
+            <!-- Menu de langue dynamique -->
             <div class="d-flex align-items-center ms-4 gap-2">
-                <span class="text-muted" title="Changer la langue" data-i18n="nav_change_language_title">🌐</span>
+                <span class="text-muted" title="Changer la langue">🌐</span>
                 <select id="langSwitcher" class="form-select form-select-sm" style="width: auto;">
-                    <option value="fr" data-i18n="nav_lang_fr">Français</option>
-                    <option value="en" data-i18n="nav_lang_en">English</option>
-                    <option value="de" data-i18n="nav_lang_de">Deutsch</option>
-                    <option value="ar" data-i18n="nav_lang_ar">العربية</option>
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                    <option value="de">Deutsch</option>
+                    <option value="ar">العربية</option>
                 </select>
-
+                  
+                <div class="ms-3 d-flex align-items-center gap-2">
+                    <a href="index.html" class="text-decoration-none">FR</a>
+                    <a href="index_fully_translated_en.html" class="text-decoration-none">EN</a>
+                    <a href="index_fully_translated_de.html" class="text-decoration-none">DE</a>
+                    <a href="index_fully_translated_ar_.html" class="text-decoration-none">AR</a>    </div>
+                  
             </div>
         </div>
     </div>
 </nav>
+  

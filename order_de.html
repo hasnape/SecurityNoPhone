@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="order_tracking_title">Bestellverfolgung – SecurityNoPhone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
+    <style>
+        body {
+            background-image: url('images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .tracking-box {
+            background: #ffffffee;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Style für den Absende-Button während des Ladens */
+        .btn.is-loading .spinner-border {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-container"></div>
+
+    <main class="container my-5" style="margin-top: 100px;"><br><br>
+        <div class="row g-4 align-items-start">
+            <div class="col-md-6">
+                <div class="tracking-box">
+                    <h2 class="mb-4 text-center" data-i18n="order_tracking_title">Meine Bestellung verfolgen</h2>
+                    <form id="trackingForm">
+                        <div class="mb-3">
+                            <label for="orderId" class="form-label" data-i18n="order_input_label">Bestellnummer aus der
+                                E-Mail:</label>
+                            <input type="text" class="form-control" id="orderId" placeholder="z.B. CMD123"
+                                data-i18n-placeholder="order_placeholder" required />
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-dark" data-i18n="order_check_button">Status
+                                anzeigen</button>
+                        </div>
+                    </form>
+                    <div id="statusResult" class="mt-4 text-center fw-bold"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="tracking-box">
+                    <h3 class="mb-3" data-i18n="tracking_how_to_title">Wie verfolge ich meine Bestellung?</h3>
+                    <p data-i18n="tracking_how_to_p1">Sobald Ihre Bestellung aufgegeben wurde, erhalten Sie eine
+                        eindeutige Nummer. Diese Nummer ermöglicht es Ihnen, den Status der Vorbereitung, des Versands
+                        und der Lieferung Ihrer SecurityNoPhone-Ausrüstung zu erfahren.</p>
+                    <p data-i18n="tracking_how_to_p2">Wir aktualisieren den Bestellstatus in Echtzeit, damit Sie immer
+                        informiert sind. Vielen Dank für Ihr Vertrauen!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Set the language for this specific page
+        localStorage.setItem("lang", "de");
+
+        // Load includes (navbar, footer) and then apply translations and setup tracking form
+        async function loadIncludes() {
+            try {
+                const [navRes, footerRes] = await Promise.all([
+                    fetch('includes/navbar.html').then(res => {
+                        if (!res.ok) throw new Error(`Failed to load navbar.html: ${res.status} ${res.statusText}`);
+                        return res.text();
+                    }),
+                    fetch('includes/footer.html').then(res => {
+                        if (!res.ok) throw new Error(`Failed to load footer.html: ${res.status} ${res.statusText}`);
+                        return res.text();
+                    })
+                ]);
+
+                const navPlaceholder = document.getElementById('navbar-container');
+                const footerPlaceholder = document.getElementById('footer-container');
+
+                if (navPlaceholder) navPlaceholder.innerHTML = navRes;
+                if (footerPlaceholder) footerPlaceholder.innerHTML = footerRes;
+
+                // Handle cookie banner (assuming it's part of your footer.html or main structure)
+                const cookieBanner = document.getElementById("cookie-banner");
+                if (cookieBanner) {
+                    const cookieBtn = cookieBanner.querySelector("button");
+                    if (cookieBtn) {
+                        cookieBtn.addEventListener("click", () => {
+                            localStorage.setItem("cookiesAccepted", "true");
+                            cookieBanner.style.display = "none";
+                        });
+                    }
+                    if (localStorage.getItem("cookiesAccepted") === "true") {
+                        cookieBanner.style.display = "none";
+                    } else {
+                        cookieBanner.style.display = "block"; // Ensure visibility if not accepted
+                    }
+                }
+
+                // Apply translations after content is loaded
+                if (typeof applyTranslations === "function") { // Use applyTranslations from main.js
+                    applyTranslations();
+                }
+
+                // Setup language switcher after navbar is loaded
+                if (typeof setupLanguageSwitcher === "function") { // Assuming this is in main.js
+                    setupLanguageSwitcher();
+                }
+
+                // Setup the tracking form logic
+                setupTrackingForm();
+
+            } catch (error) {
+                console.error("Error loading includes or setting up page:", error);
+                const mainContent = document.querySelector('main');
+                if (mainContent) {
+                    const lang = localStorage.getItem('lang') || 'de'; // Default to German for error
+                    const t = window.translations?.[lang] || {};
+                    mainContent.innerHTML = `<p class='text-center text-danger' data-i18n="error_loading_page">${t["error_loading_page"] || "Fehler beim Laden der Seite. Bitte versuchen Sie es später erneut."}</p>`;
+                }
+            }
+        }
+
+        // Logic for the tracking form
+        function setupTrackingForm() {
+            const form = document.getElementById('trackingForm');
+            if (!form) return;
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const orderIdInput = document.getElementById('orderId');
+                const orderId = orderIdInput.value.trim().toUpperCase();
+                const statusResultDiv = document.getElementById('statusResult');
+                const lang = localStorage.getItem('lang') || 'de';
+                const t = window.translations?.[lang] || {};
+                const submitButton = form.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+
+                statusResultDiv.innerHTML = "";
+                submitButton.disabled = true;
+                submitButton.classList.add('is-loading');
+                submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ${t["text_searching"] || "Suche..."}`;
+
+                // --- Mock Data for Demonstration ---
+                const mockStatuses = {
+                    "CMD123": t["order_status_1"] || "Bestellung bestätigt – Wird vorbereitet",
+                    "CMD456": t["order_status_2"] || "Bestellung versendet – Unterwegs",
+                    "CMD789": t["order_status_3"] || "Bestellung geliefert – Vielen Dank für Ihr Vertrauen!"
+                };
+
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+
+                let resultText = mockStatuses[orderId] || t["order_result_notfound"] || "Bestellnummer nicht gefunden.";
+                let resultClass = mockStatuses[orderId] ? "text-success" : "text-danger";
+
+                statusResultDiv.className = `mt-4 text-center fw-bold ${resultClass}`;
+                statusResultDiv.textContent = resultText;
+
+                submitButton.disabled = false;
+                submitButton.classList.remove('is-loading');
+                submitButton.innerHTML = originalButtonText;
+
+                /* // BEISPIEL FÜR ECHTE API-LOGIK (ZUKÜNFTIGE IMPLEMENTIERUNG)
+                try {
+                    // const response = await fetch(`/api/orderstatus?id=${orderId}&lang=${lang}`);
+                    // if (!response.ok) {
+                    //   let errorData = await response.json().catch(() => null);
+                    //   const apiErrorMsg = errorData?.message || t["order_result_error_api_detail"] || `Fehler ${response.status}`;
+                    //   throw new Error(apiErrorMsg);
+                    // }
+                    // const data = await response.json();
+                    // resultText = t[data.statusKey] ? t[data.statusKey].replace("{orderNumber}", data.orderNumber) : (t["order_result_notfound"] || "Unbekannter Status.");
+                    // resultClass = "text-info";
+                    // if (data.statusKey === "order_status_3") resultClass = "text-success";
+                    // if (!t[data.statusKey]) resultClass = "text-warning";
+                } catch (error) {
+                    console.error("Fehler beim Abrufen des Bestellstatus:", error);
+                    resultText = error.message || (t["order_result_error_api"] || "Bestellstatus konnte nicht abgerufen werden.");
+                    resultClass = 'text-danger';
+                } finally {
+                    statusResultDiv.className = `mt-4 text-center fw-bold ${resultClass}`;
+                    statusResultDiv.textContent = resultText;
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('is-loading');
+                    submitButton.innerHTML = originalButtonText;
+                }
+                */
+            });
+        }
+
+        // Call loadIncludes on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', loadIncludes);
+    </script>
+</body>
+
+</html>

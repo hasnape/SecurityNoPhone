@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-< lang="de">
+<html lang="de">
 
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SecurityNoPhone – Order</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="flags/flags.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="order_title">SecurityNoPhone – Order</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
+  <link rel="stylesheet" href="css/style_optimized.css">
 
   <style>
-      body {
-        background-image: url("images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d");
-        /* ton image ici */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-      }
+    body {
+      background-image: url("images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
     html {
       scroll-behavior: smooth;
     }
@@ -48,184 +49,305 @@
   </style>
 </head>
 
-<div id="navbar-container"></div>
+<body>
 
-
+  <div id="navbar-container"></div>
 
   <div class="container my-5"><br><br>
-    <h1 class="text-center mb-5">Bestellung aufgeben</h1>
+    <h1 class="text-center mb-5" data-i18n="order_title">Bestellung aufgeben</h1>
     <div class="row">
       <div class="col-md-6">
         <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm">
           <input type="text" name="_gotcha" style="display:none">
           <div class="mb-3">
-            <label class="form-label">Angebotsart:</label>
+            <label class="form-label" data-i18n="label_offer_type">Angebotsart:</label>
             <select class="form-select" name="offre" id="offerType" required>
-              <option value="">-- Angebot auswählen --</option>
-              <option value="location_sans">Miete ohne Personal</option>
-              <option value="location_avec">Miete mit Personal</option>
-              <option value="achat">Personalisierte Hüllen</option>
-              <option value="abonnement">Starter-Abonnement</option>
+              <option value="" data-i18n="option_choose_offer">-- Angebot auswählen --</option>
+              <option value="location_sans" data-i18n="option_location_without">Miete ohne Personal</option>
+              <option value="location_avec" data-i18n="option_location_with">Miete mit Personal</option>
+              <option value="achat" data-i18n="option_custom_pouches">Personalisierte Hüllen</option>
+              <option value="abonnement" data-i18n="option_subscription">Starter-Abonnement</option>
             </select>
           </div>
           <div class="mb-3">
-            <label for="quantity" class="form-label">Anzahl der Hüllen:</label>
+            <label for="quantity" class="form-label" data-i18n="label_quantity">Anzahl der Hüllen:</label>
             <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="100"
               required />
+            <div id="quantityError" class="text-danger mt-1" style="display: none;"></div>
           </div>
           <div class="mb-3">
-            <label for="date" class="form-label">Veranstaltungsdatum:</label>
+            <label for="date" class="form-label" data-i18n="label_date">Veranstaltungsdatum:</label>
             <input type="date" name="date" id="date" class="form-control" required />
+            <div id="dateError" class="text-danger mt-1" style="display: none;"></div>
           </div>
           <div class="mb-3">
-            <label for="nom" class="form-label">Vollständiger Name:</label>
+            <label for="nom" class="form-label" data-i18n="label_fullname">Vollständiger Name:</label>
             <input type="text" name="nom" id="nom" class="form-control" required />
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label">E-Mail:</label>
+            <label for="email" class="form-label" data-i18n="label_email">E-Mail:</label>
             <input type="email" name="email" id="email" class="form-control" required />
           </div>
           <div class="mb-3">
-            <label for="adresse" class="form-label">Rechnungsadresse:</label>
+            <label for="adresse" class="form-label" data-i18n="label_address">Rechnungsadresse:</label>
             <textarea name="adresse" id="adresse" class="form-control" required></textarea>
           </div>
-          <div class="price-box text-center" id="priceDisplay">Total: 0 €</div>
+          <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" data-i18n-base-text="price_total">
+            Total: 0 €</div>
+          <div id="formSubmissionFeedback" class="mt-3"></div>
           <div class="text-center mt-4">
-            <button type="submit" class="btn btn-primary">Bestellung absenden</button>
+            <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order">Bestellung absenden</button>
           </div>
         </form>
       </div>
       <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-        <p class="text-center text-muted mt-3"></p>
-        <small class="text-muted d-block mt-2 text-center">
-          💳 Zahlung in 4 zinsfreien Raten mit PayPal möglich (bei Berechtigung)
-        </small>
+        <div class="bg-light rounded-4 shadow-sm p-4 w-100">
+          <p class="text-center fw-semibold fs-5 mb-3 text-dark" data-i18n="payment_title">
+            💳 Zahlung in <strong>4 zinsfreien Raten</strong> mit PayPal<br>
+            <small class="fst-italic text-muted" data-i18n="payment_eligibility_note">(bei Berechtigung)</small>
+          </p>
+          <p class="text-center text-secondary" data-i18n="payment_description">
+            Schützen Sie die Vertraulichkeit Ihrer Veranstaltungen mit unserer Ratenzahlungsoption.<br>
+            <span class="text-dark" data-i18n="payment_detail">Die Option wird bei der PayPal-Zahlung automatisch
+              angezeigt, wenn Sie berechtigt sind.</span>
+          </p>
+          <hr class="my-3 bg-secondary" style="height:1px; width:80%;" />
+          <p class="text-center text-dark" data-i18n="payment_flexibility_title">
+            <strong>Unsere flexiblen Angebote:</strong><br>
+            <span data-i18n="payment_flexibility_point_1">• Rundum-sorglos-Miete (mit oder ohne Personal)</span><br>
+            <span data-i18n="payment_flexibility_point_2">• Personalisierte Hüllen für Ihre Events</span><br>
+            <span data-i18n="payment_flexibility_point_3">• Starter-Abo als langfristige Lösung</span>
+          </p>
+          <p class="fw-bold mt-4 text-center" style="color: #198754;" data-i18n="payment_footer">
+            Bestellen Sie noch heute, zahlen Sie bequem und sichern Sie den Erfolg Ihrer Veranstaltung.
+          </p>
+          <small class="d-block text-center mt-3 text-muted" data-i18n="payment_tip">
+            💡 Tipp: Die Ratenzahlung wird beim Bezahlen automatisch angeboten.
+          </small>
+        </div>
       </div>
     </div>
   </div>
 
-  
+  <div id="footer-container"></div>
 
-<!-- Footer inclus dynamiquement -->
-<div id="footer-placeholder"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+  <script src="js/translations.js"></script>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/translations.js"></script>
-<script src="js/main.js"></script>
+  <script>
+    localStorage.setItem("lang", "de"); // Set the language to German for this page
+  </script>
 
-<!-- Forcer la langue souhaitée (modifie selon la page) -->
-<script>
-  localStorage.setItem("lang", "de"); // change en "de", "en", "ar" selon la page
-</script>
+  <script src="js/main.js"></script>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const offerType = document.getElementById('offerType');
+      const quantityInput = document.getElementById('quantity'); // Renamed for clarity from 'quantity'
+      const priceDisplay = document.getElementById('priceDisplay');
+      const dateInput = document.getElementById('date');
+      const orderForm = document.getElementById('orderForm');
+      const quantityError = document.getElementById('quantityError');
+      const dateError = document.getElementById('dateError');
+      const formSubmissionFeedback = document.getElementById('formSubmissionFeedback');
+      const basePriceText = priceDisplay.getAttribute('data-i18n-base-text') || "price_total";
 
-<script>
-  async function loadIncludes() {
-    const [navRes, footerRes] = await Promise.all([
-      fetch('includes/navbar.html'),
-      fetch('includes/footer.html')
-    ]);
+      // Prices are fixed in the script. Ensure they match your offers.
+      const PRICES = {
+        'location_sans': 150, // Rental without staff
+        'location_avec': 390, // Rental with staff
+        'achat_per_unit': 3.5, // Price per pouch for custom order
+        'abonnement_per_50': 19 // Price per 50 pouches for subscription
+      };
 
-    const navHtml = await navRes.text();
-    const footerHtml = await footerRes.text();
-
-    const navContainer = document.getElementById('navbar-placeholder');
-    const footerContainer = document.getElementById('footer-placeholder');
-
-    if (navContainer) navContainer.innerHTML = navHtml;
-    if (footerContainer) footerContainer.innerHTML = footerHtml;
-
-    // Gérer le bandeau cookie
-    const cookieBtn = document.querySelector("#cookie-banner button");
-    if (cookieBtn) {
-      cookieBtn.addEventListener("click", () => {
-        localStorage.setItem("cookiesAccepted", "true");
-        document.getElementById("cookie-banner").style.display = "none";
-      });
-
-      if (localStorage.getItem("cookiesAccepted") === "true") {
-        document.getElementById("cookie-banner").style.display = "none";
+      function getTranslations() {
+        return window.translations[localStorage.getItem('lang') || 'fr'] || {};
       }
-    }
 
-    // Appliquer la langue après insertion
-    if (typeof switchLanguage === "function") switchLanguage();
-    if (typeof setupTrackingForm === "function") setupTrackingForm();
-  }
+      function validateQuantity() {
+        const qty = parseInt(quantityInput.value);
+        const type = offerType.value;
+        let isValid = true;
+        let errorMessage = "";
+        const currentTranslations = getTranslations();
 
-  loadIncludes();
+        if (type === 'achat' && qty < 50) {
+          isValid = false;
+          errorMessage = currentTranslations["alert_min_quantity_achat"] || "Für personalisierte Hüllen ist eine Mindestmenge von 50 Stück erforderlich.";
+        } else if (qty > 250 && (type === 'location_sans' || type === 'location_avec')) { // Max 250 for rentals
+          isValid = false;
+          errorMessage = currentTranslations["alert_max_quantity"] || "Die maximal zulässige Menge für dieses Angebot beträgt 250 Hüllen.";
+        } else if (qty < 1 && type !== 'abonnement') { // Quantity must be at least 1 for non-subscription
+          isValid = false;
+          errorMessage = currentTranslations["alert_min_quantity_general"] || "Die Menge muss mindestens 1 betragen.";
+        }
+        // For subscription, quantity can be 0 or more, it determines packs of 50.
+        if (type === 'abonnement' && qty > 50) { // Specific validation for subscription max pouches
+          isValid = false;
+          errorMessage = currentTranslations["alert_max_quantity_subscription"] || "Das Starter-Abonnement ist auf 50 Hüllen begrenzt.";
+        }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const offerType = document.getElementById('offerType');
-    const quantity = document.getElementById('quantity');
-    const priceDisplay = document.getElementById('priceDisplay');
-    const orderForm = document.getElementById('orderForm');
+        quantityError.textContent = errorMessage;
+        quantityError.style.display = isValid ? "none" : "block";
+        return isValid;
+      }
 
-    if (offerType && quantity && priceDisplay) {
+      function validateDate() {
+        const today = new Date().toISOString().split('T')[0];
+        let isValid = true;
+        let errorMessage = "";
+        const currentTranslations = getTranslations();
+
+        if (dateInput.value < today) {
+          isValid = false;
+          errorMessage = currentTranslations["alert_date_past"] || "Das Veranstaltungsdatum darf nicht in der Vergangenheit liegen.";
+        }
+        dateError.textContent = errorMessage;
+        dateError.style.display = isValid ? "none" : "block";
+        return isValid;
+      }
+
       function updatePrice() {
         const type = offerType.value;
-        const qty = parseInt(quantity.value) || 0;
+        const qty = parseInt(quantityInput.value) || 0;
         let total = 0;
+        const currentTranslations = getTranslations();
 
-        if (type === 'location_sans') total = 290;
-        else if (type === 'location_avec') total = 390;
-        else if (type === 'achat') total = qty >= 50 ? qty * 3.5 : 0;
-        else if (type === 'abonnement') total = Math.ceil(qty / 50) * 19;
+        if (!type || (qty <= 0 && type !== 'abonnement')) { // Clear price if no offer selected or invalid quantity for non-subscription
+          priceDisplay.innerHTML = "";
+          return;
+        }
 
-        priceDisplay.innerText = `Total: ${total.toFixed(2)} €`;
+        // Ensure quantity is within valid range for calculation, even if an error is displayed
+        let effectiveQty = qty;
+        if (type === 'achat' && qty < 50) effectiveQty = 0; // Don't calculate price if min not met
+        if ((type === 'location_sans' || type === 'location_avec') && qty > 250) effectiveQty = 250; // Cap at max for price calculation
+        if (type === 'abonnement' && qty > 50) effectiveQty = 50; // Cap at max for price calculation for subscription
+
+        if (type === 'location_sans') {
+          total = PRICES.location_sans;
+        } else if (type === 'location_avec') {
+          total = PRICES.location_avec;
+        } else if (type === 'achat') {
+          total = effectiveQty * PRICES.achat_per_unit;
+        } else if (type === 'abonnement') {
+          total = (effectiveQty > 0 ? Math.ceil(effectiveQty / 50) : 1) * PRICES.abonnement_per_50;
+        } else {
+          priceDisplay.innerHTML = ""; // Clear price if no offer selected
+          return;
+        }
+
+        const priceTextTemplate = currentTranslations[basePriceText] || "Total: {price} €";
+        priceDisplay.innerHTML = priceTextTemplate.replace("{price}", total.toFixed(2));
       }
 
+      // Initial setup for events
+      if (offerType && quantityInput && priceDisplay) {
+        offerType.addEventListener('change', () => { validateQuantity(); updatePrice(); });
+        quantityInput.addEventListener('input', () => { validateQuantity(); updatePrice(); });
+        if (dateInput) dateInput.addEventListener('change', validateDate);
+
+        // Initial calls
+        validateQuantity();
+        validateDate();
+        updatePrice();
+      }
+
+      // Form submission logic
+      if (orderForm) {
+        orderForm.addEventListener('submit', async function (event) {
+          event.preventDefault(); // Prevent default form submission
+          formSubmissionFeedback.innerHTML = ""; // Reset feedback area
+
+          const isQtyValid = validateQuantity();
+          const isDateValid = dateInput ? validateDate() : true;
+
+          if (!isQtyValid || !isDateValid || !orderForm.checkValidity()) {
+            const currentTranslations = getTranslations();
+            formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_invalid"] || "Bitte korrigieren Sie die Fehler im Formular."}</div>`;
+            return;
+          }
+
+          // Show loading indicator
+          const submitButton = orderForm.querySelector('button[type="submit"]');
+          const originalButtonText = submitButton.innerHTML;
+          const currentTranslations = getTranslations();
+          submitButton.disabled = true;
+          submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ${currentTranslations["text_sending"] || "Senden..."}`;
+
+          const formData = new FormData(orderForm);
+          try {
+            const response = await fetch(orderForm.action, {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            });
+
+            if (response.ok) {
+              formSubmissionFeedback.innerHTML = `<div class="alert alert-success">${currentTranslations["alert_form_success"] || "Bestellung erfolgreich gesendet! Wir werden Sie in Kürze kontaktieren."}</div>`;
+              orderForm.reset(); // Clear form
+              updatePrice(); // Reset price display
+              // You might want to automatically initiate PayPal payment here
+              // payerAvecPayPal(); // Call this function if you want to redirect to PayPal
+            } else {
+              const data = await response.json();
+              let errorMessage = currentTranslations["alert_form_error_generic"] || "Ein Fehler ist aufgetreten.";
+              if (data.errors) {
+                errorMessage = data.errors.map(error => error.message).join(", ");
+              }
+              formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${errorMessage}</div>`;
+            }
+          } catch (error) {
+            formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_error_network"] || "Netzwerkfehler. Bitte versuchen Sie es erneut."}</div>`;
+          } finally {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonText;
+          }
+        });
+      }
+
+      // Function for PayPal redirection (removed from direct submission, now optional)
+      // If you want PayPal payment immediately after form submission, uncomment call above.
       function payerAvecPayPal() {
+        if (!offerType || !quantityInput) return;
+
         const offer = offerType.value;
-        const qty = parseInt(quantity.value) || 0;
+        const qty = parseInt(quantityInput.value) || 0;
         let total = 0;
         let label = "";
 
+        // Re-validate quantity and offer before generating PayPal link
+        if (!validateQuantity() || !offer) {
+          alert(getTranslations()["alert_form_invalid"] || "Bitte wählen Sie ein gültiges Angebot und eine gültige Menge.");
+          return;
+        }
+
         if (offer === "location_sans") {
-          total = 290;
-          label = "Miete ohne Personal";
+          total = PRICES.location_sans;
+          label = getTranslations()["option_location_without"];
         } else if (offer === "location_avec") {
-          total = 390;
-          label = "Miete mit Personal";
+          total = PRICES.location_avec;
+          label = getTranslations()["option_location_with"];
         } else if (offer === "achat") {
-          if (qty < 50) return alert("Mindestens 50 Hüllen erforderlich.");
-          total = qty * 3.5;
-          label = `Kauf von ${qty} Hüllen`;
+          total = qty * PRICES.achat_per_unit;
+          label = `${getTranslations()["option_custom_pouches"]} (${qty} Einheiten)`;
         } else if (offer === "abonnement") {
-          if (qty < 50) return alert("Mindestens 50 Hüllen erforderlich.");
-          total = Math.ceil(qty / 50) * 19;
-          label = `Abonnement für ${qty} Hüllen`;
+          total = (qty > 0 ? Math.ceil(qty / 50) : 1) * PRICES.abonnement_per_50;
+          label = `${getTranslations()["option_subscription"]} (${qty} Hüllen)`;
         } else {
-          return alert("Bitte wählen Sie ein Angebot.");
+          alert(getTranslations()["alert_form_invalid"] || "Bitte wählen Sie ein Angebot.");
+          return;
         }
 
         const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=harbi.mail.a@gmail.com&currency_code=EUR&item_name=${encodeURIComponent(label)}&amount=${total.toFixed(2)}`;
         window.open(url, "_blank");
       }
+    });
+  </script>
+</body>
 
-      offerType.addEventListener('change', updatePrice);
-      quantity.addEventListener('input', updatePrice);
-      updatePrice();
-    }
-
-    if (orderForm) {
-      orderForm.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        const data = new FormData(orderForm);
-
-        const response = await fetch(orderForm.action, {
-          method: orderForm.method,
-          body: data,
-          headers: { Accept: "application/json" }
-        });
-
-        if (response.ok) {
-          payerAvecPayPal();
-        } else {
-          alert("Beim Absenden des Formulars ist ein Fehler aufgetreten.");
-        }
-      });
-    }
-  });
-</script>
+</html>

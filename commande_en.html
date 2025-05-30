@@ -4,15 +4,12 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title data-i18n="auto_key_1">SecurityNoPhone – Offres & Concept</title>
-
-  <!-- Styles -->
+  <title data-i18n="order_title">SecurityNoPhone – Commande</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  <link href="css/style.css" rel="stylesheet" />
-  <link rel="stylesheet" href="flags/flags.css" />
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
+  <link rel="stylesheet" href="css/style_optimized.css">
   <style>
+    /* Your custom background image style */
     body {
       background-image: url("images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d");
       background-size: cover;
@@ -21,219 +18,312 @@
       background-attachment: fixed;
     }
   </style>
-
-  <!-- SEO -->
-  <meta name="description"
-    content="Protégez vos événements privés avec nos pochettes sécurisées anti-photo et anti-vidéo. Vente, location, abonnement. Livraison incluse.">
-  <meta name="keywords"
-    content="pochette anti téléphone, anti-photo, location smartphone, confidentialité événement, sécurité mobile, mariage sans portable, location pochette, abonnement confidentialité">
-  <meta name="author" content="Rép&Web">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="SecurityNoPhone – Pochettes anti-smartphone pour événements sécurisés">
-  <meta property="og:description"
-    content="Vente et location de pochettes bloquant l’usage des téléphones. Idéal pour mariages, conférences, soirées VIP.">
-  <meta property="og:image" content="https://github.com/hasnape/SecurityNoPhone/images/IMG_20250421_182622.jpg">
-  <meta property="og:url" content="https://www.securitynophone.com/">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SecurityNoPhone – Pochettes anti-smartphone">
-  <meta name="twitter:description" content="Confidentialité garantie pour vos événements privés et professionnels.">
-  <meta name="twitter:image" content="https://github.com/hasnape/SecurityNoPhone/images/IMG_20250421_182622.jpg">
-
-  <!-- Hreflang -->
-  <link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/index.html" />
-  <link rel="alternate" hreflang="en" href="https://www.securitynophone.com/en/index.html" />
-  <link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/ar/index.html" />
-  <link rel="alternate" hreflang="de" href="https://www.securitynophone.com/de/index.html" />
-  <link rel="alternate" hreflang="x-default" href="https://www.securitynophone.com/index.html" />
 </head>
 
+<body>
 
-<div id="navbar-container"></div>
+  <div id="navbar-container"></div>
 
+  <main class="container my-5">
+    <div class="border rounded-4 shadow-sm p-4 bg-white mt-5">
+      <h1 class="text-center mb-5" data-i18n="order_title">Place an Order</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm">
+            <input type="text" name="_gotcha" style="display:none">
+            <div class="mb-3">
+              <label class="form-label" data-i18n="label_offer_type">Offer Type:</label>
+              <select class="form-select" name="offre" id="offerType" required>
+                <option value="" data-i18n="option_choose_offer">-- Select an Offer --</option>
+                <option value="location_sans" data-i18n="option_location_without">Rental without Staff</option>
+                <option value="location_avec" data-i18n="option_location_with">Rental with Staff</option>
+                <option value="achat" data-i18n="option_custom_pouches">Custom Pouches</option>
+                <option value="abonnement" data-i18n="option_subscription">Starter Subscription</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="quantity" class="form-label" data-i18n="label_quantity">Pouch Quantity:</label>
+              <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="100"
+                required />
+              <div id="quantityError" class="text-danger mt-1" style="display: none;"></div>
+            </div>
+            <div class="mb-3">
+              <label for="date" class="form-label" data-i18n="label_date">Event Date:</label>
+              <input type="date" name="date" id="date" class="form-control" required />
+              <div id="dateError" class="text-danger mt-1" style="display: none;"></div>
+            </div>
+            <div class="mb-3">
+              <label for="nom" class="form-label" data-i18n="label_fullname">Full Name:</label>
+              <input type="text" name="nom" id="nom" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label" data-i18n="label_email">Email:</label>
+              <input type="email" name="email" id="email" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label for="adresse" class="form-label" data-i18n="label_address">Billing Address:</label>
+              <textarea name="adresse" id="adresse" class="form-control" required></textarea>
+            </div>
+            <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" data-i18n-base-text="price_total">
+              Total: 0 €</div>
 
+            <div id="formSubmissionFeedback" class="mt-3"></div>
 
-  <div class="container my-5"><br><br>
-    <h1 class="text-center mb-5">Place an Order</h1>
-    <div class="row">
-      <div class="col-md-6">
-        <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm">
-          <input type="text" name="_gotcha" style="display:none">
-          <div class="mb-3">
-            <label class="form-label">Offer Type:</label>
-            <select class="form-select" name="offre" id="offerType" required>
-              <option value="">-- Select an Offer --</option>
-              <option value="location_sans">Rental without Staff</option>
-              <option value="location_avec">Rental with Staff</option>
-              <option value="achat">Custom Pouches</option>
-              <option value="abonnement">Starter Subscription</option>
-            </select>
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order">Submit Order</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center px-3">
+          <div class="bg-light rounded-4 shadow-sm p-4 w-100">
+            <p class="text-center fw-semibold fs-5 mb-3 text-dark" data-i18n="payment_title">
+              💳 Pay in <strong>4 interest-free installments</strong> with PayPal<br>
+              <small class="fst-italic text-muted" data-i18n="payment_eligibility_note">(if eligible)</small>
+            </p>
+            <p class="text-center text-secondary" data-i18n="payment_description">
+              Protect the confidentiality of your events with our installment payment option.<br>
+              <span class="text-dark" data-i18n="payment_detail">This option appears automatically during PayPal
+                checkout if you are eligible.</span>
+            </p>
+            <hr class="my-3 bg-secondary" style="height:1px; width:80%;" />
+            <p class="text-center text-dark" data-i18n="payment_flexibility_title">
+              <strong>Our flexible offers:</strong><br>
+              <span data-i18n="payment_flexibility_point_1">• Turnkey rental (with or without staff)</span><br>
+              <span data-i18n="payment_flexibility_point_2">• Customized pouches for your events</span><br>
+              <span data-i18n="payment_flexibility_point_3">• Starter subscription for a long-term solution</span>
+            </p>
+            <p class="fw-bold mt-4 text-center" style="color: #198754;" data-i18n="payment_footer">
+              Order today, pay in comfort,<br>and ensure your event's success.
+            </p>
+            <small class="d-block text-center mt-3 text-muted" data-i18n="payment_tip">
+              💡 Tip: installment payment will be automatically offered at checkout.
+            </small>
           </div>
-          <div class="mb-3">
-            <label for="quantity" class="form-label">Pouch Quantity:</label>
-            <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="100"
-              required />
-          </div>
-          <div class="mb-3">
-            <label for="date" class="form-label">Event Date:</label>
-            <input type="date" name="date" id="date" class="form-control" required />
-          </div>
-          <div class="mb-3">
-            <label for="nom" class="form-label">Full Name:</label>
-            <input type="text" name="nom" id="nom" class="form-control" required />
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" name="email" id="email" class="form-control" required />
-          </div>
-          <div class="mb-3">
-            <label for="adresse" class="form-label">Billing Address:</label>
-            <textarea name="adresse" id="adresse" class="form-control" required></textarea>
-          </div>
-          <div class="price-box text-center" id="priceDisplay">Total: 0 €</div>
-          <div class="text-center mt-4">
-            <button type="submit" class="btn btn-primary">Submit Order</button>
-          </div>
-        </form>
-      </div>
-      <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-        <p class="text-center text-muted mt-3"></p>
-        <small class="text-muted d-block mt-2 text-center">
-          💳 Pay in 4 interest-free installments with PayPal (if eligible)
-        </small>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
 
-  <!-- Footer inclus dynamiquement -->
-  <div id="footer-placeholder"></div>
-  
-  <!-- Scripts -->
+  <div id="footer-container"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/translations.js"></script>
-  <script src="js/main.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
 
-  <!-- Forcer la langue souhaitée (modifie selon la page) -->
+  <script src="js/translations.js"></script>
+
   <script>
     localStorage.setItem("lang", "en"); // change en "de", "en", "ar" selon la page
   </script>
 
-  
-  <script>
-    async function loadIncludes() {
-      const [navRes, footerRes] = await Promise.all([
-        fetch('includes/navbar.html'),
-        fetch('includes/footer.html')
-      ]);
+  <script src="js/main.js"></script>
 
-      const navHtml = await navRes.text();
-      const footerHtml = await footerRes.text();
-
-      const navPlaceholder = document.getElementById('navbar-placeholder');
-      const footerPlaceholder = document.getElementById('footer-placeholder');
-
-      if (navPlaceholder) navPlaceholder.innerHTML = navHtml;
-      if (footerPlaceholder) footerPlaceholder.innerHTML = footerHtml;
-
-      // Gérer bannière cookie
-      const cookieBtn = document.querySelector("#cookie-banner button");
-      if (cookieBtn) {
-        cookieBtn.addEventListener("click", () => {
-          localStorage.setItem("cookiesAccepted", "true");
-          document.getElementById("cookie-banner").style.display = "none";
-        });
-
-        if (localStorage.getItem("cookiesAccepted") === "true") {
-          document.getElementById("cookie-banner").style.display = "none";
-        }
-      }
-
-      // Appliquer la langue après injection
-      if (typeof switchLanguage === "function") switchLanguage();
-      if (typeof setupTrackingForm === "function") setupTrackingForm();
-    }
-
-    loadIncludes();
-  </script>
-  
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const offerType = document.getElementById('offerType');
-      const quantity = document.getElementById('quantity');
+      const quantityInput = document.getElementById('quantity');
       const priceDisplay = document.getElementById('priceDisplay');
+      const dateInput = document.getElementById('date');
       const orderForm = document.getElementById('orderForm');
+      const quantityError = document.getElementById('quantityError');
+      const dateError = document.getElementById('dateError');
+      const formSubmissionFeedback = document.getElementById('formSubmissionFeedback');
+      const basePriceText = priceDisplay.getAttribute('data-i18n-base-text') || "price_total";
 
-      function updatePrice() {
-        if (!offerType || !quantity || !priceDisplay) return;
+      // Prices are fixed in the script. Ensure they match your offers.
+      const PRICES = {
+        'location_sans': 150, // Rental without staff
+        'location_avec': 390, // Rental with staff
+        'achat_per_unit': 3.5, // Price per pouch for custom order
+        'abonnement_per_50': 19 // Price per 50 pouches for subscription
+      };
 
-        const type = offerType.value;
-        const qty = parseInt(quantity.value) || 0;
-        let total = 0;
-
-        if (type === 'location_sans') total = 290;
-        else if (type === 'location_avec') total = 390;
-        else if (type === 'achat') total = qty >= 50 ? qty * 3.5 : 0;
-        else if (type === 'abonnement') total = Math.ceil(qty / 50) * 19;
-
-        priceDisplay.innerText = `Total : ${total.toFixed(2)} €`;
+      function getTranslations() {
+        return window.translations[localStorage.getItem('lang') || 'fr'] || {};
       }
 
+      function validateQuantity() {
+        const qty = parseInt(quantityInput.value);
+        const type = offerType.value;
+        let isValid = true;
+        let errorMessage = "";
+        const currentTranslations = getTranslations();
+
+        if (type === 'achat' && qty < 50) {
+          isValid = false;
+          errorMessage = currentTranslations["alert_min_quantity_achat"] || "For customized pouches, the minimum is 50 units.";
+        } else if (qty > 250 && (type === 'location_sans' || type === 'location_avec')) { // Max 250 for rentals
+          isValid = false;
+          errorMessage = currentTranslations["alert_max_quantity"] || "The maximum quantity allowed for this offer is 250 pouches.";
+        } else if (qty < 1 && type !== 'abonnement') { // Quantity must be at least 1 for non-subscription
+          isValid = false;
+          errorMessage = currentTranslations["alert_min_quantity_general"] || "Quantity must be at least 1.";
+        }
+        // For subscription, quantity can be 0 or more, it determines packs of 50.
+        if (type === 'abonnement' && qty > 50) { // Specific validation for subscription max pouches
+          isValid = false;
+          errorMessage = currentTranslations["alert_max_quantity_subscription"] || "Starter Subscription is limited to 50 pouches.";
+        }
+
+        quantityError.textContent = errorMessage;
+        quantityError.style.display = isValid ? "none" : "block";
+        return isValid;
+      }
+
+      function validateDate() {
+        const today = new Date().toISOString().split('T')[0];
+        let isValid = true;
+        let errorMessage = "";
+        const currentTranslations = getTranslations();
+
+        if (dateInput.value < today) {
+          isValid = false;
+          errorMessage = currentTranslations["alert_date_past"] || "The event date cannot be in the past.";
+        }
+        dateError.textContent = errorMessage;
+        dateError.style.display = isValid ? "none" : "block";
+        return isValid;
+      }
+
+      function updatePrice() {
+        const type = offerType.value;
+        const qty = parseInt(quantityInput.value) || 0;
+        let total = 0;
+        const currentTranslations = getTranslations();
+
+        if (!type || qty <= 0 && type !== 'abonnement') { // Clear price if no offer selected or invalid quantity for non-subscription
+          priceDisplay.innerHTML = "";
+          return;
+        }
+
+        // Ensure quantity is within valid range for calculation, even if an error is displayed
+        let effectiveQty = qty;
+        if (type === 'achat' && qty < 50) effectiveQty = 0; // Don't calculate price if min not met
+        if ((type === 'location_sans' || type === 'location_avec') && qty > 250) effectiveQty = 250; // Cap at max for price calculation
+        if (type === 'abonnement' && qty > 50) effectiveQty = 50; // Cap at max for price calculation for subscription
+
+        if (type === 'location_sans') {
+          total = PRICES.location_sans;
+        } else if (type === 'location_avec') {
+          total = PRICES.location_avec;
+        } else if (type === 'achat') {
+          total = effectiveQty * PRICES.achat_per_unit;
+        } else if (type === 'abonnement') {
+          total = (effectiveQty > 0 ? Math.ceil(effectiveQty / 50) : 1) * PRICES.abonnement_per_50;
+        } else {
+          priceDisplay.innerHTML = ""; // Clear price if no offer selected
+          return;
+        }
+
+        const priceTextTemplate = currentTranslations[basePriceText] || "Total: {price} €";
+        priceDisplay.innerHTML = priceTextTemplate.replace("{price}", total.toFixed(2));
+      }
+
+      // Initial setup for events
+      if (offerType && quantityInput && priceDisplay) {
+        offerType.addEventListener('change', () => { validateQuantity(); updatePrice(); });
+        quantityInput.addEventListener('input', () => { validateQuantity(); updatePrice(); });
+        if (dateInput) dateInput.addEventListener('change', validateDate);
+
+        // Initial calls
+        validateQuantity();
+        validateDate();
+        updatePrice();
+      }
+
+      // Form submission logic
+      if (orderForm) {
+        orderForm.addEventListener('submit', async function (event) {
+          event.preventDefault(); // Prevent default form submission
+          formSubmissionFeedback.innerHTML = ""; // Reset feedback area
+
+          const isQtyValid = validateQuantity();
+          const isDateValid = dateInput ? validateDate() : true;
+
+          if (!isQtyValid || !isDateValid || !orderForm.checkValidity()) {
+            const currentTranslations = getTranslations();
+            formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_invalid"] || "Please correct the errors in the form."}</div>`;
+            return;
+          }
+
+          // Show loading indicator
+          const submitButton = orderForm.querySelector('button[type="submit"]');
+          const originalButtonText = submitButton.innerHTML;
+          const currentTranslations = getTranslations();
+          submitButton.disabled = true;
+          submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ${currentTranslations["text_sending"] || "Sending..."}`;
+
+          const formData = new FormData(orderForm);
+          try {
+            const response = await fetch(orderForm.action, {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            });
+
+            if (response.ok) {
+              formSubmissionFeedback.innerHTML = `<div class="alert alert-success">${currentTranslations["alert_form_success"] || "Order submitted successfully! We will contact you soon."}</div>`;
+              orderForm.reset(); // Clear form
+              updatePrice(); // Reset price display
+              // You might want to automatically initiate PayPal payment here
+              // payerAvecPayPal(); // Call this function if you want to redirect to PayPal
+            } else {
+              const data = await response.json();
+              let errorMessage = currentTranslations["alert_form_error_generic"] || "An error occurred.";
+              if (data.errors) {
+                errorMessage = data.errors.map(error => error.message).join(", ");
+              }
+              formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${errorMessage}</div>`;
+            }
+          } catch (error) {
+            formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_error_network"] || "Network error. Please try again."}</div>`;
+          } finally {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonText;
+          }
+        });
+      }
+
+      // Function for PayPal redirection (removed from direct submission, now optional)
+      // If you want PayPal payment immediately after form submission, uncomment call above.
       function payerAvecPayPal() {
-        if (!offerType || !quantity) return;
+        if (!offerType || !quantityInput) return;
 
         const offer = offerType.value;
-        const qty = parseInt(quantity.value) || 0;
+        const qty = parseInt(quantityInput.value) || 0;
         let total = 0;
         let label = "";
 
+        // Re-validate quantity and offer before generating PayPal link
+        if (!validateQuantity() || !offer) {
+          alert(getTranslations()["alert_form_invalid"] || "Please select a valid offer and quantity.");
+          return;
+        }
+
         if (offer === "location_sans") {
-          total = 290;
-          label = "Rental without Staff";
+          total = PRICES.location_sans;
+          label = getTranslations()["option_location_without"];
         } else if (offer === "location_avec") {
-          total = 390;
-          label = "Rental with Staff";
+          total = PRICES.location_avec;
+          label = getTranslations()["option_location_with"];
         } else if (offer === "achat") {
-          if (qty < 50) return alert("Minimum 50 pochettes requises.");
-          total = qty * 3.5;
-          label = `Achat de ${qty} pochettes`;
+          total = qty * PRICES.achat_per_unit;
+          label = `${getTranslations()["option_custom_pouches"]} (${qty} units)`;
         } else if (offer === "abonnement") {
-          if (qty < 50) return alert("Minimum 50 pochettes requises.");
-          total = Math.ceil(qty / 50) * 19;
-          label = `Abonnement pour ${qty} pochettes`;
+          total = (qty > 0 ? Math.ceil(qty / 50) : 1) * PRICES.abonnement_per_50;
+          label = `${getTranslations()["option_subscription"]} (${qty} pouches)`;
         } else {
-          return alert("Veuillez sélectionner une offre.");
+          alert(getTranslations()["alert_form_invalid"] || "Please select an offer.");
+          return;
         }
 
         const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=harbi.mail.a@gmail.com&currency_code=EUR&item_name=${encodeURIComponent(label)}&amount=${total.toFixed(2)}`;
         window.open(url, "_blank");
       }
-
-      if (offerType && quantity) {
-        offerType.addEventListener('change', updatePrice);
-        quantity.addEventListener('input', updatePrice);
-        updatePrice();
-      }
-
-      if (orderForm) {
-        orderForm.addEventListener("submit", async function (e) {
-          e.preventDefault();
-          const data = new FormData(orderForm);
-
-          const response = await fetch(orderForm.action, {
-            method: orderForm.method,
-            body: data,
-            headers: { Accept: "application/json" }
-          });
-
-          if (response.ok) {
-            payerAvecPayPal();
-          } else {
-            alert("Une erreur est survenue lors de l’envoi du formulaire.");
-          }
-        });
-      }
     });
   </script>
+</body>
+
+</html>

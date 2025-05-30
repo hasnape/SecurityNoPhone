@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="order_title">SecurityNoPhone – Pedido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="css/style_optimized.css">
+    <style>
+        body {
+            background-image: url("images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="navbar-container"></div>
+
+    <main class="container my-5">
+        <div class="border rounded-4 shadow-sm p-4 bg-white mt-5">
+            <h1 class="text-center mb-5" data-i18n="order_title">Realizar un pedido</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm">
+                        <input type="text" name="_gotcha" style="display:none">
+                        <div class="mb-3">
+                            <label class="form-label" data-i18n="label_offer_type">Tipo de oferta:</label>
+                            <select class="form-select" name="offre" id="offerType" required>
+                                <option value="" data-i18n="option_choose_offer">-- Elegir una oferta --</option>
+                                <option value="location_sans" data-i18n="option_location_without">Alquiler sin personal
+                                </option>
+                                <option value="location_avec" data-i18n="option_location_with">Alquiler con personal
+                                </option>
+                                <option value="achat" data-i18n="option_custom_pouches">Fundas personalizadas</option>
+                                <option value="abonnement" data-i18n="option_subscription">Suscripción Starter</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label" data-i18n="label_quantity">Cantidad de
+                                fundas:</label>
+                            <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1"
+                                value="50" required />
+                            <div id="quantityError" class="text-danger mt-1" style="display: none;"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label" data-i18n="label_date">Fecha del evento:</label>
+                            <input type="date" name="date" id="date" class="form-control" required />
+                            <div id="dateError" class="text-danger mt-1" style="display: none;"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nom" class="form-label" data-i18n="label_fullname">Nombre completo:</label>
+                            <input type="text" name="nom" id="nom" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label" data-i18n="label_email">Correo electrónico:</label>
+                            <input type="email" name="email" id="email" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="adresse" class="form-label" data-i18n="label_address">Dirección de
+                                facturación:</label>
+                            <textarea name="adresse" id="adresse" class="form-control" required></textarea>
+                        </div>
+                        <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay"
+                            data-i18n-base-text="price_total">Total: 0 €</div>
+
+                        <div id="formSubmissionFeedback" class="mt-3"></div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order">Confirmar
+                                pedido</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center px-3">
+                    <div class="bg-light rounded-4 shadow-sm p-4 w-100">
+                        <p class="text-center fw-semibold fs-5 mb-3 text-dark" data-i18n="payment_title">
+                            💳 Pago en <strong>4 plazos sin intereses</strong> con PayPal<br>
+                            <small class="fst-italic text-muted" data-i18n="payment_eligibility_note">(si es
+                                elegible)</small>
+                        </p>
+                        <p class="text-center text-secondary" data-i18n="payment_description">
+                            Protege la confidencialidad de tus eventos con nuestra opción de pago a plazos.<br>
+                            <span class="text-dark" data-i18n="payment_detail">La opción aparece automáticamente durante
+                                el pago vía PayPal si eres elegible.</span>
+                        </p>
+                        <hr class="my-3 bg-secondary" style="height:1px; width:80%;" />
+                        <p class="text-center text-dark" data-i18n="payment_flexibility_title">
+                            <strong>Nuestras ofertas flexibles:</strong><br>
+                            <span data-i18n="payment_flexibility_point_1">• Alquiler llave en mano (con o sin
+                                personal)</span><br>
+                            <span data-i18n="payment_flexibility_point_2">• Fundas personalizadas para tus
+                                eventos</span><br>
+                            <span data-i18n="payment_flexibility_point_3">• Suscripción Starter para una solución
+                                duradera</span>
+                        </p>
+                        <p class="fw-bold mt-4 text-center" style="color: #198754;" data-i18n="payment_footer">
+                            Pide hoy, paga con tranquilidad,<br>y garantiza el éxito de tu evento.
+                        </p>
+                        <small class="d-block text-center mt-3 text-muted" data-i18n="payment_tip">
+                            💡 Consejo: el pago a plazos se te ofrecerá automáticamente en la etapa de validación.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+
+    <script src="js/translations.js"></script>
+    <script>localStorage.setItem("lang", "es");</script>
+    <script src="js/main.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const offerType = document.getElementById('offerType');
+            const quantityInput = document.getElementById('quantity');
+            const priceDisplay = document.getElementById('priceDisplay');
+            const dateInput = document.getElementById('date');
+            const orderForm = document.getElementById('orderForm');
+            const quantityError = document.getElementById('quantityError');
+            const dateError = document.getElementById('dateError');
+            const formSubmissionFeedback = document.getElementById('formSubmissionFeedback');
+            const basePriceText = priceDisplay.getAttribute('data-i18n-base-text') || "price_total";
+
+            // Los precios son fijos en el script. Asegúrate de que coincidan con tus ofertas.
+            const PRICES = {
+                'location_sans': 150, // Alquiler sin personal
+                'location_avec': 390, // Alquiler con personal
+                'achat_per_unit': 3.5, // Precio por funda para pedido personalizado
+                'abonnement_per_50': 19 // Precio por 50 fundas para suscripción
+            };
+
+            function getTranslations() {
+                return window.translations[localStorage.getItem('lang') || 'es'] || {}; // Cambiado a 'es' como fallback
+            }
+
+            function validateQuantity() {
+                const qty = parseInt(quantityInput.value);
+                const type = offerType.value;
+                let isValid = true;
+                let errorMessage = "";
+                const currentTranslations = getTranslations();
+
+                if (type === 'achat' && qty < 50) {
+                    isValid = false;
+                    errorMessage = currentTranslations["alert_min_quantity_achat"] || "Para fundas personalizadas, el mínimo es de 50 unidades.";
+                } else if (qty > 250 && (type === 'location_sans' || type === 'location_avec')) { // Máx. 250 para alquileres
+                    isValid = false;
+                    errorMessage = currentTranslations["alert_max_quantity"] || "La cantidad máxima permitida para esta oferta es de 250 fundas.";
+                } else if (qty < 1 && type !== 'abonnement') { // La cantidad debe ser al menos 1 para no suscripciones
+                    isValid = false;
+                    errorMessage = currentTranslations["alert_min_quantity_general"] || "La cantidad debe ser al menos 1.";
+                }
+                // Para suscripción, la cantidad puede ser 0 o más, determina paquetes de 50.
+                if (type === 'abonnement' && qty > 50) { // Validación específica para el máximo de fundas de suscripción
+                    isValid = false;
+                    errorMessage = currentTranslations["alert_max_quantity_subscription"] || "La Suscripción Starter está limitada a 50 fundas.";
+                }
+
+                quantityError.textContent = errorMessage;
+                quantityError.style.display = isValid ? "none" : "block";
+                return isValid;
+            }
+
+            function validateDate() {
+                const today = new Date().toISOString().split('T')[0];
+                let isValid = true;
+                let errorMessage = "";
+                const currentTranslations = getTranslations();
+
+                if (dateInput.value < today) {
+                    isValid = false;
+                    errorMessage = currentTranslations["alert_date_past"] || "La fecha del evento no puede ser en el pasado.";
+                }
+                dateError.textContent = errorMessage;
+                dateError.style.display = isValid ? "none" : "block";
+                return isValid;
+            }
+
+            function updatePrice() {
+                const type = offerType.value;
+                const qty = parseInt(quantityInput.value) || 0;
+                let total = 0;
+                const currentTranslations = getTranslations();
+
+                if (!type || (qty <= 0 && type !== 'abonnement')) { // Borra el precio si no se selecciona una oferta o la cantidad es inválida para no suscripciones
+                    priceDisplay.innerHTML = "";
+                    return;
+                }
+
+                // Asegúrate de que la cantidad esté dentro del rango válido para el cálculo, incluso si se muestra un error
+                let effectiveQty = qty;
+                if (type === 'achat' && qty < 50) effectiveQty = 0; // No calcula el precio si no se cumple el mínimo
+                if ((type === 'location_sans' || type === 'location_avec') && qty > 250) effectiveQty = 250; // Límite en el máximo para el cálculo de precios
+                if (type === 'abonnement' && qty > 50) effectiveQty = 50; // Límite en el máximo para el cálculo de precios de suscripción
+
+                if (type === 'location_sans') {
+                    total = PRICES.location_sans;
+                } else if (type === 'location_avec') {
+                    total = PRICES.location_avec;
+                } else if (type === 'achat') {
+                    total = effectiveQty * PRICES.achat_per_unit;
+                } else if (type === 'abonnement') {
+                    total = (effectiveQty > 0 ? Math.ceil(effectiveQty / 50) : 1) * PRICES.abonnement_per_50;
+                } else {
+                    priceDisplay.innerHTML = ""; // Borra el precio si no se selecciona una oferta
+                    return;
+                }
+
+                const priceTextTemplate = currentTranslations[basePriceText] || "Total: {price} €";
+                priceDisplay.innerHTML = priceTextTemplate.replace("{price}", total.toFixed(2));
+            }
+
+            // Configuración inicial de eventos
+            if (offerType && quantityInput && priceDisplay) {
+                offerType.addEventListener('change', () => { validateQuantity(); updatePrice(); });
+                quantityInput.addEventListener('input', () => { validateQuantity(); updatePrice(); });
+                if (dateInput) dateInput.addEventListener('change', validateDate);
+
+                // Llamadas iniciales
+                validateQuantity();
+                validateDate();
+                updatePrice();
+            }
+
+            // Lógica de envío del formulario
+            if (orderForm) {
+                orderForm.addEventListener('submit', async function (event) {
+                    event.preventDefault(); // Previene el envío del formulario por defecto
+                    formSubmissionFeedback.innerHTML = ""; // Reinicia el área de feedback
+
+                    const isQtyValid = validateQuantity();
+                    const isDateValid = dateInput ? validateDate() : true;
+
+                    if (!isQtyValid || !isDateValid || !orderForm.checkValidity()) {
+                        const currentTranslations = getTranslations();
+                        formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_invalid"] || "Por favor, corrija los errores en el formulario."}</div>`;
+                        return;
+                    }
+
+                    // Mostrar indicador de carga
+                    const submitButton = orderForm.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.innerHTML;
+                    const currentTranslations = getTranslations();
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ${currentTranslations["text_sending"] || "Enviando..."}`;
+
+                    const formData = new FormData(orderForm);
+                    try {
+                        const response = await fetch(orderForm.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            formSubmissionFeedback.innerHTML = `<div class="alert alert-success">${currentTranslations["alert_form_success"] || "¡Pedido enviado con éxito! Nos pondremos en contacto contigo pronto."}</div>`;
+                            orderForm.reset(); // Limpia el formulario
+                            updatePrice(); // Reinicia la visualización del precio
+                            // Si deseas el pago con PayPal inmediatamente después del envío del formulario, descomenta la llamada a continuación.
+                            // payerConPayPal();
+                        } else {
+                            const data = await response.json();
+                            let errorMessage = currentTranslations["alert_form_error_generic"] || "Ocurrió un error.";
+                            if (data.errors) {
+                                errorMessage = data.errors.map(error => error.message).join(", ");
+                            }
+                            formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${errorMessage}</div>`;
+                        }
+                    } catch (error) {
+                        formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_error_network"] || "Error de red. Por favor, inténtalo de nuevo."}</div>`;
+                    } finally {
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonText;
+                    }
+                });
+            }
+
+            // Función para la redirección a PayPal (eliminada del envío directo, ahora opcional)
+            // Si deseas el pago con PayPal inmediatamente después del envío del formulario, descomenta la llamada de arriba.
+            function payerConPayPal() {
+                if (!offerType || !quantityInput) return;
+
+                const offer = offerType.value;
+                const qty = parseInt(quantityInput.value) || 0;
+                let total = 0;
+                let label = "";
+
+                // Vuelve a validar la cantidad y la oferta antes de generar el enlace de PayPal
+                if (!validateQuantity() || !offer) {
+                    alert(getTranslations()["alert_form_invalid"] || "Por favor, selecciona una oferta y cantidad válidas.");
+                    return;
+                }
+
+                if (offer === "location_sans") {
+                    total = PRICES.location_sans;
+                    label = getTranslations()["option_location_without"];
+                } else if (offer === "location_avec") {
+                    total = PRICES.location_avec;
+                    label = getTranslations()["option_location_with"];
+                } else if (offer === "achat") {
+                    total = qty * PRICES.achat_per_unit;
+                    label = `${getTranslations()["option_custom_pouches"]} (${qty} unidades)`;
+                } else if (offer === "abonnement") {
+                    total = (qty > 0 ? Math.ceil(qty / 50) : 1) * PRICES.abonnement_per_50;
+                    label = `${getTranslations()["option_subscription"]} (${qty} fundas)`;
+                } else {
+                    alert(getTranslations()["alert_form_invalid"] || "Por favor, selecciona una oferta.");
+                    return;
+                }
+
+                const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=harbi.mail.a@gmail.com&currency_code=EUR&item_name=${encodeURIComponent(label)}&amount=${total.toFixed(2)}`;
+                window.open(url, "_blank");
+            }
+        });
+    </script>
+</body>
+
+</html>
