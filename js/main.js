@@ -275,3 +275,29 @@ async function initializePage() {
 
 // Remplacer l'ancien écouteur DOMContentLoaded par l'appel à la nouvelle fonction d'initialisation
 document.addEventListener("DOMContentLoaded", initializePage);
+
+document.addEventListener('DOMContentLoaded', () => {
+  // ... (autres initialisations et fonctions) ...
+
+  // Fonction pour gérer le menu burger (animation de l'icône)
+  function setupBurgerMenuAnimation() {
+    const burgerBtn = document.querySelector('.navbar-toggler'); // C'est le bouton Bootstrap maintenant
+    const navbarCollapse = document.getElementById('navbarNav');
+
+    if (burgerBtn && navbarCollapse) {
+      // Écouter l'événement 'show.bs.collapse' et 'hide.bs.collapse' de Bootstrap
+      navbarCollapse.addEventListener('show.bs.collapse', () => {
+        burgerBtn.classList.add('is-active'); // Ajoute la classe pour l'animation "croix"
+      });
+
+      navbarCollapse.addEventListener('hide.bs.collapse', () => {
+        burgerBtn.classList.remove('is-active'); // Retire la classe pour revenir à l'icône "burger"
+      });
+    }
+  }
+
+  // Appeler la fonction d'initialisation du burger menu
+  setupBurgerMenuAnimation();
+
+  // ... (reste du code main.js) ...
+});
