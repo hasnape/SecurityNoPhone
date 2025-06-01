@@ -149,7 +149,15 @@ window.translations = {
 
     "cookie_message": "Ce site utilise des cookies pour améliorer votre expérience.",
     "cookie_more_info": "En savoir plus",
-    "cookie_button_ok": "OK"
+    "cookie_button_ok": "OK",
+    
+      "products_title": "Nos Produits",
+      "product_standard": "Modèle Standard",
+      "product_event": "Événementielle",
+      "product_secure": "Fermeture Renforcée",
+      "product_custom": "Personnalisé"
+    
+    
   },
 
   "en": {
