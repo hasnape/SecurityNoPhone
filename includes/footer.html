@@ -1,23 +1,90 @@
-<footer class="text-center py-4 bg-dark text-light mt-auto">
-    <p class="mb-0" data-i18n="footer_copyright_prefix">&copy; 2025 <span
-            data-i18n="nav_brand_name">SecurityNoPhone</span> – <span data-i18n="footer_copyright_suffix">Tous droits
-            réservés.</span></p>
+<footer class="footer bg-white text-dark text-center py-4 shadow-sm mt-auto">
+    <p class="mb-0" data-i18n="footer_copyright_prefix">
+        &copy; 2025 <span data-i18n="nav_brand_name">SecurityNoPhone</span> –
+        <span data-i18n="footer_copyright_suffix">Tous droits réservés.</span>
+    </p>
     <div class="mt-2">
-        <a href="Mention legale/1_Mentions_Legales.pdf" class="text-light me-3" target="_blank"
+        <a href="Mention legale/1_Mentions_Legales.pdf" class="footer-link me-3" target="_blank"
             data-i18n="footer_legal">Mentions légales</a>
-        <a href="Mention legale/2_Politique_Confidentialite.pdf" class="text-light me-3" target="_blank"
+        <a href="Mention legale/2_Politique_Confidentialite.pdf" class="footer-link me-3" target="_blank"
             data-i18n="footer_privacy">Politique de confidentialité</a>
-        <a href="Mention legale/3_CGV.pdf" class="text-light me-3" target="_blank" data-i18n="footer_cgv">CGV</a>
-        <a href="Mention legale/4_CGU.pdf" class="text-light me-3" target="_blank" data-i18n="footer_cgu">CGU</a>
-        <a href="Mention legale/5_Politique_Cookies_RGPD.pdf" class="text-light" target="_blank"
+        <a href="Mention legale/3_CGV.pdf" class="footer-link me-3" target="_blank" data-i18n="footer_cgv">CGV</a>
+        <a href="Mention legale/4_CGU.pdf" class="footer-link me-3" target="_blank" data-i18n="footer_cgu">CGU</a>
+        <a href="Mention legale/5_Politique_Cookies_RGPD.pdf" class="footer-link" target="_blank"
             data-i18n="footer_cookies">Politique de cookies</a>
     </div>
 </footer>
 
-<div id="cookie-banner"
-    style="position: fixed; bottom: 0; width: 100%; background: #222; color: white; padding: 10px; text-align: center; z-index: 1000;">
+<div id="cookie-banner" class="cookie-banner text-center bg-white text-dark shadow-sm p-3"
+    style="position: fixed; bottom: 0; width: 100%; z-index: 1050;">
     <span data-i18n="cookie_message">Ce site utilise des cookies pour améliorer votre expérience.</span>
-    <a href="Mention legale/5_Politique_Cookies_RGPD.pdf" target="_blank" style="color:#ffc107;"
+    <a href="Mention legale/5_Politique_Cookies_RGPD.pdf" target="_blank" class="cookie-link ms-2"
         data-i18n="cookie_more_info">En savoir plus</a>
-    <button onclick="acceptCookies()" style="margin-left: 10px;" data-i18n="cookie_button_ok">OK</button>
+    <button onclick="acceptCookies()" class="cookie-btn btn btn-link ms-2" data-i18n="cookie_button_ok">OK</button>
 </div>
+
+<style>
+    /* Style liens footer + bannière cookie - comme navbar links, sans arrondis */
+    .footer-link,
+    .cookie-link,
+    .cookie-btn {
+        color: #212529;
+        /* texte gris foncé */
+        font-weight: 500;
+        position: relative;
+        text-decoration: none;
+        transition: color 0.3s, border-bottom 0.3s;
+        border-radius: 0;
+        /* Pas d’arrondi */
+    }
+
+    .footer-link:hover,
+    .cookie-link:hover,
+    .cookie-btn:hover {
+        color: #C5B358;
+        /* doré */
+    }
+
+    .footer-link::after,
+    .cookie-link::after,
+    .cookie-btn::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 10%;
+        width: 80%;
+        height: 2px;
+        background-color: #C5B358;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        transform-origin: bottom right;
+        border-radius: 0;
+        /* Pas d’arrondi */
+    }
+
+    .footer-link:hover::after,
+    .cookie-link:hover::after,
+    .cookie-btn:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+
+    /* Footer box shadow comme navbar, sans arrondis */
+    .footer {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 0;
+        /* Pas d’arrondi */
+    }
+
+    /* Bannière cookie : bouton style lien sans arrondi */
+    .cookie-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        font-size: 1rem;
+        border-radius: 0;
+        /* Pas d’arrondi */
+    }
+</style>
+  

@@ -11,7 +11,6 @@
   <link href="style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
 
 
 
@@ -48,12 +47,21 @@
 
 <body data-aos-once="true">
 
-  <div id="navbar-container"></div><br>
+  <div id="navbar-container"></div>
+  
+  <section class="container my-5 text-center" id="intro">
+    <h1 class="section-title" data-i18n="auto_key_1">Bienvenue chez SecurityNoPhone</h1>
+    <p class="fs-5" data-i18n="auto_key_59">
+      Confidentialité maximale pour vos événements – sans les distractions du téléphone, mais avec style.
+    </p>
+  </section>
+  
+  
 
   <section class="snf-container my-5" data-aos="fade-up" id="galerie-concept">
     <div class="row align-items-stretch">
       <div class="col-lg-6 mb-4" id="galerie">
-        <div class="border rounded-4 shadow-sm p-4 bg-white">
+        <div class="border rounded-4 shadow-sm p-4 text-center">
           <h2 class="section-title text-center" data-i18n="auto_key_3">Galerie</h2>
           <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
             <div class="carousel-inner rounded shadow">
@@ -90,19 +98,19 @@
       </div>
 
       <div class="col-lg-6" id="concept">
-        <div class="concept-border rounded-4 shadow-sm p-4 bg-white">
-          <h2 class="section-title text-center text-dark" data-i18n="auto_key_5">Notre Concept</h2>
-          <p class="fs-5 text-center" data-i18n="auto_key_59">
+        <div class="border rounded-4 shadow-sm p-4 text-center concept-box">
+          <h2 class="section-title text-center" data-i18n="auto_key_5">Notre Concept</h2>
+          <p class="p-4 text-center" data-i18n="auto_key_59">
             SecurityNoPhone est bien plus qu’un simple accessoire : c’est une solution de sérénité pensée pour les
             événements privés, professionnels ou confidentiels. Grâce à notre pochette sécurisée, vos invités conservent
             leur téléphone sur eux sans pouvoir l'utiliser : aucun stress, aucune photo, aucun enregistrement.
           </p>
-          <p class="fs-5 text-center" data-i18n="auto_key_12">
+          <p class="p-4 text-center" data-i18n="auto_key_12">
             Fini les flashs inopportuns, les vidéos partagées sans consentement ou les fuites de contenu. Chaque
             pochette est conçue pour garantir une atmosphère respectueuse et intime, que ce soit lors d’un mariage, d’un
             séminaire ou d’un lancement VIP.
           </p>
-          <p class="fs-5 text-center" data-i18n="auto_key_13">
+          <p class="p-4 text-center" data-i18n="auto_key_13">
             En choisissant SecurityNoPhone, vous protégez l’expérience de vos invités, vous renforcez votre image
             professionnelle, et vous créez une bulle de confidentialité dans un monde surconnecté.
           </p>
@@ -111,12 +119,13 @@
           </small>
         </div>
       </div>
-    </div>
-  </section>
+
+      
+      
 
  <!-- Section Nos Produits -->
 <section class="snf-container my-5" data-aos="fade-up" id="produits">
-  <div class="border rounded-4 shadow-sm p-4 bg-white">
+  <div class="border rounded-4 shadow-sm p-4 text-center">
     <h2 class="section-title text-center mb-5" data-i18n="products_title">Nos Produits</h2>
     <div class="row g-4">
       <div class="col-6 col-md-3 text-center">
@@ -163,12 +172,12 @@
 </section>
 
 <!-- Section Nos Offres -->
-<section class="snf-container my-5" id="offers">
-  <div class="border rounded-4 shadow-sm p-4 bg-white">
+<section class=" rounded-4 shadow-sm p-4 text-center">
+  <div class="border rounded-4 shadow-sm p-4 text-center">
     <h2 class="section-title text-center" data-i18n="auto_key_7">Nos Offres</h2><br>
     <div class="row gy-4 justify-content-center">
       <div class="col-md-4 mb-4">
-        <div class="card p-4 shadow-sm h-100 text-center">
+        <div class="border rounded-4 shadow-sm p-4 text-center">
           <h4 data-i18n="auto_key_19">Pochettes personnalisées</h4><br>
           <ul class="list-unstyled text-center">
             <li data-i18n="auto_key_20">À partir de 3,50€ TTC par pochettes</li>
@@ -183,7 +192,7 @@
         </div>
       </div>
       <div class="col-md-4 mb-4">
-        <div class="card p-4 shadow-sm h-100 text-center">
+        <div class="border rounded-4 shadow-sm p-4 text-center">
           <h4 data-i18n="auto_key_28">Location clé-en-main</h4><br>
           <ul class="list-unstyled text-center">
             <li data-i18n="auto_key_29">Jusqu’à 250 pochettes</li>
@@ -196,7 +205,7 @@
         </div>
       </div>
       <div class="col-md-4 mb-4">
-        <div class="card p-4 shadow-sm h-100 text-center">
+        <div class="border rounded-4 shadow-sm p-4 text-center">
           <h4 data-i18n="auto_key_35">Abonnement Starter</h4><br>
           <ul class="list-unstyled text-center">
             <li data-i18n="auto_key_36">Jusqu’à 50 pochettes</li>
@@ -216,46 +225,46 @@
 
 
     <section class="snf-container my-5" data-aos="fade-up" id="usecases">
-      <div class="border rounded-4 shadow-sm p-4 bg-white">
+      <div class="border rounded-4 shadow-sm p-4">
         <h2 class="section-title text-center mb-5" data-i18n="auto_key_44">Cas d'utilisation</h2>
         <div class="row g-4">
           <div class="col-md-4">
-            <div class="card p-4 shadow-sm h-100 text-center">
+            <div class="border rounded-4 shadow-sm p-4 text-center">
               <h5 class="fw-bold" data-i18n="auto_key_45">Mariages</h5>
               <p class="text-muted" data-i18n="auto_key_46">Des cérémonies 100% confidentielles, sans téléphone
                 ni distractions. Idéal pour préserver l’intimité du moment.</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-4 shadow-sm h-100 text-center">
+            <div class="border rounded-4 shadow-sm p-4 text-center">
               <h5 class="fw-bold" data-i18n="auto_key_47">Conférences</h5>
               <p class="text-muted" data-i18n="auto_key_48">Protégez vos échanges sensibles et évitez toute
                 captation d’image ou de son pendant vos réunions importantes.</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-4 shadow-sm h-100 text-center">
+            <div class="border rounded-4 shadow-sm p-4 text-center">
               <h5 class="fw-bold" data-i18n="auto_key_49">Soirées VIP</h5>
               <p class="text-muted" data-i18n="auto_key_50">Préservez la confidentialité d’événements privés :
                 défilés, avant-premières, afterworks exclusifs.</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-4 shadow-sm h-100 text-center">
+            <div class="border rounded-4 shadow-sm p-4 text-center">
               <h5 class="fw-bold" data-i18n="auto_key_51">Examens</h5>
               <p class="text-muted" data-i18n="auto_key_52">Empêchez toute triche en bloquant l’usage des
                 téléphones pendant les évaluations scolaires.</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-4 shadow-sm h-100 text-center">
+            <div class="border rounded-4 shadow-sm p-4 text-center">
               <h5 class="fw-bold" data-i18n="auto_key_53">Établissements de santé</h5>
               <p class="text-muted" data-i18n="auto_key_54">Respectez la confidentialité et la tranquillité dans
                 les salles d'attente ou blocs opératoires.</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-4 shadow-sm h-100 text-center">
+            <div class="border rounded-4 shadow-sm p-4 text-center">
               <h5 class="fw-bold" data-i18n="auto_key_55">Justice & institutions</h5>
               <p class="text-muted" data-i18n="auto_key_56">Sécurisez les procès ou réunions sensibles où l’usage
                 de téléphones est interdit</p>
@@ -266,7 +275,7 @@
     </section>
 
       <section class="snf-container my-5" data-aos="fade-up" id="contact">
-        <div class="snf-card p-4 shadow-sm text-center">
+        <div class="border rounded-4 shadow-sm p-4 text-center">
           <h2 class="section-title text-center" data-i18n="auto_key_11">Contact</h2>
           <p class="text-center mb-4" data-i18n="auto_key_57">Une question ? Besoin d’un devis ou d’un conseil ?
             Écrivez-nous :</p>
@@ -285,7 +294,7 @@
                 class="form-control" id="contact_message" name="message" required rows="4"></textarea>
             </div>
             <div class="col-12 text-center">
-              <button class="btn btn-dark" data-i18n="btn_send" type="submit">Envoyer</button>
+              <button class="snf-btn snf-btn-outline mt-auto" data-i18n="btn_send" type="submit">Envoyer</button>
             </div>
             <div id="contactFormFeedback" class="col-12 mt-3"></div>
           </form>

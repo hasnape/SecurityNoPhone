@@ -5,16 +5,30 @@
 /* Général */
 body {
     margin: 0;
-    font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
-    background: linear-gradient(135deg, #00000041, #f7e3a7, #f2d16b, #B9A341);
-    background-size: 400% 400%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);    background-size: 400% 400%;
     animation: goldFade 20s ease infinite;
-    color: #000;
+    color: #fffdfd;
     scroll-behavior: smooth;
     box-sizing: border-box;
-    
+    font-size: 1.25rem;
+        font-weight: 400;
 }
 
+.concept-box {
+    color: white !important;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);    /* fond foncé */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8) !important;
+    font-size: 1.25rem;
+        font-weight: 400;
+    /* ombre noire */
+}
+
+.snf-container *:hover {
+    color:#C5B358;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
 
 @keyframes goldFade {
     0% {
@@ -61,6 +75,7 @@ body {
     #concept>.concept-border {
         padding: 2rem;
         flex-grow: 0;
+        height: 480px;
     }
 }
 
@@ -117,9 +132,10 @@ body {
 /* Titres */
 .section-title,
 .snf-section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
+    /* Remplacé Playfair Display par Inter */
     font-size: 2rem;
-    color: #0D1B2A;
+    color: #ffffff;
     border-bottom: 2px solid #C5B358;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
@@ -131,7 +147,7 @@ body {
 }
 
 .snf-text-dark {
-    color: #222;
+    color: #ffffff;
 }
 
 .snf-fw-bold {
@@ -143,7 +159,7 @@ body {
 }
 
 .snf-text-muted {
-    color: #888;
+    color: #fffdfd;
 }
 
 /* Grille responsive */
@@ -184,11 +200,11 @@ body {
 /* Box / Card */
 .snf-box,
 .snf-card {
-    border: 1px solid #e0e0e0;
+    border: 1px solid #ffffff;
     border-radius: 1.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
     padding: 2rem;
-    background: #fff;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
 }
 
 .snf-card {
@@ -201,7 +217,7 @@ body {
     max-width: 180px;
     border-radius: 1rem;
     border: 1px solid #e0e0e0;
-    background: #fafafa;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
     transition: transform 0.2s;
 }
@@ -225,8 +241,7 @@ body {
     height: 260px;
     object-fit: contain;
     border-radius: 1rem;
-    background: #f8f8f8;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
 }
 
 .snf-carousel-img.snf-active {
@@ -237,21 +252,18 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: #fff;
-    border: none;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);    border: none;
     font-size: 2rem;
-    color: #222;
+    color: #ffffff;
     padding: 0.2em 0.7em;
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
     opacity: 0.8;
-    transition: background 0.2s;
-}
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);}
 
 .snf-carousel-btn:hover {
-    background: #eee;
-}
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);}
 
 .snf-carousel-btn.snf-prev {
     left: 10px;
@@ -264,15 +276,15 @@ body {
 /* Boutons */
 .snf-btn {
     display: inline-block;
-    font-family: inherit;
+    font-family: 'Inter', sans-serif;
+    /* uniformiser ici aussi */
     font-weight: 500;
     font-size: 1rem;
     padding: 0.7em 1.5em;
     border-radius: 2em;
     border: none;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s, border 0.2s;
-    text-decoration: none;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);    text-decoration: none;
     margin-bottom: 0.5em;
 }
 
@@ -287,7 +299,7 @@ body {
 }
 
 .snf-btn-outline {
-    background: transparent;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);    
     color: #C5B358;
     border: 2px solid #C5B358;
 }
@@ -311,15 +323,19 @@ body {
 .snf-note {
     display: block;
     margin-top: 1rem;
-    color: #888;
+    color: #ffffff;
     text-align: center;
     font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    /* uniformiser ici */
 }
 
 /* Formulaires */
 .snf-form {
     max-width: 500px;
     margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    /* uniformiser ici */
 }
 
 .snf-form-group {
@@ -331,7 +347,7 @@ body {
 .snf-form-label {
     margin-bottom: 0.4rem;
     font-weight: 500;
-    color: #222;
+    color: #ffffff;
 }
 
 .snf-input {
@@ -339,7 +355,8 @@ body {
     border: 1px solid #ccc;
     border-radius: 0.7em;
     font-size: 1rem;
-    font-family: inherit;
+    font-family: 'Inter', sans-serif;
+    /* uniformiser ici */
     background: #fafafa;
     transition: border 0.2s;
 }
@@ -355,8 +372,49 @@ body {
     text-align: center;
     font-size: 1rem;
     color: #B22222;
+    font-family: 'Inter', sans-serif;
+    /* uniformiser ici */
 }
 
+#intro {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
+    padding: 10px 5px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    max-width: 900px;
+    margin: 40px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#intro .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+#intro p.fs-5 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Responsive pour petits écrans */
+@media (max-width: 576px) {
+    #intro {
+        padding: 40px 15px;
+    }
+
+    #intro .section-title {
+        font-size: 2rem;
+    }
+
+    #intro p.fs-5 {
+        font-size: 1.1rem;
+    }
+}
 /* Responsive */
 @media (max-width: 900px) {
     .snf-container {
@@ -381,21 +439,6 @@ body {
     .snf-carousel,
     .snf-carousel-img {
         height: 180px;
-    }
-
-    .snf-btn {
-        width: 100%;
-        margin-bottom: 0.7em;
-    }
-
-    .snf-me-2 {
-        margin-right: 0;
-    }
-}
-
-@media (max-width: 600px) {
-    .snf-form {
-        padding: 0 0.5rem;
     }
 
     .snf-box {
