@@ -8,7 +8,7 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -49,50 +49,42 @@
         aber mit Stil.</p>
     </section>
 
+    <div id="navbar-container"></div>
+    
     <section class="container my-5" data-aos="fade-up" id="galerie-concept">
-      <div class="row align-items-center">
-        <div class="col-lg-6 mb-4" id="galerie">
+      <div class="row align-items-stretch">
+        <div class="col-lg-6 mb-4" id="galerie"><br><br>
           <div class="border rounded-4 shadow-sm p-4 bg-white">
             <h2 class="section-title text-center" data-i18n="auto_key_3">Galerie</h2>
             <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
               <div class="carousel-inner rounded shadow">
+                <div class="carousel-item">
+                  <img alt="Exemple 1 pochette SecurityNoPhone" class="d-block w-100"
+                    src="images/IMG_20250421_182622-removebg-preview.png" />
+                </div>
+                <div class="carousel-item">
+                  <img alt="Exemple 2 pochette SecurityNoPhone en situation" class="d-block w-100"
+                    src="images/Locking+Cell+Phone+Pouches+For+Schools,+Phone+Lockers+For+Schools,+Cell+Phone+Pouch+Lock+For+Schools,+Lockers+For+Mobile+Phones,+Phone+Lock+Bag+Concert,+Cell+.jpg" />
+                </div>
+                <div class="carousel-item">
+                  <img alt="Exemple 3 type d'événement avec SecurityNoPhone" class="d-block w-100"
+                    src="images/1321647.webp" />
+                </div>
                 <div class="carousel-item active">
-                  <img class="d-block w-100" src="images/2986967587606.PNM.jpg" alt="Beispiel 1" />
+                  <img alt="Exemple 4 type d'événement avec SecurityNoPhone" class="d-block w-100"
+                    src="images/31282227-29547156.jpg" />
                 </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="images/3352798400086.PNM.jpg" alt="Beispiel 2" />
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="images/3469191228188.PNM.jpg" alt="Beispiel 3" />
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="images/3470635691117.PNM.jpg" alt="Beispiel 4" />
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="images/Alibaba8645a3326b4a8432872212d54008259b_original.png"
-                    alt="Beispiel 5" />
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="images/Alibabab1f46257725ce9f58fef719d6e28de07_original.png"
-                    alt="Beispiel 6" />
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="images/IMG_20250421_182622.jpg" alt="Beispiel 7" />
-                </div>
-                <div class="carousel-item">
-                  <div class="ratio ratio-1x1">
-                    <iframe allowfullscreen src="https://www.tiktok.com/embed/v2/7471266049443319095"></iframe>
-                  </div>
-                </div>
+    
+    
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
+              <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators"
+                type="button">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden" data-i18n="carousel_previous">Précédent</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
+              <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators"
+                type="button">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden" data-i18n="carousel_next">Suivant</span>
               </button>
             </div>
