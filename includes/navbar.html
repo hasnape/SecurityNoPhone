@@ -1,61 +1,68 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
-    <div class="container">
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
-            <img alt="Logo SecurityNoPhone" src="images/IMG_20250421_182622-removebg-preview.png"
-                style="height: 40px; margin-right: 10px;" />
-            <span>SecurityNoPhone</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<!DOCTYPE html>
+<html lang="fr">
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="index.html#galerie" data-i18n="nav_gallery">Galerie</a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="index.html#concept" data-i18n="nav_concept">Concept</a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="index.html#offers" data-i18n="nav_offers">Offres</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.html#usecases"
-                        data-i18n="nav_usecases">Utilisations</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.html#contact" data-i18n="nav_contact">Contact</a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="commande.html" data-i18n="nav_order">Commande</a></li>
-                <li class="nav-item"><a class="nav-link" href="suivi.html" data-i18n="nav_tracking">Suivi</a></li>
-            </ul>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Navbar responsive Bootstrap</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
 
-            <!-- Menu de langue dynamique -->
-            <div class="d-flex align-items-center ms-4 gap-2">
-                <span class="text-muted" title="Changer la langue">🌐</span>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm" style="padding: 22px;">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <!-- Langue à gauche -->
+            <div class="d-flex align-items-center">
+                <span class="text-muted me-2" title="Changer la langue">🌐</span>
                 <select id="langSwitcher" class="form-select form-select-sm" style="width: auto;">
                     <option value="fr">Français</option>
                     <option value="en">English</option>
                     <option value="de">Deutsch</option>
                     <option value="ar">العربية</option>
                 </select>
-
-                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdownLang">
-                    <li><a class="dropdown-item language-switcher d-flex align-items-center" href="#"
-                            data-lang="fr"><span class="flag-icon flag-icon-fr me-2"></span> Français</a></li>
-                    <li><a class="dropdown-item language-switcher d-flex align-items-center" href="#"
-                            data-lang="en"><span class="flag-icon flag-icon-gb me-2"></span> English</a></li>
-                    <li><a class="dropdown-item language-switcher d-flex align-items-center" href="#"
-                            data-lang="es"><span class="flag-icon flag-icon-es me-2"></span> Español</a></li>
-                    <li><a class="dropdown-item language-switcher d-flex align-items-center" href="#"
-                            data-lang="de"><span class="flag-icon flag-icon-de me-2"></span> Deutsch</a></li>
-                    <li><a class="dropdown-item language-switcher d-flex align-items-center" href="#"
-                            data-lang="ar"><span class="flag-icon flag-icon-sa me-2"></span> العربية</a></li>
-                </ul>
-
-                <!-- Menu de langue dynamique
-                <div class="ms-3 d-flex align-items-center gap-2">
-                    <a href="index.html" class="text-decoration-none">FR</a>
-                    <a href="index_fully_translated_en.html" class="text-decoration-none">EN</a>
-                    <a href="index_fully_translated_de.html" class="text-decoration-none">DE</a>
-                    <a href="index_fully_translated_ar_.html" class="text-decoration-none">AR</a>
-                </div> -->
-
             </div>
+
+            <!-- Logo centré -->
+            <a class="navbar-brand fw-bold position-absolute start-50 translate-middle-x d-flex align-items-center"
+                href="index.html">
+                <img alt="Logo SecurityNoPhone" src="images/IMG_20250421_182622-removebg-preview.png"
+                    style="height: 80px; margin-right:60px; margin-top: 4px;" />
+            </a>
+
+            <!-- Bouton burger (visible en mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Liens (à droite en desktop, dans burger en mobile) -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html#galerie"
+                            data-i18n="nav_gallery">Galerie</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#concept"
+                            data-i18n="nav_concept">Concept</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#offers" data-i18n="nav_offers">Offres</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#usecases"
+                            data-i18n="nav_usecases">Utilisations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact"
+                            data-i18n="nav_contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="commande.html" data-i18n="nav_order">Commande</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="suivi.html" data-i18n="nav_tracking">Suivi</a></li>
+                </ul>
+            </div>
+
         </div>
-    </div>
-</nav>
+    </nav>
+
+    <!-- Bootstrap JS Bundle (avec Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

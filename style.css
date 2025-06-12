@@ -1,0 +1,286 @@
+/* =======================
+   CSS natif pour index.html
+   ======================= */
+
+/* Général */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+    background: linear-gradient(135deg, #00000041, #f7e3a7, #f2d16b, #B9A341);
+    background-size: 400% 400%;
+    animation: goldFade 20s ease infinite;
+    color: #000;
+}
+@keyframes goldFade {
+    0% { background-position: 20% 70%; }
+    50% { background-position: 90% 70%; }
+    100% { background-position: 20% 70%; }
+}
+
+
+/* Conteneur principal */
+.snf-container {
+    width: 95%;
+    max-width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+/* Ligne en flex, enfants étirés en hauteur */
+@media (min-width: 992px) {
+    #galerie-concept .row {
+        display: flex;
+        align-items: stretch;
+    }
+
+    #galerie,
+    #concept {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Carousel prend toute la hauteur dispo */
+    #galerie>div.border {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Concept a hauteur naturelle, pas de flex-grow */
+    #concept>.concept-border {
+        padding: 2rem;
+        /* hauteur automatique, pas de flex-grow */
+    }
+}
+
+
+/* Hauteur fixe pour carousel */
+#galerie .carousel-inner {
+    position: relative;
+    width: 100%;
+    height: 365px;
+    /* règle la hauteur ici */
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+#galerie .carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#galerie .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Espacement vertical */
+.snf-my-5 { margin-top: 0 ; margin-bottom: 3rem; }
+.snf-mb-3 { margin-bottom: 1.2rem; }
+.snf-mb-4 { margin-bottom: 2rem; }
+.snf-mb-5 { margin-bottom: 3rem; }
+.snf-mt-2 { margin-top: 0.7rem; }
+.snf-mt-3 { margin-top: 1.2rem; }
+
+/* Titres */
+.section-title, .snf-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #0D1B2A;
+    border-bottom: 2px solid #C5B358;
+    display: block;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+.snf-text-center { text-align: center; }
+.snf-text-dark { color: #222; }
+.snf-fw-bold { font-weight: bold; }
+.snf-fs-5 { font-size: 1.15rem; }
+.snf-text-muted { color: #888; }
+
+/* Grille responsive */
+.snf-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.snf-col-6 {
+    flex: 1 1 50%;
+    min-width: 320px;
+    box-sizing: border-box;
+}
+.snf-col-3 {
+    flex: 1 1 22%;
+    min-width: 220px;
+    max-width: 260px;
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
+}
+.snf-g-4 { gap: 2rem; }
+.snf-justify-center { justify-content: center; }
+.snf-product { display: flex; flex-direction: column; align-items: center; }
+
+/* Box et Card */
+.snf-box, .snf-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 2rem;
+    background: #fff;
+}
+.snf-card { margin-bottom: 1.5rem; }
+
+/* Images produits */
+.snf-img-thumb {
+    width: 100%;
+    max-width: 180px;
+    border-radius: 1rem;
+    border: 1px solid #e0e0e0;
+    background: #fafafa;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    transition: transform 0.2s;
+}
+.snf-img-thumb:hover { transform: scale(1.05); }
+
+/* Carousel */
+.snf-carousel {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.snf-carousel-img {
+    display: none;
+    width: 100%;
+    height: 260px;
+    object-fit: contain;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    background: #f8f8f8;
+}
+.snf-carousel-img.snf-active { display: block; }
+.snf-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    border: none;
+    font-size: 2rem;
+    color: #222;
+    padding: 0.2em 0.7em;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    z-index: 2;
+    opacity: 0.8;
+    transition: background 0.2s;
+}
+.snf-carousel-btn:hover { background: #eee; }
+.snf-carousel-btn.snf-prev { left: 10px; }
+.snf-carousel-btn.snf-next { right: 10px; }
+
+/* Boutons */
+.snf-btn {
+    display: inline-block;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.7em 1.5em;
+    border-radius: 2em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    text-decoration: none;
+    margin-bottom: 0.5em;
+}
+.snf-btn-primary {
+    background: #C5B358;
+    color: #fff;
+}
+.snf-btn-primary:hover {
+    background: #B9A341;
+    color: #fff;
+}
+.snf-btn-outline {
+    background: transparent;
+    color: #C5B358;
+    border: 2px solid #C5B358;
+}
+.snf-btn-outline:hover {
+    background: #C5B358;
+    color: #fff;
+}
+.snf-me-2 { margin-right: 0.7em; }
+
+/* Notes et petits textes */
+.snf-note {
+    display: block;
+    margin-top: 1rem;
+    color: #888;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* Formulaire */
+.snf-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+.snf-form-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+.snf-form-label {
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+    color: #222;
+}
+.snf-input {
+    padding: 0.7em 1em;
+    border: 1px solid #ccc;
+    border-radius: 0.7em;
+    font-size: 1rem;
+    font-family: inherit;
+    background: #fafafa;
+    transition: border 0.2s;
+}
+.snf-input:focus {
+    border-color: #C5B358;
+    outline: none;
+    background: #fff;
+}
+.snf-form-message {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #B22222;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .snf-container { width: 98%; }
+    .snf-row { flex-direction: column; gap: 1rem; }
+    .snf-col-6 { flex: 1 1 100%; min-width: 0; }
+    .snf-col-3 { flex: 1 1 100%; max-width: 350px; }
+    .snf-carousel, .snf-carousel-img { height: 180px; }
+    .snf-btn { width: 100%; margin-bottom: 0.7em; }
+    .snf-me-2 { margin-right: 0; }
+}
+@media (max-width: 600px) {
+    .snf-form { padding: 0 0.5rem; }
+    .snf-box { padding: 1rem; }
+}
+
+/* Accessibilité : focus visible sur les boutons */
+.snf-btn:focus {
+    outline: 2px solid #C5B358;
+    outline-offset: 2px;
+}
