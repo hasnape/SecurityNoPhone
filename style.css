@@ -112,7 +112,7 @@ body {
 }
 .snf-col-6 {
     flex: 1 1 50%;
-    min-width: 320px;
+    min-width: 321px;
     box-sizing: border-box;
 }
 .snf-col-3 {
