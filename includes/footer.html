@@ -1,65 +1,75 @@
-<footer class="footer bg-white text-dark text-center py-4 shadow-sm mt-auto">
-    <div class="container-fluid">
-        <p class="mb-2 fw-medium">
-            &copy; 2025 <span data-i18n="nav_brand_name">SecurityNoPhone</span> –
-            <span data-i18n="footer_rights">Tous droits réservés.</span>
-        </p>
-        <div class="d-flex flex-wrap justify-content-center gap-3">
-            <a href="Mention legale/1_Mentions_Legales.pdf" target="_blank" class="footer-link"
-                data-i18n="footer_legal">Mentions légales</a>
-            <a href="Mention legale/2_Politique_Confidentialite.pdf" target="_blank" class="footer-link"
-                data-i18n="footer_privacy">Politique de confidentialité</a>
-            <a href="Mention legale/3_CGV.pdf" target="_blank" class="footer-link" data-i18n="footer_cgv">CGV</a>
-            <a href="Mention legale/4_CGU.pdf" target="_blank" class="footer-link" data-i18n="footer_cgu">CGU</a>
-            <a href="Mention legale/5_Politique_Cookies_RGPD.pdf" target="_blank" class="footer-link"
-                data-i18n="footer_cookies">Politique de cookies</a>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- NAVBAR ICI -->
+
+    <main class="flex-grow-1">
+        <!-- CONTENU PRINCIPAL ICI -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer bg-white text-dark text-center py-4 shadow-sm mt-auto">
+        <div class="container-fluid">
+            <p class="mb-2 fw-medium">
+                &copy; 2025 <span data-i18n="nav_brand_name">SecurityNoPhone</span> –
+                <span data-i18n="footer_rights">Tous droits réservés.</span>
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="Mention legale/1_Mentions_Legales.pdf" target="_blank" class="footer-link"
+                    data-i18n="footer_legal">Mentions légales</a>
+                <a href="Mention legale/2_Politique_Confidentialite.pdf" target="_blank" class="footer-link"
+                    data-i18n="footer_privacy">Politique de confidentialité</a>
+                <a href="Mention legale/3_CGV.pdf" target="_blank" class="footer-link" data-i18n="footer_cgv">CGV</a>
+                <a href="Mention legale/4_CGU.pdf" target="_blank" class="footer-link" data-i18n="footer_cgu">CGU</a>
+                <a href="Mention legale/5_Politique_Cookies_RGPD.pdf" target="_blank" class="footer-link"
+                    data-i18n="footer_cookies">Politique de cookies</a>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<!-- Style identique navbar -->
-<style>
-    .footer-link {
-        color: #212529;
-        font-weight: 500;
-        position: relative;
-        text-decoration: none;
-        transition: color 0.3s, border-bottom 0.3s;
-        font-size: 0.9rem;
-    }
+    <!-- STYLE FOOTER -->
+    <style>
+        .footer-link {
+            color: #212529;
+            font-weight: 500;
+            position: relative;
+            text-decoration: none;
+            transition: color 0.3s, border-bottom 0.3s;
+            font-size: 0.9rem;
+        }
 
-    .footer-link:hover {
-        color: #C5B358;
-    }
+        .footer-link:hover {
+            color: #C5B358;
+        }
 
-    .footer-link::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 10%;
-        width: 80%;
-        height: 2px;
-        background-color: #C5B358;
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-        transform-origin: bottom right;
-    }
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background-color: #C5B358;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom right;
+        }
 
-    .footer-link:hover::after {
-        transform: scaleX(1);
-        transform-origin: bottom left;
-    }
+        .footer-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
 
-    .footer {
-        border-radius: 0;
-        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
-    }
-</style>
-  
+        .footer {
+            border-radius: 0;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+        }
+    </style>
 
-<script>
-    function acceptCookies() {
-        document.getElementById('cookie-banner').style.display = 'none';
-    }
-</script>
+    <!-- TON SCRIPT JS -->
+    <script>
+        function acceptCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+    </script>
+</body>
   

@@ -25,7 +25,7 @@
   <meta name="author" content="Rép&Web">
 
   <meta property="og:title" data-i18n="og_title"
-    content="SecurityNoPhone – Pochettes anti-smartphone pour événements sécurisés">
+    content="SecurityNoPhone – Pochettes smartphone anti-photo & video pour événements sécurisés">
   <meta property="og:description" data-i18n="og_description"
     content="Vente et location de pochettes bloquant l’usage des téléphones. Idéal pour mariages, conférences, soirées VIP.">
   <meta property="og:image" content="https://github.com/hasnape/SecurityNoPhone/images/IMG_20250421_182622.jpg">
@@ -52,17 +52,18 @@
   <section class="snf-container my-5 text-center"  id="intro">
     <h1 class="section-title" data-i18n="auto_key_1">Bienvenue chez SecurityNoPhone</h1>
     <p class="fs-5" data-i18n="auto_key_59">
-      Confidentialité maximale pour vos événements – sans les distractions du téléphone, mais avec style.
+      Votre solution sécurisée pour vos événements, permettant à vos invités de garder leur téléphone sur eux sans pouvoir
+      prendre photos ni vidéos, garantissant tranquillité et confidentialité.
     </p>
   </section>
   
 
-  <section class="snf-container my-5" data-aos="fade-up" id="galerie-concept">
+  <section class=" snf-container my-5"  data-aos="fade-up" id="galerie-concept">
     <div class="row align-items-stretch">
       <div class="col-lg-6 mb-4" id="galerie">
-        <div class=" rounded-4 p-4 text-center">
+        <div class="rounded-4 p-4 text-center concept-box">
           <h2 class="section-title text-center" data-i18n="auto_key_3">Galerie</h2>
-          <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
+          <div id="carouselExampleIndicators"  class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
             <div class="carousel-inner rounded shadow">
               <div class="carousel-item">
                 <img alt="Exemple 1 pochette SecurityNoPhone" class="d-block w-100"
@@ -81,7 +82,12 @@
                   src="images/31282227-29547156.jpg" />
               </div>
             </div>
-
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>    </div>
             <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators"
               type="button">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -98,7 +104,7 @@
 
       <div class="col-lg-6" id="concept">
         <div class="rounded-4 p-4 text-center concept-box">
-          <h2 class="section-title text-center" data-i18n="auto_key_5">Notre Concept</h2>
+          <h2 class="section-title text-center" data-i18n="auto_key_5">Concept</h2>
           <p class="p-1 text-center" data-i18n="auto_key_59">
             SecurityNoPhone est bien plus qu’un simple accessoire : c’est une solution de sérénité pensée pour les
             événements privés, professionnels ou confidentiels. Grâce à notre pochette sécurisée, vos invités conservent
@@ -124,8 +130,8 @@
 
  <!-- Section Nos Produits -->
 <section class="snf-container my-5" data-aos="fade-up" id="produits">
-  <div class="rounded-4 p-4 text-center">
-    <h2 class="section-title text-center mb-5" data-i18n="products_title">Nos Produits</h2>
+  <div class="snf-box snf-text-center">
+    <h2 class="section-title text-center" data-i18n="products_title">Nos Produits</h2>
     <div class="row g-4">
       <div class="col-6 col-md-3 text-center">
         <a href="images/IMG_20250421_182622.jpg" target="_blank">
@@ -160,7 +166,7 @@
 <!-- Section CTA Banner -->
 <section class="snf-container my-5" data-aos="fade-up" id="cta-banner-main">
   <div class="snf-box snf-text-center">
-    <h3 class="snf-mb-3 text-white" data-i18n="auto_key_14">Offrez à vos invités une tranquillité inégalée</h3>
+    <h3 class="section-title text-center" data-i18n="auto_key_14">Offrez à vos invités une tranquillité inégalée</h3>
     <p class="snf-mb-4 fs-5 text-white" data-i18n="auto_key_15">
       Commandez vos pochettes, réservez une location ou découvrez notre abonnement simple et pratique.
     </p>
@@ -172,7 +178,7 @@
 
 <!-- Section Nos Offres -->
 <section class=" rounded-4 sm p-4 text-center">
-  <div class=" rounded-4 p-4 text-center">
+  <div class="snf-box snf-text-center">
     <h2 class="section-title text-center" data-i18n="auto_key_7">Offres</h2><br>
     <div class="row gy-4 justify-content-center">
       <div class="col-md-4 mb-4">
@@ -190,10 +196,11 @@
           <a class="snf-btn snf-btn-outline mt-auto text-white" href="commande.html#custom" data-i18n="auto_key_27">Commander</a>
         </div>
       </div>
+      
       <div class="col-md-4 mb-4">
         <div class="border rounded-4 p-4 text-center text-white">
           <h4 data-i18n="auto_key_28">Location clé-en-main</h4><br>
-          <ul class="list-unstyled text-center text-white"> 
+          <ul class="list-unstyled text-center"> 
             <li data-i18n="auto_key_29">Jusqu’à 250 pochettes</li>
             <li data-i18n="auto_key_30">Livraison incluse en France</li>
             <li data-i18n="auto_key_31">Retour via bon prépayé fourni</li>
@@ -206,7 +213,7 @@
       <div class="col-md-4 mb-4">
         <div class="border rounded-4 p-4 text-center text-white">
           <h4 data-i18n="auto_key_35">Abonnement Starter</h4><br>
-          <ul class="list-unstyled text-center text-white">
+          <ul class="list-unstyled text-center">
             <li data-i18n="auto_key_36">Jusqu’à 50 pochettes</li>
             <li data-i18n="auto_key_37">Historique sur 30 jours</li>
             <li data-i18n="auto_key_38">Suivi des factures PDF</li>
@@ -224,48 +231,49 @@
 
 
     <section class="snf-container my-3" data-aos="fade-up" id="usecases">
-      <div class=" rounded-4 p-4">
+      <div class="snf-box snf-text-center">
+">
         <h2 class="section-title text-center mb-5" data-i18n="auto_key_44">Cas d'utilisation</h2>
         <div class="row g-4">
           <div class="col-md-4">
             <div class="border rounded-4 p-4 text-center text-white">
               <h5 class="fw-bold" data-i18n="auto_key_45">Mariages</h5>
-              <p class="text-white" data-i18n="auto_key_46">Des cérémonies 100% confidentielles, sans téléphone
+              <p class="list-unstyled text-center" data-i18n="auto_key_46">Des cérémonies 100% confidentielles, sans téléphone
                 ni distractions. Idéal pour préserver l’intimité du moment.</p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="border rounded-4  p-4 text-center text-white">
               <h5 class="fw-bold" data-i18n="auto_key_47">Conférences</h5>
-              <p class="text-white" data-i18n="auto_key_48">Protégez vos échanges sensibles et évitez toute
+              <p class="list-unstyled text-center" data-i18n="auto_key_48">Protégez vos échanges sensibles et évitez toute
                 captation d’image ou de son pendant vos réunions importantes.</p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="border rounded-4 p-4 text-center text-white">
               <h5 class="fw-bold" data-i18n="auto_key_49">Soirées VIP</h5>
-              <p class="text-white" data-i18n="auto_key_50">Préservez la confidentialité d’événements privés :
+              <p class="list-unstyled text-center" data-i18n="auto_key_50">Préservez la confidentialité d’événements privés :
                 défilés, avant-premières, afterworks exclusifs.</p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="border rounded-4 p-4 text-center text-white">
               <h5 class="fw-bold" data-i18n="auto_key_51">Examens</h5>
-              <p class="text-white" data-i18n="auto_key_52">Empêchez toute triche en bloquant l’usage des
+              <p class="list-unstyled text-center" data-i18n="auto_key_52">Empêchez toute triche en bloquant l’usage des
                 téléphones pendant les évaluations scolaires.</p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="border rounded-4 p-4 text-center text-white">
-              <h5 class="fw-bold" data-i18n="auto_key_53">Établissements de santé</h5>
-              <p class="text-white" data-i18n="auto_key_54">Respectez la confidentialité et la tranquillité dans
+              <h5 class="list-unstyled text-center" data-i18n="auto_key_53">Établissements de santé</h5>
+              <p class="list-unstyled text-center" data-i18n="auto_key_54">Respectez la confidentialité et la tranquillité dans
                 les salles d'attente ou blocs opératoires.</p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="border rounded-4 p-4 text-center text-white">
               <h5 class="fw-bold" data-i18n="auto_key_55">Justice & institutions</h5>
-              <p class="text-white" data-i18n="auto_key_56">Sécurisez les procès ou réunions sensibles où l’usage
+              <p class="list-unstyled text-center" data-i18n="auto_key_56">Sécurisez les procès ou réunions sensibles où l’usage
                 de téléphones est interdit</p>
             </div>
           </div>
@@ -274,7 +282,7 @@
     </section>
 
       <section class="snf-container my-5" data-aos="fade-up" id="contact">
-        <div class="rounded-4 p-4 text-center text-white">
+        <div class="snf-box snf-text-center text-white">
           <h2 class="section-title text-center" data-i18n="auto_key_11">Contact</h2>
           <p class="text-center mb-4 text-white" data-i18n="auto_key_57">Une question ? Besoin d’un devis ou d’un conseil ?
             Écrivez-nous :</p>
@@ -300,7 +308,7 @@
         </div>
       </section>
 
-      <div id="footer-container"></div>
+
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
       <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -308,7 +316,6 @@
 
       <script src="js/translations.js"></script>
       <script src="js/main.js"></script>
-
 
 </body>
 

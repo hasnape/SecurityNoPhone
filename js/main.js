@@ -3,7 +3,7 @@ function switchLanguage(lang) {
   const currentLang = lang || localStorage.getItem('lang') || 'fr';
   document.documentElement.lang = currentLang; // Mettre à jour l'attribut lang de la balise HTML
 
-  const translations = window.translations ?. [currentLang];
+  const translations = window.translations ? window.translations[currentLang] : null;
   if (!translations) {
     console.warn(`No translations found for language: ${currentLang}`);
     return;
@@ -168,7 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Charger les composants dynamiques
   // Ces fonctions vont insérer le HTML. switchLanguage sera appelé après pour traduire.
   loadNavbar();
-  loadFooter();
 
   // Appliquer la langue à toute la page une fois que tout est potentiellement chargé.
   // Il peut y avoir un léger décalage si fetch prend du temps.

@@ -1,6 +1,6 @@
 window.translations = {
   "fr": {
-    "auto_key_1": "SecurityNoPhone",
+    "auto_key_1": " Bienvenue chez SecurityNoPhone",
     "auto_key_2": "Galerie",
     "auto_key_3": "Galerie",
     "auto_key_4": "Concept",
