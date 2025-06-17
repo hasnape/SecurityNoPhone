@@ -6,7 +6,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: black;
     background-size: 400% 400%;
     animation: goldFade 20s ease infinite;
     color: #fffdfd;
