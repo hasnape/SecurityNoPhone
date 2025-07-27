@@ -480,3 +480,25 @@ body {
         padding: 1rem;
     }
 }
+
+/* Alignement vertical Galerie / Concept sur desktop */
+@media (min-width: 992px) {
+  #galerie-concept .row {
+    align-items: stretch;
+  }
+
+  #galerie,
+  #concept {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #galerie .carousel-inner {
+    flex-grow: 1;
+  }
+
+  #concept .concept-border {
+    height: 100%;
+  }
+}
