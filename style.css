@@ -479,10 +479,7 @@ body {
     .snf-box {
         padding: 1rem;
     }
-}
-
-/* Alignement vertical Galerie / Concept sur desktop */
-@media (min-width: 992px) {
+   @media (min-width: 992px) {
   #galerie-concept .row {
     align-items: stretch;
   }
@@ -502,3 +499,6 @@ body {
     height: 100%;
   }
 }
+
+/* Alignement vertical Galerie / Concept sur desktop */
+
