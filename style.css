@@ -1,58 +1,37 @@
-/* =======================
-   CSS natif pour index.html
-   ======================= */
-
 /* Général */
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: black;
-    background-size: 400% 400%;
-    animation: goldFade 20s ease infinite;
-    color: #fffdfd;
+    font-family: 'Inter', sans-serif;
+    background: #121212;
+    color: #ffffff;
     scroll-behavior: smooth;
     box-sizing: border-box;
-    font-size: 1.25rem;
-    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 .concept-box {
     color: white !important;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    /* fond foncé */
+    background: linear-gradient(135deg, #1a2a44 0%, #2e4372 100%);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8) !important;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 400;
-    /* ombre noire */
 }
 
 .snf-container *:hover {
-    color: #C5B358;
+    color: #d4af37;
     transition: color 0.3s ease;
     cursor: pointer;
 }
 
-@keyframes goldFade {
-    0% {
-        background-position: 20% 70%;
-    }
-
-    50% {
-        background-position: 90% 70%;
-    }
-
-    100% {
-        background-position: 20% 70%;
-    }
-}
-
 /* Conteneur principal */
 .snf-container {
-    width: 95%;
-    max-width: 1800px;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: linear-gradient(135deg, #1a2a44 0%, #2e4372 100%);
+    border-radius: 1rem;
 }
 
 /* Ligne en flex, enfants étirés en hauteur */
@@ -61,19 +40,16 @@ body {
         display: flex;
         align-items: stretch;
     }
-
     #galerie,
     #concept {
         display: flex;
         flex-direction: column;
     }
-
     #galerie>div.border {
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
     }
-
     #concept>.concept-border {
         padding: 2rem;
         flex-grow: 0;
@@ -85,7 +61,7 @@ body {
 #galerie .carousel-inner {
     position: relative;
     width: 100%;
-    height: 365px;
+    height: 400px;
     overflow: hidden;
     border-radius: 1rem;
 }
@@ -101,68 +77,68 @@ body {
 #galerie .carousel-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center;
+    object-fit: contain;
+    background: #1a2a44;
+}
+
+.carousel-inner img {
+    height: 400px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background 0.3s ease;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
 }
 
 /* Espacements */
-.snf-my-5 {
-    margin-top: 0;
-    margin-bottom: 2rem;
-}
-
-.snf-mb-3 {
-    margin-bottom: 1.2rem;
-}
-
-.snf-mb-4 {
-    margin-bottom: 2rem;
-}
-
-.snf-mb-5 {
-    margin-bottom: 2rem;
-}
-
-.snf-mt-2 {
-    margin-top: 0.7rem;
-}
-
-.snf-mt-3 {
-    margin-top: 1.2rem;
-}
+.snf-my-5 { margin: 2rem 0; }
+.snf-mb-3 { margin-bottom: 1.2rem; }
+.snf-mb-4 { margin-bottom: 2rem; }
+.snf-mb-5 { margin-bottom: 2rem; }
+.snf-mt-2 { margin-top: 0.7rem; }
+.snf-mt-3 { margin-top: 1.2rem; }
 
 /* Titres */
-.section-title,
-.snf-section-title {
+.section-title {
     font-family: 'Inter', sans-serif;
-    /* Remplacé Playfair Display par Inter */
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
     color: #ffffff;
-    border-bottom: 2px solid #C5B358;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    display: block;
+    border-bottom: 2px solid #d4af37;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    letter-spacing: 0.02em;
 }
 
-.snf-text-center {
-    text-align: center;
+p, li {
+    font-size: 1.1rem;
+    line-height: 1.8;
 }
 
-.snf-text-dark {
-    color: #ffffff;
-}
-
-.snf-fw-bold {
-    font-weight: bold;
-}
-
-.snf-fs-5 {
-    font-size: 1.15rem;
-}
-
-.snf-text-muted {
-    color: #fffdfd;
-}
+.snf-text-center { text-align: center; }
+.snf-text-dark { color: #ffffff; }
+.snf-fw-bold { font-weight: bold; }
+.snf-fs-5 { font-size: 1.15rem; }
+.snf-text-muted { color: #d1d1d1; }
 
 /* Grille responsive */
 .snf-row {
@@ -185,14 +161,8 @@ body {
     box-sizing: border-box;
 }
 
-.snf-g-4 {
-    gap: 2rem;
-}
-
-.snf-justify-center {
-    justify-content: center;
-}
-
+.snf-g-4 { gap: 2rem; }
+.snf-justify-center { justify-content: center; }
 .snf-product {
     display: flex;
     flex-direction: column;
@@ -200,127 +170,72 @@ body {
 }
 
 /* Box / Card */
-.snf-box,
-.snf-card {
-   
+.snf-box, .snf-card {
     border-radius: 1.5rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8) !important;
     padding: 2rem;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #1a2a44 0%, #2e4372 100%);
 }
 
-.snf-card {
-    margin-bottom: 1.5rem;
-}
+.snf-card { margin-bottom: 1.5rem; }
 
 /* Images */
 .snf-img-thumb {
     width: 100%;
     max-width: 180px;
     border-radius: 1rem;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #1a2a44 0%, #2e4372 100%);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8) !important;
-        transition: transform 0.2s;
+    transition: transform 0.2s;
 }
 
 .snf-img-thumb:hover {
     transform: scale(1.05);
 }
 
-/* Carousel custom */
-.snf-carousel {
-    position: relative;
-    width: 100%;
-    height: 260px;
-    overflow: hidden;
-    margin: 0 auto;
-}
-
-.snf-carousel-img {
-    display: none;
-    width: 100%;
-    height: 260px;
-    object-fit: contain;
-    border-radius: 1rem;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8) !important;
-}
-
-.snf-carousel-img.snf-active {
-    display: block;
-}
-
-.snf-carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    border: none;
-    font-size: 2rem;
-    color: #ffffff;
-    padding: 0.2em 0.7em;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8) !important;
-        opacity: 0.8;
-}
-
-.snf-carousel-btn:hover {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-}
-
-.snf-carousel-btn.snf-prev {
-    left: 10px;
-}
-
-.snf-carousel-btn.snf-next {
-    right: 10px;
-}
-
 /* Boutons */
 .snf-btn {
     display: inline-block;
     font-family: 'Inter', sans-serif;
-    /* uniformiser ici aussi */
     font-weight: 500;
-    font-size: 1rem;
-    padding: 0.7em 1.5em;
-    border-radius: 2em;
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
+    border-radius: 2rem;
     border: none;
     cursor: pointer;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #1a2a44 0%, #2e4372 100%);
     text-decoration: none;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
 }
 
 .snf-btn-primary {
-    background: #C5B358;
-    color: #fff;
+    background: #d4af37;
+    color: #121212;
 }
 
 .snf-btn-primary:hover {
-    background: #B9A341;
-    color: #fff;
+    background: #c19b2e;
+    transform: scale(1.05);
 }
 
 .snf-btn-outline {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: #C5B358;
-    border: 2px solid #C5B358;
+    background: transparent;
+    color: #d4af37;
+    border: 2px solid #d4af37;
 }
 
 .snf-btn-outline:hover {
-    background: #C5B358;
-    color: #fff;
+    background: #d4af37;
+    color: #121212;
+    transform: scale(1.05);
 }
 
-.snf-me-2 {
-    margin-right: 0.7em;
-}
+.snf-me-2 { margin-right: 0.7rem; }
 
 /* Accessibilité */
 .snf-btn:focus {
-    outline: 2px solid #C5B358;
+    outline: 2px solid #d4af37;
     outline-offset: 2px;
 }
 
@@ -332,7 +247,6 @@ body {
     text-align: center;
     font-size: 0.95rem;
     font-family: 'Inter', sans-serif;
-    /* uniformiser ici */
 }
 
 /* Formulaires */
@@ -340,7 +254,6 @@ body {
     max-width: 500px;
     margin: 0 auto;
     font-family: 'Inter', sans-serif;
-    /* uniformiser ici */
 }
 
 .snf-form-group {
@@ -356,20 +269,17 @@ body {
 }
 
 .snf-input {
-    padding: 0.7em 1em;
+    padding: 0.7rem 1rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8) !important;
-    border-radius: 0.7em;
+    border-radius: 0.7rem;
     font-size: 1rem;
     font-family: 'Inter', sans-serif;
-    /* uniformiser ici */
     background: #fafafa;
     transition: border 0.2s;
 }
 
-
-
 .snf-input:focus {
-    border-color: #C5B358;
+    border-color: #d4af37;
     outline: none;
     background: #fff;
 }
@@ -380,31 +290,27 @@ body {
     font-size: 1rem;
     color: #B22222;
     font-family: 'Inter', sans-serif;
-    /* uniformiser ici */
 }
 
-
 #intro {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #1a2a44 0%, #2e4372 100%);
     color: #fff;
-    padding: 10px 5px;
+    padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8) !important;
-    max-width: 1790px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #intro .section-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
 }
 
 #intro p.fs-5 {
     font-size: 1.25rem;
     font-weight: 400;
-    line-height: 1.6;
-    max-width: 1800px;
+    line-height: 1.8;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -416,95 +322,80 @@ body {
     box-shadow: none;
 }
 
-/* Uniformise les tailles d’images dans le carrousel */
-.carousel-inner img {
-    width: 100%;
-    height: 300px;
-    /* ou la hauteur que tu veux */
-    object-fit: cover;
-    border-radius: 12px;
-    /* optionnel, coins arrondis */
-}
-
 /* Uniformise les images des produits */
 #produits img {
     width: 100%;
-    height: 200px;
-    /* ou adapte selon ton design */
-    object-fit: cover;
+    height: 250px;
+    object-fit: contain;
     border-radius: 12px;
+}
+
+/* Animation pour changement de langue */
+[data-i18n], [data-i18n-placeholder], [data-i18n-title] {
+    transition: opacity 0.3s ease;
+}
+
+[data-i18n].fade-out, [data-i18n-placeholder].fade-out, [data-i18n-title].fade-out {
+    opacity: 0;
 }
 
 /* Responsive pour petits écrans */
 @media (max-width: 576px) {
-    #intro {
-        padding: 40px 15px;
+    .snf-container {
+        width: 95%;
+        padding: 1rem;
     }
-
-    #intro .section-title {
-        font-size: 2rem;
+    .section-title {
+        font-size: 1.8rem;
     }
-
-    #intro p.fs-5 {
-        font-size: 1.1rem;
+    p, li {
+        font-size: 0.95rem;
+    }
+    #galerie .carousel-inner {
+        height: 250px;
+    }
+    #produits img {
+        height: 150px;
     }
 }
 
-/* Responsive */
 /* Responsive mobile */
 @media (max-width: 900px) {
     .snf-container {
         width: 98%;
     }
-
     .snf-row {
         flex-direction: column;
         gap: 1rem;
     }
-
     .snf-col-6 {
         flex: 1 1 100%;
         min-width: 0;
     }
-
     .snf-col-3 {
         flex: 1 1 100%;
         max-width: 350px;
     }
-
-    .snf-carousel,
-    .snf-carousel-img {
-        height: 180px;
-    }
-
     .snf-box {
         padding: 1rem;
     }
-} /* ← cette accolade était manquante */
+}
 
 /* Alignement vertical Galerie / Concept sur desktop */
 @media (min-width: 992px) {
     #galerie-concept .row {
         align-items: stretch;
     }
-
     #galerie,
     #concept {
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
-
     #galerie .carousel-inner {
         flex-grow: 1;
     }
-
     #concept .concept-border {
         height: 100%;
     }
 }
-
-
-
-/* Alignement vertical Galerie / Concept sur desktop */
-
