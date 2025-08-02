@@ -1,6 +1,6 @@
 window.translations = {
   "fr": {
-    "auto_key_1": " Bienvenue chez SecurityNoPhone",
+    "auto_key_1": "SecurityNoPhone",
     "auto_key_2": "Galerie",
     "auto_key_3": "Galerie",
     "auto_key_4": "Concept",
@@ -58,7 +58,7 @@ window.translations = {
     "auto_key_56": "Sécurisez les procès ou réunions sensibles où l’usage de téléphones est interdit.",
     "auto_key_57": "Une question ? Besoin d’un devis ou d’un conseil ? Écrivez-nous :",
     "auto_key_58": "© 2025 SecurityNoPhone – Tous droits réservés.",
-    "auto_key_59": "Votre solution sécurisée pour vos événements, permettant à vos invités de garder leur téléphone sur eux sans pouvoir prendre photos ni vidéos, garantissant tranquillité et confidentialité.",
+    "auto_key_59": "Confidentialité garantie, écran accessible.\nLe téléphone reste sur l'invité, dans une pochette avec fenêtre : appels et messages possibles, mais impossible de prendre des photos ou des vidéos.\nIdéal pour mariages, séminaires et événements privés.\nDiscrétion - Sécurité - Contrôle",
     "auto_key_60": "Offrez à vos invités une tranquillité inégalée",
     "auto_key_61": "Commandez vos pochettes, réservez une location ou découvrez notre abonnement simple et pratique.",
     "auto_key_62": "Commander",
