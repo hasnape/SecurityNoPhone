@@ -58,7 +58,7 @@ window.translations = {
     "auto_key_56": "Sécurisez les procès ou réunions sensibles où l’usage de téléphones est interdit.",
     "auto_key_57": "Une question ? Besoin d’un devis ou d’un conseil ? Écrivez-nous :",
     "auto_key_58": "© 2025 SecurityNoPhone – Tous droits réservés.",
-    "auto_key_59": "Vos invités gardent leur téléphone sur eux, inséré dans une pochette avec fenêtre.\nL’écran reste accessible : appels et messages sont possibles.\nMais les photos et vidéos sont impossibles.\n\nConfidentialité garantie, idéal pour mariages, séminaires et événements privés.\n\nDiscrétion - Sécurité - Contrôle.",
+    "auto_key_59": "Vos invités gardent leur téléphone sur eux, inséré dans une pochette avec fenêtre.\nL’écran reste accessible :\n appels et messages sont possibles.\nMais les photos et vidéos sont impossibles.\nConfidentialité garantie, idéal pour mariages, séminaires et événements privés.\nDiscrétion - Sécurité - Contrôle.",
     "auto_key_60": "Offrez à vos invités une tranquillité inégalée",
     "auto_key_61": "Commandez vos pochettes, réservez une location ou découvrez notre abonnement simple et pratique.",
     "auto_key_62": "Commander",
