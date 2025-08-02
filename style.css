@@ -301,7 +301,7 @@ p, li {
 }
 
 #intro .section-title {
-    font-size: 2.5rem;
+    font-size: 1.5rem !important;
     font-weight: 700;
     margin-bottom: 1.5rem;
 }
