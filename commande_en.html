@@ -43,9 +43,24 @@
             </div>
             <div class="mb-3">
               <label for="quantity" class="form-label" data-i18n="label_quantity">Pouch Quantity:</label>
-              <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="100"
+              <input type="number" class="form-control" name="quantite" id="quantity" max="500" min="1" value="100"
                 required />
               <div id="quantityError" class="text-danger mt-1" style="display: none;"></div>
+            </div>
+            <div class="mb-3" id="shippingSection" style="display: none;">
+              <label for="shippingMethod" class="form-label" data-i18n="label_shipping_method">Round-trip shipping via
+                Mondial Relay:</label>
+              <select class="form-select" name="livraison" id="shippingMethod">
+                <option value="" data-i18n="shipping_option_placeholder">-- Select your zone --</option>
+                <option value="relay_fr" data-i18n="shipping_option_relay_fr">France – 2 x €12.90</option>
+                <option value="relay_eu" data-i18n="shipping_option_relay_eu">European Union – 2 x €24.90</option>
+                <option value="relay_world" data-i18n="shipping_option_relay_world">Worldwide – 2 x €39.90</option>
+              </select>
+              <small class="text-muted d-block mt-2" data-i18n="shipping_widget_note">Shipping rates powered by our Mondial
+                Relay widget (outbound + return).</small>
+            </div>
+            <div class="mb-3" id="shippingDetails" style="display: none;">
+              <div class="alert alert-secondary mb-0" id="shippingBreakdown"></div>
             </div>
             <div class="mb-3">
               <label for="date" class="form-label" data-i18n="label_date">Event Date:</label>
@@ -128,6 +143,10 @@
       const quantityError = document.getElementById('quantityError');
       const dateError = document.getElementById('dateError');
       const formSubmissionFeedback = document.getElementById('formSubmissionFeedback');
+      const shippingSection = document.getElementById('shippingSection');
+      const shippingMethod = document.getElementById('shippingMethod');
+      const shippingDetails = document.getElementById('shippingDetails');
+      const shippingBreakdown = document.getElementById('shippingBreakdown');
       const basePriceText = priceDisplay.getAttribute('data-i18n-base-text') || "price_total";
 
       // Prices are fixed in the script. Ensure they match your offers.
@@ -136,6 +155,12 @@
         'location_avec': 390, // Rental with staff
         'achat_per_unit': 3.5, // Price per pouch for custom order
         'abonnement_per_50': 19 // Price per 50 pouches for subscription
+      };
+
+      const SHIPPING_RATES = {
+        'relay_fr': { outbound: 12.9, return: 12.9 },
+        'relay_eu': { outbound: 24.9, return: 24.9 },
+        'relay_world': { outbound: 39.9, return: 39.9 }
       };
 
       function getTranslations() {
@@ -152,9 +177,9 @@
         if (type === 'achat' && qty < 50) {
           isValid = false;
           errorMessage = currentTranslations["alert_min_quantity_achat"] || "For customized pouches, the minimum is 50 units.";
-        } else if (qty > 250 && (type === 'location_sans' || type === 'location_avec')) { // Max 250 for rentals
+        } else if (qty > 500 && (type === 'location_sans' || type === 'location_avec')) { // Max 500 for rentals
           isValid = false;
-          errorMessage = currentTranslations["alert_max_quantity"] || "The maximum quantity allowed for this offer is 250 pouches.";
+          errorMessage = currentTranslations["alert_max_quantity"] || "The maximum quantity allowed for this offer is 500 pouches.";
         } else if (qty < 1 && type !== 'abonnement') { // Quantity must be at least 1 for non-subscription
           isValid = false;
           errorMessage = currentTranslations["alert_min_quantity_general"] || "Quantity must be at least 1.";
@@ -189,17 +214,20 @@
         const type = offerType.value;
         const qty = parseInt(quantityInput.value) || 0;
         let total = 0;
+        let shippingTotal = 0;
         const currentTranslations = getTranslations();
 
-        if (!type || qty <= 0 && type !== 'abonnement') { // Clear price if no offer selected or invalid quantity for non-subscription
+        if (!type || (qty <= 0 && type !== 'abonnement')) { // Clear price if no offer selected or invalid quantity for non-subscription
           priceDisplay.innerHTML = "";
+          if (shippingDetails) shippingDetails.style.display = "none";
+          if (shippingBreakdown) shippingBreakdown.innerHTML = "";
           return;
         }
 
         // Ensure quantity is within valid range for calculation, even if an error is displayed
         let effectiveQty = qty;
         if (type === 'achat' && qty < 50) effectiveQty = 0; // Don't calculate price if min not met
-        if ((type === 'location_sans' || type === 'location_avec') && qty > 250) effectiveQty = 250; // Cap at max for price calculation
+        if ((type === 'location_sans' || type === 'location_avec') && qty > 500) effectiveQty = 500; // Cap at max for price calculation
         if (type === 'abonnement' && qty > 50) effectiveQty = 50; // Cap at max for price calculation for subscription
 
         if (type === 'location_sans') {
@@ -212,23 +240,71 @@
           total = (effectiveQty > 0 ? Math.ceil(effectiveQty / 50) : 1) * PRICES.abonnement_per_50;
         } else {
           priceDisplay.innerHTML = ""; // Clear price if no offer selected
+          if (shippingDetails) shippingDetails.style.display = "none";
+          if (shippingBreakdown) shippingBreakdown.innerHTML = "";
           return;
         }
 
+        if ((type === 'location_sans' || type === 'location_avec') && shippingMethod && shippingMethod.value) {
+          const selectedRate = SHIPPING_RATES[shippingMethod.value];
+          if (selectedRate) {
+            shippingTotal = selectedRate.outbound + selectedRate.return;
+            const shippingTemplate = currentTranslations["shipping_breakdown"] || "Outbound: {outbound} € • Return: {return} €";
+            if (shippingBreakdown) {
+              shippingBreakdown.innerHTML = shippingTemplate
+                .replace("{outbound}", selectedRate.outbound.toFixed(2))
+                .replace("{return}", selectedRate.return.toFixed(2))
+                .replace("{total}", shippingTotal.toFixed(2));
+            }
+            if (shippingDetails) shippingDetails.style.display = "block";
+          }
+        } else if (shippingDetails) {
+          shippingDetails.style.display = "none";
+          if (shippingBreakdown) shippingBreakdown.innerHTML = "";
+        }
+
         const priceTextTemplate = currentTranslations[basePriceText] || "Total: {price} €";
-        priceDisplay.innerHTML = priceTextTemplate.replace("{price}", total.toFixed(2));
+        let finalHtml = `<div>${priceTextTemplate.replace("{price}", total.toFixed(2))}</div>`;
+
+        if (shippingTotal > 0) {
+          const totalWithShippingTemplate = currentTranslations["price_total_with_shipping"] || "Total with shipping: {price} €";
+          finalHtml += `<div>${totalWithShippingTemplate.replace("{price}", (total + shippingTotal).toFixed(2))}</div>`;
+        }
+
+        priceDisplay.innerHTML = finalHtml;
       }
 
       // Initial setup for events
       if (offerType && quantityInput && priceDisplay) {
-        offerType.addEventListener('change', () => { validateQuantity(); updatePrice(); });
+        offerType.addEventListener('change', () => {
+          validateQuantity();
+          toggleShippingSection();
+          updatePrice();
+        });
         quantityInput.addEventListener('input', () => { validateQuantity(); updatePrice(); });
+        if (shippingMethod) {
+          shippingMethod.addEventListener('change', () => { updatePrice(); });
+        }
         if (dateInput) dateInput.addEventListener('change', validateDate);
 
         // Initial calls
         validateQuantity();
         validateDate();
+        toggleShippingSection();
         updatePrice();
+      }
+
+      function toggleShippingSection() {
+        if (!shippingSection) return;
+        const type = offerType.value;
+        if (type === 'location_sans' || type === 'location_avec') {
+          shippingSection.style.display = 'block';
+        } else {
+          shippingSection.style.display = 'none';
+          if (shippingMethod) shippingMethod.value = '';
+          if (shippingDetails) shippingDetails.style.display = 'none';
+          if (shippingBreakdown) shippingBreakdown.innerHTML = '';
+        }
       }
 
       // Form submission logic
@@ -266,6 +342,7 @@
             if (response.ok) {
               formSubmissionFeedback.innerHTML = `<div class="alert alert-success">${currentTranslations["alert_form_success"] || "Order submitted successfully! We will contact you soon."}</div>`;
               orderForm.reset(); // Clear form
+              toggleShippingSection();
               updatePrice(); // Reset price display
               // You might want to automatically initiate PayPal payment here
               // payerAvecPayPal(); // Call this function if you want to redirect to PayPal
@@ -295,6 +372,7 @@
         const qty = parseInt(quantityInput.value) || 0;
         let total = 0;
         let label = "";
+        let shippingTotal = 0;
 
         // Re-validate quantity and offer before generating PayPal link
         if (!validateQuantity() || !offer) {
@@ -319,7 +397,20 @@
           return;
         }
 
-        const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=harbi.mail.a@gmail.com&currency_code=EUR&item_name=${encodeURIComponent(label)}&amount=${total.toFixed(2)}`;
+        if ((offer === "location_sans" || offer === "location_avec") && shippingMethod && shippingMethod.value) {
+          const selectedRate = SHIPPING_RATES[shippingMethod.value];
+          if (selectedRate) {
+            shippingTotal = selectedRate.outbound + selectedRate.return;
+          }
+        }
+
+        const finalTotal = total + shippingTotal;
+        if (shippingTotal > 0) {
+          const shippingSuffix = getTranslations()["shipping_label_suffix"] || " + Mondial Relay shipping";
+          label = `${label}${shippingSuffix}`;
+        }
+
+        const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=harbi.mail.a@gmail.com&currency_code=EUR&item_name=${encodeURIComponent(label)}&amount=${finalTotal.toFixed(2)}`;
         window.open(url, "_blank");
       }
     });

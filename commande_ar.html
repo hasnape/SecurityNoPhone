@@ -35,8 +35,21 @@
           </div>
           <div class="mb-3">
             <label for="quantity" class="form-label">عدد الحافظات:</label>
-            <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="100"
+            <input type="number" class="form-control" name="quantite" id="quantity" max="500" min="1" value="100"
               required />
+          </div>
+          <div class="mb-3" id="shippingSection" style="display:none;">
+            <label for="shippingMethod" class="form-label">رسوم الشحن ذهابًا وإيابًا (Mondial Relay):</label>
+            <select class="form-select" name="livraison" id="shippingMethod">
+              <option value="">-- اختر منطقتك --</option>
+              <option value="relay_fr">فرنسا – ٢ × 12.90 €</option>
+              <option value="relay_eu">الاتحاد الأوروبي – ٢ × 24.90 €</option>
+              <option value="relay_world">دولي – ٢ × 39.90 €</option>
+            </select>
+            <small class="text-muted d-block mt-2">يتم حساب الرسوم عبر ويدجت Mondial Relay (ذهاب + إياب).</small>
+          </div>
+          <div class="mb-3" id="shippingDetails" style="display:none;">
+            <div class="alert alert-secondary mb-0" id="shippingBreakdown"></div>
           </div>
           <div class="mb-3">
             <label for="date" class="form-label">تاريخ الحدث:</label>
@@ -122,11 +135,26 @@
     const offerType = document.getElementById('offerType');
     const quantity = document.getElementById('quantity');
     const priceDisplay = document.getElementById('priceDisplay');
+    const shippingSection = document.getElementById('shippingSection');
+    const shippingMethod = document.getElementById('shippingMethod');
+    const shippingDetails = document.getElementById('shippingDetails');
+    const shippingBreakdown = document.getElementById('shippingBreakdown');
+
+    const SHIPPING_RATES = {
+      'relay_fr': { outbound: 12.9, return: 12.9 },
+      'relay_eu': { outbound: 24.9, return: 24.9 },
+      'relay_world': { outbound: 39.9, return: 39.9 }
+    };
 
     function updatePrice() {
       const type = offerType.value;
-      const qty = parseInt(quantity.value) || 0;
+      let qty = parseInt(quantity.value) || 0;
+      if (qty > 500) {
+        qty = 500;
+        quantity.value = 500;
+      }
       let total = 0;
+      let shippingTotal = 0;
 
       if (type === 'location_sans') {
         total = 290;
@@ -138,7 +166,26 @@
         total = Math.ceil(qty / 50) * 19;
       }
 
-      priceDisplay.innerText = `Total: ${total.toFixed(2)} €`;
+      if ((type === 'location_sans' || type === 'location_avec') && shippingMethod && shippingMethod.value) {
+        const selectedRate = SHIPPING_RATES[shippingMethod.value];
+        if (selectedRate) {
+          shippingTotal = selectedRate.outbound + selectedRate.return;
+          if (shippingBreakdown) {
+            shippingBreakdown.textContent = `الشحن ذهابًا: ${selectedRate.outbound.toFixed(2)} € • الشحن إيابًا: ${selectedRate.return.toFixed(2)} € • الإجمالي: ${shippingTotal.toFixed(2)} €`;
+          }
+          if (shippingDetails) shippingDetails.style.display = 'block';
+        }
+      } else if (shippingDetails) {
+        shippingDetails.style.display = 'none';
+        if (shippingBreakdown) shippingBreakdown.textContent = '';
+      }
+
+      let displayText = `المجموع الأساسي: ${total.toFixed(2)} €`;
+      if (shippingTotal > 0) {
+        displayText += `\nالإجمالي مع الشحن: ${(total + shippingTotal).toFixed(2)} €`;
+      }
+
+      priceDisplay.innerText = displayText;
     }
 
     function payerAvecPayPal() {
@@ -146,6 +193,7 @@
       const qty = parseInt(quantity.value) || 0;
       let total = 0;
       let label = "";
+      let shippingTotal = 0;
 
       if (offer === "location_sans") {
         total = 290;
@@ -165,13 +213,47 @@
         return alert("يرجى اختيار عرض.");
       }
 
-      const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=harbi.mail.a@gmail.com&currency_code=EUR&item_name=${encodeURIComponent(label)}&amount=${total.toFixed(2)}`;
+      if ((offer === "location_sans" || offer === "location_avec") && shippingMethod && shippingMethod.value) {
+        const selectedRate = SHIPPING_RATES[shippingMethod.value];
+        if (selectedRate) {
+          shippingTotal = selectedRate.outbound + selectedRate.return;
+        }
+      }
+
+      const finalTotal = total + shippingTotal;
+      if (shippingTotal > 0) {
+        label = `${label} + شحن Mondial Relay`;
+      }
+
+      const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=harbi.mail.a@gmail.com&currency_code=EUR&item_name=${encodeURIComponent(label)}&amount=${finalTotal.toFixed(2)}`;
       window.open(url, "_blank");
     }
 
-    offerType.addEventListener('change', updatePrice);
+    offerType.addEventListener('change', () => {
+      toggleShippingSection();
+      updatePrice();
+    });
     quantity.addEventListener('input', updatePrice);
-    document.addEventListener('DOMContentLoaded', updatePrice);
+    if (shippingMethod) {
+      shippingMethod.addEventListener('change', updatePrice);
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      toggleShippingSection();
+      updatePrice();
+    });
+
+    function toggleShippingSection() {
+      if (!shippingSection) return;
+      const type = offerType.value;
+      if (type === 'location_sans' || type === 'location_avec') {
+        shippingSection.style.display = 'block';
+      } else {
+        shippingSection.style.display = 'none';
+        if (shippingMethod) shippingMethod.value = '';
+        if (shippingDetails) shippingDetails.style.display = 'none';
+        if (shippingBreakdown) shippingBreakdown.textContent = '';
+      }
+    }
 
     document.getElementById("orderForm").addEventListener("submit", async function (e) {
       e.preventDefault();
