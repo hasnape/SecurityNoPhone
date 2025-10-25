@@ -1,289 +1,262 @@
 (function () {
-  const DEFAULT_MESSAGES = {
-    invalid: 'Complete the form to enable PayPal checkout.',
-    processing: 'Processing payment...',
-    success: 'PayPal payment completed successfully. Your order has been sent.',
-    error: 'Unable to process the PayPal payment. Please try again.',
-    cancelled: 'PayPal payment cancelled.',
-    unavailable: 'PayPal is currently unavailable. Please try again later.',
-    ineligible: 'PayPal checkout is not available for this order.'
-  };
-  const PAYPAL_SCRIPT_ID = 'paypal-sdk';
-  const DEFAULT_INTENT = 'CAPTURE';
+  const SDK_URL = 'https://www.paypal.com/sdk/js';
+  const DEFAULT_COMPONENTS = 'buttons,messages';
+  const DEFAULT_CURRENCY = 'EUR';
+  let sdkPromise = null;
 
-  function ensureHiddenInput(form, name) {
-    let input = form.querySelector(`input[name="${name}"]`);
-    if (!input) {
-      input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = name;
-      form.appendChild(input);
+  function loadSdk(options) {
+    const clientId = options.clientId;
+    const currency = options.currency || DEFAULT_CURRENCY;
+    const components = options.components || DEFAULT_COMPONENTS;
+    if (!clientId) {
+      return Promise.reject(new Error('PayPal client ID is required.'));
     }
-    return input;
-  }
 
-  function removeHiddenInput(form, name) {
-    const input = form.querySelector(`input[name="${name}"]`);
-    if (input) {
-      input.remove();
+    if (window.paypal) {
+      return Promise.resolve(window.paypal);
     }
-  }
 
-  function setHiddenValue(form, name, value) {
-    const input = ensureHiddenInput(form, name);
-    input.value = value || '';
-  }
+    if (!sdkPromise) {
+      sdkPromise = new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[data-paypal-sdk="true"]');
+        if (existing) {
+          existing.addEventListener('load', () => resolve(window.paypal));
+          existing.addEventListener('error', () => reject(new Error('Unable to load PayPal SDK.')));
+          return;
+        }
 
-  function submitForm(form) {
-    if (typeof form.requestSubmit === 'function') {
-      form.requestSubmit();
-    } else {
-      form.submit();
+        const script = document.createElement('script');
+        const url = new URL(SDK_URL);
+        url.searchParams.set('client-id', clientId);
+        url.searchParams.set('currency', currency);
+        url.searchParams.set('components', components);
+        url.searchParams.set('enable-funding', 'paylater,card');
+        script.src = url.toString();
+        script.async = true;
+        script.defer = true;
+        script.dataset.paypalSdk = 'true';
+        script.addEventListener('load', () => {
+          if (window.paypal) {
+            resolve(window.paypal);
+          } else {
+            reject(new Error('PayPal SDK loaded without paypal namespace.'));
+          }
+        });
+        script.addEventListener('error', () => reject(new Error('Unable to load PayPal SDK.')));
+        document.head.appendChild(script);
+      });
     }
+
+    return sdkPromise;
   }
 
-  function formatAmountForPayPal(amount) {
-    if (typeof amount !== 'number' || Number.isNaN(amount)) {
-      return '0.00';
+  function formatAmount(amount) {
+    if (typeof amount !== 'number' || Number.isNaN(amount) || amount <= 0) {
+      return null;
     }
     return (Math.round(amount * 100) / 100).toFixed(2);
   }
 
-  function createCurrencyFormatter(locale, currency) {
-    try {
-      const formatter = new Intl.NumberFormat(locale, { style: 'currency', currency });
-      return value => formatter.format(value);
-    } catch (error) {
-      console.warn('Unable to create currency formatter:', error);
-      return value => `${formatAmountForPayPal(typeof value === 'number' ? value : 0)} ${currency}`;
-    }
-  }
-
-  function loadPayPalSdk(options) {
-    const clientId = options.clientId;
-    const currency = options.currency;
-    const intent = options.intent || DEFAULT_INTENT;
-
-    return new Promise((resolve, reject) => {
-      if (window.paypal) {
-        resolve(window.paypal);
-        return;
-      }
-
-      const existingScript = document.querySelector('script[data-paypal-sdk]');
-      if (existingScript) {
-        existingScript.addEventListener('load', () => resolve(window.paypal));
-        existingScript.addEventListener('error', () => reject(new Error('Failed to load PayPal SDK')));
-        return;
-      }
-
-      const script = document.createElement('script');
-      script.id = PAYPAL_SCRIPT_ID;
-      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=${encodeURIComponent(currency)}&intent=${encodeURIComponent(intent)}`;
-      script.async = true;
-      script.dataset.paypalSdk = 'true';
-      script.dataset.paypalClientId = clientId;
-      script.dataset.paypalCurrency = currency;
-      script.dataset.paypalIntent = intent;
-      script.addEventListener('load', () => {
-        if (window.paypal) {
-          resolve(window.paypal);
-        } else {
-          reject(new Error('PayPal SDK loaded but the paypal namespace is unavailable.'));
-        }
-      });
-      script.addEventListener('error', () => reject(new Error('Failed to load PayPal SDK script.')));
-      document.head.appendChild(script);
-    });
-  }
-
-  function isFormReady(state) {
-    return Boolean(state && state.isReady && typeof state.total === 'number' && state.total > 0);
-  }
-
-  function setupPayPalIntegration(form) {
+  function setupForm(form) {
     const container = form.querySelector('[data-paypal-container]');
     if (!container) {
       return;
     }
 
     const clientId = container.dataset.clientId || form.dataset.paypalClientId;
-    if (!clientId) {
-      console.warn('PayPal client ID is missing for this order form.');
-      return;
-    }
-
-    const currency = (container.dataset.currency || 'EUR').toUpperCase();
-    const intent = (container.dataset.intent || DEFAULT_INTENT).toUpperCase();
+    const currency = (container.dataset.currency || DEFAULT_CURRENCY).toUpperCase();
+    const components = container.dataset.components || DEFAULT_COMPONENTS;
     const description = container.dataset.description || 'SecurityNoPhone Order';
     const autoSubmit = container.dataset.autoSubmit !== 'false';
-    const locale = form.dataset.locale || document.documentElement.lang || 'en-US';
-    const formatCurrency = createCurrencyFormatter(locale, currency);
-
-    container.classList.add('paypal-integration');
-
-    const buttonWrapper = document.createElement('div');
-    buttonWrapper.className = 'paypal-buttons-wrapper';
-    container.appendChild(buttonWrapper);
 
     const status = document.createElement('div');
     status.className = 'paypal-status-message small text-muted mt-2';
     container.appendChild(status);
 
-    if (container.dataset.messageInvalid) {
-      setStatus(container.dataset.messageInvalid, 'muted');
-    }
-
-    ['paypal_order_id', 'paypal_payer_email', 'payment_method'].forEach(name => removeHiddenInput(form, name));
-
-    let state = form.__orderState || { total: null, isReady: false };
-    let buttonActions = null;
+    const messageElement = form.querySelector('[data-paypal-message]');
+    let messageComponent = null;
+    let latestState = form.__orderState || { total: null, isReady: false };
+    let buttonsInstance = null;
+    let buttonsActions = null;
 
     function setStatus(message, tone = 'muted') {
-      const tones = ['text-danger', 'text-success', 'text-info', 'text-muted'];
-      tones.forEach(cls => status.classList.remove(cls));
-
-      let className = 'text-muted';
-      if (tone === 'error') {
-        className = 'text-danger';
-      } else if (tone === 'success') {
-        className = 'text-success';
-      } else if (tone === 'info') {
-        className = 'text-info';
-      }
-
-      status.classList.add(className);
       status.textContent = message || '';
+      status.classList.remove('text-danger', 'text-success', 'text-info', 'text-muted');
+      const map = { error: 'text-danger', success: 'text-success', info: 'text-info', muted: 'text-muted' };
+      status.classList.add(map[tone] || 'text-muted');
     }
 
-    function applyReadyMessage(currentState) {
-      const template = container.dataset.messageReady;
-      if (!template || typeof currentState.total !== 'number') {
-        return;
+    function updateHidden(name, value) {
+      let input = form.querySelector(`input[name="${name}"]`);
+      if (!input) {
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        form.appendChild(input);
       }
-      const formatted = formatCurrency(currentState.total);
-      setStatus(template.replace('{amount}', formatted), 'muted');
+      input.value = value || '';
     }
 
-    function syncButtonState() {
-      if (!buttonActions) {
-        return;
-      }
-      if (isFormReady(state)) {
-        buttonActions.enable();
-        applyReadyMessage(state);
-      } else {
-        buttonActions.disable();
-        if (container.dataset.messageInvalid) {
-          setStatus(container.dataset.messageInvalid, 'muted');
-        } else {
-          setStatus('', 'muted');
+    function clearHidden() {
+      ['paypal_order_id', 'paypal_payer_email', 'payment_method'].forEach(name => {
+        const input = form.querySelector(`input[name="${name}"]`);
+        if (input) {
+          input.remove();
         }
+      });
+    }
+
+    function updateButtonsState() {
+      if (!buttonsActions) {
+        return;
+      }
+      if (latestState && latestState.isReady && typeof latestState.total === 'number' && latestState.total > 0) {
+        buttonsActions.enable();
+        const readyTemplate = container.dataset.messageReady || 'Montant estimé : {amount}';
+        const formattedAmount = new Intl.NumberFormat(form.dataset.locale || 'fr-FR', {
+          style: 'currency',
+          currency
+        }).format(latestState.total);
+        setStatus(readyTemplate.replace('{amount}', formattedAmount));
+      } else {
+        buttonsActions.disable();
+        setStatus(container.dataset.messageInvalid || 'Complétez le formulaire pour activer PayPal.');
+      }
+    }
+
+    function renderMessage() {
+      if (!messageElement) {
+        return;
+      }
+      if (!window.paypal || typeof window.paypal.Messages !== 'function') {
+        return;
+      }
+
+      const formatted = formatAmount(latestState.total);
+      if (!formatted) {
+        if (messageComponent && typeof messageComponent.remove === 'function') {
+          messageComponent.remove();
+        }
+        messageElement.innerHTML = '';
+        messageComponent = null;
+        return;
+      }
+
+      messageElement.setAttribute('data-pp-amount', formatted);
+      try {
+        if (messageComponent && typeof messageComponent.update === 'function') {
+          messageComponent.update({ amount: formatted });
+        } else {
+          messageElement.innerHTML = '';
+          messageComponent = window.paypal.Messages({ amount: formatted, placement: messageElement.dataset.ppPlacement || undefined });
+          const renderPromise = messageComponent.render(messageElement);
+          if (renderPromise && typeof renderPromise.catch === 'function') {
+            renderPromise.catch(() => { messageComponent = null; });
+          }
+        }
+      } catch (error) {
+        console.warn('Unable to render PayPal message', error);
+        messageComponent = null;
       }
     }
 
     form.addEventListener('order:state-change', event => {
       if (event.detail) {
-        state = event.detail;
+        latestState = event.detail;
       }
-      syncButtonState();
+      updateButtonsState();
+      renderMessage();
     });
 
-    loadPayPalSdk({ clientId, currency, intent })
+    loadSdk({ clientId, currency, components })
       .then(paypal => {
-        const buttons = paypal.Buttons({
+        renderMessage();
+        buttonsInstance = paypal.Buttons({
           style: {
             layout: container.dataset.layout || 'vertical',
             color: container.dataset.color || 'gold',
             shape: container.dataset.shape || 'rect',
             label: container.dataset.label || 'paypal'
           },
-          onInit(data, actions) {
-            buttonActions = actions;
-            syncButtonState();
+          onInit(_data, actions) {
+            buttonsActions = actions;
+            updateButtonsState();
           },
-          onClick(data, actions) {
-            if (!isFormReady(state)) {
-              if (container.dataset.messageInvalid) {
-                setStatus(container.dataset.messageInvalid, 'error');
-              } else {
-                setStatus(DEFAULT_MESSAGES.invalid, 'error');
-              }
-              if (typeof actions.reject === 'function') {
-                return actions.reject();
-              }
-              return false;
+          onClick(_data, actions) {
+            if (!latestState || !latestState.isReady || typeof latestState.total !== 'number' || latestState.total <= 0) {
+              setStatus(container.dataset.messageInvalid || 'Complétez le formulaire pour activer PayPal.', 'error');
+              return actions.reject();
             }
-            setStatus(container.dataset.messageProcessing || DEFAULT_MESSAGES.processing, 'info');
+            setStatus(container.dataset.messageProcessing || 'Paiement en cours...', 'info');
             return true;
           },
-          createOrder(data, actions) {
-            const totalValue = isFormReady(state) ? state.total : 0;
+          createOrder(_data, actions) {
+            const formatted = formatAmount(latestState.total);
+            if (!formatted) {
+              throw new Error('Montant invalide.');
+            }
             return actions.order.create({
               purchase_units: [
                 {
                   amount: {
                     currency_code: currency,
-                    value: formatAmountForPayPal(totalValue)
+                    value: formatted
                   },
                   description
                 }
               ]
             });
           },
-          onApprove(data, actions) {
-            setStatus(container.dataset.messageProcessing || DEFAULT_MESSAGES.processing, 'info');
-            if (buttonActions && typeof buttonActions.disable === 'function') {
-              buttonActions.disable();
-            }
-            return actions.order.capture()
-              .then(details => {
-                setHiddenValue(form, 'paypal_order_id', details.id || data.orderID || '');
-                setHiddenValue(form, 'paypal_payer_email', details?.payer?.email_address || '');
-                setHiddenValue(form, 'payment_method', 'paypal');
-                setStatus(container.dataset.messageSuccess || DEFAULT_MESSAGES.success, 'success');
-                if (autoSubmit) {
-                  submitForm(form);
+          onApprove(_data, actions) {
+            setStatus(container.dataset.messageProcessing || 'Paiement en cours...', 'info');
+            buttonsActions && buttonsActions.disable();
+            return actions.order.capture().then(details => {
+              updateHidden('paypal_order_id', details.id || '');
+              updateHidden('paypal_payer_email', details?.payer?.email_address || '');
+              updateHidden('payment_method', 'paypal');
+              setStatus(container.dataset.messageSuccess || 'Paiement confirmé. Nous traitons votre commande.', 'success');
+              if (autoSubmit) {
+                if (typeof form.requestSubmit === 'function') {
+                  form.requestSubmit();
                 } else {
-                  syncButtonState();
+                  form.submit();
                 }
-              })
-              .catch(error => {
-                console.error('PayPal capture failed:', error);
-                setStatus(container.dataset.messageError || DEFAULT_MESSAGES.error, 'error');
-                ['paypal_order_id', 'paypal_payer_email', 'payment_method'].forEach(name => removeHiddenInput(form, name));
-                if (buttonActions && typeof buttonActions.enable === 'function') {
-                  buttonActions.enable();
-                }
-                syncButtonState();
-              });
+              } else {
+                updateButtonsState();
+              }
+            }).catch(error => {
+              console.error('PayPal capture failed', error);
+              setStatus(container.dataset.messageError || 'Le paiement via PayPal a échoué. Veuillez réessayer.', 'error');
+              clearHidden();
+              buttonsActions && buttonsActions.enable();
+            });
           },
           onCancel() {
-            setStatus(container.dataset.messageCancelled || DEFAULT_MESSAGES.cancelled, 'muted');
-            ['paypal_order_id', 'paypal_payer_email', 'payment_method'].forEach(name => removeHiddenInput(form, name));
-            syncButtonState();
+            setStatus(container.dataset.messageCancelled || 'Paiement PayPal annulé.', 'muted');
+            clearHidden();
+            updateButtonsState();
           },
           onError(error) {
-            console.error('PayPal Buttons error:', error);
-            setStatus(container.dataset.messageError || DEFAULT_MESSAGES.error, 'error');
-            ['paypal_order_id', 'paypal_payer_email', 'payment_method'].forEach(name => removeHiddenInput(form, name));
-            syncButtonState();
+            console.error('PayPal Buttons error', error);
+            setStatus(container.dataset.messageError || 'Le paiement via PayPal a échoué. Veuillez réessayer.', 'error');
+            clearHidden();
+            updateButtonsState();
           }
         });
 
-        if (buttons.isEligible()) {
-          buttons.render(buttonWrapper);
+        if (buttonsInstance.isEligible()) {
+          buttonsInstance.render(container);
         } else {
-          setStatus(container.dataset.messageIneligible || DEFAULT_MESSAGES.ineligible, 'error');
+          setStatus(container.dataset.messageIneligible || 'PayPal n’est pas disponible pour cette commande.', 'error');
         }
       })
       .catch(error => {
-        console.error('Failed to initialise PayPal:', error);
-        setStatus(container.dataset.messageUnavailable || DEFAULT_MESSAGES.unavailable, 'error');
+        console.error('PayPal SDK initialization failed', error);
+        setStatus(container.dataset.messageUnavailable || 'PayPal est indisponible pour le moment. Merci de réessayer plus tard.', 'error');
       });
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-order-form]').forEach(setupPayPalIntegration);
+    document.querySelectorAll('[data-order-form]').forEach(setupForm);
   });
 })();
