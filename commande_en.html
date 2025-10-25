@@ -29,11 +29,17 @@
       <h1 class="text-center mb-5" data-i18n="order_title">Place an Order</h1>
       <div class="row">
         <div class="col-md-6">
-          <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm">
+          <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm" data-order-form data-locale="en-GB">
             <input type="text" name="_gotcha" style="display:none">
+            <div class="visually-hidden">
+              <span data-offer-base="location_sans" data-price="150" data-pricing-type="flat"></span>
+              <span data-offer-base="location_avec" data-price="390" data-pricing-type="flat"></span>
+              <span data-offer-base="achat" data-price="3.5" data-pricing-type="per-unit"></span>
+              <span data-offer-base="abonnement" data-price="19" data-pricing-type="subscription" data-pack-size="50" data-max-quantity="50"></span>
+            </div>
             <div class="mb-3">
               <label class="form-label" data-i18n="label_offer_type">Offer Type:</label>
-              <select class="form-select" name="offre" id="offerType" required>
+              <select class="form-select" name="offre" id="offerType" required data-offer-select>
                 <option value="" data-i18n="option_choose_offer">-- Select an Offer --</option>
                 <option value="location_sans" data-i18n="option_location_without">Rental without Staff</option>
                 <option value="location_avec" data-i18n="option_location_with">Rental with Staff</option>
@@ -43,14 +49,42 @@
             </div>
             <div class="mb-3">
               <label for="quantity" class="form-label" data-i18n="label_quantity">Pouch Quantity:</label>
-              <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="100"
-                required />
-              <div id="quantityError" class="text-danger mt-1" style="display: none;"></div>
+              <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="0" value="100"
+                required data-quantity-input />
+              <div id="quantityError" class="text-danger mt-1" style="display: none;" data-quantity-error
+                data-min-rental="The minimum quantity for rentals is 1 pouch."
+                data-max-rental="The maximum quantity allowed for rentals is 250 pouches."
+                data-min-custom="Customized pouches require at least 50 units."
+                data-min-subscription="Quantity cannot be negative." data-max-subscription="50"
+                data-max-subscription-message="The Starter Subscription is limited to 50 pouches."></div>
             </div>
-            <div class="mb-3">
-              <label for="date" class="form-label" data-i18n="label_date">Event Date:</label>
-              <input type="date" name="date" id="date" class="form-control" required />
-              <div id="dateError" class="text-danger mt-1" style="display: none;"></div>
+            <div class="mb-3 d-none" data-rental-fields>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="startDate" class="form-label">Start date:</label>
+                  <input type="date" name="date_debut" id="startDate" class="form-control" data-start-date />
+                </div>
+                <div class="col-md-6">
+                  <label for="endDate" class="form-label">End date:</label>
+                  <input type="date" name="date_fin" id="endDate" class="form-control" data-end-date />
+                </div>
+              </div>
+              <div id="dateError" class="text-danger mt-2" style="display: none;" data-date-error
+                data-missing="Please provide both rental start and end dates."
+                data-range="The end date must be on or after the start date."></div>
+            </div>
+            <div class="mb-3 d-none" data-staff-fields>
+              <label for="staffQuantity" class="form-label">Additional staff (optional):</label>
+              <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0"
+                data-staff-quantity>
+              <small class="text-muted">€100 / day / person for 6 hours.</small>
+            </div>
+            <div class="alert alert-info d-none" data-summary data-days-label="Duration" data-total-label="Estimated total"
+              data-day-singular="day" data-day-plural="days" aria-live="polite">
+              <p class="mb-1"><strong><span data-summary-days-label>Duration</span>: <span
+                      data-summary-days-count>—</span></strong></p>
+              <p class="mb-0"><span data-summary-total-label>Estimated total</span>: <span
+                  data-summary-total-amount>—</span></p>
             </div>
             <div class="mb-3">
               <label for="nom" class="form-label" data-i18n="label_fullname">Full Name:</label>
@@ -64,26 +98,25 @@
               <label for="adresse" class="form-label" data-i18n="label_address">Billing Address:</label>
               <textarea name="adresse" id="adresse" class="form-control" required></textarea>
             </div>
-            <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" data-i18n-base-text="price_total">
-              Total: 0 €</div>
+            <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite" data-price-display
+              data-template="Estimated total: {price}"></div>
 
             <div id="formSubmissionFeedback" class="mt-3"></div>
 
             <div class="text-center mt-4">
-              <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order">Submit Order</button>
+              <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order" disabled>Submit Order</button>
             </div>
           </form>
         </div>
         <div class="col-md-6 d-flex flex-column justify-content-center align-items-center px-3">
           <div class="bg-light rounded-4 shadow-sm p-4 w-100">
-            <p class="text-center fw-semibold fs-5 mb-3 text-dark" data-i18n="payment_title">
-              💳 Pay in <strong>4 interest-free installments</strong> with PayPal<br>
-              <small class="fst-italic text-muted" data-i18n="payment_eligibility_note">(if eligible)</small>
+            <p class="text-center fw-semibold fs-5 mb-3 text-dark">
+              💳 Pay with <strong>PayPal (if eligible)</strong><br>
+              <small class="fst-italic text-muted">(automatically shown according to your account)</small>
             </p>
             <p class="text-center text-secondary" data-i18n="payment_description">
               Protect the confidentiality of your events with our installment payment option.<br>
-              <span class="text-dark" data-i18n="payment_detail">This option appears automatically during PayPal
-                checkout if you are eligible.</span>
+              <span class="text-dark">This option appears automatically during PayPal checkout if you are eligible.</span>
             </p>
             <hr class="my-3 bg-secondary" style="height:1px; width:80%;" />
             <p class="text-center text-dark" data-i18n="payment_flexibility_title">
@@ -95,8 +128,8 @@
             <p class="fw-bold mt-4 text-center" style="color: #198754;" data-i18n="payment_footer">
               Order today, pay in comfort,<br>and ensure your event's success.
             </p>
-            <small class="d-block text-center mt-3 text-muted" data-i18n="payment_tip">
-              💡 Tip: installment payment will be automatically offered at checkout.
+            <small class="d-block text-center mt-3 text-muted">
+              💡 Tip: PayPal (if eligible) appears during checkout.
             </small>
           </div>
         </div>
@@ -117,213 +150,8 @@
   </script>
 
   <script src="js/main.js"></script>
+  <script src="js/order-calculator.js"></script>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const offerType = document.getElementById('offerType');
-      const quantityInput = document.getElementById('quantity');
-      const priceDisplay = document.getElementById('priceDisplay');
-      const dateInput = document.getElementById('date');
-      const orderForm = document.getElementById('orderForm');
-      const quantityError = document.getElementById('quantityError');
-      const dateError = document.getElementById('dateError');
-      const formSubmissionFeedback = document.getElementById('formSubmissionFeedback');
-      const basePriceText = priceDisplay.getAttribute('data-i18n-base-text') || "price_total";
-
-      // Prices are fixed in the script. Ensure they match your offers.
-      const PRICES = {
-        'location_sans': 150, // Rental without staff
-        'location_avec': 390, // Rental with staff
-        'achat_per_unit': 3.5, // Price per pouch for custom order
-        'abonnement_per_50': 19 // Price per 50 pouches for subscription
-      };
-
-      function getTranslations() {
-        return window.translations[localStorage.getItem('lang') || 'fr'] || {};
-      }
-
-      function validateQuantity() {
-        const qty = parseInt(quantityInput.value);
-        const type = offerType.value;
-        let isValid = true;
-        let errorMessage = "";
-        const currentTranslations = getTranslations();
-
-        if (type === 'achat' && qty < 50) {
-          isValid = false;
-          errorMessage = currentTranslations["alert_min_quantity_achat"] || "For customized pouches, the minimum is 50 units.";
-        } else if (qty > 250 && (type === 'location_sans' || type === 'location_avec')) { // Max 250 for rentals
-          isValid = false;
-          errorMessage = currentTranslations["alert_max_quantity"] || "The maximum quantity allowed for this offer is 250 pouches.";
-        } else if (qty < 1 && type !== 'abonnement') { // Quantity must be at least 1 for non-subscription
-          isValid = false;
-          errorMessage = currentTranslations["alert_min_quantity_general"] || "Quantity must be at least 1.";
-        }
-        // For subscription, quantity can be 0 or more, it determines packs of 50.
-        if (type === 'abonnement' && qty > 50) { // Specific validation for subscription max pouches
-          isValid = false;
-          errorMessage = currentTranslations["alert_max_quantity_subscription"] || "Starter Subscription is limited to 50 pouches.";
-        }
-
-        quantityError.textContent = errorMessage;
-        quantityError.style.display = isValid ? "none" : "block";
-        return isValid;
-      }
-
-      function validateDate() {
-        const today = new Date().toISOString().split('T')[0];
-        let isValid = true;
-        let errorMessage = "";
-        const currentTranslations = getTranslations();
-
-        if (dateInput.value < today) {
-          isValid = false;
-          errorMessage = currentTranslations["alert_date_past"] || "The event date cannot be in the past.";
-        }
-        dateError.textContent = errorMessage;
-        dateError.style.display = isValid ? "none" : "block";
-        return isValid;
-      }
-
-      function updatePrice() {
-        const type = offerType.value;
-        const qty = parseInt(quantityInput.value) || 0;
-        let total = 0;
-        const currentTranslations = getTranslations();
-
-        if (!type || qty <= 0 && type !== 'abonnement') { // Clear price if no offer selected or invalid quantity for non-subscription
-          priceDisplay.innerHTML = "";
-          return;
-        }
-
-        // Ensure quantity is within valid range for calculation, even if an error is displayed
-        let effectiveQty = qty;
-        if (type === 'achat' && qty < 50) effectiveQty = 0; // Don't calculate price if min not met
-        if ((type === 'location_sans' || type === 'location_avec') && qty > 250) effectiveQty = 250; // Cap at max for price calculation
-        if (type === 'abonnement' && qty > 50) effectiveQty = 50; // Cap at max for price calculation for subscription
-
-        if (type === 'location_sans') {
-          total = PRICES.location_sans;
-        } else if (type === 'location_avec') {
-          total = PRICES.location_avec;
-        } else if (type === 'achat') {
-          total = effectiveQty * PRICES.achat_per_unit;
-        } else if (type === 'abonnement') {
-          total = (effectiveQty > 0 ? Math.ceil(effectiveQty / 50) : 1) * PRICES.abonnement_per_50;
-        } else {
-          priceDisplay.innerHTML = ""; // Clear price if no offer selected
-          return;
-        }
-
-        const priceTextTemplate = currentTranslations[basePriceText] || "Total: {price} €";
-        priceDisplay.innerHTML = priceTextTemplate.replace("{price}", total.toFixed(2));
-      }
-
-      // Initial setup for events
-      if (offerType && quantityInput && priceDisplay) {
-        offerType.addEventListener('change', () => { validateQuantity(); updatePrice(); });
-        quantityInput.addEventListener('input', () => { validateQuantity(); updatePrice(); });
-        if (dateInput) dateInput.addEventListener('change', validateDate);
-
-        // Initial calls
-        validateQuantity();
-        validateDate();
-        updatePrice();
-      }
-
-      // Form submission logic
-      if (orderForm) {
-        orderForm.addEventListener('submit', async function (event) {
-          event.preventDefault(); // Prevent default form submission
-          formSubmissionFeedback.innerHTML = ""; // Reset feedback area
-
-          const isQtyValid = validateQuantity();
-          const isDateValid = dateInput ? validateDate() : true;
-
-          if (!isQtyValid || !isDateValid || !orderForm.checkValidity()) {
-            const currentTranslations = getTranslations();
-            formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_invalid"] || "Please correct the errors in the form."}</div>`;
-            return;
-          }
-
-          // Show loading indicator
-          const submitButton = orderForm.querySelector('button[type="submit"]');
-          const originalButtonText = submitButton.innerHTML;
-          const currentTranslations = getTranslations();
-          submitButton.disabled = true;
-          submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ${currentTranslations["text_sending"] || "Sending..."}`;
-
-          const formData = new FormData(orderForm);
-          try {
-            const response = await fetch(orderForm.action, {
-              method: 'POST',
-              body: formData,
-              headers: {
-                'Accept': 'application/json'
-              }
-            });
-
-            if (response.ok) {
-              formSubmissionFeedback.innerHTML = `<div class="alert alert-success">${currentTranslations["alert_form_success"] || "Order submitted successfully! We will contact you soon."}</div>`;
-              orderForm.reset(); // Clear form
-              updatePrice(); // Reset price display
-              // You might want to automatically initiate PayPal payment here
-              // payerAvecPayPal(); // Call this function if you want to redirect to PayPal
-            } else {
-              const data = await response.json();
-              let errorMessage = currentTranslations["alert_form_error_generic"] || "An error occurred.";
-              if (data.errors) {
-                errorMessage = data.errors.map(error => error.message).join(", ");
-              }
-              formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${errorMessage}</div>`;
-            }
-          } catch (error) {
-            formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_error_network"] || "Network error. Please try again."}</div>`;
-          } finally {
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalButtonText;
-          }
-        });
-      }
-
-      // Function for PayPal redirection (removed from direct submission, now optional)
-      // If you want PayPal payment immediately after form submission, uncomment call above.
-      function payerAvecPayPal() {
-        if (!offerType || !quantityInput) return;
-
-        const offer = offerType.value;
-        const qty = parseInt(quantityInput.value) || 0;
-        let total = 0;
-        let label = "";
-
-        // Re-validate quantity and offer before generating PayPal link
-        if (!validateQuantity() || !offer) {
-          alert(getTranslations()["alert_form_invalid"] || "Please select a valid offer and quantity.");
-          return;
-        }
-
-        if (offer === "location_sans") {
-          total = PRICES.location_sans;
-          label = getTranslations()["option_location_without"];
-        } else if (offer === "location_avec") {
-          total = PRICES.location_avec;
-          label = getTranslations()["option_location_with"];
-        } else if (offer === "achat") {
-          total = qty * PRICES.achat_per_unit;
-          label = `${getTranslations()["option_custom_pouches"]} (${qty} units)`;
-        } else if (offer === "abonnement") {
-          total = (qty > 0 ? Math.ceil(qty / 50) : 1) * PRICES.abonnement_per_50;
-          label = `${getTranslations()["option_subscription"]} (${qty} pouches)`;
-        } else {
-          alert(getTranslations()["alert_form_invalid"] || "Please select an offer.");
-          return;
-        }
-
-        const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=harbi.mail.a@gmail.com&currency_code=EUR&item_name=${encodeURIComponent(label)}&amount=${total.toFixed(2)}`;
-        window.open(url, "_blank");
-      }
-    });
-  </script>
 </body>
 
 </html>

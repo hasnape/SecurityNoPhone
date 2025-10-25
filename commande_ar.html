@@ -21,49 +21,77 @@
     <h1 class="text-center mb-5">إجراء طلب</h1>
     <div class="row">
       <div class="col-md-6">
-        <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm">
+        <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm" data-order-form data-locale="ar">
           <input type="text" name="_gotcha" style="display:none">
+          <div class="visually-hidden">
+            <span data-offer-base="location_sans" data-price="150" data-pricing-type="flat"></span>
+            <span data-offer-base="location_avec" data-price="390" data-pricing-type="flat"></span>
+            <span data-offer-base="achat" data-price="3.5" data-pricing-type="per-unit"></span>
+            <span data-offer-base="abonnement" data-price="19" data-pricing-type="subscription" data-pack-size="50" data-max-quantity="50"></span>
+          </div>
           <div class="mb-3">
-            <label class="form-label">نوع العرض:</label>
-            <select class="form-select" name="offre" id="offerType" required>
-              <option value="">-- اختر عرضًا --</option>
-              <option value="location_sans">تأجير بدون طاقم</option>
-              <option value="location_avec">تأجير مع طاقم</option>
-              <option value="achat">حافظات مخصصة</option>
-              <option value="abonnement">اشتراك ستارتر</option>
+            <label class="form-label" data-i18n="label_offer_type">نوع العرض:</label>
+            <select class="form-select" name="offre" id="offerType" required data-offer-select>
+              <option value="" data-i18n="option_choose_offer">-- اختر عرضًا --</option>
+              <option value="location_sans" data-i18n="option_location_without">تأجير بدون طاقم</option>
+              <option value="location_avec" data-i18n="option_location_with">تأجير مع طاقم</option>
+              <option value="achat" data-i18n="option_custom_pouches">حافظات مخصصة</option>
+              <option value="abonnement" data-i18n="option_subscription">اشتراك ستارتر</option>
             </select>
           </div>
           <div class="mb-3">
-            <label for="quantity" class="form-label">عدد الحافظات:</label>
-            <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="100"
-              required />
+            <label for="quantity" class="form-label" data-i18n="label_quantity">عدد الحافظات:</label>
+            <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="0" value="50" required data-quantity-input />
+            <div id="quantityError" class="text-danger mt-1" style="display: none;" data-quantity-error data-min-rental="الحد الأدنى للتأجير هو حافظة واحدة." data-max-rental="الحد الأقصى للتأجير هو 250 حافظة." data-min-custom="يتطلب التخصيص حدًا أدنى قدره 50 وحدة." data-min-subscription="لا يمكن أن تكون الكمية سالبة." data-max-subscription="50" data-max-subscription-message="الاشتراك المبدئي محدود بـ 50 حافظة."></div>
+          </div>
+          <div class="mb-3 d-none" data-rental-fields>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="startDate" class="form-label">تاريخ البداية:</label>
+                <input type="date" name="date_debut" id="startDate" class="form-control" data-start-date />
+              </div>
+              <div class="col-md-6">
+                <label for="endDate" class="form-label">تاريخ النهاية:</label>
+                <input type="date" name="date_fin" id="endDate" class="form-control" data-end-date />
+              </div>
+            </div>
+            <div id="dateError" class="text-danger mt-2" style="display: none;" data-date-error data-missing="يرجى إدخال تاريخي بداية ونهاية التأجير." data-range="يجب أن يكون تاريخ النهاية مساويًا أو بعد تاريخ البداية."></div>
+          </div>
+          <div class="mb-3 d-none" data-staff-fields>
+            <label for="staffQuantity" class="form-label">طاقم إضافي (اختياري):</label>
+            <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0" data-staff-quantity>
+            <small class="text-muted">100 € / يوم / للشخص لمدة 6 ساعات.</small>
+          </div>
+          <div class="alert alert-info d-none" data-summary data-days-label="المدة" data-total-label="الإجمالي التقديري" data-day-singular="يوم" data-day-plural="أيام" aria-live="polite">
+            <p class="mb-1"><strong><span data-summary-days-label>المدة</span> : <span data-summary-days-count>—</span></strong></p>
+            <p class="mb-0"><span data-summary-total-label>الإجمالي التقديري</span> : <span data-summary-total-amount>—</span></p>
           </div>
           <div class="mb-3">
-            <label for="date" class="form-label">تاريخ الحدث:</label>
-            <input type="date" name="date" id="date" class="form-control" required />
-          </div>
-          <div class="mb-3">
-            <label for="nom" class="form-label">الاسم الكامل:</label>
+            <label for="nom" class="form-label" data-i18n="label_fullname">الاسم الكامل:</label>
             <input type="text" name="nom" id="nom" class="form-control" required />
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label">البريد الإلكتروني:</label>
+            <label for="email" class="form-label" data-i18n="label_email">البريد الإلكتروني:</label>
             <input type="email" name="email" id="email" class="form-control" required />
           </div>
           <div class="mb-3">
-            <label for="adresse" class="form-label">عنوان الفاتورة:</label>
+            <label for="adresse" class="form-label" data-i18n="label_address">عنوان الفوترة:</label>
             <textarea name="adresse" id="adresse" class="form-control" required></textarea>
           </div>
-          <div class="price-box text-center" id="priceDisplay">Total: 0 €</div>
+          <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite" data-price-display data-template="الإجمالي التقديري: {price}"></div>
+          <div id="formSubmissionFeedback" class="mt-3"></div>
           <div class="text-center mt-4">
-            <button type="submit" class="btn btn-primary">تأكيد الطلب</button>
+            <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order" disabled>إرسال الطلب</button>
           </div>
         </form>
       </div>
       <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
         <p class="text-center text-muted mt-3"></p>
         <small class="text-muted d-block mt-2 text-center">
-          💳 الدفع على 4 أقساط بدون فوائد متاح عبر باي بال (إذا كنت مؤهلاً)
+          💳 الدفع عبر <strong>PayPal (إن كان متاحًا)</strong> يظهر تلقائيًا حسب حسابك.
+        </small>
+        <small class="text-muted d-block text-center">
+          💡 ملاحظة: يظهر PayPal (إن كان متاحًا) أثناء الدفع.
         </small>
       </div>
     </div>
@@ -118,80 +146,8 @@
     }
 
     loadIncludes();
-
-    const offerType = document.getElementById('offerType');
-    const quantity = document.getElementById('quantity');
-    const priceDisplay = document.getElementById('priceDisplay');
-
-    function updatePrice() {
-      const type = offerType.value;
-      const qty = parseInt(quantity.value) || 0;
-      let total = 0;
-
-      if (type === 'location_sans') {
-        total = 290;
-      } else if (type === 'location_avec') {
-        total = 390;
-      } else if (type === 'achat') {
-        total = qty >= 50 ? qty * 3.5 : 0;
-      } else if (type === 'abonnement') {
-        total = Math.ceil(qty / 50) * 19;
-      }
-
-      priceDisplay.innerText = `Total: ${total.toFixed(2)} €`;
-    }
-
-    function payerAvecPayPal() {
-      const offer = offerType.value;
-      const qty = parseInt(quantity.value) || 0;
-      let total = 0;
-      let label = "";
-
-      if (offer === "location_sans") {
-        total = 290;
-        label = "تأجير بدون طاقم";
-      } else if (offer === "location_avec") {
-        total = 390;
-        label = "تأجير مع طاقم";
-      } else if (offer === "achat") {
-        if (qty < 50) return alert("الحد الأدنى 50 حافظة.");
-        total = qty * 3.5;
-        label = `شراء ${qty} pouches`;
-      } else if (offer === "abonnement") {
-        if (qty < 50) return alert("الحد الأدنى 50 حافظة.");
-        total = Math.ceil(qty / 50) * 19;
-        label = `اشتراك لـ ${qty} pouches`;
-      } else {
-        return alert("يرجى اختيار عرض.");
-      }
-
-      const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=harbi.mail.a@gmail.com&currency_code=EUR&item_name=${encodeURIComponent(label)}&amount=${total.toFixed(2)}`;
-      window.open(url, "_blank");
-    }
-
-    offerType.addEventListener('change', updatePrice);
-    quantity.addEventListener('input', updatePrice);
-    document.addEventListener('DOMContentLoaded', updatePrice);
-
-    document.getElementById("orderForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      const form = e.target;
-      const data = new FormData(form);
-
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: { Accept: "application/json" }
-      });
-
-      if (response.ok) {
-        payerAvecPayPal();
-      } else {
-        alert("حدث خطأ أثناء إرسال النموذج.");
-      }
-    });
-  </script>
+  
+  <script src="js/order-calculator.js"></script>
 
 </body>
 

@@ -20,11 +20,17 @@
       <h1 class="text-center mb-5" data-i18n="order_title">Passer une commande</h1>
       <div class="row">
         <div class="col-md-6">
-          <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm">
+          <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm" data-order-form data-locale="fr-FR">
             <input type="text" name="_gotcha" style="display:none">
+            <div class="visually-hidden">
+              <span data-offer-base="location_sans" data-price="150" data-pricing-type="flat"></span>
+              <span data-offer-base="location_avec" data-price="390" data-pricing-type="flat"></span>
+              <span data-offer-base="achat" data-price="3.5" data-pricing-type="per-unit"></span>
+              <span data-offer-base="abonnement" data-price="19" data-pricing-type="subscription" data-pack-size="50" data-max-quantity="50"></span>
+            </div>
             <div class="mb-3">
               <label class="form-label" data-i18n="label_offer_type">Type d’offre :</label>
-              <select class="form-select" name="offre" id="offerType" required>
+              <select class="form-select" name="offre" id="offerType" required data-offer-select>
                 <option value="" data-i18n="option_choose_offer">-- Choisir une offre --</option>
                 <option value="location_sans" data-i18n="option_location_without">Location sans personnel</option>
                 <option value="location_avec" data-i18n="option_location_with">Location avec personnel</option>
@@ -34,14 +40,42 @@
             </div>
             <div class="mb-3">
               <label for="quantity" class="form-label" data-i18n="label_quantity">Quantité de pochettes :</label>
-              <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="1" value="50"
-                required />
-              <div id="quantityError" class="text-danger mt-1" style="display: none;"></div>
+              <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="0" value="50"
+                required data-quantity-input />
+              <div id="quantityError" class="text-danger mt-1" style="display: none;" data-quantity-error
+                data-min-rental="La quantité minimale pour la location est de 1 pochette."
+                data-max-rental="La quantité maximale autorisée pour la location est de 250 pochettes."
+                data-min-custom="Pour les pochettes personnalisées, le minimum est de 50 unités."
+                data-min-subscription="La quantité ne peut pas être négative." data-max-subscription="50"
+                data-max-subscription-message="L’abonnement Starter est limité à 50 pochettes."></div>
             </div>
-            <div class="mb-3">
-              <label for="date" class="form-label" data-i18n="label_date">Date de l'événement :</label>
-              <input type="date" name="date" id="date" class="form-control" required />
-              <div id="dateError" class="text-danger mt-1" style="display: none;"></div>
+            <div class="mb-3 d-none" data-rental-fields>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="startDate" class="form-label">Date de début :</label>
+                  <input type="date" name="date_debut" id="startDate" class="form-control" data-start-date />
+                </div>
+                <div class="col-md-6">
+                  <label for="endDate" class="form-label">Date de fin :</label>
+                  <input type="date" name="date_fin" id="endDate" class="form-control" data-end-date />
+                </div>
+              </div>
+              <div id="dateError" class="text-danger mt-2" style="display: none;" data-date-error
+                data-missing="Merci d’indiquer les dates de début et de fin de la location."
+                data-range="La date de fin doit être postérieure ou égale à la date de début."></div>
+            </div>
+            <div class="mb-3 d-none" data-staff-fields>
+              <label for="staffQuantity" class="form-label">Personnel supplémentaire (optionnel) :</label>
+              <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0"
+                data-staff-quantity>
+              <small class="text-muted">100 € / jour / personne pour 6 h.</small>
+            </div>
+            <div class="alert alert-info d-none" data-summary data-days-label="Durée" data-total-label="Total estimé"
+              data-day-singular="jour" data-day-plural="jours" aria-live="polite">
+              <p class="mb-1"><strong><span data-summary-days-label>Durée</span> : <span
+                      data-summary-days-count>—</span></strong></p>
+              <p class="mb-0"><span data-summary-total-label>Total estimé</span> : <span
+                  data-summary-total-amount>—</span></p>
             </div>
             <div class="mb-3">
               <label for="nom" class="form-label" data-i18n="label_fullname">Nom complet :</label>
@@ -55,27 +89,26 @@
               <label for="adresse" class="form-label" data-i18n="label_address">Adresse de facturation :</label>
               <textarea name="adresse" id="adresse" class="form-control" required></textarea>
             </div>
-            <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" data-i18n-base-text="price_total">
+            <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite"
+              data-price-display data-template="Total estimé : {price}">
             </div>
 
             <div id="formSubmissionFeedback" class="mt-3"></div>
 
             <div class="text-center mt-4">
-              <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order">Valider la commande</button>
+              <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order" disabled>Valider la commande</button>
             </div>
           </form>
         </div>
         <div class="col-md-6 d-flex flex-column justify-content-center align-items-center px-3">
           <div class="bg-light rounded-4 shadow-sm p-4 w-100">
-            <p class="text-center fw-semibold fs-5 mb-3 text-dark" data-i18n="payment_title">
-              💳 Paiement en <strong>4 fois sans frais</strong> avec PayPal<br>
-              <small class="fst-italic text-muted" data-i18n="payment_eligibility_note">(sous réserve
-                d’éligibilité)</small>
+            <p class="text-center fw-semibold fs-5 mb-3 text-dark">
+              💳 Paiement via <strong>PayPal (si éligible)</strong><br>
+              <small class="fst-italic text-muted">(proposé automatiquement selon votre compte)</small>
             </p>
             <p class="text-center text-secondary" data-i18n="payment_description">
               Protégez la confidentialité de vos événements grâce à notre option de paiement en plusieurs fois.<br>
-              <span class="text-dark" data-i18n="payment_detail">L’option s’affiche automatiquement lors du paiement via
-                PayPal si vous êtes éligible.</span>
+              <span class="text-dark">L’option s’affiche automatiquement lors du paiement via PayPal si vous êtes éligible.</span>
             </p>
             <hr class="my-3 bg-secondary" style="height:1px; width:80%;" />
             <p class="text-center text-dark" data-i18n="payment_flexibility_title">
@@ -87,8 +120,8 @@
             <p class="fw-bold mt-4 text-center" style="color: #198754;" data-i18n="payment_footer">
               Commandez aujourd’hui, payez sereinement,<br>et garantissez la réussite de votre événement.
             </p>
-            <small class="d-block text-center mt-3 text-muted" data-i18n="payment_tip">
-              💡 Astuce : le paiement en plusieurs fois vous sera proposé automatiquement à l’étape de validation.
+            <small class="d-block text-center mt-3 text-muted">
+              💡 Astuce : PayPal (si éligible) se propose lors de la validation du paiement.
             </small>
           </div>
         </div>
@@ -110,167 +143,7 @@
 
   <script src="js/main.js"></script>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const offerType = document.getElementById('offerType');
-      const quantityInput = document.getElementById('quantity');
-      const priceDisplay = document.getElementById('priceDisplay');
-      const dateInput = document.getElementById('date');
-      const orderForm = document.getElementById('orderForm');
-      const quantityError = document.getElementById('quantityError');
-      const dateError = document.getElementById('dateError');
-      const formSubmissionFeedback = document.getElementById('formSubmissionFeedback');
-      const basePriceText = priceDisplay.getAttribute('data-i18n-base-text') || "price_total";
-
-      // Prices are fixed in the script. Ensure they match your offers.
-      const PRICES = {
-        'location_sans': 150,
-        'location_avec': 390,
-        'achat_per_unit': 3.5, // Price per pouch for custom order
-        'abonnement_per_50': 19 // Price per 50 pouches for subscription
-      };
-
-      function getTranslations() {
-        return window.translations[localStorage.getItem('lang') || 'fr'] || {};
-      }
-
-      function validateQuantity() {
-        const qty = parseInt(quantityInput.value);
-        const type = offerType.value;
-        let isValid = true;
-        let errorMessage = "";
-        const currentTranslations = getTranslations();
-
-        if (type === 'achat' && qty < 50) {
-          isValid = false;
-          errorMessage = currentTranslations["alert_min_quantity_achat"] || "Pour les pochettes personnalisées, le minimum est de 50 unités.";
-        } else if (qty > 250 && (type === 'location_sans' || type === 'location_avec')) { // Max 250 for rentals
-          isValid = false;
-          errorMessage = currentTranslations["alert_max_quantity"] || "La quantité maximale autorisée pour cette offre est de 250 pochettes.";
-        } else if (qty < 1 && type !== 'abonnement') { // Quantity must be at least 1 for non-subscription
-          isValid = false;
-          errorMessage = currentTranslations["alert_min_quantity_general"] || "La quantité doit être au moins de 1."; // Add this key to translations.js
-        }
-        // For subscription, quantity can be 0 or more, it determines packs of 50.
-
-        quantityError.textContent = errorMessage;
-        quantityError.style.display = isValid ? "none" : "block";
-        return isValid;
-      }
-
-      function validateDate() {
-        const today = new Date().toISOString().split('T')[0];
-        let isValid = true;
-        let errorMessage = "";
-        const currentTranslations = getTranslations();
-
-        if (dateInput.value < today) {
-          isValid = false;
-          errorMessage = currentTranslations["alert_date_past"] || "La date de l'événement ne peut pas être dans le passé.";
-        }
-        dateError.textContent = errorMessage;
-        dateError.style.display = isValid ? "none" : "block";
-        return isValid;
-      }
-
-      function updatePrice() {
-        const type = offerType.value;
-        const qty = parseInt(quantityInput.value) || 0;
-        let total = 0;
-        const currentTranslations = getTranslations();
-
-        if (type === 'location_sans') {
-          total = PRICES.location_sans;
-        } else if (type === 'location_avec') {
-          total = PRICES.location_avec;
-        } else if (type === 'achat') {
-          total = qty * PRICES.achat_per_unit;
-        } else if (type === 'abonnement') {
-          // For subscription, assume quantity input indicates number of "50-pouch packs"
-          // If quantity is 0, it means 1 pack by default as per offer_subscription_max_pouches logic.
-          // This logic might need refinement based on exact subscription model.
-          total = (qty > 0 ? Math.ceil(qty / 50) : 1) * PRICES.abonnement_per_50;
-          if (qty > 50 && type === 'abonnement') { // Max 50 pouches for starter subscription
-            total = Math.ceil(50 / 50) * PRICES.abonnement_per_50; // Cap at 50 for price calculation
-            quantityError.textContent = currentTranslations["alert_max_quantity_subscription"] || "L'abonnement Starter est limité à 50 pochettes."; // Add this key
-            quantityError.style.display = "block";
-          }
-        } else {
-          priceDisplay.innerHTML = ""; // Clear price if no offer selected
-          return;
-        }
-
-        const priceTextTemplate = currentTranslations[basePriceText] || "Total : {price} €";
-        priceDisplay.innerHTML = priceTextTemplate.replace("{price}", total.toFixed(2));
-      }
-
-      // Initial setup for events
-      if (offerType && quantityInput && priceDisplay) {
-        offerType.addEventListener('change', () => { validateQuantity(); updatePrice(); });
-        quantityInput.addEventListener('input', () => { validateQuantity(); updatePrice(); });
-        if (dateInput) dateInput.addEventListener('change', validateDate);
-
-        // Initial calls
-        validateQuantity();
-        validateDate();
-        updatePrice();
-      }
-
-      // Form submission logic
-      if (orderForm) {
-        orderForm.addEventListener('submit', function (event) {
-          event.preventDefault(); // Prevent default form submission
-          formSubmissionFeedback.innerHTML = ""; // Reset feedback area
-
-          const isQtyValid = validateQuantity();
-          const isDateValid = dateInput ? validateDate() : true;
-
-          if (!isQtyValid || !isDateValid || !orderForm.checkValidity()) {
-            const currentTranslations = getTranslations();
-            formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_invalid"] || "Veuillez corriger les erreurs dans le formulaire."}</div>`;
-            return;
-          }
-
-          // Show loading indicator
-          const submitButton = orderForm.querySelector('button[type="submit"]');
-          const originalButtonText = submitButton.innerHTML;
-          const currentTranslations = getTranslations();
-          submitButton.disabled = true;
-          submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ${currentTranslations["text_sending"] || "Envoi..."}`;
-
-          const formData = new FormData(orderForm);
-          fetch(orderForm.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-              'Accept': 'application/json'
-            }
-          }).then(response => {
-            if (response.ok) {
-              formSubmissionFeedback.innerHTML = `<div class="alert alert-success">${currentTranslations["alert_form_success"] || "Commande envoyée avec succès ! Nous vous contacterons bientôt."}</div>`;
-              orderForm.reset(); // Clear form
-              updatePrice(); // Reset price display
-            } else {
-              response.json().then(data => {
-                let errorMessage = currentTranslations["alert_form_error_generic"] || "Une erreur s'est produite.";
-                if (data.errors) {
-                  errorMessage = data.errors.map(error => error.message).join(", ");
-                }
-                formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${errorMessage}</div>`;
-              }).catch(() => {
-                formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_error_generic"] || "Une erreur s'est produite."}</div>`;
-              });
-            }
-          }).catch(error => {
-            formSubmissionFeedback.innerHTML = `<div class="alert alert-danger">${currentTranslations["alert_form_error_network"] || "Erreur réseau. Veuillez réessayer."}</div>`;
-          }).finally(() => {
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalButtonText;
-          });
-        });
-      }
-    });
-  </script>
+  <script src="js/order-calculator.js"></script>
 </body>
 
 </html>

@@ -399,3 +399,8 @@ p, li {
         height: 100%;
     }
 }
+
+.footer, .footer * {
+    font-family: 'Inter', sans-serif !important;
+}
+
