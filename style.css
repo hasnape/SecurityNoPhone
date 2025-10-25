@@ -432,6 +432,9 @@ a:hover {
   text-align: center;
   box-shadow: var(--snf-shadow);
 }
+/* -------------------------------------------------- */
+/* Premium navigation and footer styles               */
+/* -------------------------------------------------- */
 
 .cta-card .btn {
   padding: 0.85rem 2.2rem;
