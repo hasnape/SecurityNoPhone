@@ -98,8 +98,7 @@
                 placeholder="Précisez le format, les lieux, les attentes protocole..."></textarea>
             </div>
 
-            <div class="price-box text-center fw-bold fs-5 my-3" data-total-display data-template="Total estimé : {price}" aria-live="polite"></div>
-            <p class="small text-muted text-center" data-i18n="caution_note">La caution est automatiquement ajoutée et précisée dans le récapitulatif envoyé par nos équipes.</p>
+            <div class="price-box text-center fw-bold fs-5 my-3" data-total-display data-template="Total estimé : {price}" aria-live="polite"></div>            <p class="small text-muted text-center" data-i18n="caution_note">La caution est automatiquement ajoutée et précisée dans le récapitulatif envoyé par nos équipes.</p>
 
             <input type="hidden" name="montant_total_estime" data-total-value value="0">
             <input type="hidden" name="caution_total" data-caution-value value="0">
@@ -111,6 +110,8 @@
             <div class="mt-4">
               <button type="submit" class="btn btn-primary w-100" data-i18n="btn_submit_order">Valider la commande</button>
             </div>
+
+            <div id="formSubmissionFeedback" class="mt-3" data-feedback></div>
           </form>
         </div>
         <div class="col-lg-5">
