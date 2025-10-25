@@ -76,6 +76,18 @@
     const offerConfig = getOfferConfig(form);
     const locale = form.dataset.locale || document.documentElement.lang || 'fr-FR';
     const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR' });
+    const formStateEventName = 'order:state-change';
+
+    function dispatchState(detail) {
+      const state = {
+        total: typeof detail.total === 'number' ? detail.total : null,
+        days: typeof detail.days === 'number' ? detail.days : null,
+        offer: detail.offer || null,
+        isReady: Boolean(detail.isReady)
+      };
+      form.__orderState = state;
+      form.dispatchEvent(new CustomEvent(formStateEventName, { detail: state }));
+    }
 
     function isRentalOffer(value) {
       const offerValue = value || offerSelect.value;
@@ -294,6 +306,9 @@
       const quantityValid = validateQuantity();
       const datesValid = validateDates();
       const totalInfo = computeTotal();
+      const totalValue = totalInfo && typeof totalInfo.total === 'number'
+        ? Number.parseFloat((Math.round(totalInfo.total * 100) / 100).toFixed(2))
+        : null;
 
       if (!totalInfo) {
         if (isRentalOffer(offerValue) && datesValid) {
@@ -312,7 +327,34 @@
 
       if (submitButton) {
         const baseValidity = form.checkValidity();
-        submitButton.disabled = !(offerValue && quantityValid && datesValid && baseValidity);
+        const isReady = Boolean(
+          offerValue &&
+          quantityValid &&
+          datesValid &&
+          baseValidity &&
+          totalValue !== null &&
+          totalValue > 0
+        );
+        submitButton.disabled = !isReady;
+        dispatchState({
+          total: totalValue,
+          days: totalInfo && typeof totalInfo.days === 'number' ? totalInfo.days : null,
+          offer: offerValue,
+          isReady
+        });
+      } else {
+        dispatchState({
+          total: totalValue,
+          days: totalInfo && typeof totalInfo.days === 'number' ? totalInfo.days : null,
+          offer: offerValue,
+          isReady: Boolean(
+            offerValue &&
+            quantityValid &&
+            datesValid &&
+            totalValue !== null &&
+            totalValue > 0
+          )
+        });
       }
     }
 

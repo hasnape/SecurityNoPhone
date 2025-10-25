@@ -79,6 +79,21 @@
             <textarea name="adresse" id="adresse" class="form-control" required></textarea>
           </div>
           <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite" data-price-display data-template="الإجمالي التقديري: {price}"></div>
+
+          <div class="text-center mt-4">
+            <div class="d-inline-block" data-paypal-container data-client-id="sb" data-currency="EUR"
+              data-description="SecurityNoPhone – طلب" data-auto-submit="true"
+              data-message-invalid="يرجى إكمال النموذج لتفعيل الدفع عبر PayPal."
+              data-message-ready="الإجمالي التقديري: {amount}. اضغط على PayPal لإتمام طلبك."
+              data-message-processing="جاري معالجة الدفع..."
+              data-message-success="تم تأكيد الدفع عبر PayPal. تم إرسال طلبك."
+              data-message-error="فشل الدفع عبر PayPal. يرجى المحاولة مرة أخرى."
+              data-message-cancelled="تم إلغاء الدفع عبر PayPal."
+              data-message-unavailable="PayPal غير متاح حاليًا. حاول مرة أخرى لاحقًا."
+              data-message-ineligible="PayPal غير متاح لهذا الطلب.">
+            </div>
+          </div>
+
           <div id="formSubmissionFeedback" class="mt-3"></div>
           <div class="text-center mt-4">
             <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order" disabled>إرسال الطلب</button>
@@ -148,6 +163,7 @@
     loadIncludes();
   
   <script src="js/order-calculator.js"></script>
+  <script src="js/paypal-buttons.js"></script>
 
 </body>
 
