@@ -93,6 +93,19 @@
               data-price-display data-template="Total estimé : {price}">
             </div>
 
+            <div class="text-center mt-4">
+              <div class="d-inline-block" data-paypal-container data-client-id="sb" data-currency="EUR"
+                data-description="SecurityNoPhone – Commande" data-auto-submit="true"
+                data-message-invalid="Complétez le formulaire pour activer le paiement PayPal."
+                data-message-ready="Montant estimé : {amount}. Cliquez sur PayPal pour finaliser votre commande."
+                data-message-processing="Paiement en cours..." data-message-success="Paiement PayPal confirmé. Votre commande est envoyée."
+                data-message-error="Le paiement via PayPal a échoué. Veuillez réessayer."
+                data-message-cancelled="Paiement PayPal annulé."
+                data-message-unavailable="PayPal est indisponible pour le moment. Merci de réessayer plus tard."
+                data-message-ineligible="PayPal n'est pas disponible pour cette commande.">
+              </div>
+            </div>
+
             <div id="formSubmissionFeedback" class="mt-3"></div>
 
             <div class="text-center mt-4">
@@ -144,6 +157,7 @@
   <script src="js/main.js"></script>
 
   <script src="js/order-calculator.js"></script>
+  <script src="js/paypal-buttons.js"></script>
 </body>
 
 </html>

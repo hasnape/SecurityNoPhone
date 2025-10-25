@@ -115,6 +115,21 @@
             <textarea name="adresse" id="adresse" class="form-control" required></textarea>
           </div>
           <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite" data-price-display data-template="Geschätzter Gesamtbetrag: {price}"></div>
+
+          <div class="text-center mt-4">
+            <div class="d-inline-block" data-paypal-container data-client-id="sb" data-currency="EUR"
+              data-description="SecurityNoPhone – Bestellung" data-auto-submit="true"
+              data-message-invalid="Bitte füllen Sie das Formular aus, um die PayPal-Zahlung zu aktivieren."
+              data-message-ready="Geschätzter Gesamtbetrag: {amount}. Klicken Sie auf PayPal, um Ihre Bestellung abzuschließen."
+              data-message-processing="Zahlung wird verarbeitet..."
+              data-message-success="PayPal-Zahlung bestätigt. Ihre Bestellung wurde gesendet."
+              data-message-error="PayPal-Zahlung fehlgeschlagen. Bitte versuchen Sie es erneut."
+              data-message-cancelled="PayPal-Zahlung abgebrochen."
+              data-message-unavailable="PayPal ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut."
+              data-message-ineligible="PayPal ist für diese Bestellung nicht verfügbar.">
+            </div>
+          </div>
+
           <div id="formSubmissionFeedback" class="mt-3"></div>
           <div class="text-center mt-4">
             <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order" disabled>Bestellung absenden</button>
@@ -162,6 +177,7 @@
 
   <script src="js/main.js"></script>
   <script src="js/order-calculator.js"></script>
+  <script src="js/paypal-buttons.js"></script>
 
 </body>
 

@@ -101,6 +101,20 @@
             <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite" data-price-display
               data-template="Estimated total: {price}"></div>
 
+            <div class="text-center mt-4">
+              <div class="d-inline-block" data-paypal-container data-client-id="sb" data-currency="EUR"
+                data-description="SecurityNoPhone – Order" data-auto-submit="true"
+                data-message-invalid="Please complete the form to enable PayPal payment."
+                data-message-ready="Estimated total: {amount}. Click PayPal to finalize your order."
+                data-message-processing="Processing payment..."
+                data-message-success="PayPal payment confirmed. Your order has been sent."
+                data-message-error="PayPal payment failed. Please try again."
+                data-message-cancelled="PayPal payment cancelled."
+                data-message-unavailable="PayPal is currently unavailable. Please try again later."
+                data-message-ineligible="PayPal is not available for this order.">
+              </div>
+            </div>
+
             <div id="formSubmissionFeedback" class="mt-3"></div>
 
             <div class="text-center mt-4">
@@ -151,6 +165,7 @@
 
   <script src="js/main.js"></script>
   <script src="js/order-calculator.js"></script>
+  <script src="js/paypal-buttons.js"></script>
 
 </body>
 

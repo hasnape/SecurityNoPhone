@@ -86,6 +86,21 @@
             <textarea name="adresse" id="adresse" class="form-control" required></textarea>
           </div>
           <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite" data-price-display data-template="Total estimado: {price}"></div>
+
+          <div class="text-center mt-4">
+            <div class="d-inline-block" data-paypal-container data-client-id="sb" data-currency="EUR"
+              data-description="SecurityNoPhone – Pedido" data-auto-submit="true"
+              data-message-invalid="Complete el formulario para activar el pago con PayPal."
+              data-message-ready="Total estimado: {amount}. Haz clic en PayPal para finalizar tu pedido."
+              data-message-processing="Procesando el pago..."
+              data-message-success="Pago con PayPal confirmado. Tu pedido ha sido enviado."
+              data-message-error="El pago con PayPal ha fallado. Inténtalo de nuevo."
+              data-message-cancelled="Pago con PayPal cancelado."
+              data-message-unavailable="PayPal no está disponible en este momento. Inténtalo más tarde."
+              data-message-ineligible="PayPal no está disponible para este pedido.">
+            </div>
+          </div>
+
           <div id="formSubmissionFeedback" class="mt-3"></div>
           <div class="text-center mt-4">
             <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order" disabled>Enviar pedido</button>
@@ -134,6 +149,7 @@
     <script>localStorage.setItem("lang", "es");</script>
     <script src="js/main.js"></script>
   <script src="js/order-calculator.js"></script>
+  <script src="js/paypal-buttons.js"></script>
 
 </body>
 
