@@ -1,120 +1,36 @@
-<!DOCTYPE html>
-<html lang="fr">
+<nav class="navbar navbar-expand-lg snf-navbar shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html" aria-label="SecurityNoPhone">
+      <img src="images/IMG_20250421_182622-removebg-preview.png" alt="SecurityNoPhone" class="brand-logo" />
+      <span class="brand-text" data-i18n="nav_brand_name">SecurityNoPhone</span>
+    </a>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SecurityNoPhone</title>
+    <div class="d-flex align-items-center order-lg-3 ms-lg-3">
+      <label for="langSwitcher" class="lang-label me-2 mb-0 text-nowrap d-none d-sm-inline" data-i18n="nav_language">Langue</label>
+      <select id="langSwitcher" class="form-select form-select-sm lang-select" aria-label="Changer de langue">
+        <option value="fr" data-flag="images/fr.png">Français</option>
+        <option value="en" data-flag="images/gb.png">English</option>
+        <option value="de" data-flag="images/de.png">Deutsch</option>
+        <option value="ar" data-flag="images/sa.png">العربية</option>
+      </select>
+    </div>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        /* Effet au survol et modernisation des liens */
-        .navbar-nav .nav-link {
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s, border-bottom 0.3s;
-            position: relative;
-        }
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#snfNav" aria-controls="snfNav" aria-expanded="false" aria-label="Basculer la navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        .navbar-nav .nav-link:hover {
-            color: #C5B358;
-        }
-
-        .navbar-nav .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 10%;
-            width: 80%;
-            height: 2px;
-            background-color: #C5B358;
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-            transform-origin: bottom right;
-        }
-
-        .navbar-nav .nav-link:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-
-        /* Logo responsive */
-        .navbar-brand img {
-            height: 60px;
-            max-height: 70px;
-        }
-
-        /* Sticky navbar */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1030;
-        }
-
-        /* Responsive pour centrer logo sur mobile */
-        @media (max-width: 991px) {
-            .navbar-brand {
-                position: static !important;
-                transform: none !important;
-                margin: auto;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
-        <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
-
-            <!-- Sélecteur de langue à gauche -->
-            <div class="d-flex align-items-center">
-                <span class="me-2 text-muted" title="Changer la langue">🌐</span>
-                <select id="langSwitcher" class="form-select form-select-sm" style="width: auto;">
-                    <option value="fr">Français</option>
-                    <option value="en">English</option>
-                    <option value="de">Deutsch</option>
-                    <option value="ar">العربية</option>
-                </select>
-            </div>
-
-            <!-- Logo centré -->
-            <a class="navbar-brand fw-bold position-absolute start-50 translate-middle-x" href="index.html">
-                <img src="images/IMG_20250421_182622-removebg-preview.png" alt="Logo SecurityNoPhone">
-            </a>
-
-            <!-- Bouton hamburger -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Afficher la navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Liens de navigation -->
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="index.html#galerie"
-                            data-i18n="nav_gallery">Galerie</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#concept"
-                            data-i18n="nav_concept">Concept</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#offres" data-i18n="nav_offers" data-scroll-target="#offres">Offres</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#usecases"
-                            data-i18n="nav_usecases">Utilisations</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#contact"
-                            data-i18n="nav_contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="commande.html" data-i18n="nav_order">Commande</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="suivi.html" data-i18n="nav_tracking">Suivi</a></li>
-                </ul>
-            </div>
-
-        </div>
-    </nav>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+    <div class="collapse navbar-collapse order-lg-2" id="snfNav">
+      <ul class="navbar-nav ms-lg-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="#audiences" data-scroll-target="#audiences" data-i18n="nav_audiences">Clients</a></li>
+        <li class="nav-item"><a class="nav-link" href="#promises" data-scroll-target="#promises" data-i18n="nav_promises">Expérience VIP</a></li>
+        <li class="nav-item"><a class="nav-link" href="#solutions" data-scroll-target="#solutions" data-i18n="nav_solutions">Solutions</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services" data-scroll-target="#services" data-i18n="nav_services">Accompagnement</a></li>
+        <li class="nav-item"><a class="nav-link" href="#sectors" data-scroll-target="#sectors" data-i18n="nav_sectors">Secteurs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#references" data-scroll-target="#references" data-i18n="nav_references">Références</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact" data-scroll-target="#contact" data-i18n="nav_contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-cta" href="commande.html" data-i18n="nav_order">Commande</a></li>
+        <li class="nav-item"><a class="nav-link" href="suivi.html" data-i18n="nav_tracking">Suivi</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

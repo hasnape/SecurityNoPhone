@@ -93,8 +93,18 @@
               data-price-display data-template="Total estimé : {price}">
             </div>
 
+            <div class="paypal-message-wrapper text-center mt-3">
+              <div data-paypal-message data-pp-style-layout="text" data-pp-style-logo-type="inline"
+                data-pp-style-text-color="black"></div>
+              <small class="d-block mt-2 text-muted" data-i18n="payment_card_note">
+                Réglez aussi par carte bancaire via PayPal, même sans compte.
+              </small>
+            </div>
+
             <div class="text-center mt-4">
-              <div class="d-inline-block" data-paypal-container data-client-id="sb" data-currency="EUR"
+              <div class="d-inline-block" data-paypal-container
+                data-client-id="AYfFtx4nhnM_IaoUdUfCmRX9MqWxjHY2QKx3QcficjUNDSCk3SsZCzGRI2yzpKR4bwmQvkWveZbf9Jxq"
+                data-currency="EUR" data-components="buttons,messages"
                 data-description="SecurityNoPhone – Commande" data-auto-submit="true"
                 data-message-invalid="Complétez le formulaire pour activer le paiement PayPal."
                 data-message-ready="Montant estimé : {amount}. Cliquez sur PayPal pour finaliser votre commande."
@@ -120,8 +130,8 @@
               <small class="fst-italic text-muted">(proposé automatiquement selon votre compte)</small>
             </p>
             <p class="text-center text-secondary" data-i18n="payment_description">
-              Protégez la confidentialité de vos événements grâce à notre option de paiement en plusieurs fois.<br>
-              <span class="text-dark">L’option s’affiche automatiquement lors du paiement via PayPal si vous êtes éligible.</span>
+              Protégez la confidentialité de vos événements et profitez du paiement en 4x via PayPal si vous êtes éligible.<br>
+              <span class="text-dark">Vous pouvez aussi régler par carte bancaire via PayPal, sans créer de compte.</span>
             </p>
             <hr class="my-3 bg-secondary" style="height:1px; width:80%;" />
             <p class="text-center text-dark" data-i18n="payment_flexibility_title">
@@ -133,8 +143,8 @@
             <p class="fw-bold mt-4 text-center" style="color: #198754;" data-i18n="payment_footer">
               Commandez aujourd’hui, payez sereinement,<br>et garantissez la réussite de votre événement.
             </p>
-            <small class="d-block text-center mt-3 text-muted">
-              💡 Astuce : PayPal (si éligible) se propose lors de la validation du paiement.
+            <small class="d-block text-center mt-3 text-muted" data-i18n="payment_tip">
+              💡 Astuce : PayPal affiche automatiquement vos options (4x, carte) au moment du paiement.
             </small>
           </div>
         </div>

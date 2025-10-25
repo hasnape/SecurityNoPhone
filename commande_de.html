@@ -116,8 +116,18 @@
           </div>
           <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite" data-price-display data-template="Geschätzter Gesamtbetrag: {price}"></div>
 
+          <div class="paypal-message-wrapper text-center mt-3">
+            <div data-paypal-message data-pp-style-layout="text" data-pp-style-logo-type="inline"
+              data-pp-style-text-color="black"></div>
+            <small class="d-block mt-2 text-muted" data-i18n="payment_card_note">
+              Zahlen Sie auch per Kreditkarte über PayPal – ganz ohne PayPal-Konto.
+            </small>
+          </div>
+
           <div class="text-center mt-4">
-            <div class="d-inline-block" data-paypal-container data-client-id="sb" data-currency="EUR"
+            <div class="d-inline-block" data-paypal-container
+              data-client-id="AYfFtx4nhnM_IaoUdUfCmRX9MqWxjHY2QKx3QcficjUNDSCk3SsZCzGRI2yzpKR4bwmQvkWveZbf9Jxq"
+              data-currency="EUR" data-components="buttons,messages"
               data-description="SecurityNoPhone – Bestellung" data-auto-submit="true"
               data-message-invalid="Bitte füllen Sie das Formular aus, um die PayPal-Zahlung zu aktivieren."
               data-message-ready="Geschätzter Gesamtbetrag: {amount}. Klicken Sie auf PayPal, um Ihre Bestellung abzuschließen."
@@ -143,8 +153,8 @@
               <small class="fst-italic text-muted">(wird automatisch gemäß Ihrem Konto angezeigt)</small>
           </p>
           <p class="text-center text-secondary" data-i18n="payment_description">
-            Schützen Sie die Vertraulichkeit Ihrer Veranstaltungen mit unserer Ratenzahlungsoption.<br>
-            <span class="text-dark">Diese Option wird bei der PayPal-Zahlung automatisch angezeigt, wenn Sie berechtigt sind.</span>
+            Schützen Sie die Vertraulichkeit Ihrer Veranstaltungen und zahlen Sie – sofern berechtigt – bequem in 4 Raten über PayPal.<br>
+            <span class="text-dark">Sie können auch per Kreditkarte über PayPal bezahlen, ganz ohne eigenes PayPal-Konto.</span>
           </p>
           <hr class="my-3 bg-secondary" style="height:1px; width:80%;" />
           <p class="text-center text-dark" data-i18n="payment_flexibility_title">
@@ -156,8 +166,8 @@
           <p class="fw-bold mt-4 text-center" style="color: #198754;" data-i18n="payment_footer">
             Bestellen Sie noch heute, zahlen Sie bequem und sichern Sie den Erfolg Ihrer Veranstaltung.
           </p>
-          <small class="d-block text-center mt-3 text-muted">
-            💡 Tipp: PayPal (bei Berechtigung) erscheint beim Bezahlen.
+          <small class="d-block text-center mt-3 text-muted" data-i18n="payment_tip">
+            💡 Tipp: PayPal blendet beim Bezahlen automatisch Ihre verfügbaren Optionen (Pay in 4, Karte) ein.
           </small>
         </div>
       </div>
