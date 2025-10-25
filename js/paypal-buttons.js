@@ -58,6 +58,77 @@
   }
 
   function setupForm(form) {
+  function loadPayPalSdk(options) {
+    const clientId = options.clientId;
+    const currency = options.currency;
+    const intent = options.intent || DEFAULT_INTENT;
+    const components = options.components || 'buttons,messages';
+    const namespace = options.namespace || null;
+    const requestedComponents = String(components)
+      .split(',')
+      .map(part => part.trim().toLowerCase())
+      .filter(Boolean);
+    const requiresMessages = requestedComponents.includes('messages');
+
+    return new Promise((resolve, reject) => {
+      if (window.paypal) {
+        if (!requiresMessages || typeof window.paypal.Messages === 'function') {
+          resolve(window.paypal);
+          return;
+        }
+      }
+
+      const existingScript = document.querySelector('script[data-paypal-sdk]');
+      if (existingScript) {
+        const existingComponents = String(existingScript.dataset.paypalComponents || '')
+          .split(',')
+          .map(part => part.trim().toLowerCase())
+          .filter(Boolean);
+        const existingHasMessages = existingComponents.includes('messages');
+        if (!requiresMessages || existingHasMessages) {
+          existingScript.addEventListener('load', () => resolve(window.paypal));
+          existingScript.addEventListener('error', () => reject(new Error('Failed to load PayPal SDK')));
+          return;
+        }
+      }
+
+      const script = document.createElement('script');
+      script.id = PAYPAL_SCRIPT_ID;
+      const url = new URL('https://www.paypal.com/sdk/js');
+      url.searchParams.set('client-id', clientId);
+      url.searchParams.set('currency', currency);
+      url.searchParams.set('intent', intent);
+      if (components) {
+        url.searchParams.set('components', components);
+      }
+      script.src = url.toString();
+      script.async = true;
+      script.dataset.paypalSdk = 'true';
+      script.dataset.paypalClientId = clientId;
+      script.dataset.paypalCurrency = currency;
+      script.dataset.paypalIntent = intent;
+      script.dataset.paypalComponents = components;
+      if (namespace) {
+        script.dataset.paypalNamespace = namespace;
+        script.setAttribute('data-namespace', namespace);
+      }
+      script.addEventListener('load', () => {
+        if (window.paypal) {
+          resolve(window.paypal);
+        } else {
+          reject(new Error('PayPal SDK loaded but the paypal namespace is unavailable.'));
+        }
+      });
+      script.addEventListener('error', () => reject(new Error('Failed to load PayPal SDK script.')));
+      document.head.appendChild(script);
+    });
+  }
+
+  function isFormReady(state) {
+    return Boolean(state && state.isReady && typeof state.total === 'number' && state.total > 0);
+  }
+
+  function setupPayPalIntegration(form) {
     const container = form.querySelector('[data-paypal-container]');
     if (!container) {
       return;
@@ -66,6 +137,15 @@
     const clientId = container.dataset.clientId || form.dataset.paypalClientId;
     const currency = (container.dataset.currency || DEFAULT_CURRENCY).toUpperCase();
     const components = container.dataset.components || DEFAULT_COMPONENTS;
+    if (!clientId) {
+      console.warn('PayPal client ID is missing for this order form.');
+      return;
+    }
+
+    const currency = (container.dataset.currency || 'EUR').toUpperCase();
+    const intent = (container.dataset.intent || DEFAULT_INTENT).toUpperCase();
+    const components = container.dataset.components || 'buttons,messages';
+    const namespace = container.dataset.namespace || null;
     const description = container.dataset.description || 'SecurityNoPhone Order';
     const autoSubmit = container.dataset.autoSubmit !== 'false';
 
@@ -78,6 +158,17 @@
     let latestState = form.__orderState || { total: null, isReady: false };
     let buttonsInstance = null;
     let buttonsActions = null;
+    if (container.dataset.messageInvalid) {
+      setStatus(container.dataset.messageInvalid, 'muted');
+    }
+
+    ['paypal_order_id', 'paypal_payer_email', 'payment_method'].forEach(name => removeHiddenInput(form, name));
+
+    let state = form.__orderState || { total: null, isReady: false };
+    let buttonActions = null;
+    const messageElement = form.querySelector('[data-paypal-message]');
+    let messageComponent = null;
+    let pendingMessageAmount = null;
 
     function setStatus(message, tone = 'muted') {
       status.textContent = message || '';
@@ -126,6 +217,68 @@
 
     function renderMessage() {
       if (!messageElement) {
+    function renderPayPalMessage() {
+      if (!messageElement || !pendingMessageAmount) {
+        return;
+      }
+      if (!window.paypal || typeof window.paypal.Messages !== 'function') {
+        return;
+      }
+      try {
+        messageElement.innerHTML = '';
+        messageComponent = window.paypal.Messages({
+          amount: pendingMessageAmount,
+          placement: messageElement.dataset.ppPlacement || undefined
+        });
+        const renderResult = messageComponent.render(messageElement);
+        if (renderResult && typeof renderResult.catch === 'function') {
+          renderResult.catch(() => {
+            messageComponent = null;
+          });
+        }
+      } catch (error) {
+        console.warn('Unable to render PayPal message:', error);
+        messageComponent = null;
+      }
+    }
+
+    function updatePayPalMessage(currentState) {
+      if (!messageElement) {
+        return;
+      }
+
+      const hasAmount = currentState && typeof currentState.total === 'number' && currentState.total > 0;
+      if (!hasAmount) {
+        messageElement.removeAttribute('data-pp-amount');
+        pendingMessageAmount = null;
+        if (messageComponent && typeof messageComponent.remove === 'function') {
+          try {
+            messageComponent.remove();
+          } catch (error) {
+            console.warn('Unable to remove PayPal message component:', error);
+          }
+        }
+        messageElement.innerHTML = '';
+        messageComponent = null;
+        return;
+      }
+
+      const formattedAmount = formatAmountForPayPal(currentState.total);
+      pendingMessageAmount = formattedAmount;
+      messageElement.setAttribute('data-pp-amount', formattedAmount);
+
+      if (messageComponent && typeof messageComponent.update === 'function') {
+        messageComponent.update({ amount: formattedAmount }).catch(() => {
+          messageComponent = null;
+          renderPayPalMessage();
+        });
+      } else {
+        renderPayPalMessage();
+      }
+    }
+
+    function syncButtonState() {
+      if (!buttonActions) {
         return;
       }
       if (!window.paypal || typeof window.paypal.Messages !== 'function') {
@@ -172,6 +325,16 @@
       .then(paypal => {
         renderMessage();
         buttonsInstance = paypal.Buttons({
+      syncButtonState();
+      updatePayPalMessage(state);
+    });
+
+    updatePayPalMessage(state);
+
+    loadPayPalSdk({ clientId, currency, intent, components, namespace })
+      .then(paypal => {
+        updatePayPalMessage(state);
+        const buttons = paypal.Buttons({
           style: {
             layout: container.dataset.layout || 'vertical',
             color: container.dataset.color || 'gold',
