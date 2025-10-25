@@ -13,7 +13,7 @@
                 &copy; 2025 <span data-i18n="nav_brand_name">SecurityNoPhone</span> –
                 <span data-i18n="footer_rights">Tous droits réservés.</span>
             </p>
-            <div class="d-flex flex-wrap justify-content-center gap-3">
+            <div class="d-flex flex-wrap justify-content-center gap-3 mb-3">
                 <a href="Mention legale/1_Mentions_Legales.pdf" target="_blank" class="footer-link"
                     data-i18n="footer_legal">Mentions légales</a>
                 <a href="Mention legale/2_Politique_Confidentialite.pdf" target="_blank" class="footer-link"
@@ -23,12 +23,13 @@
                 <a href="Mention legale/5_Politique_Cookies_RGPD.pdf" target="_blank" class="footer-link"
                     data-i18n="footer_cookies">Politique de cookies</a>
             </div>
-            <div class="mt-3 text-muted small">
-                <p class="mb-1">SecurityNoPhone – Service par Rép&amp;Web</p>
-                <p class="mb-1">10 Grande Rue de Saint-Clair, 69300 Caluire-et-Cuire</p>
-                <p class="mb-1">SIRET : 518 495 569 00049</p>
-                <p class="mb-0">Contact : snophone.info@gmail.com • 07 45 20 13 10</p>
-            </div>
+            <p class="mb-0 fw-medium footer-contact">
+                <span class="footer-contact-item">SecurityNoPhone – Service par Rép&amp;Web</span>
+                <span class="footer-contact-item">10 Grande Rue de Saint-Clair, 69300 Caluire-et-Cuire</span>
+                <span class="footer-contact-item">SIRET : 518 495 569 00049</span>
+                <span class="footer-contact-item">Contact : <a class="footer-link d-inline" href="mailto:snophone.info@gmail.com">snophone.info@gmail.com</a>
+                    <span class="footer-contact-separator">•</span> <a class="footer-link d-inline" href="tel:+33745201310">07 45 20 13 10</a></span>
+            </p>
         </div>
     </footer>
 
@@ -68,6 +69,51 @@
         .footer {
             border-radius: 0;
             box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-contact {
+            line-height: 1.7;
+        }
+
+        .footer-contact .footer-link {
+            font-size: inherit;
+        }
+
+        .footer-contact .footer-link::after {
+            left: 0;
+            width: 100%;
+        }
+
+        .footer-contact-item {
+            display: block;
+        }
+
+        .footer-contact-item + .footer-contact-item {
+            margin-top: 0.35rem;
+        }
+
+        .footer-contact-separator {
+            margin: 0 0.35rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-contact-item {
+                display: inline;
+            }
+
+            .footer-contact-item + .footer-contact-item {
+                margin-top: 0;
+            }
+
+            .footer-contact-item + .footer-contact-item::before {
+                content: " • ";
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .footer-contact-separator {
+                display: none;
+            }
         }
     </style>
 
