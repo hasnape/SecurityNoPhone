@@ -1,6 +1,73 @@
+function updateLanguageSelectUI(lang) {
+  const select = document.getElementById('langSwitcher');
+  if (!select) {
+    return;
+  }
+
+  if (select.value !== lang) {
+    select.value = lang;
+  }
+
+  const option = select.querySelector(`option[value="${lang}"]`);
+  let flagUrl = option ? option.dataset.flag : null;
+  if (!flagUrl && select.options.length > 0) {
+    flagUrl = select.options[0].dataset.flag || null;
+  }
+
+  if (flagUrl) {
+    select.style.backgroundImage = `url('${flagUrl}')`;
+    select.style.backgroundRepeat = 'no-repeat';
+    select.style.backgroundSize = '20px 14px';
+
+    const isRTL = lang === 'ar';
+    if (isRTL) {
+      select.style.backgroundPosition = 'calc(100% - 8px) center';
+      select.style.paddingLeft = '0.6rem';
+      select.style.paddingRight = '2.2rem';
+    } else {
+      select.style.backgroundPosition = '8px center';
+      select.style.paddingLeft = '2.2rem';
+      select.style.paddingRight = '0.6rem';
+    }
+  } else {
+    select.style.backgroundImage = 'none';
+    select.style.paddingLeft = '';
+    select.style.paddingRight = '';
+    select.style.backgroundPosition = '';
+  }
+}
+
+function setLanguage(lang) {
+  const targetLang = lang || 'fr';
+  localStorage.setItem('lang', targetLang);
+  switchLanguage(targetLang);
+}
+
+function setupLanguageSwitcher(initialLang) {
+  const select = document.getElementById('langSwitcher');
+  if (!select) {
+    return;
+  }
+
+  const langToApply = initialLang || localStorage.getItem('lang') || 'fr';
+  updateLanguageSelectUI(langToApply);
+
+  if (select.dataset.langBound === 'true') {
+    return;
+  }
+
+  select.addEventListener('change', event => {
+    const selectedLang = event.target.value || 'fr';
+    setLanguage(selectedLang);
+  });
+  select.dataset.langBound = 'true';
+}
+
 function switchLanguage(lang) {
   const currentLang = lang || localStorage.getItem('lang') || 'fr';
   document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+  updateLanguageSelectUI(currentLang);
   const translations = window.translations ? window.translations[currentLang] : null;
   if (!translations) {
     console.warn(`No translations found for language: ${currentLang}`);
@@ -72,7 +139,7 @@ function handleCookieBanner() {
     if (accepted === "true") {
       banner.style.display = "none";
     } else {
-      banner.style.display = "block";
+      banner.style.display = "flex";
     }
   }
 }
@@ -108,6 +175,22 @@ function setupSmoothScroll() {
   });
 }
 
+function setupNavbarToggler() {
+  const burgerBtn = document.querySelector('.navbar-toggler');
+  const navbarCollapse = document.getElementById('snfNav');
+  if (!burgerBtn || !navbarCollapse || burgerBtn.dataset.togglerBound === 'true') {
+    return;
+  }
+
+  navbarCollapse.addEventListener('show.bs.collapse', () => {
+    burgerBtn.classList.add('is-active');
+  });
+  navbarCollapse.addEventListener('hide.bs.collapse', () => {
+    burgerBtn.classList.remove('is-active');
+  });
+  burgerBtn.dataset.togglerBound = 'true';
+}
+
 function loadNavbar() {
   fetch("includes/navbar.html")
     .then(res => {
@@ -124,15 +207,8 @@ function loadNavbar() {
       }
       navContainer.innerHTML = html;
       const lang = localStorage.getItem("lang") || "fr";
-      const langSelect = document.getElementById("langSwitcher");
-      if (langSelect) {
-        langSelect.value = lang;
-        langSelect.addEventListener("change", e => {
-          const selectedLang = e.target.value;
-          localStorage.setItem("lang", selectedLang);
-          switchLanguage(selectedLang);
-        });
-      }
+      setupLanguageSwitcher(lang);
+      setupNavbarToggler();
       setupSmoothScroll();
     })
     .catch(error => console.error("Error loading navbar:", error));
@@ -170,6 +246,7 @@ async function initializePage() {
   }
   const currentLang = localStorage.getItem("lang") || 'fr';
   document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
   const navbarPromise = new Promise((resolve, reject) => {
     fetch("includes/navbar.html")
@@ -181,15 +258,8 @@ async function initializePage() {
         const navContainer = document.getElementById("navbar-container") || document.getElementById("navbar-placeholder");
         if (navContainer) navContainer.innerHTML = html;
         else console.warn("Navbar container not found.");
-        const langSelect = document.getElementById("langSwitcher");
-        if (langSelect) {
-          langSelect.value = currentLang;
-          langSelect.addEventListener("change", e => {
-            const selectedLang = e.target.value;
-            localStorage.setItem("lang", selectedLang);
-            switchLanguage(selectedLang);
-          });
-        }
+        setupLanguageSwitcher(currentLang);
+        setupNavbarToggler();
         resolve();
       })
       .catch(error => {
@@ -231,16 +301,8 @@ async function initializePage() {
   }
 }
 
+window.applyTranslations = switchLanguage;
+
 document.addEventListener("DOMContentLoaded", () => {
   initializePage();
-  const burgerBtn = document.querySelector('.navbar-toggler');
-  const navbarCollapse = document.getElementById('navbarNav');
-  if (burgerBtn && navbarCollapse) {
-    navbarCollapse.addEventListener('show.bs.collapse', () => {
-      burgerBtn.classList.add('is-active');
-    });
-    navbarCollapse.addEventListener('hide.bs.collapse', () => {
-      burgerBtn.classList.remove('is-active');
-    });
-  }
 });
