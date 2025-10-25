@@ -647,3 +647,16 @@ p, li {
     direction: rtl;
 }
 
+.paypal-message-wrapper {
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.paypal-message-wrapper [data-paypal-message] {
+    min-height: 48px;
+}
+
+.paypal-message-wrapper small {
+    font-size: 0.85rem;
+}
+

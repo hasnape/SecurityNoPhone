@@ -80,8 +80,18 @@
           </div>
           <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite" data-price-display data-template="الإجمالي التقديري: {price}"></div>
 
+          <div class="paypal-message-wrapper text-center mt-3">
+            <div data-paypal-message data-pp-style-layout="text" data-pp-style-logo-type="inline"
+              data-pp-style-text-color="black"></div>
+            <small class="d-block mt-2 text-muted" data-i18n="payment_card_note">
+              يمكنك أيضًا الدفع بالبطاقة عبر PayPal من دون الحاجة إلى حساب.
+            </small>
+          </div>
+
           <div class="text-center mt-4">
-            <div class="d-inline-block" data-paypal-container data-client-id="sb" data-currency="EUR"
+            <div class="d-inline-block" data-paypal-container
+              data-client-id="AYfFtx4nhnM_IaoUdUfCmRX9MqWxjHY2QKx3QcficjUNDSCk3SsZCzGRI2yzpKR4bwmQvkWveZbf9Jxq"
+              data-currency="EUR" data-components="buttons,messages"
               data-description="SecurityNoPhone – طلب" data-auto-submit="true"
               data-message-invalid="يرجى إكمال النموذج لتفعيل الدفع عبر PayPal."
               data-message-ready="الإجمالي التقديري: {amount}. اضغط على PayPal لإتمام طلبك."
@@ -102,11 +112,11 @@
       </div>
       <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
         <p class="text-center text-muted mt-3"></p>
-        <small class="text-muted d-block mt-2 text-center">
-          💳 الدفع عبر <strong>PayPal (إن كان متاحًا)</strong> يظهر تلقائيًا حسب حسابك.
+        <small class="text-muted d-block mt-2 text-center" data-i18n="payment_description">
+          استفد من الدفع على 4 دفعات عبر PayPal (إن كنت مؤهلاً) مع إمكانية الدفع بالبطاقة دون الحاجة إلى حساب PayPal.
         </small>
-        <small class="text-muted d-block text-center">
-          💡 ملاحظة: يظهر PayPal (إن كان متاحًا) أثناء الدفع.
+        <small class="text-muted d-block text-center" data-i18n="payment_tip">
+          💡 ملاحظة: يعرض PayPal تلقائيًا خياراتك المتاحة (الدفع على 4 دفعات أو البطاقة) عند إتمام الطلب.
         </small>
       </div>
     </div>

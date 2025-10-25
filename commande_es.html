@@ -87,8 +87,18 @@
           </div>
           <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite" data-price-display data-template="Total estimado: {price}"></div>
 
+          <div class="paypal-message-wrapper text-center mt-3">
+            <div data-paypal-message data-pp-style-layout="text" data-pp-style-logo-type="inline"
+              data-pp-style-text-color="black"></div>
+            <small class="d-block mt-2 text-muted" data-i18n="payment_card_note">
+              También puedes pagar con tarjeta a través de PayPal, sin crear cuenta.
+            </small>
+          </div>
+
           <div class="text-center mt-4">
-            <div class="d-inline-block" data-paypal-container data-client-id="sb" data-currency="EUR"
+            <div class="d-inline-block" data-paypal-container
+              data-client-id="AYfFtx4nhnM_IaoUdUfCmRX9MqWxjHY2QKx3QcficjUNDSCk3SsZCzGRI2yzpKR4bwmQvkWveZbf9Jxq"
+              data-currency="EUR" data-components="buttons,messages"
               data-description="SecurityNoPhone – Pedido" data-auto-submit="true"
               data-message-invalid="Complete el formulario para activar el pago con PayPal."
               data-message-ready="Total estimado: {amount}. Haz clic en PayPal para finalizar tu pedido."
@@ -114,8 +124,8 @@
               <small class="fst-italic text-muted">(se muestra automáticamente según tu cuenta)</small>
           </p>
                         <p class="text-center text-secondary" data-i18n="payment_description">
-                            Protege la confidencialidad de tus eventos con nuestra opción de pago a plazos.<br>
-                            <span class="text-dark">Esta opción aparece automáticamente durante el pago con PayPal si eres elegible.</span>
+                            Protege la confidencialidad de tus eventos y, si eres elegible, paga en 4 plazos con PayPal.<br>
+                            <span class="text-dark">También puedes pagar con tarjeta mediante PayPal, sin necesidad de crear una cuenta.</span>
                         </p>
                         <hr class="my-3 bg-secondary" style="height:1px; width:80%;" />
                         <p class="text-center text-dark" data-i18n="payment_flexibility_title">
@@ -130,8 +140,8 @@
                         <p class="fw-bold mt-4 text-center" style="color: #198754;" data-i18n="payment_footer">
                             Pide hoy, paga con tranquilidad,<br>y garantiza el éxito de tu evento.
                         </p>
-                        <small class="d-block text-center mt-3 text-muted">
-            💡 Consejo: PayPal (si es elegible) aparece durante el pago.
+                        <small class="d-block text-center mt-3 text-muted" data-i18n="payment_tip">
+            💡 Consejo: PayPal muestra automáticamente tus opciones disponibles (Pay in 4, tarjeta) durante el pago.
           </small>
                     </div>
                 </div>
