@@ -1811,3 +1811,102 @@ Discrétion - Sécurité - Contrôle.",
 
   }
 };
+
+(function (translations) {
+  if (!translations) {
+    return;
+  }
+  const overrides = {
+    fr: {
+      nav_resources: "Ressources",
+      hero_strapline: "SecurityNoPhone • Concierge anti-smartphone haut de gamme",
+      hero_description: "SecurityNoPhone orchestre des dispositifs complets pour les agences événementielles, maisons de luxe, institutions publiques et familles exigeantes afin de préserver vos contenus exclusifs.",
+      hero_point_1: "Confidentialité garantie du brief au débrief",
+      hero_point_2: "Signalétique multilingue, personnel formé et reporting",
+      hero_point_3: "Solutions location, vente ou conciergerie pour événements particuliers",
+      hero_cta_primary: "Demander un accompagnement",
+      hero_cta_secondary: "Explorer nos offres",
+      hero_note: "Chaque mission bénéficie d’un chef de projet dédié, de messages personnalisés et d’un kit premium prêt à déployer.",
+      contact_payment_note: "Facturation envoyée sous 24 h avec règlement sécurisé par carte bancaire ou virement, selon vos procédures.",
+      label_caution: "Caution (obligatoire)",
+      caution_help: "Comptez 300 € de caution par tranche de 700 pochettes pour les dispositifs de location et l’abonnement Starter. La caution est restituée après vérification.",
+      caution_note: "La caution est automatiquement ajoutée et précisée dans le récapitulatif envoyé par nos équipes.",
+      policy_title: "Politique de rétractation et engagement de service",
+      policy_intro: "Nous respectons le cadre légal français tout en protégeant vos échéances événementielles.",
+      policy_client_title: "Droits du client",
+      policy_client_text: "Pour les clients consommateurs, vous disposez d’un délai légal de 14 jours (articles L221-18 et suivants du Code de la consommation) pour vous rétracter sur les prestations non exécutées. Pour les professionnels, nous étudions chaque situation et pouvons proposer un report ou un avoir lorsque le planning le permet.",
+      policy_provider_title: "Engagement SecurityNoPhone",
+      policy_provider_text: "Toute annulation écrite avant mobilisation des équipes donne lieu à un remboursement intégral des acomptes. À moins de 7 jours de l’événement, seuls les frais engagés et la caution restent dus. Nous fournissons un protocole signé récapitulant ces conditions pour chaque mission."
+    },
+    en: {
+      nav_resources: "Resources",
+      hero_strapline: "SecurityNoPhone • High-end anti-smartphone concierge",
+      hero_description: "SecurityNoPhone designs end-to-end programmes for event agencies, luxury houses, public institutions and private hosts to protect your exclusive content.",
+      hero_point_1: "Confidentiality guaranteed from briefing to debrief",
+      hero_point_2: "Multilingual signage, trained staff and clear reporting",
+      hero_point_3: "Rental, purchase or concierge services for private occasions",
+      hero_cta_primary: "Request our support",
+      hero_cta_secondary: "Explore our solutions",
+      hero_note: "Every assignment includes a dedicated project manager, tailored messaging and a premium deployment kit.",
+      contact_payment_note: "We send your invoice within 24 hours with a secure card or bank transfer link adapted to your procedures.",
+      label_caution: "Mandatory security deposit",
+      caution_help: "A refundable €300 deposit applies to every block of 700 pouches for rental services and the Starter subscription. It is released after inspection.",
+      caution_note: "The deposit is automatically added and detailed in the confirmation email you receive.",
+      policy_title: "Withdrawal policy and service commitment",
+      policy_intro: "We comply with French regulations while safeguarding your event timelines.",
+      policy_client_title: "Client rights",
+      policy_client_text: "Consumers benefit from a 14-day withdrawal period (French Consumer Code L221-18 and following) for services not yet delivered. Professional clients are reviewed case by case and we can offer postponements or credits whenever the schedule allows.",
+      policy_provider_title: "SecurityNoPhone commitment",
+      policy_provider_text: "Any written cancellation before our teams are mobilised leads to a full refund of deposits. Within 7 days of the event, only incurred costs and the deposit remain due. A signed protocol summarises these terms for every mission."
+    },
+    de: {
+      nav_resources: "Ressourcen",
+      hero_strapline: "SecurityNoPhone • High-End Anti-Smartphone Concierge",
+      hero_description: "SecurityNoPhone begleitet Eventagenturen, Luxusmarken, öffentliche Institutionen und private Gastgeber mit ganzheitlichen Konzepten zum Schutz vertraulicher Inhalte.",
+      hero_point_1: "Vertraulichkeit vom Briefing bis zum Debrief garantiert",
+      hero_point_2: "Mehrsprachige Beschilderung, geschulte Teams und transparentes Reporting",
+      hero_point_3: "Miet-, Kauf- oder Concierge-Lösungen für private Anlässe",
+      hero_cta_primary: "Begleitung anfragen",
+      hero_cta_secondary: "Unsere Lösungen entdecken",
+      hero_note: "Jedes Projekt erhält einen dedizierten Projektleiter, individuelle Botschaften und ein einsatzbereites Premium-Kit.",
+      contact_payment_note: "Wir senden innerhalb von 24 Stunden eine Rechnung mit sicherem Zahlungslink (Karte oder Überweisung) entsprechend Ihren Prozessen.",
+      label_caution: "Pflichtkaution",
+      caution_help: "Für jede Tranche von 700 Taschen bei Mietlösungen oder Starter-Abo fällt eine erstattbare Kaution von 300 € an. Die Freigabe erfolgt nach Prüfung.",
+      caution_note: "Die Kaution wird automatisch ergänzt und in unserer Bestätigungs-E-Mail erläutert.",
+      policy_title: "Widerrufsrecht und Serviceverpflichtung",
+      policy_intro: "Wir halten den französischen Rechtsrahmen ein und sichern gleichzeitig Ihre Veranstaltungsfristen ab.",
+      policy_client_title: "Rechte der Auftraggeber",
+      policy_client_text: "Verbraucher haben ein gesetzliches Widerrufsrecht von 14 Tagen (Code de la Consommation L221-18 ff.), solange die Leistung nicht erbracht wurde. Geschäftskunden betrachten wir individuell und bieten, wenn möglich, Verschiebungen oder Gutschriften an.",
+      policy_provider_title: "Verpflichtung von SecurityNoPhone",
+      policy_provider_text: "Jede schriftliche Stornierung vor Einsatzbeginn führt zur vollständigen Rückerstattung der Anzahlungen. Innerhalb von 7 Tagen vor dem Event bleiben nur die bereits entstandenen Kosten und die Kaution fällig. Ein unterschriebenes Protokoll fasst diese Bedingungen zusammen."
+    },
+    ar: {
+      nav_resources: "الموارد",
+      hero_strapline: "SecurityNoPhone • خدمة كونسيرج فاخرة مضادة للهواتف",
+      hero_description: "تدير SecurityNoPhone حلولاً متكاملة لوكالات الفعاليات، دور الفخامة، المؤسسات العامة والعائلات الراقية لحماية محتواكم الحصري.",
+      hero_point_1: "سرية مضمونة من مرحلة الإعداد حتى ختام الحدث",
+      hero_point_2: "لافتات متعددة اللغات، فريق مدرّب وتقارير واضحة",
+      hero_point_3: "خيارات تأجير أو شراء أو كونسيرج للفعاليات الخاصة",
+      hero_cta_primary: "اطلب مرافقتنا",
+      hero_cta_secondary: "اكتشف حلولنا",
+      hero_note: "يُخصَّص لكل مهمة مدير مشروع، ورسائل مخصصة، وحقيبة تجهيز فاخرة جاهزة للتنفيذ.",
+      contact_payment_note: "نرسل الفاتورة خلال 24 ساعة مع رابط دفع آمن بالبطاقة أو التحويل المصرفي وفق إجراءاتكم.",
+      label_caution: "وديعة إلزامية",
+      caution_help: "تُطبّق وديعة قابلة للاسترداد بقيمة 300 € لكل 700 غطاء في خدمات الإيجار أو اشتراك Starter. يتم إرجاعها بعد التحقق من المعدات.",
+      caution_note: "تُضاف الوديعة تلقائياً وسيتم شرحها في رسالة التأكيد التي نرسلها لكم.",
+      policy_title: "سياسة التراجع والتزام الخدمة",
+      policy_intro: "نلتزم بالإطار القانوني الفرنسي مع حماية مواعيد فعالياتكم.",
+      policy_client_title: "حقوق العميل",
+      policy_client_text: "يحق للمستهلكين فترة تراجع قانونية مدتها 14 يوماً (المواد L221-18 وما يليها من قانون المستهلك الفرنسي) للخدمات غير المنفذة. أما المهنيون فنقوم بدراسة كل حالة ويمكننا اقتراح تأجيل أو رصيد حسب توفر الجدول.",
+      policy_provider_title: "التزام SecurityNoPhone",
+      policy_provider_text: "أي إلغاء خطي قبل تعبئة فرقنا يؤدي إلى استرداد كامل للدفعات المقدّمة. قبل الحدث بـ7 أيام أو أقل تبقى التكاليف المنجزة والوديعة مستحقة. نقدم بروتوكولاً موقّعاً يوضح هذه الشروط لكل مهمة."
+    }
+  };
+
+  Object.keys(overrides).forEach(lang => {
+    if (!translations[lang]) {
+      translations[lang] = {};
+    }
+    Object.assign(translations[lang], overrides[lang]);
+  });
+})(window.translations);

@@ -18,35 +18,30 @@
       <h1 class="text-center mb-5">إرسال طلب</h1>
       <div class="row gy-5">
         <div class="col-lg-7">
-          <form action="https://formspree.io/f/xqaqogdv" method="POST" data-order-form data-locale="ar-SA"
-            data-paypal-description="SecurityNoPhone – Order AR" data-paypal-invalid="يرجى إكمال النموذج لتفعيل باي بال."
-            data-paypal-ready="المجموع التقديري: {amount}. تابع الدفع عبر باي بال."
-            data-paypal-processing="جاري معالجة الدفع..."
-            data-paypal-success="تم تأكيد الدفع عبر باي بال. تم إرسال طلبك."
-            data-paypal-error="فشل الدفع عبر باي بال. حاول مجددًا."
-            data-paypal-cancel="تم إلغاء الدفع عبر باي بال." data-currency="EUR"
-            data-custom-message="عرض مخصص: سنتواصل معكم خلال يوم عمل واحد.">
+                    <form action="https://formspree.io/f/xqaqogdv" method="POST" data-order-form data-locale="ar-SA"
+            data-currency="EUR"
+            data-custom-message="سنعاود الاتصال بكم خلال يوم عمل واحد لتأكيد التفاصيل.">
             <input type="text" name="_gotcha" style="display:none" />
 
             <div class="mb-3">
               <label class="form-label" for="offerType">نوع العرض:</label>
               <select class="form-select" name="offre" id="offerType" required>
-                <option value="">-- اختر العرض --</option>
-                <option value="location_sans">إيجار بدون فريق</option>
-                <option value="location_avec">إيجار مع فريق</option>
-                <option value="abonnement">اشتراك ستارتر</option>
-                <option value="achat">أغطية مخصصة</option>
-                <option value="special_event">مرافقة للفعاليات الخاصة</option>
+                <option value="">-- اختر عرضاً --</option>
+                <option value="location_sans">تأجير بدون طاقم</option>
+                <option value="location_avec">تأجير مع طاقم</option>
+                <option value="abonnement">اشتراك Starter</option>
+                <option value="achat">أغلفة مخصصة</option>
+                <option value="special_event">مرافقة الفعاليات الخاصة وVIP</option>
               </select>
             </div>
 
             <div class="mb-3">
               <label class="form-label" for="quantity">عدد الأغطية:</label>
               <input type="number" class="form-control" name="quantite" id="quantity" min="0" value="50" required
-                data-msg-min-rental="الحد الأدنى للإيجار هو غطاء واحد." 
-                data-msg-min-custom="الحد الأدنى للأغطية المخصصة هو 50 قطعة." 
-                data-msg-min-subscription="يرجى إدخال غطاء واحد على الأقل لاشتراك ستارتر." 
-                data-msg-max-subscription="اشتراك ستارتر محدود بـ 50 غطاء." />
+                data-msg-min-rental="الحد الأدنى للإيجار هو غطاء واحد."
+                data-msg-min-custom="الحد الأدنى للأغلفة المخصصة هو 50 وحدة."
+                data-msg-min-subscription="يرجى إدخال غطاء واحد على الأقل لاشتراك Starter."
+                data-msg-max-subscription="اشتراك Starter محدود بـ 50 غطاء." />
               <div class="text-danger mt-1" id="quantityError" style="display:none"></div>
             </div>
 
@@ -62,64 +57,59 @@
                 </div>
               </div>
               <div id="dateError" class="text-danger mt-2" style="display:none"
-                data-msg-missing="يرجى تحديد تاريخي البدء والانتهاء للإيجار."
-                data-msg-range="يجب أن يكون تاريخ الانتهاء مساويًا أو بعد تاريخ البدء."></div>
+                data-msg-missing="يرجى إدخال تاريخي البداية والنهاية."
+                data-msg-range="يجب أن يكون تاريخ الانتهاء مساوياً أو لاحقاً لتاريخ البداية."></div>
             </div>
 
             <div class="mb-3 d-none" data-staff-fields>
-              <label class="form-label" for="staffQuantity">فريق إضافي (اختياري):</label>
+              <label class="form-label" for="staffQuantity">طاقم إضافي (اختياري):</label>
               <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0" />
-              <small class="text-muted">100 يورو لكل شخص في اليوم (6 ساعات).</small>
+              <small class="text-muted">100 € لكل شخص لكل 6 ساعات.</small>
             </div>
 
-            <div class="alert alert-info d-none" data-summary data-days-label="المدة" data-total-label="المجموع التقديري"
+            <div class="alert alert-info d-none" data-summary data-days-label="المدة" data-total-label="المبلغ التقديري"
               data-day-singular="يوم" data-day-plural="أيام" aria-live="polite">
               <p class="mb-1"><strong><span data-summary-days-label>المدة</span> : <span data-summary-days-count>—</span></strong></p>
-              <p class="mb-0"><span data-summary-total-label>المجموع التقديري</span> : <span data-summary-total-amount>—</span></p>
+              <p class="mb-0"><span data-summary-total-label>المبلغ التقديري</span> : <span data-summary-total-amount>—</span></p>
+            </div>
+
+            <div class="mb-3 d-none" data-caution-block>
+              <label class="form-label" data-i18n="label_caution">وديعة إلزامية</label>
+              <input type="text" class="form-control" data-caution-display readonly value="0,00 €" />
+              <small class="text-muted" data-i18n="caution_help">تُطبق وديعة قابلة للاسترداد بقيمة 300 € لكل 700 غطاء في خدمات الإيجار أو اشتراك Starter. يتم إرجاعها بعد التحقق من المعدات.</small>
             </div>
 
             <div class="mb-3">
-              <label class="form-label" for="nom">الاسم الكامل:</label>
-              <input type="text" name="nom" id="nom" class="form-control" required />
+              <label class="form-label" for="name" data-i18n="label_fullname">الاسم الكامل:</label>
+              <input type="text" name="nom" id="name" class="form-control" required />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="email">البريد الإلكتروني:</label>
+              <label class="form-label" for="email" data-i18n="label_email">البريد الإلكتروني:</label>
               <input type="email" name="email" id="email" class="form-control" required />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="adresse">عنوان الفواتير:</label>
-              <textarea name="adresse" id="adresse" class="form-control" rows="3" required></textarea>
+              <label class="form-label" for="address" data-i18n="label_address">عنوان الفواتير:</label>
+              <textarea name="adresse" id="address" class="form-control" rows="3" required></textarea>
             </div>
-            <div class="mb-3" id="special">
+            <div class="mb-3">
               <label class="form-label" for="infos">معلومات إضافية (اختياري)</label>
               <textarea name="infos" id="infos" class="form-control" rows="4"
-                placeholder="اذكر تفاصيل الموقع، الجدول الزمني أو المتطلبات الخاصة..."></textarea>
+                placeholder="اذكر نوع الحدث، عدد الضيوف، الشركاء..."></textarea>
             </div>
 
-            <div class="price-box text-center fw-bold fs-5 my-3" data-total-display data-template="المجموع التقديري: {price}"
-              aria-live="polite"></div>
-            <p class="small text-muted text-center" data-equation-note>
-              مرجع الميزانية: احسب 300 يورو لكل 700 غطاء للحلول المؤجرة واشتراك ستارتر.
-            </p>
+            <div class="price-box text-center fw-bold fs-5 my-3" data-total-display data-template="المبلغ التقديري: {price}" aria-live="polite"></div>
+            <p class="small text-muted text-center" data-i18n="caution_note">تُضاف الوديعة تلقائياً وسيتم شرحها في رسالة التأكيد التي نرسلها لكم.</p>
 
-            <div class="paypal-message-wrapper text-center mt-3">
-              <div id="pp-message" data-paypal-message data-pp-style-layout="text" data-pp-style-logo-type="inline"
-                data-pp-style-text-color="black" data-pp-amount="0.00"></div>
-              <small class="d-block mt-2 text-muted">
-                يمكن الدفع بالبطاقة عبر باي بال حتى بدون حساب.
-              </small>
+            <input type="hidden" name="montant_total_estime" data-total-value value="0" />
+            <input type="hidden" name="caution_total" data-caution-value value="0" />
+            <input type="hidden" name="submission_type" value="order" />
+            <input type="hidden" name="payment_status" value="to_be_confirmed" />
+
+            <div id="formSubmissionFeedback" class="mt-3" data-feedback></div>
+
+            <div class="mt-4">
+              <button type="submit" class="btn btn-primary w-100" data-i18n="btn_submit_order">إرسال الطلب</button>
             </div>
-
-            <div class="paypal-status small text-muted text-center mt-2" data-paypal-status></div>
-            <div class="mt-3" data-paypal-buttons></div>
-
-            <div class="mt-3 text-center">
-              <button type="button" class="btn btn-outline-secondary w-100" data-info-only>
-                إرسال بدون دفع (طلب معلومات)
-              </button>
-            </div>
-
-            <div class="mt-3" data-feedback></div>
           </form>
         </div>
         <div class="col-lg-5">
@@ -134,7 +124,7 @@
               <li class="mb-2">• أغطية مخصصة وعرض خاص للفعاليات رفيعة المستوى</li>
             </ul>
             <p class="small text-muted mb-0">
-              يعرض باي بال خيار الدفع على أربع دفعات تلقائيًا عند توفره في حسابك. يمكن الدفع بالبطاقة بدون حساب باي بال.
+              بعد تأكيد الطلب نرسل رابط دفع آمن (بطاقة أو حوالة) بما يتماشى مع إجراءاتكم الداخلية.
             </p>
           </div>
         </div>

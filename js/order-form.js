@@ -9,14 +9,6 @@
     special_event: { type: 'custom' }
   };
 
-  const META_FIELDS = ['paypal_order_id', 'paypal_payer_email', 'paypal_amount', 'payment_status', 'submission_type'];
-  const PAYPAL_MAX_ATTEMPTS = 40;
-  const PAYPAL_RETRY_DELAY = 150;
-
-  function clampMin(value, min) {
-    return value < min ? min : value;
-  }
-
   function formatCurrency(locale, value, currency) {
     try {
       return new Intl.NumberFormat(locale || 'fr-FR', { style: 'currency', currency: currency || 'EUR' }).format(value);
@@ -40,51 +32,44 @@
     }
     const MS_PER_DAY = 24 * 60 * 60 * 1000;
     const rawDays = Math.ceil(diff / MS_PER_DAY);
-    return clampMin(rawDays + 1, 1);
+    return Math.max(rawDays + 1, 1);
   }
 
-  function waitForPayPal() {
-    if (window.PayPalSDK && typeof window.PayPalSDK.Buttons === 'function') {
-      return Promise.resolve(window.PayPalSDK);
+  function computeCaution(offerKey, quantity) {
+    const offer = OFFER_CONFIG[offerKey];
+    if (!offer) {
+      return 0;
     }
-    return new Promise((resolve, reject) => {
-      let attempts = 0;
-      const interval = setInterval(() => {
-        attempts += 1;
-        if (window.PayPalSDK && typeof window.PayPalSDK.Buttons === 'function') {
-          clearInterval(interval);
-          resolve(window.PayPalSDK);
-        } else if (attempts >= PAYPAL_MAX_ATTEMPTS) {
-          clearInterval(interval);
-          reject(new Error('PayPal SDK unavailable'));
-        }
-      }, PAYPAL_RETRY_DELAY);
-    });
-  }
-
-  function addHiddenInput(form, name, value) {
-    let input = form.querySelector(`input[name="${name}"]`);
-    if (!input) {
-      input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = name;
-      form.appendChild(input);
+    if (offer.type === 'rental' || offer.type === 'subscription') {
+      const qty = Math.max(Number(quantity) || 0, 1);
+      const blocks = Math.ceil(qty / 700);
+      return blocks * 300;
     }
-    input.value = value || '';
+    return 0;
   }
 
-  function clearMetaFields(form) {
-    META_FIELDS.forEach((name) => {
-      const existing = form.querySelector(`input[name="${name}"]`);
-      if (existing) {
-        existing.remove();
-      }
-    });
+  function updateSummaryVisibility(summaryEl, show, locale, days, total, currency) {
+    if (!summaryEl) {
+      return;
+    }
+    summaryEl.classList.toggle('d-none', !show);
+    if (!show) {
+      return;
+    }
+    const daysLabel = summaryEl.querySelector('[data-summary-days-count]');
+    const totalLabel = summaryEl.querySelector('[data-summary-total-amount]');
+    if (daysLabel) {
+      daysLabel.textContent = days != null ? String(days) : '—';
+    }
+    if (totalLabel) {
+      totalLabel.textContent = total != null ? formatCurrency(locale, total, currency) : '—';
+    }
   }
 
   function initOrderForm(form) {
     const locale = form.dataset.locale || document.documentElement.getAttribute('lang') || 'fr-FR';
     const currency = (form.dataset.currency || 'EUR').toUpperCase();
+
     const offerSelect = form.querySelector('#offerType, [name="offre"]');
     const quantityInput = form.querySelector('#quantity, [name="quantite"]');
     const startInput = form.querySelector('[data-start-date]');
@@ -93,72 +78,28 @@
     const rentalFields = form.querySelector('[data-rental-fields]');
     const staffFields = form.querySelector('[data-staff-fields]');
     const summary = form.querySelector('[data-summary]');
-    const summaryDaysCount = summary ? summary.querySelector('[data-summary-days-count]') : null;
-    const summaryTotalAmount = summary ? summary.querySelector('[data-summary-total-amount]') : null;
     const priceDisplay = form.querySelector('[data-total-display]');
+    const priceTemplate = priceDisplay ? (priceDisplay.dataset.template || priceDisplay.textContent || 'Total: {price}') : 'Total: {price}';
+    const customMessage = form.dataset.customMessage || '';
     const quantityError = form.querySelector('#quantityError, [data-quantity-error]');
     const dateError = form.querySelector('#dateError, [data-date-error]');
-    const paypalMessage = form.querySelector('[data-paypal-message]');
-    const paypalButtons = form.querySelector('[data-paypal-buttons]');
-    const paypalStatus = form.querySelector('[data-paypal-status]');
-    const infoButton = form.querySelector('[data-info-only]');
-    const feedback = form.querySelector('[data-feedback]');
+    const cautionBlock = form.querySelector('[data-caution-block]');
+    const cautionDisplay = form.querySelector('[data-caution-display]');
+    const totalHidden = form.querySelector('[data-total-value]');
+    const cautionHidden = form.querySelector('[data-caution-value]');
 
-    let currentState = {
-      offer: '',
-      total: null,
-      days: null,
-      readyForPayPal: false
-    };
-
-    function showElement(element, shouldShow) {
+    function showElement(element, show) {
       if (!element) {
         return;
       }
-      element.classList.toggle('d-none', !shouldShow);
-      element.querySelectorAll('input, select, textarea').forEach((input) => {
-        if (shouldShow) {
+      element.classList.toggle('d-none', !show);
+      element.querySelectorAll('input, select, textarea').forEach(input => {
+        if (show) {
           input.removeAttribute('disabled');
         } else {
           input.setAttribute('disabled', 'disabled');
-          if (input.type === 'number') {
-            input.value = input.value || '0';
-          }
         }
       });
-    }
-
-    function showStatus(message, tone = 'muted') {
-      if (!paypalStatus) {
-        return;
-      }
-      const classMap = {
-        muted: 'text-muted',
-        info: 'text-info',
-        success: 'text-success',
-        error: 'text-danger'
-      };
-      paypalStatus.textContent = message || '';
-      paypalStatus.classList.remove('text-muted', 'text-info', 'text-success', 'text-danger');
-      paypalStatus.classList.add(classMap[tone] || 'text-muted');
-    }
-
-    function showFeedback(message, tone = 'info') {
-      if (!feedback) {
-        return;
-      }
-      feedback.textContent = message || '';
-      feedback.className = '';
-      feedback.classList.add('mt-3');
-      if (!message) {
-        return;
-      }
-      const toneClass = {
-        info: 'text-info',
-        success: 'text-success',
-        error: 'text-danger'
-      };
-      feedback.classList.add(toneClass[tone] || 'text-info');
     }
 
     function setQuantityValidity(message) {
@@ -183,314 +124,178 @@
       }
     }
 
-    function validateQuantity(offer) {
-      if (!quantityInput) {
+    function getQuantity() {
+      const raw = Number.parseInt(quantityInput && quantityInput.value, 10);
+      return Number.isNaN(raw) ? 0 : raw;
+    }
+
+    function validateQuantity(offerKey) {
+      const offer = OFFER_CONFIG[offerKey];
+      if (!offer || !quantityInput) {
+        setQuantityValidity('');
         return true;
       }
-      const rawValue = Number.parseInt(quantityInput.value, 10);
-      const quantity = Number.isNaN(rawValue) ? 0 : rawValue;
+      const qty = getQuantity();
       let message = '';
-
-      if (!offer) {
-        setQuantityValidity('');
-        return false;
+      if (offer.type === 'rental' && qty < 1) {
+        message = quantityInput.dataset.msgMinRental || 'Indiquez au moins une pochette.';
       }
-
-      if (offer === 'location_sans' || offer === 'location_avec') {
-        if (quantity < 1) {
-          message = quantityInput.dataset.msgMinRental || '';
-        }
-      } else if (offer === 'achat') {
-        if (quantity < (OFFER_CONFIG.achat.minQuantity || 50)) {
-          message = quantityInput.dataset.msgMinCustom || '';
-        }
-      } else if (offer === 'abonnement') {
-        if (quantity < 1) {
-          message = quantityInput.dataset.msgMinSubscription || '';
-        } else if (quantity > (OFFER_CONFIG.abonnement.maxQuantity || 50)) {
+      if (offer.type === 'purchase' && qty < (offer.minQuantity || 0)) {
+        message = quantityInput.dataset.msgMinCustom || `Minimum ${offer.minQuantity}`;
+      }
+      if (offer.type === 'subscription') {
+        if (qty < 1) {
+          message = quantityInput.dataset.msgMinSubscription || 'Indiquez au moins une pochette.';
+        } else if (offer.maxQuantity && qty > offer.maxQuantity) {
           message = quantityInput.dataset.msgMaxSubscription || '';
         }
-      } else {
-        if (quantity < 0) {
-          message = quantityInput.dataset.msgMinRental || '';
-        }
       }
-
       setQuantityValidity(message);
-      return !message;
+      return message === '';
     }
 
-    function validateDates(offer) {
+    function validateDates(offerKey) {
       if (!startInput || !endInput) {
-        return true;
+        return { valid: true, days: null };
       }
-      if (offer !== 'location_sans' && offer !== 'location_avec') {
+      const offer = OFFER_CONFIG[offerKey];
+      if (!offer || offer.type !== 'rental') {
         setDateValidity('');
-        return true;
+        return { valid: true, days: null };
+      }
+      if (!startInput.value && !endInput.value) {
+        setDateValidity('');
+        return { valid: true, days: null };
       }
       if (!startInput.value || !endInput.value) {
-        setDateValidity(startInput.dataset.msgMissing || endInput.dataset.msgMissing || form.querySelector('[data-msg-missing]')?.dataset.msgMissing || '');
-        return false;
+        setDateValidity(endInput.dataset.msgMissing || 'Veuillez indiquer les dates de début et de fin.');
+        return { valid: false, days: null };
       }
       const days = computeInclusiveDays(startInput.value, endInput.value);
-      if (days === null) {
-        setDateValidity(startInput.dataset.msgMissing || endInput.dataset.msgMissing || form.querySelector('[data-msg-missing]')?.dataset.msgMissing || '');
-        return false;
-      }
       if (days === -1) {
-        const rangeMessage = startInput.dataset.msgRange || endInput.dataset.msgRange || form.querySelector('[data-msg-range]')?.dataset.msgRange || '';
-        setDateValidity(rangeMessage);
-        return false;
+        setDateValidity(endInput.dataset.msgRange || 'La date de fin doit être postérieure ou égale à la date de début.');
+        return { valid: false, days: null };
       }
       setDateValidity('');
-      return true;
+      return { valid: true, days };
     }
 
-    function renderSummary(days, total) {
-      if (!summary) {
-        return;
-      }
-      if (typeof days === 'number' && typeof total === 'number') {
-        summary.classList.remove('d-none');
-        if (summaryDaysCount) {
-          const singular = summary.dataset.daySingular || 'jour';
-          const plural = summary.dataset.dayPlural || 'jours';
-          const label = days > 1 ? plural : singular;
-          summaryDaysCount.textContent = `${days} ${label}`;
+    function computeTotals() {
+      const offerKey = offerSelect ? offerSelect.value : '';
+      const offer = OFFER_CONFIG[offerKey];
+      if (!offer) {
+        updateSummaryVisibility(summary, false);
+        if (priceDisplay) {
+          priceDisplay.textContent = formatCurrency(locale, 0, currency);
         }
-        if (summaryTotalAmount) {
-          summaryTotalAmount.textContent = formatCurrency(locale, total, currency);
+        if (cautionBlock) {
+          cautionBlock.classList.add('d-none');
         }
-      } else {
-        summary.classList.add('d-none');
-      }
-    }
-
-    function renderPrice(total, offer) {
-      if (!priceDisplay) {
-        return;
-      }
-      if (typeof total === 'number' && total > 0) {
-        const template = priceDisplay.dataset.template || '{price}';
-        priceDisplay.textContent = template.replace('{price}', formatCurrency(locale, total, currency));
-      } else if (offer === 'special_event') {
-        priceDisplay.textContent = form.dataset.customMessage || '';
-      } else if (offer) {
-        priceDisplay.textContent = form.dataset.paypalInvalid || '';
-      } else {
-        priceDisplay.textContent = '';
-      }
-    }
-
-    let currentButtonsInstance = null;
-
-    function teardownButtons() {
-      if (paypalButtons) {
-        paypalButtons.innerHTML = '';
-      }
-      if (currentButtonsInstance && typeof currentButtonsInstance.close === 'function') {
-        try {
-          currentButtonsInstance.close();
-        } catch (error) {
-          // ignore teardown errors
-        }
-      }
-      currentButtonsInstance = null;
-    }
-
-    function renderPayPal(total, offer) {
-      const amountNumber = typeof total === 'number' && total > 0 ? Number((Math.round(total * 100) / 100).toFixed(2)) : null;
-      if (!paypalButtons) {
+        if (totalHidden) totalHidden.value = '0';
+        if (cautionHidden) cautionHidden.value = '0';
         return;
       }
 
-      if (!amountNumber) {
-        teardownButtons();
-        if (paypalMessage) {
-          paypalMessage.innerHTML = '';
-          paypalMessage.setAttribute('data-pp-amount', '0.00');
+      const quantityValid = validateQuantity(offerKey);
+      const quantity = getQuantity();
+      const caution = computeCaution(offerKey, quantity);
+
+      let total = 0;
+      let daysInfo = { valid: true, days: null };
+
+      switch (offer.type) {
+        case 'rental': {
+          daysInfo = validateDates(offerKey);
+          const days = daysInfo.days || 1;
+          const base = offer.dailyRate * days;
+          let staffTotal = 0;
+          if (staffInput) {
+            const staffCount = Math.max(Number.parseInt(staffInput.value, 10) || 0, 0);
+            staffTotal = (offer.staffDailyRate || 0) * staffCount * days;
+          }
+          total = base + staffTotal;
+          break;
         }
-        const idleMessage = offer === 'special_event' ? (form.dataset.customMessage || '') : (form.dataset.paypalInvalid || '');
-        showStatus(idleMessage, 'muted');
-        return;
+        case 'subscription': {
+          const qty = Math.max(quantity, 0);
+          const packs = Math.max(Math.ceil(qty / (offer.packSize || 1)), 0);
+          total = packs * (offer.pricePerPack || 0);
+          break;
+        }
+        case 'purchase': {
+          total = Math.max(quantity, 0) * (offer.unitPrice || 0);
+          break;
+        }
+        case 'custom':
+          total = 0;
+          break;
+        default:
+          total = 0;
       }
 
-      waitForPayPal()
-        .then((sdk) => {
-          if (paypalMessage) {
-            paypalMessage.innerHTML = '';
-            paypalMessage.setAttribute('data-pp-amount', amountNumber.toFixed(2));
-            try {
-              sdk.Messages({ amount: amountNumber.toFixed(2) }).render(paypalMessage);
-            } catch (error) {
-              // ignore render errors
-            }
-          }
+      const grandTotal = total + caution;
 
-          teardownButtons();
-          const prettyAmount = formatCurrency(locale, amountNumber, currency);
-          const readyTemplate = form.dataset.paypalReady || '';
-          if (readyTemplate) {
-            showStatus(readyTemplate.replace('{amount}', prettyAmount), 'info');
-          } else {
-            showStatus(prettyAmount, 'info');
-          }
+      if (priceDisplay) {
+        if (offer.type === 'custom' && customMessage) {
+          priceDisplay.textContent = customMessage;
+        } else {
+          priceDisplay.textContent = priceTemplate.replace('{price}', formatCurrency(locale, grandTotal, currency));
+        }
+      }
 
-          currentButtonsInstance = sdk.Buttons({
-            style: { layout: 'vertical' },
-            onClick: function onClick(_, actions) {
-              clearMetaFields(form);
-              const offerValue = offerSelect ? offerSelect.value : '';
-              const quantityValid = validateQuantity(offerValue);
-              const datesValid = validateDates(offerValue);
-              const baseValid = form.checkValidity();
-              if (!quantityValid || !datesValid || !baseValid) {
-                form.reportValidity();
-                return actions.reject();
-              }
-              showStatus(form.dataset.paypalProcessing || '', 'info');
-              return actions.resolve();
-            },
-            createOrder: function createOrder(_, actions) {
-              return actions.order.create({
-                purchase_units: [
-                  {
-                    description: form.dataset.paypalDescription || 'SecurityNoPhone Order',
-                    amount: {
-                      currency_code: currency,
-                      value: amountNumber.toFixed(2)
-                    }
-                  }
-                ]
-              });
-            },
-            onApprove: function onApprove(data, actions) {
-              showStatus(form.dataset.paypalProcessing || '', 'info');
-              return actions.order.capture().then((details) => {
-                const payerEmail = details && details.payer ? details.payer.email_address || '' : '';
-                clearMetaFields(form);
-                addHiddenInput(form, 'paypal_order_id', data.orderID || '');
-                addHiddenInput(form, 'paypal_payer_email', payerEmail);
-                addHiddenInput(form, 'paypal_amount', amountNumber.toFixed(2));
-                addHiddenInput(form, 'payment_status', 'paid');
-                addHiddenInput(form, 'submission_type', 'paypal');
-                showStatus(form.dataset.paypalSuccess || '', 'success');
-                form.submit();
-              });
-            },
-            onCancel: function onCancel() {
-              showStatus(form.dataset.paypalCancel || '', 'muted');
-            },
-            onError: function onError() {
-              showStatus(form.dataset.paypalError || '', 'error');
-            }
-          });
+      updateSummaryVisibility(summary, offer.type === 'rental', locale, daysInfo.days || 1, total, currency);
 
-          if (currentButtonsInstance) {
-            currentButtonsInstance.render(paypalButtons).catch(() => {
-              showStatus(form.dataset.paypalError || '', 'error');
-            });
-          }
-        })
-        .catch(() => {
-          teardownButtons();
-          showStatus(form.dataset.paypalError || '', 'error');
-        });
+      if (cautionBlock) {
+        const shouldShow = caution > 0;
+        cautionBlock.classList.toggle('d-none', !shouldShow);
+        if (cautionDisplay) {
+          cautionDisplay.value = formatCurrency(locale, caution, currency);
+        }
+      }
+
+      if (totalHidden) {
+        totalHidden.value = grandTotal.toFixed(2);
+      }
+      if (cautionHidden) {
+        cautionHidden.value = caution.toFixed(2);
+      }
+
+      const summaryFieldsActive = offer.type === 'rental';
+      showElement(rentalFields, summaryFieldsActive);
+      showElement(staffFields, offer.type === 'rental' && offer.staffDailyRate);
+
+      return quantityValid && daysInfo.valid;
     }
 
-    function refreshState() {
-      const offer = offerSelect ? offerSelect.value : '';
-      const config = offer ? OFFER_CONFIG[offer] : null;
-      showElement(rentalFields, offer === 'location_sans' || offer === 'location_avec');
-      showElement(staffFields, offer === 'location_avec');
-
-      const quantityValid = validateQuantity(offer);
-      const datesValid = validateDates(offer);
-
-      let total = null;
-      let days = null;
-
-      if (config) {
-        if (config.type === 'rental') {
-          if (datesValid) {
-            days = computeInclusiveDays(startInput.value, endInput.value);
-            if (typeof days === 'number' && days > 0) {
-              total = config.dailyRate * days;
-              if (offer === 'location_avec' && staffInput) {
-                const staffRaw = Number.parseInt(staffInput.value, 10);
-                const staffQty = Number.isNaN(staffRaw) ? 0 : clampMin(staffRaw, 0);
-                staffInput.value = staffQty.toString();
-                total += staffQty * (config.staffDailyRate || 0) * days;
-              }
-            }
-          }
-        } else if (config.type === 'purchase') {
-          const qty = Number.parseInt(quantityInput.value, 10);
-          if (!Number.isNaN(qty) && qty >= (config.minQuantity || 0)) {
-            total = qty * (config.unitPrice || 0);
-          }
-        } else if (config.type === 'subscription') {
-          const qty = clampMin(Number.parseInt(quantityInput.value, 10) || 0, 0);
-          if (qty > 0) {
-            const effectiveMax = config.maxQuantity || qty;
-            const effectiveQty = qty > effectiveMax ? effectiveMax : qty;
-            const packSize = clampMin(config.packSize || 50, 1);
-            const packs = Math.max(1, Math.ceil(effectiveQty / packSize));
-            total = packs * (config.pricePerPack || 0);
-          }
-        } else if (config.type === 'custom') {
-          total = null;
-        }
-      }
-
-      const readyForPayPal = Boolean(
-        config && config.type !== 'custom' && quantityValid && datesValid && typeof total === 'number' && total > 0
-      );
-
-      renderPrice(total, offer);
-      renderSummary(config && config.type === 'rental' ? days : null, total);
-      currentState = { offer, total: typeof total === 'number' ? total : null, days, readyForPayPal };
-      renderPayPal(currentState.total, offer);
+    function refresh() {
+      computeTotals();
     }
 
     if (offerSelect) {
-      offerSelect.addEventListener('change', refreshState);
+      offerSelect.addEventListener('change', refresh);
     }
     if (quantityInput) {
-      quantityInput.addEventListener('input', refreshState);
+      quantityInput.addEventListener('input', refresh);
     }
     if (startInput) {
-      startInput.addEventListener('change', refreshState);
+      startInput.addEventListener('change', refresh);
     }
     if (endInput) {
-      endInput.addEventListener('change', refreshState);
+      endInput.addEventListener('change', refresh);
     }
     if (staffInput) {
-      staffInput.addEventListener('input', refreshState);
+      staffInput.addEventListener('input', refresh);
     }
 
-    if (infoButton) {
-      infoButton.addEventListener('click', (event) => {
+    form.addEventListener('submit', event => {
+      const valid = computeTotals();
+      if (!valid || !form.checkValidity()) {
         event.preventDefault();
-        const offer = offerSelect ? offerSelect.value : '';
-        const quantityValid = validateQuantity(offer);
-        const datesValid = validateDates(offer);
-        const baseValid = form.checkValidity();
-        if (!quantityValid || !datesValid || !baseValid) {
-          form.reportValidity();
-          return;
-        }
-        clearMetaFields(form);
-        const amount = typeof currentState.total === 'number' ? currentState.total : 0;
-        addHiddenInput(form, 'paypal_amount', amount > 0 ? amount.toFixed(2) : '0.00');
-        addHiddenInput(form, 'payment_status', 'unpaid');
-        addHiddenInput(form, 'submission_type', 'info_only');
-        showFeedback('', 'info');
-        form.submit();
-      });
-    }
+        form.reportValidity();
+      }
+    });
 
-    refreshState();
+    refresh();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
