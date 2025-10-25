@@ -1,170 +1,144 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SecurityNoPhone – Order</title>
+  <title>سيكيورتي نو فون – طلب</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <link rel="stylesheet" href="style.css">
-
-
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
   <div id="navbar-container"></div>
 
+  <main class="container my-5">
+    <div class="border rounded-4 shadow-sm p-4 bg-white mt-5">
+      <h1 class="text-center mb-5">إرسال طلب</h1>
+      <div class="row gy-5">
+        <div class="col-lg-7">
+                    <form action="https://formspree.io/f/xqaqogdv" method="POST" data-order-form data-locale="ar-SA"
+            data-currency="EUR"
+            data-custom-message="سنعاود الاتصال بكم خلال يوم عمل واحد لتأكيد التفاصيل.">
+            <input type="text" name="_gotcha" style="display:none" />
 
-
-  <div class="container my-5"><br><br>
-    <h1 class="text-center mb-5">إجراء طلب</h1>
-    <div class="row">
-      <div class="col-md-6">
-        <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm" data-order-form data-locale="ar">
-          <input type="text" name="_gotcha" style="display:none">
-          <div class="visually-hidden">
-            <span data-offer-base="location_sans" data-price="150" data-pricing-type="flat"></span>
-            <span data-offer-base="location_avec" data-price="390" data-pricing-type="flat"></span>
-            <span data-offer-base="achat" data-price="3.5" data-pricing-type="per-unit"></span>
-            <span data-offer-base="abonnement" data-price="19" data-pricing-type="subscription" data-pack-size="50" data-max-quantity="50"></span>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" data-i18n="label_offer_type">نوع العرض:</label>
-            <select class="form-select" name="offre" id="offerType" required data-offer-select>
-              <option value="" data-i18n="option_choose_offer">-- اختر عرضًا --</option>
-              <option value="location_sans" data-i18n="option_location_without">تأجير بدون طاقم</option>
-              <option value="location_avec" data-i18n="option_location_with">تأجير مع طاقم</option>
-              <option value="achat" data-i18n="option_custom_pouches">حافظات مخصصة</option>
-              <option value="abonnement" data-i18n="option_subscription">اشتراك ستارتر</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="quantity" class="form-label" data-i18n="label_quantity">عدد الحافظات:</label>
-            <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="0" value="50" required data-quantity-input />
-            <div id="quantityError" class="text-danger mt-1" style="display: none;" data-quantity-error data-min-rental="الحد الأدنى للتأجير هو حافظة واحدة." data-max-rental="الحد الأقصى للتأجير هو 250 حافظة." data-min-custom="يتطلب التخصيص حدًا أدنى قدره 50 وحدة." data-min-subscription="لا يمكن أن تكون الكمية سالبة." data-max-subscription="50" data-max-subscription-message="الاشتراك المبدئي محدود بـ 50 حافظة."></div>
-          </div>
-          <div class="mb-3 d-none" data-rental-fields>
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label for="startDate" class="form-label">تاريخ البداية:</label>
-                <input type="date" name="date_debut" id="startDate" class="form-control" data-start-date />
-              </div>
-              <div class="col-md-6">
-                <label for="endDate" class="form-label">تاريخ النهاية:</label>
-                <input type="date" name="date_fin" id="endDate" class="form-control" data-end-date />
-              </div>
+            <div class="mb-3">
+              <label class="form-label" for="offerType">نوع العرض:</label>
+              <select class="form-select" name="offre" id="offerType" required>
+                <option value="">-- اختر عرضاً --</option>
+                <option value="location_sans">تأجير بدون طاقم</option>
+                <option value="location_avec">تأجير مع طاقم</option>
+                <option value="abonnement">اشتراك Starter</option>
+                <option value="achat">أغلفة مخصصة</option>
+                <option value="special_event">مرافقة الفعاليات الخاصة وVIP</option>
+              </select>
             </div>
-            <div id="dateError" class="text-danger mt-2" style="display: none;" data-date-error data-missing="يرجى إدخال تاريخي بداية ونهاية التأجير." data-range="يجب أن يكون تاريخ النهاية مساويًا أو بعد تاريخ البداية."></div>
-          </div>
-          <div class="mb-3 d-none" data-staff-fields>
-            <label for="staffQuantity" class="form-label">طاقم إضافي (اختياري):</label>
-            <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0" data-staff-quantity>
-            <small class="text-muted">100 € / يوم / للشخص لمدة 6 ساعات.</small>
-          </div>
-          <div class="alert alert-info d-none" data-summary data-days-label="المدة" data-total-label="الإجمالي التقديري" data-day-singular="يوم" data-day-plural="أيام" aria-live="polite">
-            <p class="mb-1"><strong><span data-summary-days-label>المدة</span> : <span data-summary-days-count>—</span></strong></p>
-            <p class="mb-0"><span data-summary-total-label>الإجمالي التقديري</span> : <span data-summary-total-amount>—</span></p>
-          </div>
-          <div class="mb-3">
-            <label for="nom" class="form-label" data-i18n="label_fullname">الاسم الكامل:</label>
-            <input type="text" name="nom" id="nom" class="form-control" required />
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label" data-i18n="label_email">البريد الإلكتروني:</label>
-            <input type="email" name="email" id="email" class="form-control" required />
-          </div>
-          <div class="mb-3">
-            <label for="adresse" class="form-label" data-i18n="label_address">عنوان الفوترة:</label>
-            <textarea name="adresse" id="adresse" class="form-control" required></textarea>
-          </div>
-          <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite" data-price-display data-template="الإجمالي التقديري: {price}"></div>
 
-          <div class="text-center mt-4">
-            <div class="d-inline-block" data-paypal-container data-client-id="sb" data-currency="EUR"
-              data-description="SecurityNoPhone – طلب" data-auto-submit="true"
-              data-message-invalid="يرجى إكمال النموذج لتفعيل الدفع عبر PayPal."
-              data-message-ready="الإجمالي التقديري: {amount}. اضغط على PayPal لإتمام طلبك."
-              data-message-processing="جاري معالجة الدفع..."
-              data-message-success="تم تأكيد الدفع عبر PayPal. تم إرسال طلبك."
-              data-message-error="فشل الدفع عبر PayPal. يرجى المحاولة مرة أخرى."
-              data-message-cancelled="تم إلغاء الدفع عبر PayPal."
-              data-message-unavailable="PayPal غير متاح حاليًا. حاول مرة أخرى لاحقًا."
-              data-message-ineligible="PayPal غير متاح لهذا الطلب.">
+            <div class="mb-3">
+              <label class="form-label" for="quantity">عدد الأغطية:</label>
+              <input type="number" class="form-control" name="quantite" id="quantity" min="0" value="50" required
+                data-msg-min-rental="الحد الأدنى للإيجار هو غطاء واحد."
+                data-msg-min-custom="الحد الأدنى للأغلفة المخصصة هو 50 وحدة."
+                data-msg-min-subscription="يرجى إدخال غطاء واحد على الأقل لاشتراك Starter."
+                data-msg-max-subscription="اشتراك Starter محدود بـ 50 غطاء." />
+              <div class="text-danger mt-1" id="quantityError" style="display:none"></div>
             </div>
-          </div>
 
-          <div id="formSubmissionFeedback" class="mt-3"></div>
-          <div class="text-center mt-4">
-            <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order" disabled>إرسال الطلب</button>
+            <div class="mb-3 d-none" data-rental-fields>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="startDate">تاريخ البدء:</label>
+                  <input type="date" name="date_debut" id="startDate" class="form-control" data-start-date />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="endDate">تاريخ الانتهاء:</label>
+                  <input type="date" name="date_fin" id="endDate" class="form-control" data-end-date />
+                </div>
+              </div>
+              <div id="dateError" class="text-danger mt-2" style="display:none"
+                data-msg-missing="يرجى إدخال تاريخي البداية والنهاية."
+                data-msg-range="يجب أن يكون تاريخ الانتهاء مساوياً أو لاحقاً لتاريخ البداية."></div>
+            </div>
+
+            <div class="mb-3 d-none" data-staff-fields>
+              <label class="form-label" for="staffQuantity">طاقم إضافي (اختياري):</label>
+              <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0" />
+              <small class="text-muted">100 € لكل شخص لكل 6 ساعات.</small>
+            </div>
+
+            <div class="alert alert-info d-none" data-summary data-days-label="المدة" data-total-label="المبلغ التقديري"
+              data-day-singular="يوم" data-day-plural="أيام" aria-live="polite">
+              <p class="mb-1"><strong><span data-summary-days-label>المدة</span> : <span data-summary-days-count>—</span></strong></p>
+              <p class="mb-0"><span data-summary-total-label>المبلغ التقديري</span> : <span data-summary-total-amount>—</span></p>
+            </div>
+
+            <div class="mb-3 d-none" data-caution-block>
+              <label class="form-label" data-i18n="label_caution">وديعة إلزامية</label>
+              <input type="text" class="form-control" data-caution-display readonly value="0,00 €" />
+              <small class="text-muted" data-i18n="caution_help">تُطبق وديعة قابلة للاسترداد بقيمة 300 € لكل 700 غطاء في خدمات الإيجار أو اشتراك Starter. يتم إرجاعها بعد التحقق من المعدات.</small>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="name" data-i18n="label_fullname">الاسم الكامل:</label>
+              <input type="text" name="nom" id="name" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="email" data-i18n="label_email">البريد الإلكتروني:</label>
+              <input type="email" name="email" id="email" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="address" data-i18n="label_address">عنوان الفواتير:</label>
+              <textarea name="adresse" id="address" class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="infos">معلومات إضافية (اختياري)</label>
+              <textarea name="infos" id="infos" class="form-control" rows="4"
+                placeholder="اذكر نوع الحدث، عدد الضيوف، الشركاء..."></textarea>
+            </div>
+
+            <div class="price-box text-center fw-bold fs-5 my-3" data-total-display data-template="المبلغ التقديري: {price}" aria-live="polite"></div>
+            <p class="small text-muted text-center" data-i18n="caution_note">تُضاف الوديعة تلقائياً وسيتم شرحها في رسالة التأكيد التي نرسلها لكم.</p>
+
+            <input type="hidden" name="montant_total_estime" data-total-value value="0" />
+            <input type="hidden" name="caution_total" data-caution-value value="0" />
+            <input type="hidden" name="submission_type" value="order" />
+            <input type="hidden" name="payment_status" value="to_be_confirmed" />
+
+            <div id="formSubmissionFeedback" class="mt-3" data-feedback></div>
+
+            <div class="mt-4">
+              <button type="submit" class="btn btn-primary w-100" data-i18n="btn_submit_order">إرسال الطلب</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-5">
+          <div class="bg-light rounded-4 shadow-sm p-4 h-100">
+            <h2 class="h5 text-center mb-3">مرافقة مخصصة لمشروعك</h2>
+            <p class="text-muted small">
+              نقوم بإعداد كل تنفيذ بالتنسيق مع فرقكم: بروتوكول الأمان، مسار الضيوف ورسائل متعددة اللغات.
+            </p>
+            <ul class="list-unstyled small mb-4">
+              <li class="mb-2">• إيجار بإشراف كامل مع مسؤول مشروع من SecurityNoPhone</li>
+              <li class="mb-2">• مجموعة تشغيل ذاتي مدعومة وخط ساخن يوم الحدث</li>
+              <li class="mb-2">• أغطية مخصصة وعرض خاص للفعاليات رفيعة المستوى</li>
+            </ul>
+            <p class="small text-muted mb-0">
+              بعد تأكيد الطلب نرسل رابط دفع آمن (بطاقة أو حوالة) بما يتماشى مع إجراءاتكم الداخلية.
+            </p>
           </div>
-        </form>
-      </div>
-      <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-        <p class="text-center text-muted mt-3"></p>
-        <small class="text-muted d-block mt-2 text-center">
-          💳 الدفع عبر <strong>PayPal (إن كان متاحًا)</strong> يظهر تلقائيًا حسب حسابك.
-        </small>
-        <small class="text-muted d-block text-center">
-          💡 ملاحظة: يظهر PayPal (إن كان متاحًا) أثناء الدفع.
-        </small>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
 
-  <!-- Footer incluse dynamiquement -->
-  <div id="footer-placeholder"></div>
+  <div id="footer-container"></div>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
   <script src="js/translations.js"></script>
-  <script src="js/main.js"></script>
-
-  <!-- Forcer la langue souhaitée (modifie selon la page) -->
   <script>
-    localStorage.setItem("lang", "ar"); // change en "de", "en", "ar" selon la page
+    localStorage.setItem("lang", "ar");
   </script>
-
-
-  <!-- Include navbar + footer + langue -->
-  <script>
-    async function loadIncludes() {
-      const [navRes, footerRes] = await Promise.all([
-        fetch('includes/navbar.html'),
-        fetch('includes/footer.html')
-      ]);
-
-      const navHtml = await navRes.text();
-      const footerHtml = await footerRes.text();
-
-      document.getElementById('navbar-placeholder').innerHTML = navHtml;
-      document.getElementById('footer-placeholder').innerHTML = footerHtml;
-
-      document.getElementById('footer-placeholder').innerHTML = footerHtml;
-
-      // Gérer le bouton cookie après chargement du footer
-      const cookieBtn = document.querySelector("#cookie-banner button");
-      if (cookieBtn) {
-        cookieBtn.addEventListener("click", () => {
-          localStorage.setItem("cookiesAccepted", "true");
-          document.getElementById("cookie-banner").style.display = "none";
-        });
-
-        if (localStorage.getItem("cookiesAccepted") === "true") {
-          document.getElementById("cookie-banner").style.display = "none";
-        }
-      }
-
-      // Après insertion, appliquer les traductions et activer le suivi
-      if (typeof switchLanguage === "function") switchLanguage();
-      setupTrackingForm();
-    }
-
-    loadIncludes();
-  
-  <script src="js/order-calculator.js"></script>
-  <script src="js/paypal-buttons.js"></script>
-
+  <script src="js/main.js"></script>
+  <script src="js/order-form.js"></script>
 </body>
-
 </html>

@@ -8,7 +8,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -18,37 +17,35 @@
   <main class="container my-5">
     <div class="border rounded-4 shadow-sm p-4 bg-white mt-5">
       <h1 class="text-center mb-5" data-i18n="order_title">Passer une commande</h1>
-      <div class="row">
-        <div class="col-md-6">
-          <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm" data-order-form data-locale="fr-FR">
+      <div class="row gy-5">
+        <div class="col-lg-7">
+          <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm" data-order-form
+            data-locale="fr-FR" data-currency="EUR"
+            data-custom-message="Sur devis : nous vous contactons sous 24 h ouvrées.">
             <input type="text" name="_gotcha" style="display:none">
-            <div class="visually-hidden">
-              <span data-offer-base="location_sans" data-price="150" data-pricing-type="flat"></span>
-              <span data-offer-base="location_avec" data-price="390" data-pricing-type="flat"></span>
-              <span data-offer-base="achat" data-price="3.5" data-pricing-type="per-unit"></span>
-              <span data-offer-base="abonnement" data-price="19" data-pricing-type="subscription" data-pack-size="50" data-max-quantity="50"></span>
-            </div>
+
             <div class="mb-3">
-              <label class="form-label" data-i18n="label_offer_type">Type d’offre :</label>
-              <select class="form-select" name="offre" id="offerType" required data-offer-select>
+              <label class="form-label" for="offerType" data-i18n="label_offer_type">Type d’offre :</label>
+              <select class="form-select" name="offre" id="offerType" required>
                 <option value="" data-i18n="option_choose_offer">-- Choisir une offre --</option>
                 <option value="location_sans" data-i18n="option_location_without">Location sans personnel</option>
                 <option value="location_avec" data-i18n="option_location_with">Location avec personnel</option>
-                <option value="achat" data-i18n="option_custom_pouches">Pochettes personnalisées</option>
                 <option value="abonnement" data-i18n="option_subscription">Abonnement Starter</option>
+                <option value="achat" data-i18n="option_custom_pouches">Pochettes personnalisées</option>
+                <option value="special_event" data-i18n="option_special_event">Accompagnement événements particuliers</option>
               </select>
             </div>
+
             <div class="mb-3">
               <label for="quantity" class="form-label" data-i18n="label_quantity">Quantité de pochettes :</label>
-              <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="0" value="50"
-                required data-quantity-input />
-              <div id="quantityError" class="text-danger mt-1" style="display: none;" data-quantity-error
-                data-min-rental="La quantité minimale pour la location est de 1 pochette."
-                data-max-rental="La quantité maximale autorisée pour la location est de 250 pochettes."
-                data-min-custom="Pour les pochettes personnalisées, le minimum est de 50 unités."
-                data-min-subscription="La quantité ne peut pas être négative." data-max-subscription="50"
-                data-max-subscription-message="L’abonnement Starter est limité à 50 pochettes."></div>
+              <input type="number" class="form-control" name="quantite" id="quantity" min="0" value="50" required
+                data-msg-min-rental="La quantité minimale pour la location est de 1 pochette."
+                data-msg-min-custom="Pour les pochettes personnalisées, la commande minimale est de 50 unités."
+                data-msg-min-subscription="Indiquez au moins une pochette pour l’abonnement Starter."
+                data-msg-max-subscription="L’abonnement Starter est limité à 50 pochettes.">
+              <div class="text-danger mt-1" id="quantityError" style="display:none"></div>
             </div>
+
             <div class="mb-3 d-none" data-rental-fields>
               <div class="row g-3">
                 <div class="col-md-6">
@@ -60,82 +57,76 @@
                   <input type="date" name="date_fin" id="endDate" class="form-control" data-end-date />
                 </div>
               </div>
-              <div id="dateError" class="text-danger mt-2" style="display: none;" data-date-error
-                data-missing="Merci d’indiquer les dates de début et de fin de la location."
-                data-range="La date de fin doit être postérieure ou égale à la date de début."></div>
+              <div id="dateError" class="text-danger mt-2" style="display:none"
+                data-msg-missing="Merci d’indiquer les dates de début et de fin de la location."
+                data-msg-range="La date de fin doit être postérieure ou égale à la date de début."></div>
             </div>
+
             <div class="mb-3 d-none" data-staff-fields>
               <label for="staffQuantity" class="form-label">Personnel supplémentaire (optionnel) :</label>
-              <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0"
-                data-staff-quantity>
+              <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0">
               <small class="text-muted">100 € / jour / personne pour 6 h.</small>
             </div>
+
             <div class="alert alert-info d-none" data-summary data-days-label="Durée" data-total-label="Total estimé"
               data-day-singular="jour" data-day-plural="jours" aria-live="polite">
-              <p class="mb-1"><strong><span data-summary-days-label>Durée</span> : <span
-                      data-summary-days-count>—</span></strong></p>
-              <p class="mb-0"><span data-summary-total-label>Total estimé</span> : <span
-                  data-summary-total-amount>—</span></p>
+              <p class="mb-1"><strong><span data-summary-days-label>Durée</span> : <span data-summary-days-count>—</span></strong></p>
+              <p class="mb-0"><span data-summary-total-label>Total estimé</span> : <span data-summary-total-amount>—</span></p>
             </div>
+
+            <div class="mb-3 d-none" data-caution-block>
+              <label class="form-label" data-i18n="label_caution">Caution (obligatoire)</label>
+              <input type="text" class="form-control" data-caution-display readonly value="0,00 €" />
+              <small class="text-muted" data-i18n="caution_help">Compte 300 € de caution par tranche de 700 pochettes pour les dispositifs de location et l’abonnement Starter. La caution est restituée après vérification.</small>
+            </div>
+
             <div class="mb-3">
               <label for="nom" class="form-label" data-i18n="label_fullname">Nom complet :</label>
               <input type="text" name="nom" id="nom" class="form-control" required />
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label" data-i18n="label_email">Email :</label> <input type="email"
-                name="email" id="email" class="form-control" required />
+              <label for="email" class="form-label" data-i18n="label_email">Email :</label>
+              <input type="email" name="email" id="email" class="form-control" required />
             </div>
             <div class="mb-3">
               <label for="adresse" class="form-label" data-i18n="label_address">Adresse de facturation :</label>
-              <textarea name="adresse" id="adresse" class="form-control" required></textarea>
+              <textarea name="adresse" id="adresse" class="form-control" rows="3" required></textarea>
             </div>
-            <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite"
-              data-price-display data-template="Total estimé : {price}">
-            </div>
-
-            <div class="text-center mt-4">
-              <div class="d-inline-block" data-paypal-container data-client-id="sb" data-currency="EUR"
-                data-description="SecurityNoPhone – Commande" data-auto-submit="true"
-                data-message-invalid="Complétez le formulaire pour activer le paiement PayPal."
-                data-message-ready="Montant estimé : {amount}. Cliquez sur PayPal pour finaliser votre commande."
-                data-message-processing="Paiement en cours..." data-message-success="Paiement PayPal confirmé. Votre commande est envoyée."
-                data-message-error="Le paiement via PayPal a échoué. Veuillez réessayer."
-                data-message-cancelled="Paiement PayPal annulé."
-                data-message-unavailable="PayPal est indisponible pour le moment. Merci de réessayer plus tard."
-                data-message-ineligible="PayPal n'est pas disponible pour cette commande.">
-              </div>
+            <div class="mb-3" id="special">
+              <label for="infos" class="form-label">Informations complémentaires (optionnel)</label>
+              <textarea name="infos" id="infos" class="form-control" rows="4"
+                placeholder="Précisez le format, les lieux, les attentes protocole..."></textarea>
             </div>
 
-            <div id="formSubmissionFeedback" class="mt-3"></div>
+            <div class="price-box text-center fw-bold fs-5 my-3" data-total-display data-template="Total estimé : {price}" aria-live="polite"></div>
+            <p class="small text-muted text-center" data-i18n="caution_note">La caution est automatiquement ajoutée et précisée dans le récapitulatif envoyé par nos équipes.</p>
 
-            <div class="text-center mt-4">
-              <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order" disabled>Valider la commande</button>
+            <input type="hidden" name="montant_total_estime" data-total-value value="0">
+            <input type="hidden" name="caution_total" data-caution-value value="0">
+            <input type="hidden" name="submission_type" value="order">
+            <input type="hidden" name="payment_status" value="to_be_confirmed">
+
+            <div id="formSubmissionFeedback" class="mt-3" data-feedback></div>
+
+            <div class="mt-4">
+              <button type="submit" class="btn btn-primary w-100" data-i18n="btn_submit_order">Valider la commande</button>
             </div>
           </form>
         </div>
-        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center px-3">
-          <div class="bg-light rounded-4 shadow-sm p-4 w-100">
-            <p class="text-center fw-semibold fs-5 mb-3 text-dark">
-              💳 Paiement via <strong>PayPal (si éligible)</strong><br>
-              <small class="fst-italic text-muted">(proposé automatiquement selon votre compte)</small>
+        <div class="col-lg-5">
+          <div class="bg-light rounded-4 shadow-sm p-4 h-100">
+            <h2 class="h5 text-center mb-3">Votre projet, notre accompagnement</h2>
+            <p class="text-muted small">
+              Chaque mission est préparée sur-mesure : brief protocolaire, parcours invité sécurisé et communication multilingue.
             </p>
-            <p class="text-center text-secondary" data-i18n="payment_description">
-              Protégez la confidentialité de vos événements grâce à notre option de paiement en plusieurs fois.<br>
-              <span class="text-dark">L’option s’affiche automatiquement lors du paiement via PayPal si vous êtes éligible.</span>
+            <ul class="list-unstyled small mb-4">
+              <li class="mb-2">• Location orchestrée avec chef de projet SecurityNoPhone</li>
+              <li class="mb-2">• Kit autonome accompagné et hotline événementielle</li>
+              <li class="mb-2">• Pochettes personnalisées et offre spéciale événements particuliers</li>
+            </ul>
+            <p class="small text-muted mb-0">
+              Facturation et règlement sécurisés (virement ou carte) envoyés après validation de votre dossier.
             </p>
-            <hr class="my-3 bg-secondary" style="height:1px; width:80%;" />
-            <p class="text-center text-dark" data-i18n="payment_flexibility_title">
-              <strong>Nos offres flexibles :</strong><br>
-              <span data-i18n="payment_flexibility_point_1">• Location clé-en-main (avec ou sans personnel)</span><br>
-              <span data-i18n="payment_flexibility_point_2">• Pochettes personnalisées pour vos événements</span><br>
-              <span data-i18n="payment_flexibility_point_3">• Abonnement Starter pour une solution durable</span>
-            </p>
-            <p class="fw-bold mt-4 text-center" style="color: #198754;" data-i18n="payment_footer">
-              Commandez aujourd’hui, payez sereinement,<br>et garantissez la réussite de votre événement.
-            </p>
-            <small class="d-block text-center mt-3 text-muted">
-              💡 Astuce : PayPal (si éligible) se propose lors de la validation du paiement.
-            </small>
           </div>
         </div>
       </div>
@@ -155,9 +146,7 @@
   </script>
 
   <script src="js/main.js"></script>
-
-  <script src="js/order-calculator.js"></script>
-  <script src="js/paypal-buttons.js"></script>
+  <script src="js/order-form.js"></script>
 </body>
 
 </html>
