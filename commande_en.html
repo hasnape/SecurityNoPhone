@@ -1,160 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title data-i18n="order_title">SecurityNoPhone – Commande</title>
+  <title>SecurityNoPhone – Order</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
-  <link rel="stylesheet" href="style_optimized.css">
-  <style>
-    /* Your custom background image style */
-    body {
-      background-image: url("images/background_black_abstract_dark_backdrop_web_website_wallpaper-1005124.jpg!d");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=AYfFtx4nhnM_IaoUdUfCmRX9MqWxjHY2QKx3QcficjUNDSCk3SsZCzGRI2yzpKR4bwmQvkWveZbf9Jxq&currency=EUR&components=buttons,messages"
+    data-namespace="PayPalSDK"></script>
 </head>
-
 <body>
-
   <div id="navbar-container"></div>
 
   <main class="container my-5">
     <div class="border rounded-4 shadow-sm p-4 bg-white mt-5">
-      <h1 class="text-center mb-5" data-i18n="order_title">Place an Order</h1>
-      <div class="row">
-        <div class="col-md-6">
-          <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm" data-order-form data-locale="en-GB">
-            <input type="text" name="_gotcha" style="display:none">
-            <div class="visually-hidden">
-              <span data-offer-base="location_sans" data-price="150" data-pricing-type="flat"></span>
-              <span data-offer-base="location_avec" data-price="390" data-pricing-type="flat"></span>
-              <span data-offer-base="achat" data-price="3.5" data-pricing-type="per-unit"></span>
-              <span data-offer-base="abonnement" data-price="19" data-pricing-type="subscription" data-pack-size="50" data-max-quantity="50"></span>
-            </div>
+      <h1 class="text-center mb-5">Place an order</h1>
+      <div class="row gy-5">
+        <div class="col-lg-7">
+          <form action="https://formspree.io/f/xqaqogdv" method="POST" data-order-form data-locale="en-GB"
+            data-paypal-description="SecurityNoPhone – Order EN" data-paypal-invalid="Complete the form to enable PayPal."
+            data-paypal-ready="Estimated total: {amount}. Click PayPal to finalise your order."
+            data-paypal-processing="Processing payment..." data-paypal-success="PayPal payment confirmed. Your order has been sent."
+            data-paypal-error="PayPal payment failed. Please try again."
+            data-paypal-cancel="PayPal payment cancelled." data-currency="EUR"
+            data-custom-message="On quotation: our team will contact you within one business day.">
+            <input type="text" name="_gotcha" style="display:none" />
+
             <div class="mb-3">
-              <label class="form-label" data-i18n="label_offer_type">Offer Type:</label>
-              <select class="form-select" name="offre" id="offerType" required data-offer-select>
-                <option value="" data-i18n="option_choose_offer">-- Select an Offer --</option>
-                <option value="location_sans" data-i18n="option_location_without">Rental without Staff</option>
-                <option value="location_avec" data-i18n="option_location_with">Rental with Staff</option>
-                <option value="achat" data-i18n="option_custom_pouches">Custom Pouches</option>
-                <option value="abonnement" data-i18n="option_subscription">Starter Subscription</option>
+              <label class="form-label" for="offerType">Offer type:</label>
+              <select class="form-select" name="offre" id="offerType" required>
+                <option value="">-- Select an offer --</option>
+                <option value="location_sans">Rental without staff</option>
+                <option value="location_avec">Rental with staff</option>
+                <option value="abonnement">Starter subscription</option>
+                <option value="achat">Custom pouches</option>
+                <option value="special_event">Private & special events coordination</option>
               </select>
             </div>
+
             <div class="mb-3">
-              <label for="quantity" class="form-label" data-i18n="label_quantity">Pouch Quantity:</label>
-              <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="0" value="100"
-                required data-quantity-input />
-              <div id="quantityError" class="text-danger mt-1" style="display: none;" data-quantity-error
-                data-min-rental="The minimum quantity for rentals is 1 pouch."
-                data-max-rental="The maximum quantity allowed for rentals is 250 pouches."
-                data-min-custom="Customized pouches require at least 50 units."
-                data-min-subscription="Quantity cannot be negative." data-max-subscription="50"
-                data-max-subscription-message="The Starter Subscription is limited to 50 pouches."></div>
+              <label class="form-label" for="quantity">Pouch quantity:</label>
+              <input type="number" class="form-control" name="quantite" id="quantity" min="0" value="50" required
+                data-msg-min-rental="The minimum quantity for rentals is 1 pouch."
+                data-msg-min-custom="Custom pouches require at least 50 units."
+                data-msg-min-subscription="Enter at least one pouch for the Starter subscription."
+                data-msg-max-subscription="The Starter subscription is limited to 50 pouches." />
+              <div class="text-danger mt-1" id="quantityError" style="display:none"></div>
             </div>
+
             <div class="mb-3 d-none" data-rental-fields>
               <div class="row g-3">
                 <div class="col-md-6">
-                  <label for="startDate" class="form-label">Start date:</label>
+                  <label class="form-label" for="startDate">Start date:</label>
                   <input type="date" name="date_debut" id="startDate" class="form-control" data-start-date />
                 </div>
                 <div class="col-md-6">
-                  <label for="endDate" class="form-label">End date:</label>
+                  <label class="form-label" for="endDate">End date:</label>
                   <input type="date" name="date_fin" id="endDate" class="form-control" data-end-date />
                 </div>
               </div>
-              <div id="dateError" class="text-danger mt-2" style="display: none;" data-date-error
-                data-missing="Please provide both rental start and end dates."
-                data-range="The end date must be on or after the start date."></div>
+              <div id="dateError" class="text-danger mt-2" style="display:none"
+                data-msg-missing="Please provide both rental start and end dates."
+                data-msg-range="The end date must be on or after the start date."></div>
             </div>
+
             <div class="mb-3 d-none" data-staff-fields>
-              <label for="staffQuantity" class="form-label">Additional staff (optional):</label>
-              <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0"
-                data-staff-quantity>
-              <small class="text-muted">€100 / day / person for 6 hours.</small>
+              <label class="form-label" for="staffQuantity">Additional staff (optional):</label>
+              <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0" />
+              <small class="text-muted">€100 per person per 6-hour day.</small>
             </div>
+
             <div class="alert alert-info d-none" data-summary data-days-label="Duration" data-total-label="Estimated total"
               data-day-singular="day" data-day-plural="days" aria-live="polite">
-              <p class="mb-1"><strong><span data-summary-days-label>Duration</span>: <span
-                      data-summary-days-count>—</span></strong></p>
-              <p class="mb-0"><span data-summary-total-label>Estimated total</span>: <span
-                  data-summary-total-amount>—</span></p>
+              <p class="mb-1"><strong><span data-summary-days-label>Duration</span> : <span data-summary-days-count>—</span></strong></p>
+              <p class="mb-0"><span data-summary-total-label>Estimated total</span> : <span data-summary-total-amount>—</span></p>
             </div>
+
             <div class="mb-3">
-              <label for="nom" class="form-label" data-i18n="label_fullname">Full Name:</label>
+              <label class="form-label" for="nom">Full name:</label>
               <input type="text" name="nom" id="nom" class="form-control" required />
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label" data-i18n="label_email">Email:</label>
+              <label class="form-label" for="email">Email:</label>
               <input type="email" name="email" id="email" class="form-control" required />
             </div>
             <div class="mb-3">
-              <label for="adresse" class="form-label" data-i18n="label_address">Billing Address:</label>
-              <textarea name="adresse" id="adresse" class="form-control" required></textarea>
+              <label class="form-label" for="adresse">Billing address:</label>
+              <textarea name="adresse" id="adresse" class="form-control" rows="3" required></textarea>
             </div>
-            <div class="price-box text-center fw-bold fs-5 my-3" id="priceDisplay" aria-live="polite" data-price-display
-              data-template="Estimated total: {price}"></div>
+            <div class="mb-3" id="special">
+              <label class="form-label" for="infos">Additional information (optional)</label>
+              <textarea name="infos" id="infos" class="form-control" rows="4"
+                placeholder="Share venue details, timelines, audience expectations..."></textarea>
+            </div>
+
+            <div class="price-box text-center fw-bold fs-5 my-3" data-total-display data-template="Estimated total: {price}"
+              aria-live="polite"></div>
+            <p class="small text-muted text-center" data-equation-note>
+              Budget reference: plan €300 for every 700 pouches for rental programmes and the Starter subscription.
+            </p>
 
             <div class="paypal-message-wrapper text-center mt-3">
-              <div data-paypal-message data-pp-style-layout="text" data-pp-style-logo-type="inline"
-                data-pp-style-text-color="black"></div>
-              <small class="d-block mt-2 text-muted" data-i18n="payment_card_note">
-                You can also pay by card with PayPal — no account required.
+              <div id="pp-message" data-paypal-message data-pp-style-layout="text" data-pp-style-logo-type="inline"
+                data-pp-style-text-color="black" data-pp-amount="0.00"></div>
+              <small class="d-block mt-2 text-muted">
+                You can also pay by card through PayPal without creating an account.
               </small>
             </div>
 
-            <div class="text-center mt-4">
-              <div class="d-inline-block" data-paypal-container
-                data-client-id="AYfFtx4nhnM_IaoUdUfCmRX9MqWxjHY2QKx3QcficjUNDSCk3SsZCzGRI2yzpKR4bwmQvkWveZbf9Jxq"
-                data-currency="EUR" data-components="buttons,messages"
-                data-description="SecurityNoPhone – Order" data-auto-submit="true"
-                data-message-invalid="Please complete the form to enable PayPal payment."
-                data-message-ready="Estimated total: {amount}. Click PayPal to finalize your order."
-                data-message-processing="Processing payment..."
-                data-message-success="PayPal payment confirmed. Your order has been sent."
-                data-message-error="PayPal payment failed. Please try again."
-                data-message-cancelled="PayPal payment cancelled."
-                data-message-unavailable="PayPal is currently unavailable. Please try again later."
-                data-message-ineligible="PayPal is not available for this order.">
-              </div>
+            <div class="paypal-status small text-muted text-center mt-2" data-paypal-status></div>
+            <div class="mt-3" data-paypal-buttons></div>
+
+            <div class="mt-3 text-center">
+              <button type="button" class="btn btn-outline-secondary w-100" data-info-only>
+                Send without payment (info request)
+              </button>
             </div>
 
-            <div id="formSubmissionFeedback" class="mt-3"></div>
-
-            <div class="text-center mt-4">
-              <button type="submit" class="btn btn-primary" data-i18n="btn_submit_order" disabled>Submit Order</button>
-            </div>
+            <div class="mt-3" data-feedback></div>
           </form>
         </div>
-        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center px-3">
-          <div class="bg-light rounded-4 shadow-sm p-4 w-100">
-            <p class="text-center fw-semibold fs-5 mb-3 text-dark">
-              💳 Pay with <strong>PayPal (if eligible)</strong><br>
-              <small class="fst-italic text-muted">(automatically shown according to your account)</small>
+        <div class="col-lg-5">
+          <div class="bg-light rounded-4 shadow-sm p-4 h-100">
+            <h2 class="h5 text-center mb-3">Tailored guidance for your project</h2>
+            <p class="text-muted small">
+              We prepare each deployment with your teams: security briefing, guest journey and multilingual communications.
             </p>
-            <p class="text-center text-secondary" data-i18n="payment_description">
-              Protect the confidentiality of your events and, if eligible, split payments in 4 with PayPal.<br>
-              <span class="text-dark">You can also pay by credit card through PayPal without creating an account.</span>
+            <ul class="list-unstyled small mb-4">
+              <li class="mb-2">• Managed rental with a dedicated SecurityNoPhone project lead</li>
+              <li class="mb-2">• Assisted self-run kit with on-call event hotline</li>
+              <li class="mb-2">• Custom pouch creation and private event concierge offer</li>
+            </ul>
+            <p class="small text-muted mb-0">
+              PayPal will automatically display Pay in 4 when your account is eligible. Card payments are accepted without a PayPal account.
             </p>
-            <hr class="my-3 bg-secondary" style="height:1px; width:80%;" />
-            <p class="text-center text-dark" data-i18n="payment_flexibility_title">
-              <strong>Our flexible offers:</strong><br>
-              <span data-i18n="payment_flexibility_point_1">• Turnkey rental (with or without staff)</span><br>
-              <span data-i18n="payment_flexibility_point_2">• Customized pouches for your events</span><br>
-              <span data-i18n="payment_flexibility_point_3">• Starter subscription for a long-term solution</span>
-            </p>
-            <p class="fw-bold mt-4 text-center" style="color: #198754;" data-i18n="payment_footer">
-              Order today, pay in comfort,<br>and ensure your event's success.
-            </p>
-            <small class="d-block text-center mt-3 text-muted" data-i18n="payment_tip">
-              💡 Tip: PayPal automatically displays your options (Pay in 4, card) during checkout.
-            </small>
           </div>
         </div>
       </div>
@@ -166,17 +146,11 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
-
   <script src="js/translations.js"></script>
-
   <script>
-    localStorage.setItem("lang", "en"); // change en "de", "en", "ar" selon la page
+    localStorage.setItem("lang", "en");
   </script>
-
   <script src="js/main.js"></script>
-  <script src="js/order-calculator.js"></script>
-  <script src="js/paypal-buttons.js"></script>
-
+  <script src="js/order-form.js"></script>
 </body>
-
 </html>
