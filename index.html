@@ -288,6 +288,76 @@
       </div>
     </section>
 
+    <section class="snf-container py-5 px-4" data-aos="fade-up" id="problem">
+      <div class="container text-center">
+        <h2 class="section-title mb-4" data-i18n="problem_title">📸 Le monde capture tout... parfois il faut préserver l’instant</h2>
+        <p class="lead text-white-50 mb-5" data-i18n="problem_intro">
+          Dans les musées, concerts ou mariages, les écrans remplacent la connexion. SecurityNoPhone remet l’instant au centre.
+        </p>
+        <div class="row g-4">
+          <div class="col-md-4 d-flex">
+            <div class="snf-card w-100 text-white h-100">
+              <img src="images/31282227-29547156.jpg" class="img-fluid rounded shadow mb-3" alt="Visiteurs prenant des photos d'une œuvre" loading="lazy">
+              <h5 data-i18n="problem_case_museum">Musées</h5>
+              <p class="mb-0" data-i18n="problem_desc_museum">Protégez les œuvres et offrez une expérience authentique.</p>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex">
+            <div class="snf-card w-100 text-white h-100">
+              <img src="images/1321647.webp" class="img-fluid rounded shadow mb-3" alt="Foule filmant un concert" loading="lazy">
+              <h5 data-i18n="problem_case_concert">Concerts</h5>
+              <p class="mb-0" data-i18n="problem_desc_concert">Rendez la scène à son public sans écrans omniprésents.</p>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex">
+            <div class="snf-card w-100 text-white h-100">
+              <img src="images/2986967587606.PNM.jpg" class="img-fluid rounded shadow mb-3" alt="Pochette anti-photo dorée" loading="lazy">
+              <h5 data-i18n="problem_case_solution">La solution : SecurityNoPhone</h5>
+              <p class="mb-0" data-i18n="problem_desc_solution">Pochettes verrouillables : téléphone gardé, photo/vidéo impossible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="snf-container py-5 px-4" data-aos="fade-up" id="concept-gallery">
+      <div class="container text-center">
+        <h2 class="section-title mb-4" data-i18n="concept_gallery_title">🔒 Le concept SecurityNoPhone en images</h2>
+        <p class="lead text-white-50 mb-5" data-i18n="concept_gallery_intro">Des musées aux concerts, protégez la confidentialité et l’instant.</p>
+        <div class="row g-4">
+          <div class="col-md-4 d-flex">
+            <div class="card bg-transparent border-0 text-white h-100">
+              <img src="images/no-photo-video-phone-prohibition-260nw-2402375371.webp" class="img-fluid rounded shadow" alt="Pictogrammes interdiction photo" loading="lazy">
+              <div class="mt-3">
+                <h5 data-i18n="concept_gallery_case1">Règles claires</h5>
+                <p class="mb-0" data-i18n="concept_gallery_desc1">Signalétique simple et respectée par tous les invités.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex">
+            <div class="card bg-transparent border-0 text-white h-100">
+              <video class="rounded shadow w-100" autoplay muted loop playsinline preload="metadata">
+                <source src="images/poduit.mp4" type="video/mp4">
+              </video>
+              <div class="mt-3">
+                <h5 data-i18n="concept_gallery_case3">Pochettes anti-photo</h5>
+                <p class="mb-0" data-i18n="concept_gallery_desc3">Élégantes, personnalisables, efficaces.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex">
+            <div class="card bg-transparent border-0 text-white h-100">
+              <img src="images/Locking+Cell+Phone+Pouches+For+Schools,+Phone+Lockers+For+Schools,+Cell+Phone+Pouch+Lock+For+Schools,+Lockers+For+Mobile+Phones,+Phone+Lock+Bag+Concert,+Cell+.jpg" class="img-fluid rounded shadow" alt="Utilisation des pochettes en milieu scolaire" loading="lazy">
+              <div class="mt-3">
+                <h5 data-i18n="concept_gallery_case2">Écoles &amp; événements</h5>
+                <p class="mb-0" data-i18n="concept_gallery_desc2">Présence, concentration, confidentialité garanties.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="snf-container py-5 px-4" data-aos="fade-up" id="contact">
       <div class="container">
         <h2 class="section-title text-center">Contact &amp; commande</h2>
@@ -318,6 +388,8 @@
     </section>
   </main>
 
+  <div id="footer-container"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
@@ -329,26 +401,6 @@
   </script>
   <script src="js/translations.js"></script>
   <script src="js/main.js"></script>
-  <div id="cookie-banner" style="position:fixed;bottom:0;width:100%;background:#222;color:#fff;padding:10px;text-align:center;z-index:1000;">
-  Ce site utilise des cookies pour améliorer votre expérience.
-  <button onclick="acceptCookies()" style="margin-left:10px;">Accepter</button>
-  <button onclick="declineCookies()" style="margin-left:10px;">Refuser</button>
-</div>
-
-<script>
-function acceptCookies() {
-  document.cookie = "cookies_accepted=true; max-age=31536000; path=/";
-  document.getElementById('cookie-banner').style.display = 'none';
-}
-function declineCookies() {
-  document.getElementById('cookie-banner').style.display = 'none';
-}
-window.onload = function() {
-  if (document.cookie.indexOf('cookies_accepted=true') !== -1) {
-    document.getElementById('cookie-banner').style.display = 'none';
-  }
-}
-</script>
 
 </body>
 </html>
