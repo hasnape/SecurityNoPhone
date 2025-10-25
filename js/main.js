@@ -77,6 +77,37 @@ function handleCookieBanner() {
   }
 }
 
+function setupSmoothScroll() {
+  document.querySelectorAll('[data-scroll-target]').forEach(link => {
+    if (link.dataset.smoothScrollBound === 'true') {
+      return;
+    }
+
+    link.addEventListener('click', event => {
+      const targetSelector = link.getAttribute('data-scroll-target');
+      if (!targetSelector) {
+        return;
+      }
+
+      const targetElement = document.querySelector(targetSelector);
+      if (!targetElement) {
+        return;
+      }
+
+      event.preventDefault();
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (typeof history.replaceState === 'function') {
+        history.replaceState(null, '', targetSelector);
+      } else {
+        window.location.hash = targetSelector;
+      }
+    });
+
+    link.dataset.smoothScrollBound = 'true';
+  });
+}
+
 function loadNavbar() {
   fetch("includes/navbar.html")
     .then(res => {
@@ -102,6 +133,7 @@ function loadNavbar() {
           switchLanguage(selectedLang);
         });
       }
+      setupSmoothScroll();
     })
     .catch(error => console.error("Error loading navbar:", error));
 }
@@ -195,6 +227,7 @@ async function initializePage() {
     console.error("Error initializing page components:", error);
   } finally {
     switchLanguage(currentLang);
+    setupSmoothScroll();
   }
 }
 
