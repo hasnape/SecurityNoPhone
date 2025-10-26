@@ -13,36 +13,56 @@
 <body>
   <div id="navbar-container"></div>
 
-  <main class="container my-5" style="margin-top: 100px;"><br><br>
-    <div class="row g-4 align-items-start">
-      <div class="col-md-6">
-        <div class="tracking-box">
-          <h2 class="mb-4 text-center" data-i18n="order_tracking_title">Suivre ma commande</h2>
-          <form id="trackingForm">
-            <div class="mb-3">
-              <label for="orderId" class="form-label" data-i18n="order_input_label">Numéro de commande reçu par mail
-                :</label>
-              <input type="text" class="form-control" id="orderId" placeholder="Ex : CMD123"
-                data-i18n-placeholder="order_placeholder" required />
-            </div>
-            <div class="text-center">
-              <button type="submit" class="btn btn-dark" data-i18n="order_check_button">Afficher le statut</button>
-            </div>
-          </form>
-          <div id="statusResult" class="mt-4 text-center fw-bold"></div>
+  <main>
+    <section class="section page-hero">
+      <div class="container">
+        <div class="text-center">
+          <span class="hero-badge">Support &amp; Formation</span>
+          <h1 class="section-title">Suivi de commande SecurityNoPhone</h1>
+          <p class="section-subtitle">Retrouvez le fil rouge Support : préparation, expédition et restitution du matériel avec transparence totale.</p>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="tracking-box">
-          <h3 class="mb-3" data-i18n="tracking_how_to_title">Comment suivre votre commande ?</h3>
-          <p data-i18n="tracking_how_to_p1">Une fois votre commande passée, vous recevrez un numéro unique. Ce numéro
-            vous permet de connaître l’état d’avancement de la préparation, de l’expédition et de la livraison de votre
-            matériel SecurityNoPhone.</p>
-          <p data-i18n="tracking_how_to_p2">Nous mettons à jour en temps réel les statuts de commande pour que vous
-            soyez toujours informé. Merci pour votre confiance !</p>
+    </section>
+
+    <section class="section" id="order-tracking">
+      <div class="container">
+        <div class="tracking-shell">
+          <div class="row g-4 align-items-start">
+            <div class="col-lg-6">
+              <div class="tracking-box h-100">
+                <h2 class="mb-4 text-center" data-i18n="order_tracking_title">Suivre ma commande</h2>
+                <form id="trackingForm">
+                  <div class="mb-3">
+                    <label for="orderId" class="form-label" data-i18n="order_input_label">Numéro de commande reçu par mail :</label>
+                    <input type="text" class="form-control" id="orderId" placeholder="Ex : CMD123" data-i18n-placeholder="order_placeholder" required />
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary" data-i18n="order_check_button">Afficher le statut</button>
+                  </div>
+                </form>
+                <div id="statusResult" class="mt-4 text-center fw-bold"></div>
+                <p class="tracking-note mt-4">Ce suivi reflète notre engagement Support : communication proactive et contrôle précis du matériel prêté.</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="tracking-box h-100">
+                <h3 class="mb-3" data-i18n="tracking_how_to_title">Comment suivre votre commande ?</h3>
+                <p data-i18n="tracking_how_to_p1">Une fois votre commande passée, vous recevrez un numéro unique. Ce numéro vous permet de connaître l’état d’avancement de la préparation, de l’expédition et de la livraison de votre matériel SecurityNoPhone.</p>
+                <p data-i18n="tracking_how_to_p2">Nous mettons à jour en temps réel les statuts de commande pour que vous soyez toujours informé. Merci pour votre confiance !</p>
+                <div class="continuity-banner mt-4">
+                  <strong>Besoin d’un accompagnement supplémentaire ?</strong>
+                  <p class="mb-3">Consultez nos ressources ou contactez votre chef de projet Support pour ajuster la livraison.</p>
+                  <div class="d-flex flex-wrap gap-3 justify-content-center">
+                    <a class="btn btn-outline-primary" href="ressources.html">Voir le kit Support</a>
+                    <a class="btn btn-primary" href="contact.html">Contacter un chef de projet</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   </main>
 
   <div id="footer-container"></div>
