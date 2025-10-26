@@ -37,8 +37,7 @@
               <input type="number" class="form-control" name="quantite" id="quantity" min="0" value="50" required
                 data-msg-min-rental="The minimum quantity for rentals is 1 pouch."
                 data-msg-min-custom="Custom pouches require at least 50 units."
-                data-msg-min-subscription="Enter at least one pouch for the Starter subscription."
-                data-msg-max-subscription="The Starter subscription is limited to 50 pouches." />
+                data-msg-min-subscription="Enter at least one pouch for the Starter subscription." />
               <div class="text-danger mt-1" id="quantityError" style="display:none"></div>
             </div>
 
@@ -58,15 +57,9 @@
                 data-msg-range="The end date must be on or after the start date."></div>
             </div>
 
-            <div class="mb-3 d-none" data-staff-fields>
-              <label class="form-label" for="staffQuantity">Additional staff (optional):</label>
-              <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0" />
-              <small class="text-muted">€100 per person per 6-hour day.</small>
-            </div>
-
-            <div class="alert alert-info d-none" data-summary data-days-label="Duration" data-total-label="Estimated total"
+            <div class="alert alert-info d-none" data-summary data-days-label="Package" data-total-label="Estimated total"
               data-day-singular="day" data-day-plural="days" aria-live="polite">
-              <p class="mb-1"><strong><span data-summary-days-label>Duration</span> : <span data-summary-days-count>—</span></strong></p>
+              <p class="mb-1"><strong><span data-summary-days-label>Package</span> : <span data-summary-days-count>—</span></strong></p>
               <p class="mb-0"><span data-summary-total-label>Estimated total</span> : <span data-summary-total-amount>—</span></p>
             </div>
 
@@ -113,18 +106,22 @@
         </div>
         <div class="col-lg-5">
           <div class="bg-light rounded-4 shadow-sm p-4 h-100">
-            <h2 class="h5 text-center mb-3">Tailored guidance for your project</h2>
-            <p class="text-muted small">
-              We prepare each deployment with your teams: security briefing, guest journey and multilingual communications.
-            </p>
-            <ul class="list-unstyled small mb-4">
-              <li class="mb-2">• Managed rental with a dedicated SecurityNoPhone project lead</li>
-              <li class="mb-2">• Assisted self-run kit with on-call event hotline</li>
-              <li class="mb-2">• Custom pouch creation and private event concierge offer</li>
+            <h2 class="h5 text-center mb-3">Aligned 3-day rental packages</h2>
+            <p class="text-muted small">Two scenarios matching our Support &amp; Training page so your teams get the same on-site experience.</p>
+            <div class="mb-3">
+              <h3 class="h6 text-uppercase text-muted mb-1">Option 1 – Full-service with staff</h3>
+              <p class="small mb-0">€1,170 incl. VAT for 3 days. SecurityNoPhone agent on site (up to 6 h/day) handling installation, guest flow and closing.</p>
+            </div>
+            <div class="mb-3">
+              <h3 class="h6 text-uppercase text-muted mb-1">Option 2 – Assisted self-run</h3>
+              <p class="small mb-0">€450 incl. VAT for 3 days. Kit shipped via Mondial Relay with step-by-step guide and event hotline.</p>
+            </div>
+            <ul class="list-unstyled small mb-3">
+              <li class="mb-1">• Round-trip shipping within mainland France included.</li>
+              <li class="mb-1">• Cleaning, quality control and phone support covered.</li>
+              <li class="mb-1">• Deposit refunded instantly after full equipment check.</li>
             </ul>
-            <p class="small text-muted mb-0">
-              We send the invoice with a secure payment link (card or bank transfer) once your order is confirmed.
-            </p>
+            <p class="small text-muted mb-0">Share your dates, venues and language needs in the form so we mirror the Support &amp; Training deployment.</p>
           </div>
         </div>
       </div>
