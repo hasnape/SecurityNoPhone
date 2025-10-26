@@ -4,6 +4,8 @@
   const OFFER_CONFIG = {
     location_sans: { type: 'rental', pricing: 'package', packagePrice: 450, includedDays: 3 },
     location_avec: { type: 'rental', pricing: 'package', packagePrice: 1170, includedDays: 3 },
+    location_sans: { type: 'rental', dailyRate: 150 },
+    location_avec: { type: 'rental', dailyRate: 390, staffDailyRate: 100 },
     abonnement: { type: 'subscription', pricePerPack: 19, packSize: 50 },
     achat: { type: 'purchase', unitPrice: 3.5, minQuantity: 50 },
     special_event: { type: 'custom' }
