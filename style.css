@@ -995,6 +995,99 @@ a:hover {
   padding: 1.5rem;
 }
 
+.section-kicker {
+  display: inline-block;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--snf-accent);
+  margin-bottom: 1rem;
+}
+
+.signature-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.signature-card {
+  background: #fff;
+  border-radius: var(--snf-radius-lg);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 2rem 1.75rem;
+  box-shadow: 0 25px 45px rgba(15, 23, 42, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 35px 65px rgba(15, 23, 42, 0.18);
+}
+
+.signature-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.9rem;
+  display: grid;
+  place-items: center;
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--snf-accent);
+  margin-bottom: 1.25rem;
+  font-size: 1.35rem;
+}
+
+.method-step {
+  background: #fff;
+  border-radius: var(--snf-radius-lg);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  padding: 1.75rem 1.5rem;
+  text-align: left;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+}
+
+.method-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--snf-accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
+}
+
+.testimonial-card {
+  background: #fff;
+  border-radius: var(--snf-radius-lg);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 2.25rem 2rem;
+  position: relative;
+  box-shadow: 0 28px 55px rgba(15, 23, 42, 0.12);
+}
+
+.testimonial-quote {
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--snf-accent);
+  margin-bottom: 1rem;
+}
+
+.testimonial-author {
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: rgba(15, 23, 42, 0.8);
+}
+
+.author-name {
+  display: block;
+  font-size: 0.95rem;
+}
+
 @media print {
   body * {
     visibility: hidden !important;
