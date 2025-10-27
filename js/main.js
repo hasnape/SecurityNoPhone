@@ -9,10 +9,7 @@ function updateLanguageSelectUI(lang) {
   }
 
   const option = select.querySelector(`option[value="${lang}"]`);
-  let flagUrl = option ? option.dataset.flag : null;
-  if (!flagUrl && select.options.length > 0) {
-    flagUrl = select.options[0].dataset.flag || null;
-  }
+  const flagUrl = option && option.dataset ? option.dataset.flag : null;
 
   if (flagUrl) {
     select.style.backgroundImage = `url('${flagUrl}')`;
