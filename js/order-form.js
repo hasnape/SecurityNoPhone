@@ -2,6 +2,8 @@
 // Regénérez les clés si elles ont été publiées.
 (function () {
   const OFFER_CONFIG = {
+    location_sans: { type: 'rental', pricing: 'package', packagePrice: 450, includedDays: 3 },
+    location_avec: { type: 'rental', pricing: 'package', packagePrice: 1170, includedDays: 3 },
     location_sans: { type: 'rental', dailyRate: 150 },
     location_avec: { type: 'rental', dailyRate: 390, staffDailyRate: 100 },
     abonnement: { type: 'subscription', pricePerPack: 19, packSize: 50 },
@@ -56,10 +58,22 @@
     if (!show) {
       return;
     }
-    const daysLabel = summaryEl.querySelector('[data-summary-days-count]');
+    const daysLabelEl = summaryEl.querySelector('[data-summary-days-label]');
+    const daysCountEl = summaryEl.querySelector('[data-summary-days-count]');
     const totalLabel = summaryEl.querySelector('[data-summary-total-amount]');
-    if (daysLabel) {
-      daysLabel.textContent = days != null ? String(days) : '—';
+    if (daysLabelEl) {
+      const labelText = summaryEl.dataset.daysLabel || daysLabelEl.textContent || '';
+      daysLabelEl.textContent = labelText;
+    }
+    if (daysCountEl) {
+      if (days != null) {
+        const singular = summaryEl.dataset.daySingular || '';
+        const plural = summaryEl.dataset.dayPlural || singular;
+        const unit = singular || plural ? (Number(days) === 1 ? singular : plural) : '';
+        daysCountEl.textContent = unit ? `${days} ${unit}` : String(days);
+      } else {
+        daysCountEl.textContent = '—';
+      }
     }
     if (totalLabel) {
       totalLabel.textContent = total != null ? formatCurrency(locale, total, currency) : '—';
@@ -74,9 +88,7 @@
     const quantityInput = form.querySelector('#quantity, [name="quantite"]');
     const startInput = form.querySelector('[data-start-date]');
     const endInput = form.querySelector('[data-end-date]');
-    const staffInput = form.querySelector('#staffQuantity, [data-staff-quantity]');
     const rentalFields = form.querySelector('[data-rental-fields]');
-    const staffFields = form.querySelector('[data-staff-fields]');
     const summary = form.querySelector('[data-summary]');
     const priceDisplay = form.querySelector('[data-total-display]');
     const priceTemplate = priceDisplay ? (priceDisplay.dataset.template || priceDisplay.textContent || 'Total: {price}') : 'Total: {price}';
@@ -203,17 +215,20 @@
       let total = 0;
       let daysInfo = { valid: true, days: null };
 
+      let summaryDays = null;
+
       switch (offer.type) {
         case 'rental': {
           daysInfo = validateDates(offerKey);
-          const days = daysInfo.days || 1;
-          const base = offer.dailyRate * days;
-          let staffTotal = 0;
-          if (staffInput) {
-            const staffCount = Math.max(Number.parseInt(staffInput.value, 10) || 0, 0);
-            staffTotal = (offer.staffDailyRate || 0) * staffCount * days;
+          if (offer.pricing === 'package') {
+            summaryDays = daysInfo.days != null ? daysInfo.days : offer.includedDays || null;
+            total = offer.packagePrice || 0;
+          } else {
+            const days = daysInfo.days || 1;
+            summaryDays = days;
+            const base = (offer.dailyRate || 0) * days;
+            total = base;
           }
-          total = base + staffTotal;
           break;
         }
         case 'subscription': {
@@ -243,7 +258,9 @@
         }
       }
 
-      updateSummaryVisibility(summary, offer.type === 'rental', locale, daysInfo.days || 1, total, currency);
+      const summaryValue = summaryDays != null ? summaryDays : daysInfo.days;
+      const fallbackDays = offer.type === 'rental' ? (offer.includedDays || 1) : 1;
+      updateSummaryVisibility(summary, offer.type === 'rental', locale, summaryValue != null ? summaryValue : fallbackDays, total, currency);
 
       if (cautionBlock) {
         const shouldShow = caution > 0;
@@ -262,7 +279,6 @@
 
       const summaryFieldsActive = offer.type === 'rental';
       showElement(rentalFields, summaryFieldsActive);
-      showElement(staffFields, offer.type === 'rental' && offer.staffDailyRate);
 
       return quantityValid && daysInfo.valid;
     }
@@ -283,10 +299,6 @@
     if (endInput) {
       endInput.addEventListener('change', refresh);
     }
-    if (staffInput) {
-      staffInput.addEventListener('input', refresh);
-    }
-
     form.addEventListener('submit', event => {
       const valid = computeTotals();
       if (!valid || !form.checkValidity()) {

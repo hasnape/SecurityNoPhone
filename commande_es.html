@@ -31,8 +31,8 @@
                     <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm" data-order-form data-locale="es-ES">
           <input type="text" name="_gotcha" style="display:none">
           <div class="visually-hidden">
-            <span data-offer-base="location_sans" data-price="150" data-pricing-type="flat"></span>
-            <span data-offer-base="location_avec" data-price="390" data-pricing-type="flat"></span>
+            <span data-offer-base="location_sans" data-price="450" data-pricing-type="package" data-included-days="3"></span>
+            <span data-offer-base="location_avec" data-price="1170" data-pricing-type="package" data-included-days="3"></span>
             <span data-offer-base="achat" data-price="3.5" data-pricing-type="per-unit"></span>
             <span data-offer-base="abonnement" data-price="19" data-pricing-type="subscription" data-pack-size="50" data-max-quantity="50"></span>
           </div>
@@ -48,6 +48,8 @@
           </div>
           <div class="mb-3">
             <label for="quantity" class="form-label" data-i18n="label_quantity">Cantidad de fundas:</label>
+            <input type="number" class="form-control" name="quantite" id="quantity" min="0" value="50" required data-quantity-input />
+            <div id="quantityError" class="text-danger mt-1" style="display: none;" data-quantity-error data-min-rental="La cantidad mínima para el alquiler es de 1 funda." data-min-custom="Las fundas personalizadas requieren un mínimo de 50 unidades." data-min-subscription="Introduce al menos una funda para el plan Starter."></div>
             <input type="number" class="form-control" name="quantite" id="quantity" max="250" min="0" value="50" required data-quantity-input />
             <div id="quantityError" class="text-danger mt-1" style="display: none;" data-quantity-error data-min-rental="La cantidad mínima para el alquiler es de 1 funda." data-max-rental="La cantidad máxima permitida para el alquiler es de 250 fundas." data-min-custom="Las fundas personalizadas requieren un mínimo de 50 unidades." data-min-subscription="La cantidad no puede ser negativa."></div>
           </div>
@@ -64,13 +66,8 @@
             </div>
             <div id="dateError" class="text-danger mt-2" style="display: none;" data-date-error data-missing="Indique las fechas de inicio y fin del alquiler." data-range="La fecha de fin debe ser igual o posterior a la fecha de inicio."></div>
           </div>
-          <div class="mb-3 d-none" data-staff-fields>
-            <label for="staffQuantity" class="form-label">Personal adicional (opcional):</label>
-            <input type="number" class="form-control" name="personnel_supplementaire" id="staffQuantity" min="0" value="0" data-staff-quantity>
-            <small class="text-muted">100 € / día / persona por 6 h.</small>
-          </div>
-          <div class="alert alert-info d-none" data-summary data-days-label="Duración" data-total-label="Total estimado" data-day-singular="día" data-day-plural="días" aria-live="polite">
-            <p class="mb-1"><strong><span data-summary-days-label>Duración</span> : <span data-summary-days-count>—</span></strong></p>
+          <div class="alert alert-info d-none" data-summary data-days-label="Paquete" data-total-label="Total estimado" data-day-singular="día" data-day-plural="días" aria-live="polite">
+            <p class="mb-1"><strong><span data-summary-days-label>Paquete</span> : <span data-summary-days-count>—</span></strong></p>
             <p class="mb-0"><span data-summary-total-label>Total estimado</span> : <span data-summary-total-amount>—</span></p>
           </div>
           <div class="mb-3">
@@ -119,6 +116,22 @@
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center align-items-center px-3">
                     <div class="bg-light rounded-4 shadow-sm p-4 w-100">
+                        <h2 class="h5 text-center mb-3">Paquetes de alquiler 3 días coordinados</h2>
+                        <p class="text-center text-muted small">Dos escenarios alineados con nuestra página de Soporte y Formación para replicar la misma experiencia en tu evento.</p>
+                        <div class="mb-3">
+                          <h3 class="h6 text-uppercase text-muted mb-1">Opción 1 – Llave en mano con personal</h3>
+                          <p class="small mb-0">1.170 € IVA incluido por 3 días. Agente SecurityNoPhone en sitio (máx. 6 h/día) gestionando montaje, flujo de invitados y cierre.</p>
+                        </div>
+                        <div class="mb-3">
+                          <h3 class="h6 text-uppercase text-muted mb-1">Opción 2 – Autonomía acompañada</h3>
+                          <p class="small mb-0">450 € IVA incluido por 3 días. Kit enviado por Mondial Relay con guía paso a paso y hotline para el día del evento.</p>
+                        </div>
+                        <ul class="list-unstyled small mb-3">
+                          <li class="mb-1">• Envío y retorno incluidos en Francia metropolitana.</li>
+                          <li class="mb-1">• Limpieza, control de calidad y asistencia telefónica incluidos.</li>
+                          <li class="mb-1">• Depósito devuelto al instante tras verificar el material.</li>
+                        </ul>
+                        <p class="small text-muted mb-4">Detalla fechas, sedes e idiomas necesarios para replicar el despliegue descrito en Soporte y Formación.</p>
                         <p class="text-center fw-semibold fs-5 mb-3 text-dark">
             💳 Pago con <strong>PayPal (si es elegible)</strong><br>
               <small class="fst-italic text-muted">(se muestra automáticamente según tu cuenta)</small>

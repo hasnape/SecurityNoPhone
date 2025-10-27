@@ -27,11 +27,13 @@
       const type = element.dataset.pricingType || 'flat';
       const packSize = element.dataset.packSize ? Number.parseInt(element.dataset.packSize, 10) : null;
       const maxQuantity = element.dataset.maxQuantity ? Number.parseInt(element.dataset.maxQuantity, 10) : null;
+      const includedDays = element.dataset.includedDays ? Number.parseInt(element.dataset.includedDays, 10) : null;
       config[key] = {
         price,
         type,
         packSize,
-        maxQuantity
+        maxQuantity,
+        includedDays
       };
     });
     return config;
@@ -61,8 +63,6 @@
     const startInput = form.querySelector('[data-start-date]');
     const endInput = form.querySelector('[data-end-date]');
     const rentalFields = form.querySelector('[data-rental-fields]');
-    const staffFields = form.querySelector('[data-staff-fields]');
-    const staffQuantityInput = form.querySelector('[data-staff-quantity]');
     const quantityError = form.querySelector('[data-quantity-error]');
     const dateError = form.querySelector('[data-date-error]');
     const summary = form.querySelector('[data-summary]');
@@ -177,9 +177,6 @@
         if (value < 1) {
           isValid = false;
           message = quantityError.dataset.minRental || '';
-        } else if (value > 250) {
-          isValid = false;
-          message = quantityError.dataset.maxRental || '';
         }
       } else if (offerValue === 'achat') {
         if (value < 50) {
@@ -260,23 +257,20 @@
 
       const quantity = Number.parseInt(quantityInput.value, 10) || 0;
 
-      if (config.type === 'flat') {
+      if (config.type === 'package' || config.type === 'flat') {
         if (!isRentalOffer(offerValue)) {
-          return { total: config.price, days: null };
+          return { total: config.price, days: config.includedDays || null };
         }
         if (!validateDates(false)) {
           return null;
         }
-        const days = computeDays(startInput.value, endInput.value);
-        if (days === null || days === -1) {
+        const included = clampMin(config.includedDays || 3, 1);
+        const computedDays = computeDays(startInput.value, endInput.value);
+        if (computedDays === -1) {
           return null;
         }
-        let total = config.price * days;
-        if (offerValue === 'location_avec' && staffQuantityInput) {
-          const staffQty = clampMin(Number.parseInt(staffQuantityInput.value, 10) || 0, 0);
-          staffQuantityInput.value = staffQty;
-          total += staffQty * 100 * days;
-        }
+        const days = computedDays == null ? included : computedDays;
+        const total = config.price;
         return { total, days };
       }
 
@@ -301,8 +295,6 @@
     function updateUI() {
       const offerValue = offerSelect.value;
       showElement(rentalFields, isRentalOffer(offerValue));
-      showElement(staffFields, offerValue === 'location_avec');
-
       const quantityValid = validateQuantity();
       const datesValid = validateDates();
       const totalInfo = computeTotal();
@@ -374,10 +366,6 @@
     if (endInput) {
       endInput.addEventListener('change', updateUI);
     }
-    if (staffQuantityInput) {
-      staffQuantityInput.addEventListener('input', updateUI);
-    }
-
     form.addEventListener('submit', (event) => {
       if (submitButton && submitButton.disabled) {
         event.preventDefault();
