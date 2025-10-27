@@ -7,7 +7,6 @@
         const supported = {
             fr: "https://www.securitynophone.com/index.html",
             en: "https://www.securitynophone.com/en/index.html",
-            de: "https://www.securitynophone.com/de/index.html",
             ar: "https://www.securitynophone.com/ar/index.html",
         };
 
