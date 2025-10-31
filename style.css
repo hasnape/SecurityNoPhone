@@ -966,6 +966,167 @@ a:hover {
   }
 }
 
+/* Device-specific layouts */
+@media (min-width: 1200px) {
+  body {
+    font-size: 1rem;
+  }
+
+  .hero {
+    padding: 6.5rem 0 4.5rem;
+  }
+
+  .hero .container {
+    max-width: 1180px;
+  }
+
+  .hero-title {
+    font-size: 3.6rem;
+  }
+
+  .hero-text {
+    max-width: 560px;
+  }
+
+  .hero-media {
+    margin-left: auto;
+  }
+
+  .hero-stats .col-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+
+  .section {
+    padding: 5.5rem 0;
+  }
+
+  .support-callout-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    text-align: left;
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  body {
+    font-size: 0.98rem;
+  }
+
+  .hero {
+    padding: 4.75rem 0 3.25rem;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-text,
+  .hero-note {
+    max-width: 620px;
+  }
+
+  .hero-media {
+    margin-inline: auto;
+    max-width: 520px;
+  }
+
+  .hero-stats {
+    text-align: center;
+  }
+
+  .hero-stats .col-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .hero-stats .col-4:last-child {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .section {
+    padding: 4.25rem 0;
+  }
+
+  .audience-card,
+  .support-card,
+  .process-block {
+    height: 100%;
+  }
+}
+
+@media (max-width: 767.98px) {
+  body {
+    font-size: 0.95rem;
+  }
+
+  .hero {
+    padding: 3.75rem 0 2.75rem;
+    text-align: center;
+  }
+
+  .hero-header {
+    margin-inline: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-note {
+    margin-inline: auto;
+  }
+
+  .hero-stats {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .hero-stats .row {
+    row-gap: 1rem;
+  }
+
+  .hero-stats .col-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .hero-stat {
+    padding: 1rem;
+  }
+
+  .hero-media {
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .hero-media .ratio {
+    border-radius: var(--snf-radius-sm);
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .playbook-grid,
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .support-callout-content {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Legacy helpers */
 .snf-container {
   padding: clamp(3rem, 5vw, 4.5rem) 0;
