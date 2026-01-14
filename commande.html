@@ -48,11 +48,11 @@
             <div class="mb-3 d-none" data-rental-fields>
               <div class="row g-3">
                 <div class="col-md-6">
-                  <label for="startDate" class="form-label">Date de début :</label>
+                  <label for="startDate" class="form-label" data-i18n="label_start_date">Date de début :</label>
                   <input type="date" name="date_debut" id="startDate" class="form-control" data-start-date />
                 </div>
                 <div class="col-md-6">
-                  <label for="endDate" class="form-label">Date de fin :</label>
+                  <label for="endDate" class="form-label" data-i18n="label_end_date">Date de fin :</label>
                   <input type="date" name="date_fin" id="endDate" class="form-control" data-end-date />
                 </div>
               </div>
@@ -61,10 +61,37 @@
                 data-msg-range="La date de fin doit être postérieure ou égale à la date de début."></div>
             </div>
 
+            <div class="mb-3 d-none" data-agent-options>
+              <h3 class="h6 text-uppercase text-muted" data-i18n="agent_options_title">Options agents (location avec personnel)</h3>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label for="additionalAgents" class="form-label" data-i18n="label_additional_agents">Agents supplémentaires</label>
+                  <input type="number" class="form-control" id="additionalAgents" name="agents_supplementaires" min="0" value="0" />
+                </div>
+                <div class="col-md-8">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="outsideRhone" name="deplacement_hors_rhone" />
+                    <label class="form-check-label" for="outsideRhone" data-i18n="label_outside_rhone">Déplacement hors région Rhône (+80€)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="lodgingRequired" name="logement_requis" />
+                    <label class="form-check-label" for="lodgingRequired" data-i18n="label_lodging_required">Logement agents requis (+80€/jour/agent)</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="alert alert-info d-none" data-summary data-days-label="Forfait" data-total-label="Total estimé"
               data-day-singular="jour" data-day-plural="jours" aria-live="polite">
-              <p class="mb-1"><strong><span data-summary-days-label>Durée</span> : <span data-summary-days-count>—</span></strong></p>
-              <p class="mb-0"><span data-summary-total-label>Total estimé</span> : <span data-summary-total-amount>—</span></p>
+              <p class="mb-1"><strong><span data-summary-days-label data-i18n="summary_duration_label">Durée</span> : <span data-summary-days-count>—</span></strong></p>
+              <ul class="list-unstyled small mb-2" data-summary-breakdown>
+                <li><span data-summary-base-label data-i18n="summary_base_label">Base</span> : <span data-summary-base>—</span></li>
+                <li class="d-none" data-summary-extra-agents-row><span data-summary-extra-agents-label data-i18n="summary_extra_agents_label">Agents supp.</span> : <span data-summary-extra-agents>—</span></li>
+                <li class="d-none" data-summary-travel-row><span data-summary-travel-label data-i18n="summary_travel_label">Déplacement</span> : <span data-summary-travel>—</span></li>
+                <li class="d-none" data-summary-lodging-row><span data-summary-lodging-label data-i18n="summary_lodging_label">Logement</span> : <span data-summary-lodging>—</span></li>
+                <li><span data-summary-caution-label data-i18n="summary_caution_label">Caution</span> : <span data-summary-caution>—</span></li>
+              </ul>
+              <p class="mb-0"><span data-summary-total-label data-i18n="summary_total_label">Total estimé</span> : <span data-summary-total-amount>—</span></p>
             </div>
 
             <div class="mb-3 d-none" data-caution-block>
@@ -106,23 +133,40 @@
           </form>
         </div>
         <div class="col-lg-5">
-          <div class="bg-light rounded-4 shadow-sm p-4 h-100">
-            <h2 class="h5 text-center mb-3">Forfaits location 3 jours</h2>
-            <p class="text-muted small">Deux scénarios alignés avec la page Support &amp; Formation pour assurer la même expérience terrain.</p>
+            <div class="bg-light rounded-4 shadow-sm p-4 h-100">
+            <h2 class="h5 text-center mb-3" data-i18n="order_info_title">Forfaits location 3 jours</h2>
+            <p class="text-muted small" data-i18n="order_info_subtitle">Deux scénarios alignés avec la page Support &amp; Formation pour assurer la même expérience terrain.</p>
             <div class="mb-3">
-              <h3 class="h6 text-uppercase text-muted mb-1">Option 1 – Clé-en-main avec personnel</h3>
-              <p class="small mb-0">1 170 € TTC pour 3 jours. Agent SecurityNoPhone sur site (max. 6 h/jour), installation, distribution et clôture incluses.</p>
+              <h3 class="h6 text-uppercase text-muted mb-1" data-i18n="order_info_option1_title">Option 1 – Clé-en-main avec personnel</h3>
+              <p class="small mb-0" data-i18n="order_info_option1_desc">1 170 € TTC pour 3 jours. Agent SecurityNoPhone sur site (max. 7 h/jour), installation, distribution et clôture incluses.</p>
             </div>
             <div class="mb-3">
-              <h3 class="h6 text-uppercase text-muted mb-1">Option 2 – Autonome accompagnée</h3>
-              <p class="small mb-0">450 € TTC pour 3 jours. Kit expédié via Mondial Relay, guide pas-à-pas et hotline événementielle.</p>
+              <h3 class="h6 text-uppercase text-muted mb-1" data-i18n="order_info_option2_title">Option 2 – Autonome accompagnée</h3>
+              <p class="small mb-0" data-i18n="order_info_option2_desc">450 € TTC pour 3 jours. Kit expédié via Mondial Relay, guide pas-à-pas et hotline événementielle.</p>
             </div>
             <ul class="list-unstyled small mb-3">
-              <li class="mb-1">• Livraison aller/retour incluse en France métropolitaine.</li>
-              <li class="mb-1">• Nettoyage, contrôle qualité et assistance téléphonique.</li>
-              <li class="mb-1">• Caution remboursée après vérification complète du matériel.</li>
+              <li class="mb-1" data-i18n="order_info_point_1">• Livraison aller/retour incluse en France métropolitaine.</li>
+              <li class="mb-1" data-i18n="order_info_point_2">• Nettoyage, contrôle qualité et assistance téléphonique.</li>
+              <li class="mb-1" data-i18n="order_info_point_3">• Caution remboursée après vérification complète du matériel.</li>
             </ul>
-            <p class="small text-muted mb-0">Indiquez dans le formulaire vos dates, lieux et besoins en langues : nous calons le dispositif comme sur la page Support &amp; Formation.</p>
+            <div class="border rounded-3 p-3 bg-white mb-3">
+              <h3 class="h6 text-uppercase text-muted" data-i18n="order_fees_title">Frais et conditions agents</h3>
+              <ul class="list-unstyled small mb-0">
+                <li data-i18n="order_fee_additional_agent">Agent supplémentaire : +100€/jour/agent</li>
+                <li data-i18n="order_fee_outside_rhone">Déplacement hors région Rhône : +80€</li>
+                <li data-i18n="order_fee_lodging">Logement agents (si requis) : +80€/jour/agent</li>
+                <li data-i18n="order_fee_max_hours">Présence max : 7h/jour/agent</li>
+              </ul>
+            </div>
+            <div class="border rounded-3 p-3 bg-white mb-3">
+              <h3 class="h6 text-uppercase text-muted" data-i18n="order_agents_role_title">Rôle des agents</h3>
+              <p class="small mb-0" data-i18n="order_agents_role_desc">Nos agents ne sont pas des agents de sécurité des personnes. Ils opèrent uniquement le dispositif anti-photo/anti-vidéo (distribution, protocole, assistance, ouverture au point dédié, collecte/contrôle).</p>
+            </div>
+            <div class="border rounded-3 p-3 bg-white">
+              <h3 class="h6 text-uppercase text-muted" data-i18n="order_rc_pro_title">RC Pro</h3>
+              <p class="small mb-0" data-i18n="order_rc_pro_desc">Assurance Responsabilité Civile Professionnelle. Attestation disponible sur demande.</p>
+            </div>
+            <p class="small text-muted mt-3 mb-0" data-i18n="order_info_footer">Indiquez dans le formulaire vos dates, lieux et besoins en langues : nous calons le dispositif comme sur la page Support &amp; Formation.</p>
           </div>
         </div>
       </div>

@@ -47,11 +47,11 @@
             <div class="mb-3 d-none" data-rental-fields>
               <div class="row g-3">
                 <div class="col-md-6">
-                  <label class="form-label" for="startDate">تاريخ البدء:</label>
+                  <label class="form-label" for="startDate" data-i18n="label_start_date">تاريخ البدء:</label>
                   <input type="date" name="date_debut" id="startDate" class="form-control" data-start-date />
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label" for="endDate">تاريخ الانتهاء:</label>
+                  <label class="form-label" for="endDate" data-i18n="label_end_date">تاريخ الانتهاء:</label>
                   <input type="date" name="date_fin" id="endDate" class="form-control" data-end-date />
                 </div>
               </div>
@@ -60,10 +60,37 @@
                 data-msg-range="يجب أن يكون تاريخ الانتهاء مساوياً أو لاحقاً لتاريخ البداية."></div>
             </div>
 
+            <div class="mb-3 d-none" data-agent-options>
+              <h3 class="h6 text-uppercase text-muted" data-i18n="agent_options_title">خيارات الوكلاء (تأجير مع طاقم)</h3>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label" for="additionalAgents" data-i18n="label_additional_agents">وكلاء إضافيون</label>
+                  <input type="number" class="form-control" id="additionalAgents" name="agents_supplementaires" min="0" value="0" />
+                </div>
+                <div class="col-md-8">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="outsideRhone" name="deplacement_hors_rhone" />
+                    <label class="form-check-label" for="outsideRhone" data-i18n="label_outside_rhone">تنقل خارج منطقة الرون (+80€)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="lodgingRequired" name="logement_requis" />
+                    <label class="form-check-label" for="lodgingRequired" data-i18n="label_lodging_required">إقامة الوكلاء مطلوبة (+80€ لكل يوم/وكيل)</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="alert alert-info d-none" data-summary data-days-label="الباقة" data-total-label="المبلغ التقديري"
               data-day-singular="يوم" data-day-plural="أيام" aria-live="polite">
-              <p class="mb-1"><strong><span data-summary-days-label>الباقة</span> : <span data-summary-days-count>—</span></strong></p>
-              <p class="mb-0"><span data-summary-total-label>المبلغ التقديري</span> : <span data-summary-total-amount>—</span></p>
+              <p class="mb-1"><strong><span data-summary-days-label data-i18n="summary_duration_label">الباقة</span> : <span data-summary-days-count>—</span></strong></p>
+              <ul class="list-unstyled small mb-2" data-summary-breakdown>
+                <li><span data-summary-base-label data-i18n="summary_base_label">الأساس</span> : <span data-summary-base>—</span></li>
+                <li class="d-none" data-summary-extra-agents-row><span data-summary-extra-agents-label data-i18n="summary_extra_agents_label">وكلاء إضافيون</span> : <span data-summary-extra-agents>—</span></li>
+                <li class="d-none" data-summary-travel-row><span data-summary-travel-label data-i18n="summary_travel_label">التنقل</span> : <span data-summary-travel>—</span></li>
+                <li class="d-none" data-summary-lodging-row><span data-summary-lodging-label data-i18n="summary_lodging_label">الإقامة</span> : <span data-summary-lodging>—</span></li>
+                <li><span data-summary-caution-label data-i18n="summary_caution_label">الوديعة</span> : <span data-summary-caution>—</span></li>
+              </ul>
+              <p class="mb-0"><span data-summary-total-label data-i18n="summary_total_label">المبلغ التقديري</span> : <span data-summary-total-amount>—</span></p>
             </div>
 
             <div class="mb-3 d-none" data-caution-block>
@@ -107,22 +134,39 @@
         </div>
         <div class="col-lg-5">
           <div class="bg-light rounded-4 shadow-sm p-4 h-100">
-            <h2 class="h5 text-center mb-3">باقات إيجار لمدة 3 أيام متطابقة</h2>
-            <p class="text-muted small">سيناريوهان مطابقان لصفحة الدعم والتدريب لضمان نفس الخبرة الميدانية.</p>
+            <h2 class="h5 text-center mb-3" data-i18n="order_info_title">باقات إيجار لمدة 3 أيام متطابقة</h2>
+            <p class="text-muted small" data-i18n="order_info_subtitle">سيناريوهان مطابقان لصفحة الدعم والتدريب لضمان نفس الخبرة الميدانية.</p>
             <div class="mb-3">
-              <h3 class="h6 text-uppercase text-muted mb-1">الخيار 1 – خدمة كاملة مع طاقم</h3>
-              <p class="small mb-0">1 170 € شاملة الضريبة لمدة 3 أيام. وكيل SecurityNoPhone في الموقع (حتى 6 ساعات يومياً) يتولى التركيب، التوزيع والإغلاق.</p>
+              <h3 class="h6 text-uppercase text-muted mb-1" data-i18n="order_info_option1_title">الخيار 1 – خدمة كاملة مع طاقم</h3>
+              <p class="small mb-0" data-i18n="order_info_option1_desc">1 170 € شاملة الضريبة لمدة 3 أيام. وكيل SecurityNoPhone في الموقع (حتى 7 ساعات يومياً) يتولى التركيب، التوزيع والإغلاق.</p>
             </div>
             <div class="mb-3">
-              <h3 class="h6 text-uppercase text-muted mb-1">الخيار 2 – تشغيل ذاتي مدعوم</h3>
-              <p class="small mb-0">450 € شاملة الضريبة لمدة 3 أيام. طقم يُشحن عبر Mondial Relay مع دليل خطوة بخطوة وخط ساخن للفعالية.</p>
+              <h3 class="h6 text-uppercase text-muted mb-1" data-i18n="order_info_option2_title">الخيار 2 – تشغيل ذاتي مدعوم</h3>
+              <p class="small mb-0" data-i18n="order_info_option2_desc">450 € شاملة الضريبة لمدة 3 أيام. طقم يُشحن عبر Mondial Relay مع دليل خطوة بخطوة وخط ساخن للفعالية.</p>
             </div>
             <ul class="list-unstyled small mb-3">
-              <li class="mb-1">• شحن ذهاباً وإياباً داخل فرنسا القارية مشمول.</li>
-              <li class="mb-1">• تنظيف، فحص جودة ودعم هاتفي متضمّن.</li>
-              <li class="mb-1">• إعادة الوديعة فور التحقق الكامل من المعدات.</li>
+              <li class="mb-1" data-i18n="order_info_point_1">• شحن ذهاباً وإياباً داخل فرنسا القارية مشمول.</li>
+              <li class="mb-1" data-i18n="order_info_point_2">• تنظيف، فحص جودة ودعم هاتفي متضمّن.</li>
+              <li class="mb-1" data-i18n="order_info_point_3">• إعادة الوديعة فور التحقق الكامل من المعدات.</li>
             </ul>
-            <p class="small text-muted mb-0">اذكر في النموذج التواريخ والمواقع واللغات المطلوبة لنضبط الخدمة تماماً كما في صفحة الدعم والتدريب.</p>
+            <div class="border rounded-3 p-3 bg-white mb-3">
+              <h3 class="h6 text-uppercase text-muted" data-i18n="order_fees_title">رسوم وشروط الوكلاء</h3>
+              <ul class="list-unstyled small mb-0">
+                <li data-i18n="order_fee_additional_agent">وكيل إضافي: +100€ لكل يوم/وكيل</li>
+                <li data-i18n="order_fee_outside_rhone">تنقل خارج منطقة الرون: +80€</li>
+                <li data-i18n="order_fee_lodging">إقامة الوكلاء (عند الحاجة): +80€ لكل يوم/وكيل</li>
+                <li data-i18n="order_fee_max_hours">الحد الأقصى للحضور: 7 ساعات/يوم/وكيل</li>
+              </ul>
+            </div>
+            <div class="border rounded-3 p-3 bg-white mb-3">
+              <h3 class="h6 text-uppercase text-muted" data-i18n="order_agents_role_title">دور الوكلاء</h3>
+              <p class="small mb-0" data-i18n="order_agents_role_desc">وكلاؤنا ليسوا حراس أمن للأشخاص. دورهم يقتصر على تشغيل جهاز منع التصوير (التوزيع، البروتوكول، المساعدة، الفتح في نقطة مخصصة، الجمع/التحقق).</p>
+            </div>
+            <div class="border rounded-3 p-3 bg-white">
+              <h3 class="h6 text-uppercase text-muted" data-i18n="order_rc_pro_title">مسؤولية مهنية</h3>
+              <p class="small mb-0" data-i18n="order_rc_pro_desc">تأمين المسؤولية المدنية المهنية. الشهادة متاحة عند الطلب.</p>
+            </div>
+            <p class="small text-muted mt-3 mb-0" data-i18n="order_info_footer">اذكر في النموذج التواريخ والمواقع واللغات المطلوبة لنضبط الخدمة تماماً كما في صفحة الدعم والتدريب.</p>
           </div>
         </div>
       </div>

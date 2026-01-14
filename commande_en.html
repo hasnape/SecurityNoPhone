@@ -44,11 +44,11 @@
             <div class="mb-3 d-none" data-rental-fields>
               <div class="row g-3">
                 <div class="col-md-6">
-                  <label class="form-label" for="startDate">Start date:</label>
+                  <label class="form-label" for="startDate" data-i18n="label_start_date">Start date:</label>
                   <input type="date" name="date_debut" id="startDate" class="form-control" data-start-date />
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label" for="endDate">End date:</label>
+                  <label class="form-label" for="endDate" data-i18n="label_end_date">End date:</label>
                   <input type="date" name="date_fin" id="endDate" class="form-control" data-end-date />
                 </div>
               </div>
@@ -57,10 +57,37 @@
                 data-msg-range="The end date must be on or after the start date."></div>
             </div>
 
+            <div class="mb-3 d-none" data-agent-options>
+              <h3 class="h6 text-uppercase text-muted" data-i18n="agent_options_title">Agent options (staffed rental)</h3>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label" for="additionalAgents" data-i18n="label_additional_agents">Additional agents</label>
+                  <input type="number" class="form-control" id="additionalAgents" name="agents_supplementaires" min="0" value="0" />
+                </div>
+                <div class="col-md-8">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="outsideRhone" name="deplacement_hors_rhone" />
+                    <label class="form-check-label" for="outsideRhone" data-i18n="label_outside_rhone">Travel outside Rhône region (+€80)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="lodgingRequired" name="logement_requis" />
+                    <label class="form-check-label" for="lodgingRequired" data-i18n="label_lodging_required">Agent lodging required (+€80/day/agent)</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="alert alert-info d-none" data-summary data-days-label="Package" data-total-label="Estimated total"
               data-day-singular="day" data-day-plural="days" aria-live="polite">
-              <p class="mb-1"><strong><span data-summary-days-label>Package</span> : <span data-summary-days-count>—</span></strong></p>
-              <p class="mb-0"><span data-summary-total-label>Estimated total</span> : <span data-summary-total-amount>—</span></p>
+              <p class="mb-1"><strong><span data-summary-days-label data-i18n="summary_duration_label">Package</span> : <span data-summary-days-count>—</span></strong></p>
+              <ul class="list-unstyled small mb-2" data-summary-breakdown>
+                <li><span data-summary-base-label data-i18n="summary_base_label">Base</span> : <span data-summary-base>—</span></li>
+                <li class="d-none" data-summary-extra-agents-row><span data-summary-extra-agents-label data-i18n="summary_extra_agents_label">Extra agents</span> : <span data-summary-extra-agents>—</span></li>
+                <li class="d-none" data-summary-travel-row><span data-summary-travel-label data-i18n="summary_travel_label">Travel</span> : <span data-summary-travel>—</span></li>
+                <li class="d-none" data-summary-lodging-row><span data-summary-lodging-label data-i18n="summary_lodging_label">Lodging</span> : <span data-summary-lodging>—</span></li>
+                <li><span data-summary-caution-label data-i18n="summary_caution_label">Deposit</span> : <span data-summary-caution>—</span></li>
+              </ul>
+              <p class="mb-0"><span data-summary-total-label data-i18n="summary_total_label">Estimated total</span> : <span data-summary-total-amount>—</span></p>
             </div>
 
             <div class="mb-3 d-none" data-caution-block>
@@ -106,22 +133,39 @@
         </div>
         <div class="col-lg-5">
           <div class="bg-light rounded-4 shadow-sm p-4 h-100">
-            <h2 class="h5 text-center mb-3">Aligned 3-day rental packages</h2>
-            <p class="text-muted small">Two scenarios matching our Support &amp; Training page so your teams get the same on-site experience.</p>
+            <h2 class="h5 text-center mb-3" data-i18n="order_info_title">Aligned 3-day rental packages</h2>
+            <p class="text-muted small" data-i18n="order_info_subtitle">Two scenarios matching our Support &amp; Training page so your teams get the same on-site experience.</p>
             <div class="mb-3">
-              <h3 class="h6 text-uppercase text-muted mb-1">Option 1 – Full-service with staff</h3>
-              <p class="small mb-0">€1,170 incl. VAT for 3 days. SecurityNoPhone agent on site (up to 6 h/day) handling installation, guest flow and closing.</p>
+              <h3 class="h6 text-uppercase text-muted mb-1" data-i18n="order_info_option1_title">Option 1 – Full-service with staff</h3>
+              <p class="small mb-0" data-i18n="order_info_option1_desc">€1,170 incl. VAT for 3 days. SecurityNoPhone agent on site (up to 7 h/day) handling installation, guest flow and closing.</p>
             </div>
             <div class="mb-3">
-              <h3 class="h6 text-uppercase text-muted mb-1">Option 2 – Assisted self-run</h3>
-              <p class="small mb-0">€450 incl. VAT for 3 days. Kit shipped via Mondial Relay with step-by-step guide and event hotline.</p>
+              <h3 class="h6 text-uppercase text-muted mb-1" data-i18n="order_info_option2_title">Option 2 – Assisted self-run</h3>
+              <p class="small mb-0" data-i18n="order_info_option2_desc">€450 incl. VAT for 3 days. Kit shipped via Mondial Relay with step-by-step guide and event hotline.</p>
             </div>
             <ul class="list-unstyled small mb-3">
-              <li class="mb-1">• Round-trip shipping within mainland France included.</li>
-              <li class="mb-1">• Cleaning, quality control and phone support covered.</li>
-              <li class="mb-1">• Deposit refunded instantly after full equipment check.</li>
+              <li class="mb-1" data-i18n="order_info_point_1">• Round-trip shipping within mainland France included.</li>
+              <li class="mb-1" data-i18n="order_info_point_2">• Cleaning, quality control and phone support covered.</li>
+              <li class="mb-1" data-i18n="order_info_point_3">• Deposit refunded instantly after full equipment check.</li>
             </ul>
-            <p class="small text-muted mb-0">Share your dates, venues and language needs in the form so we mirror the Support &amp; Training deployment.</p>
+            <div class="border rounded-3 p-3 bg-white mb-3">
+              <h3 class="h6 text-uppercase text-muted" data-i18n="order_fees_title">Agent fees &amp; conditions</h3>
+              <ul class="list-unstyled small mb-0">
+                <li data-i18n="order_fee_additional_agent">Additional agent: +€100/day/agent</li>
+                <li data-i18n="order_fee_outside_rhone">Travel outside Rhône region: +€80</li>
+                <li data-i18n="order_fee_lodging">Agent lodging (if required): +€80/day/agent</li>
+                <li data-i18n="order_fee_max_hours">Max presence: 7h/day/agent</li>
+              </ul>
+            </div>
+            <div class="border rounded-3 p-3 bg-white mb-3">
+              <h3 class="h6 text-uppercase text-muted" data-i18n="order_agents_role_title">Agents role</h3>
+              <p class="small mb-0" data-i18n="order_agents_role_desc">Our agents are not personal security guards. They only operate the anti-photo/anti-video device (distribution, protocol, assistance, opening at the dedicated point, collection/control).</p>
+            </div>
+            <div class="border rounded-3 p-3 bg-white">
+              <h3 class="h6 text-uppercase text-muted" data-i18n="order_rc_pro_title">Professional liability</h3>
+              <p class="small mb-0" data-i18n="order_rc_pro_desc">Professional liability insurance. Certificate available upon request.</p>
+            </div>
+            <p class="small text-muted mt-3 mb-0" data-i18n="order_info_footer">Share your dates, venues and language needs in the form so we mirror the Support &amp; Training deployment.</p>
           </div>
         </div>
       </div>
