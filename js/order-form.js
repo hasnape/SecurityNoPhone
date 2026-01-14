@@ -2,10 +2,13 @@
 // Regénérez les clés si elles ont été publiées.
 (function () {
   const OFFER_CONFIG = {
-    location_sans: { type: 'rental', pricing: 'package', packagePrice: 450, includedDays: 3 },
-    location_avec: { type: 'rental', pricing: 'package', packagePrice: 1170, includedDays: 3 },
     location_sans: { type: 'rental', dailyRate: 150 },
-    location_avec: { type: 'rental', dailyRate: 390, staffDailyRate: 100 },
+    location_avec: {
+      type: 'rental',
+      dailyRate: 390,
+      additionalAgentDailyRate: 100,
+      maxHoursPerDay: 7
+    },
     abonnement: { type: 'subscription', pricePerPack: 19, packSize: 50 },
     achat: { type: 'purchase', unitPrice: 3.5, minQuantity: 50 },
     special_event: { type: 'custom' }
@@ -80,6 +83,30 @@
     }
   }
 
+  function updateSummaryBreakdown(summaryEl, locale, currency, breakdown) {
+    if (!summaryEl) {
+      return;
+    }
+    const baseEl = summaryEl.querySelector('[data-summary-base]');
+    const extraAgentsEl = summaryEl.querySelector('[data-summary-extra-agents]');
+    const travelEl = summaryEl.querySelector('[data-summary-travel]');
+    const lodgingEl = summaryEl.querySelector('[data-summary-lodging]');
+    const cautionEl = summaryEl.querySelector('[data-summary-caution]');
+
+    if (baseEl) baseEl.textContent = formatCurrency(locale, breakdown.base || 0, currency);
+    if (extraAgentsEl) extraAgentsEl.textContent = formatCurrency(locale, breakdown.extraAgents || 0, currency);
+    if (travelEl) travelEl.textContent = formatCurrency(locale, breakdown.travel || 0, currency);
+    if (lodgingEl) lodgingEl.textContent = formatCurrency(locale, breakdown.lodging || 0, currency);
+    if (cautionEl) cautionEl.textContent = formatCurrency(locale, breakdown.caution || 0, currency);
+
+    const extraAgentsRow = summaryEl.querySelector('[data-summary-extra-agents-row]');
+    if (extraAgentsRow) extraAgentsRow.classList.toggle('d-none', !(breakdown.extraAgents > 0));
+    const travelRow = summaryEl.querySelector('[data-summary-travel-row]');
+    if (travelRow) travelRow.classList.toggle('d-none', !(breakdown.travel > 0));
+    const lodgingRow = summaryEl.querySelector('[data-summary-lodging-row]');
+    if (lodgingRow) lodgingRow.classList.toggle('d-none', !(breakdown.lodging > 0));
+  }
+
   function initOrderForm(form) {
     const locale = form.dataset.locale || document.documentElement.getAttribute('lang') || 'fr-FR';
     const currency = (form.dataset.currency || 'EUR').toUpperCase();
@@ -89,6 +116,10 @@
     const startInput = form.querySelector('[data-start-date]');
     const endInput = form.querySelector('[data-end-date]');
     const rentalFields = form.querySelector('[data-rental-fields]');
+    const agentOptions = form.querySelector('[data-agent-options]');
+    const additionalAgentsInput = form.querySelector('#additionalAgents, [name="agents_supplementaires"]');
+    const outsideRhoneInput = form.querySelector('#outsideRhone, [name="deplacement_hors_rhone"]');
+    const lodgingInput = form.querySelector('#lodgingRequired, [name="logement_requis"]');
     const summary = form.querySelector('[data-summary]');
     const priceDisplay = form.querySelector('[data-total-display]');
     const priceTemplate = priceDisplay ? (priceDisplay.dataset.template || priceDisplay.textContent || 'Total: {price}') : 'Total: {price}';
@@ -139,6 +170,14 @@
     function getQuantity() {
       const raw = Number.parseInt(quantityInput && quantityInput.value, 10);
       return Number.isNaN(raw) ? 0 : raw;
+    }
+
+    function getAdditionalAgents() {
+      if (!additionalAgentsInput) {
+        return 0;
+      }
+      const raw = Number.parseInt(additionalAgentsInput.value, 10);
+      return Number.isNaN(raw) ? 0 : Math.max(raw, 0);
     }
 
     function validateQuantity(offerKey) {
@@ -214,21 +253,27 @@
 
       let total = 0;
       let daysInfo = { valid: true, days: null };
-
       let summaryDays = null;
+      let base = 0;
+      let extraAgentsCost = 0;
+      let travelFee = 0;
+      let lodgingFee = 0;
 
       switch (offer.type) {
         case 'rental': {
           daysInfo = validateDates(offerKey);
-          if (offer.pricing === 'package') {
-            summaryDays = daysInfo.days != null ? daysInfo.days : offer.includedDays || null;
-            total = offer.packagePrice || 0;
-          } else {
-            const days = daysInfo.days || 1;
-            summaryDays = days;
-            const base = (offer.dailyRate || 0) * days;
-            total = base;
+          const days = daysInfo.days || 1;
+          summaryDays = days;
+          base = (offer.dailyRate || 0) * days;
+          if (offerKey === 'location_avec') {
+            const additionalAgents = getAdditionalAgents();
+            extraAgentsCost = additionalAgents * (offer.additionalAgentDailyRate || 0) * days;
+            travelFee = outsideRhoneInput && outsideRhoneInput.checked ? 80 : 0;
+            if (lodgingInput && lodgingInput.checked) {
+              lodgingFee = (1 + additionalAgents) * 80 * days;
+            }
           }
+          total = base + extraAgentsCost + travelFee + lodgingFee;
           break;
         }
         case 'subscription': {
@@ -259,8 +304,18 @@
       }
 
       const summaryValue = summaryDays != null ? summaryDays : daysInfo.days;
-      const fallbackDays = offer.type === 'rental' ? (offer.includedDays || 1) : 1;
-      updateSummaryVisibility(summary, offer.type === 'rental', locale, summaryValue != null ? summaryValue : fallbackDays, total, currency);
+      const fallbackDays = offer.type === 'rental' ? 1 : 1;
+      const showSummary = offer.type === 'rental';
+      updateSummaryVisibility(summary, showSummary, locale, summaryValue != null ? summaryValue : fallbackDays, grandTotal, currency);
+      if (showSummary) {
+        updateSummaryBreakdown(summary, locale, currency, {
+          base,
+          extraAgents: extraAgentsCost,
+          travel: travelFee,
+          lodging: lodgingFee,
+          caution
+        });
+      }
 
       if (cautionBlock) {
         const shouldShow = caution > 0;
@@ -279,6 +334,7 @@
 
       const summaryFieldsActive = offer.type === 'rental';
       showElement(rentalFields, summaryFieldsActive);
+      showElement(agentOptions, offerKey === 'location_avec');
 
       return quantityValid && daysInfo.valid;
     }
@@ -292,6 +348,15 @@
     }
     if (quantityInput) {
       quantityInput.addEventListener('input', refresh);
+    }
+    if (additionalAgentsInput) {
+      additionalAgentsInput.addEventListener('input', refresh);
+    }
+    if (outsideRhoneInput) {
+      outsideRhoneInput.addEventListener('change', refresh);
+    }
+    if (lodgingInput) {
+      lodgingInput.addEventListener('change', refresh);
     }
     if (startInput) {
       startInput.addEventListener('change', refresh);

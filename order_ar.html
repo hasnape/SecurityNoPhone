@@ -76,20 +76,11 @@
                 if (footerPlaceholder) footerPlaceholder.innerHTML = footerRes;
 
                 // التعامل مع لافتة الكوكيز (بافتراض أنها جزء من footer.html أو الهيكل الرئيسي)
-                const cookieBanner = document.getElementById("cookie-banner");
-                if (cookieBanner) {
-                    const cookieBtn = cookieBanner.querySelector("button");
-                    if (cookieBtn) {
-                        cookieBtn.addEventListener("click", () => {
-                            localStorage.setItem("cookiesAccepted", "true");
-                            cookieBanner.style.display = "none";
-                        });
-                    }
-                    if (localStorage.getItem("cookiesAccepted") === "true") {
-                        cookieBanner.style.display = "none";
-                    } else {
-                        cookieBanner.style.display = "block"; // ضمان الرؤية إذا لم يتم قبولها
-                    }
+                if (typeof setupCookieBanner === "function") {
+                    setupCookieBanner();
+                }
+                if (typeof handleCookieBanner === "function") {
+                    handleCookieBanner();
                 }
 
                 // تطبيق الترجمات بعد تحميل المحتوى

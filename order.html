@@ -76,21 +76,11 @@
                 if (navPlaceholder) navPlaceholder.innerHTML = navRes;
                 if (footerPlaceholder) footerPlaceholder.innerHTML = footerRes;
 
-                // Handle cookie banner (assuming it's part of your footer.html or main structure)
-                const cookieBanner = document.getElementById("cookie-banner");
-                if (cookieBanner) {
-                    const cookieBtn = cookieBanner.querySelector("button");
-                    if (cookieBtn) {
-                        cookieBtn.addEventListener("click", () => {
-                            localStorage.setItem("cookiesAccepted", "true");
-                            cookieBanner.style.display = "none";
-                        });
-                    }
-                    if (localStorage.getItem("cookiesAccepted") === "true") {
-                        cookieBanner.style.display = "none";
-                    } else {
-                        cookieBanner.style.display = "block"; // Ensure visibility if not accepted
-                    }
+                if (typeof setupCookieBanner === "function") {
+                    setupCookieBanner();
+                }
+                if (typeof handleCookieBanner === "function") {
+                    handleCookieBanner();
                 }
 
                 // Apply translations after content is loaded
