@@ -25,6 +25,13 @@ body {
   color: var(--snf-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 img, video {
@@ -803,6 +810,15 @@ a:hover {
 .footer-chip:hover {
   background: rgba(197, 161, 78, 0.15);
   transform: translateY(-2px);
+}
+
+.pricing-table .pricing-highlight {
+  background: rgba(197, 161, 78, 0.12);
+  font-weight: 600;
+}
+
+.pricing-table thead .pricing-highlight {
+  background: rgba(197, 161, 78, 0.2);
 }
 
 .snf-cookie-banner {
