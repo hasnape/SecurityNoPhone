@@ -200,6 +200,26 @@ function setupSmoothScroll() {
   });
 }
 
+function setupActiveNavLink() {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('.snf-navbar .nav-link[href], .snf-navbar .dropdown-item[href]');
+  navLinks.forEach(link => {
+    const linkPage = (link.getAttribute('href') || '').split('/').pop();
+    if (linkPage && linkPage === currentPage) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+      // Also expand parent dropdown if in one
+      const parentDropdown = link.closest('.dropdown');
+      if (parentDropdown) {
+        const toggle = parentDropdown.querySelector('.dropdown-toggle');
+        if (toggle) {
+          toggle.classList.add('active');
+        }
+      }
+    }
+  });
+}
+
 function setupNavbarToggler() {
   const burgerBtn = document.querySelector('.navbar-toggler');
   const navbarCollapse = document.getElementById('snfNav');
@@ -253,6 +273,7 @@ function loadNavbar() {
       setupNavbarToggler();
       setupAnnouncementBanner();
       setupSmoothScroll();
+      setupActiveNavLink();
     })
     .catch(error => console.error("Error loading navbar:", error));
 }
@@ -305,6 +326,7 @@ async function initializePage() {
         setupLanguageSwitcher(currentLang);
         setupNavbarToggler();
         setupAnnouncementBanner();
+        setupActiveNavLink();
         resolve();
       })
       .catch(error => {
