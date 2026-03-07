@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- French main pages -->
+  <url>
+    <loc>https://www.securitynophone.com/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/en/index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/de/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/ar/index.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/accompagnement.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/accompagnement.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/en/accompagnement.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/de/accompagnement.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/ar/accompagnement.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/blog.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/clients.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/clients.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/en/clients.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/de/clients.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/ar/clients.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/commande.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/commande.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/commande_en.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/commande_de.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/commande_ar.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.securitynophone.com/commande_es.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/commande_en.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/commande.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/commande_en.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/commande_de.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/commande_ar.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.securitynophone.com/commande_es.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/commande_de.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/commande.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/commande_en.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/commande_de.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/commande_ar.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.securitynophone.com/commande_es.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/commande_ar.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/commande.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/commande_en.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/commande_de.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/commande_ar.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.securitynophone.com/commande_es.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/commande_es.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/commande.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/commande_en.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/commande_de.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/commande_ar.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.securitynophone.com/commande_es.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/en/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/de/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/ar/contact.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/experience.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/experience.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/en/experience.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/de/experience.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/ar/experience.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/ressources.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/ressources.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/en/ressources.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/de/ressources.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/ar/ressources.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/secteurs.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/secteurs.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/en/secteurs.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/de/secteurs.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/ar/secteurs.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/solutions.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.securitynophone.com/solutions.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.securitynophone.com/en/solutions.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.securitynophone.com/de/solutions.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.securitynophone.com/ar/solutions.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/support.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/suivi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/order.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/order_ar.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/order_de.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/order_es.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Legal pages -->
+  <url>
+    <loc>https://www.securitynophone.com/mentions-legales.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/cgv.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/cgu.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/confidentialite.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/cookies.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/retraction.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.securitynophone.com/mediation.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
