@@ -640,7 +640,14 @@ window.translations = {
     "legal_section_cookies_choice_desc": "Vous pouvez accepter ou refuser les cookies via le bandeau. Votre choix est mémorisé.",
     "legal_section_withdrawal_process_title": "Comment se rétracter",
     "legal_section_withdrawal_process_desc": "Envoyez votre demande par email ou courrier. Un modèle de formulaire est disponible sur demande.",
-    "legal_section_mediation_desc": "Médiateur de la consommation : à renseigner. Coordonnées et modalités communiquées sur demande."
+    "legal_section_mediation_desc": "Médiateur de la consommation : à renseigner. Coordonnées et modalités communiquées sur demande.",
+    "banner_badge": "Starter",
+    "banner_text": "Abonnement à 19 €/mois — jusqu'à 50 pochettes pour démarrer sans engagement.",
+    "banner_cta": "Démarrer →",
+    "trust_events": "Événements sécurisés",
+    "trust_guests": "Invités accueillis",
+    "trust_countries": "Présence européenne",
+    "trust_privacy": "Sans données collectées"
   },
   "en": {
     "auto_key_1": "SecurityNoPhone",
@@ -1284,7 +1291,14 @@ window.translations = {
     "legal_section_cookies_choice_desc": "You can accept or refuse cookies via the banner. Your choice is stored.",
     "legal_section_withdrawal_process_title": "How to withdraw",
     "legal_section_withdrawal_process_desc": "Send your request by email or post. A form template is available on request.",
-    "legal_section_mediation_desc": "Consumer mediator: to be completed. Contact details and terms provided on request."
+    "legal_section_mediation_desc": "Consumer mediator: to be completed. Contact details and terms provided on request.",
+    "banner_badge": "Starter",
+    "banner_text": "Subscription from €19/month — up to 50 pouches to get started with no commitment.",
+    "banner_cta": "Get started →",
+    "trust_events": "Events secured",
+    "trust_guests": "Guests welcomed",
+    "trust_countries": "European presence",
+    "trust_privacy": "No data collected"
   },
   "de": {
     "auto_key_1": "SecurityNoPhone",
@@ -1925,7 +1939,14 @@ window.translations = {
     "legal_section_cookies_choice_desc": "Sie können Cookies über das Banner akzeptieren oder ablehnen. Ihre Wahl wird gespeichert.",
     "legal_section_withdrawal_process_title": "Widerruf ausüben",
     "legal_section_withdrawal_process_desc": "Senden Sie Ihre Anfrage per E-Mail oder Post. Ein Formularmuster ist auf Anfrage erhältlich.",
-    "legal_section_mediation_desc": "Verbraucherschlichter: noch anzugeben. Kontaktdaten und Bedingungen auf Anfrage."
+    "legal_section_mediation_desc": "Verbraucherschlichter: noch anzugeben. Kontaktdaten und Bedingungen auf Anfrage.",
+    "banner_badge": "Starter",
+    "banner_text": "Abonnement ab 19 €/Monat — bis zu 50 Taschen, ohne Verpflichtung starten.",
+    "banner_cta": "Loslegen →",
+    "trust_events": "Gesicherte Veranstaltungen",
+    "trust_guests": "Begrüßte Gäste",
+    "trust_countries": "Europäische Präsenz",
+    "trust_privacy": "Keine Datenerfassung"
   },
   "ar": {
     "auto_key_1": "سيكيوريتي نو فون",
@@ -2565,6 +2586,13 @@ window.translations = {
     "legal_section_cookies_choice_desc": "يمكنكم قبول أو رفض ملفات تعريف الارتباط عبر الشريط. يتم حفظ اختياركم.",
     "legal_section_withdrawal_process_title": "كيفية التراجع",
     "legal_section_withdrawal_process_desc": "أرسلوا طلبكم عبر البريد الإلكتروني أو البريد العادي. نموذج متاح عند الطلب.",
-    "legal_section_mediation_desc": "وسيط المستهلك: يُستكمل لاحقاً. سيتم تزويد بيانات الاتصال عند الطلب."
+    "legal_section_mediation_desc": "وسيط المستهلك: يُستكمل لاحقاً. سيتم تزويد بيانات الاتصال عند الطلب.",
+    "banner_badge": "ستارتر",
+    "banner_text": "اشتراك بـ 19 €/شهر — ما يصل إلى 50 حقيبة للبدء بدون التزام.",
+    "banner_cta": "ابدأ الآن ←",
+    "trust_events": "فعاليات مؤمَّنة",
+    "trust_guests": "ضيف مُرحَّب به",
+    "trust_countries": "حضور أوروبي",
+    "trust_privacy": "بدون جمع بيانات"
   }
 };

@@ -216,6 +216,23 @@ function setupNavbarToggler() {
   burgerBtn.dataset.togglerBound = 'true';
 }
 
+function setupAnnouncementBanner() {
+  const banner = document.getElementById('snf-banner');
+  const closeBtn = document.getElementById('snf-banner-close');
+  if (!banner) return;
+  if (localStorage.getItem('snf-banner-dismissed') === '1') {
+    banner.hidden = true;
+    return;
+  }
+  if (closeBtn && !closeBtn.dataset.bannerBound) {
+    closeBtn.addEventListener('click', () => {
+      banner.hidden = true;
+      localStorage.setItem('snf-banner-dismissed', '1');
+    });
+    closeBtn.dataset.bannerBound = 'true';
+  }
+}
+
 function loadNavbar() {
   fetch("includes/navbar.html")
     .then(res => {
@@ -234,6 +251,7 @@ function loadNavbar() {
       const lang = localStorage.getItem("lang") || "fr";
       setupLanguageSwitcher(lang);
       setupNavbarToggler();
+      setupAnnouncementBanner();
       setupSmoothScroll();
     })
     .catch(error => console.error("Error loading navbar:", error));
@@ -286,6 +304,7 @@ async function initializePage() {
         else console.warn("Navbar container not found.");
         setupLanguageSwitcher(currentLang);
         setupNavbarToggler();
+        setupAnnouncementBanner();
         resolve();
       })
       .catch(error => {

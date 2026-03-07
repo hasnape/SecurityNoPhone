@@ -1454,3 +1454,136 @@ a:hover {
     text-align: center;
   }
 }
+
+/* Announcement banner */
+.snf-announcement-banner {
+  background: linear-gradient(135deg, rgba(197, 161, 78, 0.13), rgba(197, 161, 78, 0.04));
+  border-bottom: 1px solid rgba(197, 161, 78, 0.22);
+  padding: 0.5rem 0;
+}
+
+.snf-announcement-banner .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.snf-banner-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #fff;
+  background: var(--snf-accent-strong);
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.snf-banner-text {
+  font-size: 0.83rem;
+  color: var(--snf-text);
+  font-weight: 500;
+}
+
+.snf-banner-cta {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--snf-accent-strong);
+  background: rgba(197, 161, 78, 0.1);
+  border: 1px solid rgba(197, 161, 78, 0.3);
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.snf-banner-cta:hover {
+  background: var(--snf-accent);
+  color: #fff;
+}
+
+.snf-banner-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--snf-text-muted);
+  cursor: pointer;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  opacity: 0.65;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+
+.snf-banner-close:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.07);
+}
+
+/* Trust / stats bar */
+.snf-trust-bar {
+  background: var(--snf-surface);
+  border-top: 1px solid var(--snf-border);
+  border-bottom: 1px solid var(--snf-border);
+  padding: 1.5rem 0;
+}
+
+.snf-trust-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  flex-wrap: wrap;
+}
+
+.snf-trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.2rem;
+}
+
+.snf-trust-number {
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 700;
+  color: var(--snf-accent-strong);
+  line-height: 1.1;
+}
+
+.snf-trust-label {
+  font-size: 0.78rem;
+  color: var(--snf-text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 575.98px) {
+  .snf-trust-items {
+    gap: 1.25rem;
+  }
+
+  .snf-announcement-banner .container {
+    justify-content: flex-start;
+  }
+
+  .snf-banner-text {
+    font-size: 0.78rem;
+  }
+}
