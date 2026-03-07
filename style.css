@@ -191,6 +191,37 @@ a:hover {
 
 .nav-link-cta {
   color: var(--snf-accent) !important;
+  font-weight: 700;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link[aria-current="page"] {
+  color: var(--snf-accent-strong);
+}
+
+.navbar-nav .nav-link.active::after,
+.navbar-nav .nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/* Dropdown UX improvements */
+.snf-navbar .dropdown-toggle::after {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  border-top: 0;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  border-left: 0;
+  transform: rotate(45deg);
+  vertical-align: 0.1em;
+  margin-left: 0.4em;
+  transition: transform 0.2s ease;
+}
+
+.snf-navbar .dropdown-toggle[aria-expanded="true"]::after {
+  transform: rotate(-135deg);
+  vertical-align: 0.2em;
 }
 
 .lang-label {
@@ -810,6 +841,34 @@ a:hover {
 .footer-chip:hover {
   background: rgba(197, 161, 78, 0.15);
   transform: translateY(-2px);
+}
+
+.footer-chip-sm {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.snf-legal-toggle {
+  color: var(--snf-text-muted);
+  background: #eef1f6;
+  border: 1px solid var(--snf-border);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.snf-legal-toggle:hover {
+  background: rgba(197, 161, 78, 0.15);
+  color: var(--snf-accent-strong);
+}
+
+.footer-pdf-group {
+  padding: 0.5rem;
+  background: var(--snf-surface-soft);
+  border-radius: var(--snf-radius-sm);
+  border: 1px solid var(--snf-border);
 }
 
 .pricing-table .pricing-highlight {
