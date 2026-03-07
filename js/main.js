@@ -201,14 +201,16 @@ function setupSmoothScroll() {
 }
 
 function setupActiveNavLink() {
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const pathParts = window.location.pathname.replace(/\/$/, '').split('/');
+  const currentPage = pathParts.pop() || 'index.html';
   const navLinks = document.querySelectorAll('.snf-navbar .nav-link[href], .snf-navbar .dropdown-item[href]');
   navLinks.forEach(link => {
-    const linkPage = (link.getAttribute('href') || '').split('/').pop();
+    const href = link.getAttribute('href') || '';
+    const linkPage = href.replace(/\/$/, '').split('/').pop();
     if (linkPage && linkPage === currentPage) {
       link.classList.add('active');
       link.setAttribute('aria-current', 'page');
-      // Also expand parent dropdown if in one
+      // Also mark parent dropdown toggle as active
       const parentDropdown = link.closest('.dropdown');
       if (parentDropdown) {
         const toggle = parentDropdown.querySelector('.dropdown-toggle');
