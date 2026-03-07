@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /examples/
+Disallow: /includes/
+
+Sitemap: https://www.securitynophone.com/sitemap.xml
