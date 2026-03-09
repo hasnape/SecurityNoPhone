@@ -248,7 +248,7 @@ a:hover {
 
 /* Hero */
 .hero {
-  padding: 3cm 0 3rem;
+  padding: 2rem 0 3rem;
   background: radial-gradient(circle at top right, rgba(197, 161, 78, 0.12), transparent 55%), var(--snf-surface);
 }
 
@@ -1015,7 +1015,7 @@ a:hover {
   }
 
   .hero {
-    padding: 3cm 0 4.5rem;
+    padding: 2rem 0 4.5rem;
   }
 
   .hero-title {
@@ -1047,7 +1047,7 @@ a:hover {
   }
 
   .hero {
-    padding: 3cm 0 3.25rem;
+    padding: 2rem 0 3.25rem;
   }
 
   .hero-title {
