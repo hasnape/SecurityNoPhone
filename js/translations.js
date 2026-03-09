@@ -30,7 +30,7 @@ window.translations = {
     "auto_key_28": "Location clé-en-main",
     "auto_key_29": "Jusqu’à 700 pochettes",
     "auto_key_30": "Livraison incluse en France",
-    "auto_key_31": "Retour via bon prépayéfourni",
+    "auto_key_31": "Retour via bon prépayé fourni",
     "auto_key_32": "Option 1 – Clé-en-main avec personnel : 1 170 € TTC (forfait 3 jours)",
     "auto_key_33": "Option 2 – Autonome accompagnée : 450 € TTC (forfait 3 jours)",
     "auto_key_34": "Réserver",
