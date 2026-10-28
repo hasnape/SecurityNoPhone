@@ -36,7 +36,7 @@
   <main class="container my-5">
     <div class="border rounded-4 shadow-sm p-4 bg-white mt-5">
       <h1 class="text-center mb-5" data-i18n="order_title">Passer une commande</h1>
-      <div class="row gy-5">
+      <p class="text-muted text-center mb-4" data-i18n="order_intro">Le formulaire transmet votre demande. Les disponibilités, le matériel et le prix définitif doivent être confirmés par nos équipes avant réservation. Aucun paiement n’est effectué ici.</p><div class="row gy-5">
         <div class="col-lg-7">
           <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm" data-order-form
             data-locale="fr-FR" data-currency="EUR"
@@ -57,11 +57,11 @@
 
             <div class="mb-3">
               <label for="quantity" class="form-label" data-i18n="label_quantity">Quantité de pochettes :</label>
-              <input type="number" class="form-control" name="quantite" id="quantity" min="0" value="50" required
+              <input type="number" class="form-control" name="quantite" id="quantity" aria-describedby="quantityError" min="1" step="1" value="50" required
                 data-msg-min-rental="La quantité minimale pour la location est de 1 pochette."
                 data-msg-min-custom="Pour les pochettes personnalisées, la commande minimale est de 50 unités."
                 data-msg-min-subscription="Indiquez au moins une pochette pour l’abonnement Starter.">
-              <div class="text-danger mt-1" id="quantityError" style="display:none"></div>
+              <div class="text-danger mt-1" id="quantityError" role="status" style="display:none"></div>
             </div>
 
             <div class="mb-3 d-none" data-rental-fields>
@@ -75,7 +75,7 @@
                   <input type="date" name="date_fin" id="endDate" class="form-control" data-end-date />
                 </div>
               </div>
-              <div id="dateError" class="text-danger mt-2" style="display:none"
+              <div id="dateError" role="status" class="text-danger mt-2" style="display:none"
                 data-msg-missing="Merci d’indiquer les dates de début et de fin de la location."
                 data-msg-range="La date de fin doit être postérieure ou égale à la date de début."></div>
             </div>
@@ -121,15 +121,15 @@
 
             <div class="mb-3">
               <label for="nom" class="form-label" data-i18n="label_fullname">Nom complet :</label>
-              <input type="text" name="nom" id="nom" class="form-control" required />
+              <input type="text" name="nom" id="nom" autocomplete="name" class="form-control" required />
             </div>
             <div class="mb-3">
               <label for="email" class="form-label" data-i18n="label_email">Email :</label>
-              <input type="email" name="email" id="email" class="form-control" required />
+              <input type="email" name="email" id="email" autocomplete="email" class="form-control" required />
             </div>
             <div class="mb-3">
               <label for="adresse" class="form-label" data-i18n="label_address">Adresse de facturation :</label>
-              <textarea name="adresse" id="adresse" class="form-control" rows="3" required></textarea>
+              <textarea name="adresse" id="adresse" autocomplete="street-address" class="form-control" rows="3" required></textarea>
             </div>
             <div class="mb-3" id="special">
               <label for="infos" class="form-label">Informations complémentaires (optionnel)</label>
@@ -145,7 +145,7 @@
             <input type="hidden" name="payment_status" value="to_be_confirmed">
 
             <div class="mt-4">
-              <button type="submit" class="btn btn-primary w-100" data-i18n="btn_submit_order">Valider la commande</button>
+              <button type="submit" class="btn btn-primary w-100" data-i18n="btn_submit_order">Envoyer ma demande</button>
             </div>
 
             <div id="formSubmissionFeedback" class="mt-3" data-feedback></div>

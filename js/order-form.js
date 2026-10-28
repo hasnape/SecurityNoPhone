@@ -108,7 +108,10 @@
   }
 
   function initOrderForm(form) {
-    const locale = form.dataset.locale || document.documentElement.getAttribute('lang') || 'fr-FR';
+    let locale = document.documentElement.getAttribute('lang') || form.dataset.locale || 'fr-FR';
+    function translated(key, fallback) {
+      return window.translations?.[document.documentElement.lang]?.[key] || fallback;
+    }
     const currency = (form.dataset.currency || 'EUR').toUpperCase();
 
     const offerSelect = form.querySelector('#offerType, [name="offre"]');
@@ -188,6 +191,9 @@
       }
       const qty = getQuantity();
       let message = '';
+      if (!quantityInput.validity.badInput && (!Number.isInteger(Number(quantityInput.value)) || qty < 1)) {
+        message = translated('order_quantity_invalid', 'Indiquez un nombre entier de pochettes.');
+      }
       if (offer.type === 'rental' && qty < 1) {
         message = quantityInput.dataset.msgMinRental || 'Indiquez au moins une pochette.';
       }
@@ -214,17 +220,13 @@
         setDateValidity('');
         return { valid: true, days: null };
       }
-      if (!startInput.value && !endInput.value) {
-        setDateValidity('');
-        return { valid: true, days: null };
-      }
       if (!startInput.value || !endInput.value) {
-        setDateValidity(endInput.dataset.msgMissing || 'Veuillez indiquer les dates de début et de fin.');
+        setDateValidity(translated('order_dates_missing', 'Veuillez indiquer les dates de début et de fin.'));
         return { valid: false, days: null };
       }
       const days = computeInclusiveDays(startInput.value, endInput.value);
-      if (days === -1) {
-        setDateValidity(endInput.dataset.msgRange || 'La date de fin doit être postérieure ou égale à la date de début.');
+      if (days === -1 || days === null) {
+        setDateValidity(translated('order_dates_range', 'La date de fin doit être postérieure ou égale à la date de début.'));
         return { valid: false, days: null };
       }
       setDateValidity('');
@@ -234,7 +236,14 @@
     function computeTotals() {
       const offerKey = offerSelect ? offerSelect.value : '';
       const offer = OFFER_CONFIG[offerKey];
+      const isRental = offer?.type === 'rental';
+      showElement(rentalFields, isRental);
+      showElement(agentOptions, offerKey === 'location_avec');
+      if (startInput) startInput.required = isRental;
+      if (endInput) endInput.required = isRental;
+      if (!isRental) setDateValidity('');
       if (!offer) {
+        setQuantityValidity('');
         updateSummaryVisibility(summary, false);
         if (priceDisplay) {
           priceDisplay.textContent = formatCurrency(locale, 0, currency);
@@ -249,6 +258,16 @@
 
       const quantityValid = validateQuantity(offerKey);
       const quantity = getQuantity();
+      const needsQuote = (offer.type === 'rental' && quantity > 700) || (offer.type === 'subscription' && quantity > 50);
+      if (needsQuote) {
+        const datesValid = validateDates(offerKey).valid;
+        if (priceDisplay) priceDisplay.textContent = translated('quote_capacity', 'Sur devis.');
+        updateSummaryVisibility(summary, false);
+        if (cautionBlock) cautionBlock.classList.add('d-none');
+        if (totalHidden) totalHidden.value = '';
+        if (cautionHidden) cautionHidden.value = '';
+        return quantityValid && datesValid;
+      }
       const caution = computeCaution(offerKey, quantity);
 
       let total = 0;
@@ -295,9 +314,19 @@
 
       const grandTotal = total + caution;
 
+      // An incomplete rental must not show a default one-day price as a quote.
+      if (!quantityValid || !daysInfo.valid) {
+        if (priceDisplay) priceDisplay.textContent = '';
+        updateSummaryVisibility(summary, false);
+        if (cautionBlock) cautionBlock.classList.add('d-none');
+        if (totalHidden) totalHidden.value = '';
+        if (cautionHidden) cautionHidden.value = '';
+        return false;
+      }
+
       if (priceDisplay) {
         if (offer.type === 'custom' && customMessage) {
-          priceDisplay.textContent = customMessage;
+          priceDisplay.textContent = translated('quote_capacity', customMessage);
         } else {
           priceDisplay.textContent = priceTemplate.replace('{price}', formatCurrency(locale, grandTotal, currency));
         }
@@ -343,6 +372,21 @@
       computeTotals();
     }
 
+    function applyOfferFromLink() {
+      const offersByHash = {
+        rental: 'location_avec', autonomous: 'location_sans',
+        custom: 'achat', abonnement: 'abonnement', special: 'special_event'
+      };
+      const selected = offersByHash[window.location.hash.slice(1)];
+      if (selected && offerSelect) offerSelect.value = selected;
+      refresh();
+    }
+    window.addEventListener('hashchange', applyOfferFromLink);
+    document.addEventListener('language:changed', () => {
+      locale = document.documentElement.lang;
+      refresh();
+    });
+
     if (offerSelect) {
       offerSelect.addEventListener('change', refresh);
     }
@@ -372,7 +416,7 @@
       }
     });
 
-    refresh();
+    applyOfferFromLink();
   }
 
   document.addEventListener('DOMContentLoaded', () => {

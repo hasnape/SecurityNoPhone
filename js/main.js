@@ -35,7 +35,7 @@ function updateLanguageSelectUI(lang) {
 }
 
 function setLanguage(lang) {
-  const targetLang = lang || 'fr';
+  const targetLang = ['fr', 'en', 'de', 'ar'].includes(lang) ? lang : 'fr';
   localStorage.setItem('lang', targetLang);
   switchLanguage(targetLang);
 }
@@ -61,7 +61,8 @@ function setupLanguageSwitcher(initialLang) {
 }
 
 function switchLanguage(lang) {
-  const currentLang = lang || localStorage.getItem('lang') || 'fr';
+  const requestedLang = lang || localStorage.getItem('lang') || 'fr';
+  const currentLang = ['fr', 'en', 'de', 'ar'].includes(requestedLang) ? requestedLang : 'fr';
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
   updateLanguageSelectUI(currentLang);
@@ -71,16 +72,15 @@ function switchLanguage(lang) {
     return;
   }
 
-  // Fade out elements before updating
-  document.querySelectorAll('[data-i18n], [data-i18n-placeholder], [data-i18n-title]').forEach(el => {
-    el.classList.add('fade-out');
-  });
-
-  setTimeout(() => {
+  // Apply synchronously so fast language changes cannot overwrite each other.
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (key && translations[key] !== undefined) {
-        el.innerHTML = translations[key];
+        if (el.tagName === 'META') {
+          el.setAttribute('content', translations[key]);
+        } else {
+          el.innerHTML = translations[key];
+        }
       }
     });
 
@@ -122,7 +122,10 @@ function switchLanguage(lang) {
         linkEl.textContent = translations["cookie_more_info"];
       }
     }
-  }, 300);
+    document.querySelectorAll('[data-current-year]').forEach(el => {
+      el.textContent = new Date().getFullYear();
+    });
+    document.dispatchEvent(new CustomEvent('language:changed', { detail: { lang: currentLang } }));
 }
 
 function setCookieChoice(choice) {
@@ -311,7 +314,9 @@ async function initializePage() {
     const detectedLang = availableLangs.includes(browserLang) ? browserLang : "fr";
     localStorage.setItem("lang", detectedLang);
   }
-  const currentLang = localStorage.getItem("lang") || 'fr';
+  const savedLang = localStorage.getItem("lang");
+  const currentLang = availableLangs.includes(savedLang) ? savedLang : 'fr';
+  localStorage.setItem('lang', currentLang);
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
