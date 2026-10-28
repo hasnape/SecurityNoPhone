@@ -1693,3 +1693,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible 
 .brand-logo { width:110px; height:56px; object-fit:contain; border-radius:0; }
 @media(max-width:575px) { .snf-home-hero { padding:2.5rem 0; } .snf-home-hero .btn { width:100%; } .brand-text { font-size:.93rem; } .brand-logo { width:72px; height:42px; } .lang-select { max-width:105px; } .snf-faq details { padding:1rem; } }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto!important; } *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } }
+
+/* Keep entrance animations inside the viewport without clipping vertical content. */
+main { overflow-x: clip; }
