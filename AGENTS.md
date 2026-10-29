@@ -41,6 +41,7 @@ Distinguer « ensemble des fichiers publié » et « toutes les fonctions valid�
 
 - Lancer les contrôles adaptés avec `python3 scripts/validate_release.py`, les régressions utiles et la recette navigateur des parcours affectés.
 - Vérifier les liens, traductions, contrats et fichiers liés ; examiner le diff et conserver les preuves dans le dépôt.
+- Avant une refonte, inventorier et préserver les téléchargements, PDF, fiches imprimables et supports de formation. Leur présence doit être contrôlée sur les pages et au téléchargement ; une nouvelle présentation ne justifie pas leur suppression.
 - Distinguer code relu, contrôle automatisé, recette navigateur du candidat, publication, contrôle en production et confirmation utilisateur.
 - Une vue ordinateur, un zoom ou une règle CSS ne valent pas une recette mobile. Si aucune vraie largeur mobile n'est disponible, conserver le statut **non vérifié**.
 - Une demande non envoyée ne prouve pas la réception d'un formulaire ; un lien de paiement ne prouve pas une capture ou un abonnement. Réserver les opérations réelles aux scénarios de test autorisés.
