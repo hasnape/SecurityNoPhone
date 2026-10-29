@@ -8,6 +8,8 @@ Lire `AGENTS.md`, `docs/DESIGN_SYSTEM.md`, `docs/RELEASE_VALIDATION.md` et `docs
 
 Les caractéristiques des deux modèles de pochettes sont référencées dans `docs/PRODUCT_FACTS.md`, à partir des précisions fournies par le propriétaire.
 
+Préférence du propriétaire : publication manuelle via le navigateur cloud et contrôles locaux. La validation Actions est uniquement manuelle pour préserver les ressources ; le déploiement interne GitHub Pages peut rester nécessaire. Voir `docs/RELEASE_VALIDATION.md`.
+
 Contrôle local sans dépendance supplémentaire, avec Python 3 et Node.js :
 
 ```sh

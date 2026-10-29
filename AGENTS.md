@@ -2,6 +2,12 @@
 
 Demandées par Amine Harbi le 29 octobre 2026 : appliquer les mêmes exigences de conception, de prudence et de validation que Nexus Support Hub. Lire ce fichier, `docs/DESIGN_SYSTEM.md`, `docs/RELEASE_VALIDATION.md` et `docs/VALIDATED_FEATURE_BASELINE.md` avant une intervention.
 
+## Préférence de publication du propriétaire
+
+Instruction explicite du 29 octobre 2026 : utiliser le navigateur cloud pour publier manuellement et éviter d'épuiser GitHub Actions. Conserver les contrôles locaux et la recette navigateur ; ne pas créer de validations Actions automatiques, relancer les jobs en boucle ou utiliser Actions pour des vérifications de confort. Le workflow de validation est uniquement à déclenchement manuel, sans obligation de le lancer pour une correction statique contrôlée localement. Cette instruction remplace l'ancienne exigence de succès du job de validation Actions avant fusion. Les gardes fonctionnelles locales restent obligatoires.
+
+GitHub Pages exécute son propre déploiement, même depuis l'interface et même en mode « Deploy from a branch ». Limiter les publications au lot vérifié ; ne pas promettre une publication Pages sans aucun workflow interne. Ne pas changer de fournisseur, domaine, HTTPS ou droits d'accès pour contourner cette contrainte. Voir la procédure de publication manuelle.
+
 ## Avant de modifier
 
 - Partir de la version actuelle de `main`, contrôler le diff et lire les consommateurs, scripts, traductions, formulaires, liens et configurations concernés.
