@@ -12,7 +12,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = 'https://securitynophone.com/'
-PUBLIC_DIRECTORIES = {'images', 'flags', 'js', 'includes', 'Mention legale', 'documents'}
+PUBLIC_DIRECTORIES = {'images', 'flags', 'js', 'includes', 'Mention legale', 'documents', 'media'}
 PUBLIC_ROOT_FILES = {'AGENTS.md', 'README.md', 'robots.txt', 'sitemap.xml'}
 
 

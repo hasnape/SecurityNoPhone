@@ -750,7 +750,16 @@ window.translations = {
     "support_doc_notice": "Notice d’utilisation rapide",
     "support_doc_contact": "Étiquette de contact",
     "support_doc_signage": "Signalétique sans photos / vidéos (FR/EN)",
-    "support_doc_training": "Guide de formation des équipes"
+    "support_doc_training": "Guide de formation des équipes",
+    "media_proof_title": "Une pochette personnalisée, en images",
+    "media_proof_intro": "Découvrez la personnalisation et les finitions du matériel à travers cette photo et cette courte vidéo fournies par SecurityNoPhone.",
+    "media_proof_photo_title": "Pochette et dispositif d’ouverture",
+    "media_proof_photo_caption": "Pochette imprimée « À écouter sur Deezer », présentée dans son emballage avec un dispositif d’ouverture magnétique.",
+    "media_proof_photo_alt": "Pochette noire au visuel Deezer, emballée, à côté d’un dispositif magnétique.",
+    "media_proof_video_title": "La pochette sous plusieurs angles",
+    "media_proof_video_caption": "Vidéo sans son : la face imprimée, le dos et les finitions de la pochette.",
+    "media_proof_open": "Ouvrir la vidéo (MP4)",
+    "media_proof_cta": "Demander une personnalisation"
   },
   "en": {
     "auto_key_1": "SecurityNoPhone",
@@ -1503,7 +1512,16 @@ window.translations = {
     "support_doc_notice": "Quick user guide",
     "support_doc_contact": "Contact label",
     "support_doc_signage": "No photos / videos sign (FR/EN)",
-    "support_doc_training": "Team training guide"
+    "support_doc_training": "Team training guide",
+    "media_proof_title": "A personalised pouch, in pictures",
+    "media_proof_intro": "Explore the personalisation and finish of the equipment in this photo and short video provided by SecurityNoPhone.",
+    "media_proof_photo_title": "Pouch and opening device",
+    "media_proof_photo_caption": "Pouch printed with “À écouter sur Deezer”, shown in its packaging with a magnetic opening device.",
+    "media_proof_photo_alt": "Packaged black pouch with a Deezer design beside a magnetic device.",
+    "media_proof_video_title": "The pouch from several angles",
+    "media_proof_video_caption": "Silent video showing the printed front, back and finish of the pouch.",
+    "media_proof_open": "Open the video (MP4)",
+    "media_proof_cta": "Request personalisation"
   },
   "de": {
     "auto_key_1": "SecurityNoPhone",
@@ -2253,7 +2271,16 @@ window.translations = {
     "support_doc_notice": "Kurzanleitung",
     "support_doc_contact": "Kontaktetikett",
     "support_doc_signage": "Keine Fotos / Videos - Schild (FR/EN)",
-    "support_doc_training": "Schulungsleitfaden für Teams"
+    "support_doc_training": "Schulungsleitfaden für Teams",
+    "media_proof_title": "Eine personalisierte Hülle in Bildern",
+    "media_proof_intro": "Entdecken Sie die Personalisierung und Verarbeitung des Materials auf diesem Foto und im kurzen Video von SecurityNoPhone.",
+    "media_proof_photo_title": "Hülle und Öffnungsvorrichtung",
+    "media_proof_photo_caption": "Hülle mit dem Aufdruck „À écouter sur Deezer“, in ihrer Verpackung neben einer magnetischen Öffnungsvorrichtung.",
+    "media_proof_photo_alt": "Verpackte schwarze Hülle mit Deezer-Motiv neben einer magnetischen Vorrichtung.",
+    "media_proof_video_title": "Die Hülle aus mehreren Blickwinkeln",
+    "media_proof_video_caption": "Video ohne Ton: bedruckte Vorderseite, Rückseite und Verarbeitung der Hülle.",
+    "media_proof_open": "Video öffnen (MP4)",
+    "media_proof_cta": "Personalisierung anfragen"
   },
   "ar": {
     "auto_key_1": "سيكيوريتي نو فون",
@@ -3002,6 +3029,15 @@ window.translations = {
     "support_doc_notice": "دليل الاستخدام السريع",
     "support_doc_contact": "بطاقة التواصل",
     "support_doc_signage": "لا صور ولا فيديو - لافتة (فرنسي/إنجليزي)",
-    "support_doc_training": "دليل تدريب الفريق"
+    "support_doc_training": "دليل تدريب الفريق",
+    "media_proof_title": "حافظة مخصّصة بالصور والفيديو",
+    "media_proof_intro": "تعرّفوا على الطباعة المخصّصة وتفاصيل تشطيب الحافظة من خلال هذه الصورة والفيديو القصير المقدّمين من SecurityNoPhone.",
+    "media_proof_photo_title": "الحافظة وأداة الفتح",
+    "media_proof_photo_caption": "حافظة مطبوع عليها « À écouter sur Deezer »، معروضة في غلافها وبجانبها أداة فتح مغناطيسية.",
+    "media_proof_photo_alt": "حافظة سوداء مغلّفة تحمل تصميم Deezer وبجانبها أداة مغناطيسية.",
+    "media_proof_video_title": "الحافظة من زوايا متعددة",
+    "media_proof_video_caption": "فيديو بدون صوت يعرض الوجه المطبوع والجهة الخلفية وتفاصيل التشطيب.",
+    "media_proof_open": "فتح الفيديو (MP4)",
+    "media_proof_cta": "طلب طباعة مخصّصة"
   }
 };

@@ -33,8 +33,8 @@ class Page(HTMLParser):
         attrs = dict(attrs)
         if 'id' in attrs:
             self.ids.append(attrs['id'])
-        self.keys.extend(attrs[key] for key in ['data-i18n', 'data-i18n-placeholder', 'data-i18n-title'] if key in attrs)
-        for key in ['href', 'src']:
+        self.keys.extend(attrs[key] for key in ['data-i18n', 'data-i18n-placeholder', 'data-i18n-title', 'data-i18n-alt'] if key in attrs)
+        for key in ['href', 'src', 'poster']:
             if key in attrs:
                 self.urls.append(attrs[key])
         if tag == 'h1':

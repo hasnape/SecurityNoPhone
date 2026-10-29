@@ -1712,3 +1712,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible,
 .row > *, .footer-list li, .tracking-box { min-width: 0; }
 .footer-link, #statusResult { overflow-wrap: anywhere; }
 [dir="rtl"] .section-kicker { letter-spacing: normal; }
+
+/* Supplied product evidence: preserve full frames and native media controls. */
+.snf-proof-media {
+  display: block;
+  width: 100%;
+  height: clamp(20rem, 40vw, 28rem);
+  object-fit: contain;
+  background: var(--snf-surface-soft);
+  border-radius: var(--snf-radius-sm);
+}
+.snf-proof-media:focus-visible { outline: 3px solid var(--snf-focus); outline-offset: 4px; }

@@ -98,6 +98,13 @@ function switchLanguage(lang) {
       }
     });
 
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      const key = el.getAttribute('data-i18n-alt');
+      if (key && translations[key] !== undefined) {
+        el.setAttribute('alt', translations[key]);
+      }
+    });
+
     // Fade in elements
     document.querySelectorAll('[data-i18n], [data-i18n-placeholder], [data-i18n-title]').forEach(el => {
       el.classList.remove('fade-out');
