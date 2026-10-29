@@ -27,6 +27,14 @@ def included(name):
     return name in PUBLIC_ROOT_FILES or (len(path.parts) == 1 and path.suffix in {'.html', '.css', '.js', '.docx'})
 
 
+def committed_inventory(revision):
+    paths = subprocess.check_output(
+        ['git', 'ls-tree', '-r', '--name-only', '-z', revision], cwd=ROOT).decode().split('\0')
+    return [(name, hashlib.sha256(subprocess.check_output(
+        ['git', 'show', f'{revision}:{name}'], cwd=ROOT)).hexdigest())
+        for name in sorted(paths) if name and included(name)]
+
+
 def check_file(item, revision):
     name, expected_hash = item
     url = SITE + quote(name, safe='/') + '?deployment-check=' + revision
@@ -52,9 +60,7 @@ def main():
     parser.add_argument('--inventory-only', action='store_true')
     args = parser.parse_args()
     revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    paths = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode().split('\0')
-    inventory = [(name, hashlib.sha256((ROOT / name).read_bytes()).hexdigest())
-                 for name in sorted(paths) if name and included(name)]
+    inventory = committed_inventory(revision)
     if args.inventory_only:
         print(json.dumps({'revision': revision, 'file_count': len(inventory),
                           'paths': [name for name, _ in inventory]}, ensure_ascii=False, indent=2))
