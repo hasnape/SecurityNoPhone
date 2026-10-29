@@ -11,6 +11,7 @@ Base de reprise : `a43dfd100abe8e5bdb95630c9090592e1219f7d1`, 29 octobre 2026.
 - Formulaire principal `commande.html` : action `https://formspree.io/f/xqaqogdv`, méthode POST, noms des champs et anti-robot conservés. Ce formulaire ne capture pas de paiement.
 - Présélections : `#rental`, `#autonomous`, `#custom`, `#abonnement`, `#special`. Saisie et choix restent préservés lors d'un changement de langue.
 - Contacts existants et fichier du logo conservés. Les fichiers légaux ne sont pas réécrits par une correction graphique.
+- Support et Ressources : conserver les six fiches du kit (retour matériel, livraison/retour, protocole, notice, contact, signalétique FR/EN), leur téléchargement PDF et leur ouverture pour impression. Le guide de formation issu du déroulé historique est également disponible en PDF. Les modèles sont en français, la signalétique en français/anglais ; ce statut linguistique est explicite dans l'interface.
 - Description produit : référence propriétaire du 29 octobre dans `docs/PRODUCT_FACTS.md`. Modèle avec fenêtre : écran utilisable, appels/messages, image de caméra avant floutée. Modèle sans fenêtre : pas d'accès à l'écran. Tous les modèles : similicuir, antivol et aimant professionnel fourni. Ce sont des caractéristiques communiquées, pas une nouvelle preuve d'essai matériel.
 
 ## Preuves acquises et limites

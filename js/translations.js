@@ -738,7 +738,19 @@ window.translations = {
     "seo_commande_title": "Demander un devis | SecurityNoPhone",
     "seo_commande_description": "Le formulaire transmet votre demande. Les disponibilités, le matériel et le prix définitif doivent être confirmés par nos équipes avant réservation. Aucun paiement n’est effectué ici.",
     "seo_suivi_title": "Suivi de commande | SecurityNoPhone",
-    "seo_suivi_description": "Pour connaître l’avancement de votre commande, contactez-nous avec la référence reçue par e-mail. Aucun statut logistique en temps réel n’est affiché sur cette page."
+    "seo_suivi_description": "Pour connaître l’avancement de votre commande, contactez-nous avec la référence reçue par e-mail. Aucun statut logistique en temps réel n’est affiché sur cette page.",
+    "support_docs_title": "Supports PDF et formation",
+    "support_docs_intro": "Téléchargez les fiches du kit et le guide de formation, puis imprimez-les pour votre équipe.",
+    "support_docs_languages": "Documents en français ; signalétique bilingue français/anglais. Les fiches sont à compléter après impression.",
+    "support_docs_download": "Télécharger le PDF",
+    "support_docs_open": "Ouvrir / imprimer",
+    "support_doc_return": "Fiche de retour matériel",
+    "support_doc_delivery": "Bon de livraison et retour",
+    "support_doc_protocol": "Protocole de confidentialité",
+    "support_doc_notice": "Notice d’utilisation rapide",
+    "support_doc_contact": "Étiquette de contact",
+    "support_doc_signage": "Signalétique sans photos / vidéos (FR/EN)",
+    "support_doc_training": "Guide de formation des équipes"
   },
   "en": {
     "auto_key_1": "SecurityNoPhone",
@@ -1479,7 +1491,19 @@ window.translations = {
     "seo_commande_title": "Request a quote | SecurityNoPhone",
     "seo_commande_description": "This form sends your request. Availability, equipment and the final price must be confirmed by our team before booking. No payment is taken here.",
     "seo_suivi_title": "Order tracking | SecurityNoPhone",
-    "seo_suivi_description": "To check your order progress, contact us with the reference received by email. This page does not display real-time logistics status."
+    "seo_suivi_description": "To check your order progress, contact us with the reference received by email. This page does not display real-time logistics status.",
+    "support_docs_title": "PDF resources and training",
+    "support_docs_intro": "Download the kit templates and training guide, then print them for your team.",
+    "support_docs_languages": "Documents in French; bilingual French/English signage. Complete the templates after printing.",
+    "support_docs_download": "Download PDF",
+    "support_docs_open": "Open / print",
+    "support_doc_return": "Equipment return form",
+    "support_doc_delivery": "Delivery and return sheet",
+    "support_doc_protocol": "Confidentiality protocol",
+    "support_doc_notice": "Quick user guide",
+    "support_doc_contact": "Contact label",
+    "support_doc_signage": "No photos / videos sign (FR/EN)",
+    "support_doc_training": "Team training guide"
   },
   "de": {
     "auto_key_1": "SecurityNoPhone",
@@ -2217,7 +2241,19 @@ window.translations = {
     "seo_commande_title": "Angebot anfordern | SecurityNoPhone",
     "seo_commande_description": "Dieses Formular sendet Ihre Anfrage. Verfügbarkeit, Material und Endpreis müssen vor der Buchung bestätigt werden. Hier erfolgt keine Zahlung.",
     "seo_suivi_title": "Bestellverfolgung | SecurityNoPhone",
-    "seo_suivi_description": "Für den aktuellen Bestellstand kontaktieren Sie uns mit der per E-Mail erhaltenen Referenz. Diese Seite zeigt keinen Logistikstatus in Echtzeit an."
+    "seo_suivi_description": "Für den aktuellen Bestellstand kontaktieren Sie uns mit der per E-Mail erhaltenen Referenz. Diese Seite zeigt keinen Logistikstatus in Echtzeit an.",
+    "support_docs_title": "PDF-Unterlagen und Schulung",
+    "support_docs_intro": "Laden Sie die Vorlagen und den Schulungsleitfaden herunter und drucken Sie sie für Ihr Team aus.",
+    "support_docs_languages": "Dokumente auf Französisch; Beschilderung auf Französisch/Englisch. Die Vorlagen nach dem Ausdrucken ausfüllen.",
+    "support_docs_download": "PDF herunterladen",
+    "support_docs_open": "Öffnen / drucken",
+    "support_doc_return": "Rückgabeformular für Material",
+    "support_doc_delivery": "Liefer- und Rückgabeschein",
+    "support_doc_protocol": "Vertraulichkeitsprotokoll",
+    "support_doc_notice": "Kurzanleitung",
+    "support_doc_contact": "Kontaktetikett",
+    "support_doc_signage": "Keine Fotos / Videos - Schild (FR/EN)",
+    "support_doc_training": "Schulungsleitfaden für Teams"
   },
   "ar": {
     "auto_key_1": "سيكيوريتي نو فون",
@@ -2954,6 +2990,18 @@ window.translations = {
     "seo_commande_title": "طلب عرض سعر | SecurityNoPhone",
     "seo_commande_description": "يرسل النموذج طلبكم. يجب أن يؤكّد فريقنا التوفّر والمعدات والسعر النهائي قبل الحجز. لا يُجرى أي دفع هنا.",
     "seo_suivi_title": "متابعة الطلب | SecurityNoPhone",
-    "seo_suivi_description": "لمعرفة تقدّم طلبكم، تواصلوا معنا بالمرجع المستلم عبر البريد الإلكتروني. لا تعرض هذه الصفحة حالة الشحن في الوقت الفعلي."
+    "seo_suivi_description": "لمعرفة تقدّم طلبكم، تواصلوا معنا بالمرجع المستلم عبر البريد الإلكتروني. لا تعرض هذه الصفحة حالة الشحن في الوقت الفعلي.",
+    "support_docs_title": "ملفات PDF والتدريب",
+    "support_docs_intro": "حمّلوا نماذج المعدات ودليل التدريب، ثم اطبعوها لفريقكم.",
+    "support_docs_languages": "الوثائق بالفرنسية، واللافتة بالفرنسية والإنجليزية. تُستكمل النماذج بعد طباعتها.",
+    "support_docs_download": "تحميل PDF",
+    "support_docs_open": "فتح / طباعة",
+    "support_doc_return": "استمارة إعادة المعدات",
+    "support_doc_delivery": "ورقة التسليم والإعادة",
+    "support_doc_protocol": "بروتوكول الخصوصية",
+    "support_doc_notice": "دليل الاستخدام السريع",
+    "support_doc_contact": "بطاقة التواصل",
+    "support_doc_signage": "لا صور ولا فيديو - لافتة (فرنسي/إنجليزي)",
+    "support_doc_training": "دليل تدريب الفريق"
   }
 };
