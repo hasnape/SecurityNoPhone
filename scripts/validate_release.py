@@ -155,7 +155,7 @@ checks.append('Reference contrast pairs and horizontal-animation repair')
 test_result = run(['node', '--test', 'tests/order-tracking.test.cjs'])
 checks.append('Tracking contact regression tests')
 inventory_test_result = run([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_*.py'])
-checks.append('Committed deployment inventory regression test')
+checks.append('Python regressions: committed deployment inventory and SEO contracts')
 warnings.append('Mobile, real form delivery, payment, logistics and legal validation require separate evidence.')
 warnings.append('Legacy translated index/order pages are outside this source gate; see baseline.')
 
