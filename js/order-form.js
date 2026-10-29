@@ -65,13 +65,15 @@
     const daysCountEl = summaryEl.querySelector('[data-summary-days-count]');
     const totalLabel = summaryEl.querySelector('[data-summary-total-amount]');
     if (daysLabelEl) {
-      const labelText = summaryEl.dataset.daysLabel || daysLabelEl.textContent || '';
+      const t = window.translations?.[document.documentElement.lang] || {};
+      const labelText = t.summary_duration_label || summaryEl.dataset.daysLabel || daysLabelEl.textContent || '';
       daysLabelEl.textContent = labelText;
     }
     if (daysCountEl) {
       if (days != null) {
-        const singular = summaryEl.dataset.daySingular || '';
-        const plural = summaryEl.dataset.dayPlural || singular;
+        const t = window.translations?.[document.documentElement.lang] || {};
+        const singular = t.order_day_singular || summaryEl.dataset.daySingular || '';
+        const plural = t.order_day_plural || summaryEl.dataset.dayPlural || singular;
         const unit = singular || plural ? (Number(days) === 1 ? singular : plural) : '';
         daysCountEl.textContent = unit ? `${days} ${unit}` : String(days);
       } else {
@@ -153,6 +155,7 @@
         return;
       }
       quantityInput.setCustomValidity(message ? String(message) : '');
+      quantityInput.setAttribute('aria-invalid', message ? 'true' : 'false');
       if (quantityError) {
         quantityError.textContent = message || '';
         quantityError.style.display = message ? 'block' : 'none';
@@ -164,6 +167,7 @@
         return;
       }
       endInput.setCustomValidity(message ? String(message) : '');
+      endInput.setAttribute('aria-invalid', message ? 'true' : 'false');
       if (dateError) {
         dateError.textContent = message || '';
         dateError.style.display = message ? 'block' : 'none';
@@ -207,6 +211,7 @@
           message = quantityInput.dataset.msgMaxSubscription || '';
         }
       }
+      if (message) message = translated('order_quantity_invalid', message);
       setQuantityValidity(message);
       return message === '';
     }
@@ -328,7 +333,10 @@
         if (offer.type === 'custom' && customMessage) {
           priceDisplay.textContent = translated('quote_capacity', customMessage);
         } else {
-          priceDisplay.textContent = priceTemplate.replace('{price}', formatCurrency(locale, grandTotal, currency));
+          const label = translated('summary_total_label', '');
+          priceDisplay.textContent = label
+            ? `${label} : ${formatCurrency(locale, grandTotal, currency)}`
+            : priceTemplate.replace('{price}', formatCurrency(locale, grandTotal, currency));
         }
       }
 
