@@ -8,6 +8,18 @@ Instruction explicite du 29 octobre 2026 : utiliser le navigateur cloud pour pub
 
 GitHub Pages exécute son propre déploiement, même depuis l'interface et même en mode « Deploy from a branch ». Limiter les publications au lot vérifié ; ne pas promettre une publication Pages sans aucun workflow interne. Ne pas changer de fournisseur, domaine, HTTPS ou droits d'accès pour contourner cette contrainte. Voir la procédure de publication manuelle.
 
+## Séparation stricte avec Nexus Support Hub
+
+Instruction complémentaire d'Amine du 29 octobre 2026 : ce travail concerne SecurityNoPhone. Les règles, prompts, réglages, sources de connaissances et comportement du répondeur Nexus Support Hub ne doivent pas être modifiés dans ce cadre. La reprise d'exigences de qualité ne transfère pas les consignes produit SecurityNoPhone dans le répondeur Nexus.
+
+Vérifier le dépôt et la cible avant chaque écriture ou déploiement. Les évolutions Nexus indépendantes restent hors périmètre. Si une modification du répondeur provenant précisément d'un travail SecurityNoPhone est prouvée, comparer avant/après et rétablir uniquement cette modification en conservant les autres évolutions. Sans preuve ni ancienne valeur fiable, ne pas effectuer de réinitialisation ou de rollback global. Consigner le résultat de la vérification et ses limites.
+
+## Déploiement complet et statut à jour
+
+Préparer et publier un lot cohérent depuis le dernier `main`, avec les pages, traductions et ressources nécessaires. Après publication, vérifier le SHA du déploiement, la présence et l'intégrité des fichiers web, puis les parcours touchés dans le navigateur. La commande `python3 scripts/verify_deployment.py` contrôle en lecture seule les fichiers web et les références de travail exposés par le site ; elle ne lance aucun workflow.
+
+Distinguer « ensemble des fichiers publié » et « toutes les fonctions validées ». Le mobile, les services externes et les pages historiques gardent leurs statuts propres. Actualiser le compte rendu et le même document persistant de consignes : un ancien message de blocage ou une ancienne proposition non publiée ne doit pas remplacer une preuve de publication plus récente.
+
 ## Avant de modifier
 
 - Partir de la version actuelle de `main`, contrôler le diff et lire les consommateurs, scripts, traductions, formulaires, liens et configurations concernés.

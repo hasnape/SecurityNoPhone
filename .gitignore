@@ -1,3 +1,4 @@
 .release-validation/
 preview-dist/
 .openai/
+__pycache__/

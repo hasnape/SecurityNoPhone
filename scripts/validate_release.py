@@ -4,6 +4,7 @@ from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 import collections
+import ast
 import hashlib
 import json
 import re
@@ -70,6 +71,9 @@ translations = json.loads((ROOT / 'js/translations.js').read_text().removeprefix
 for path in list((ROOT / 'js').glob('*.js')) + [ROOT / 'redirect-lang.js']:
     run(['node', '--check', str(path)])
 checks.append('JavaScript syntax: all external scripts')
+for script in (ROOT / 'scripts').glob('*.py'):
+    ast.parse(script.read_text(), filename=str(script))
+checks.append('Python validation scripts parse')
 
 for name in PAGES + ['includes/navbar.html', 'includes/footer.html']:
     parsed = Page()
@@ -150,6 +154,8 @@ if 'main { overflow-x: clip; }' in css:
 checks.append('Reference contrast pairs and horizontal-animation repair')
 test_result = run(['node', '--test', 'tests/order-tracking.test.cjs'])
 checks.append('Tracking contact regression tests')
+inventory_test_result = run([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_*.py'])
+checks.append('Committed deployment inventory regression test')
 warnings.append('Mobile, real form delivery, payment, logistics and legal validation require separate evidence.')
 warnings.append('Legacy translated index/order pages are outside this source gate; see baseline.')
 
@@ -161,7 +167,8 @@ for name in sorted(files):
         digest.update(name.encode() + b'\0' + path.read_bytes() + b'\0')
 report = {'ok': not errors, 'head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
           'content_sha256': digest.hexdigest(), 'checks': checks, 'contrasts': contrasts,
-          'errors': errors, 'limits': warnings, 'regression_output': test_result.stdout}
+          'errors': errors, 'limits': warnings, 'regression_output': test_result.stdout,
+          'deployment_inventory_test_output': inventory_test_result.stdout + inventory_test_result.stderr}
 folder = ROOT / '.release-validation'
 folder.mkdir(exist_ok=True)
 (folder / 'result.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
