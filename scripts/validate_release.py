@@ -4,6 +4,7 @@ from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 import collections
+import ast
 import hashlib
 import json
 import re
@@ -70,6 +71,9 @@ translations = json.loads((ROOT / 'js/translations.js').read_text().removeprefix
 for path in list((ROOT / 'js').glob('*.js')) + [ROOT / 'redirect-lang.js']:
     run(['node', '--check', str(path)])
 checks.append('JavaScript syntax: all external scripts')
+for script in (ROOT / 'scripts').glob('*.py'):
+    ast.parse(script.read_text(), filename=str(script))
+checks.append('Python validation scripts parse')
 
 for name in PAGES + ['includes/navbar.html', 'includes/footer.html']:
     parsed = Page()

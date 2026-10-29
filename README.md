@@ -10,6 +10,8 @@ Les caractéristiques des deux modèles de pochettes sont référencées dans `d
 
 Préférence du propriétaire : publication manuelle via le navigateur cloud et contrôles locaux. La validation Actions est uniquement manuelle pour préserver les ressources ; le déploiement interne GitHub Pages peut rester nécessaire. Voir `docs/RELEASE_VALIDATION.md`.
 
+Périmètre strict : aucun changement des règles, prompts ou réglages du répondeur Nexus Support Hub dans le cadre SecurityNoPhone. Voir `AGENTS.md`. Après publication, `python3 scripts/verify_deployment.py` vérifie la présence et l'intégrité du lot web complet sans déclencher Actions. Le statut de référence figure dans `docs/DEPLOYMENT_STATUS.md`.
+
 Contrôle local sans dépendance supplémentaire, avec Python 3 et Node.js :
 
 ```sh
