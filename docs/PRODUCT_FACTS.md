@@ -16,3 +16,9 @@ La formulation sur le floutage décrit l'effet annoncé par le propriétaire, sa
 Ne pas ajouter de certification, résistance chiffrée, stérilisation, blocage audio, brouillage, fermeture inviolable ou compatibilité dimensionnelle universelle. Les prix, conditions et disponibilités ne changent pas du fait de cette précision. Ne pas déduire un tarif différent ou identique pour les deux modèles sans information commerciale supplémentaire.
 
 Employer cette référence pour les pages publiques, la FAQ, le support et les traductions FR/EN/DE/AR. Les pages historiques et les documents contractuels doivent garder leur propre revue avant toute harmonisation.
+
+## Positionnement : confidentialité et prises de vue non autorisées
+
+Précision d'Amine du 29 octobre 2026 : présenter SecurityNoPhone comme une solution de confidentialité lorsque les participants prennent des photos ou vidéos malgré les consignes, le règlement du lieu ou le contexte. Les exemples donnés sont les soirées confidentielles, les événements privés et le milieu scolaire, notamment les examens.
+
+Le message principal doit relier le problème des prises de vue non autorisées à la solution apportée par les pochettes verrouillables. L'accueil ne doit pas présenter l'offre comme un service de gestion ou d'organisation des prises de vue. La conservation du téléphone et l'accès à l'écran selon le modèle sont des précisions produit. Ne pas déduire une conformité réglementaire ou une garantie contre toutes les formes de triche ; les règles de l'établissement et de surveillance restent distinctes.
