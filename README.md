@@ -6,6 +6,8 @@ Site statique publié sur https://securitynophone.com/ via GitHub Pages.
 
 Lire `AGENTS.md`, `docs/DESIGN_SYSTEM.md`, `docs/RELEASE_VALIDATION.md` et `docs/VALIDATED_FEATURE_BASELINE.md` avant de modifier le site. Ces références appliquent les exigences Nexus à l’identité et aux parcours SecurityNoPhone.
 
+Les caractéristiques des deux modèles de pochettes sont référencées dans `docs/PRODUCT_FACTS.md`, à partir des précisions fournies par le propriétaire.
+
 Contrôle local sans dépendance supplémentaire, avec Python 3 et Node.js :
 
 ```sh

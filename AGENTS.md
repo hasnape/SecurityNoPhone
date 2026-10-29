@@ -16,6 +16,7 @@ Demandées par Amine Harbi le 29 octobre 2026 : appliquer les mêmes exigences d
 - Vérifier hiérarchie des actions, lisibilité, focus clavier, cibles, contrastes, textes longs, FR/EN/DE/AR et RTL. Employer les propriétés CSS logiques.
 - Ne pas modifier implicitement tarifs, contrats, endpoints, consentements ou moyens de paiement pour une correction graphique.
 - Ne pas inventer de clients, résultats, assurances, certifications, disponibilité humaine ou fonctions. Signaler les exemples et simulations avant leur utilisation. Un statut de commande doit provenir d'une source réelle ou être explicitement présenté comme exemple.
+- Avant de modifier une description produit, lire `docs/PRODUCT_FACTS.md` : distinguer les modèles avec/sans fenêtre, l'effet sur la caméra avant, le similicuir et le verrouillage par antivol avec aimant fourni.
 - Ne pas masquer un débordement global pour le déclarer corrigé. Traiter sa cause et tester les contenus longs.
 
 ## Après modification
