@@ -1681,6 +1681,7 @@ a:hover {
 
 /* Clear event guidance and accessible responsive landing page. */
 .snf-home-hero { padding: clamp(3rem,7vw,6rem) 0; background: var(--snf-hero); color: #fff; --snf-focus: var(--snf-focus-light); }
+.snf-home-hero > .container { padding-inline: 1.5rem; }
 .snf-home-hero h1 { font-size: clamp(2rem,4.4vw,3.7rem); line-height: 1.13; max-width: 20ch; letter-spacing: -.035em; margin: 1rem 0 1.5rem; }
 .snf-home-hero .section-kicker { color: #e2c47b; }
 .snf-home-hero .lead { color: #e1e5ee; font-size: 1.1rem; }
