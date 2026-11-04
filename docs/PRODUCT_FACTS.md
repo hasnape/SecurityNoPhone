@@ -28,3 +28,9 @@ Le message principal doit relier le problème des prises de vue non autorisées 
 Amine transmet une photo (`11055.jpg`) et une vidéo (`11056.mp4`, environ 11 secondes) comme éléments de preuve. La photo montre une pochette noire imprimée « À écouter sur Deezer », dans son emballage, à côté d'un dispositif d'ouverture magnétique. La vidéo présente une pochette portant le même visuel, sa face imprimée, son dos et ses finitions. Ces éléments étayent la présentation matérielle et la personnalisation ; ils ne documentent à eux seuls ni une commande cliente Deezer, ni un partenariat, ni un témoignage, ni des résultats en événement. Ne pas ajouter ces affirmations sans confirmation factuelle distincte.
 
 La photo publiée conserve les octets de la pièce jointe. La version web de la vidéo conserve tout le déroulé visuel et est convertie en H.264 sans piste audio pour la lecture dans le navigateur ; son aperçu est une image extraite du clip. Aucun contenu visuel génératif ne remplace ces preuves.
+
+## Médias fournis le 4 novembre 2026
+
+La photo `11733.jpg` montre une face rouge avec fenêtre et une face blanche texturée. Les clips `11734.mp4`, `11784.mp4` et `11785.mp4` présentent les faces, les coutures, l'œillet et, pour le dernier, le marquage SecurityNoPhone. Ils ne montrent pas un essai d'écran, de caméra, de verrouillage ou d'ouverture : ne pas en déduire une nouvelle preuve de performance. Les couleurs et finitions disponibles sont à confirmer au devis.
+
+`11727.mp4` est identique, par SHA-256, au clip de personnalisation déjà publié ; ne pas en créer un second exemplaire. La photo est conservée sans retouche. Les trois versions web sont sans son, en H.264, avec aperçu extrait de chaque clip et lecture sur demande. Le grand fichier HEVC `11785.mp4` est réduit pour le web tout en conservant le déroulé visuel ; l'original fourni reste distinct du dérivé publié. Les médias de personnalisation et les PDF antérieurs restent accessibles.

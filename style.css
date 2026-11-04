@@ -1688,7 +1688,7 @@ a:hover {
 .snf-home-hero .btn-primary { color:#151b25; }
 .snf-home-hero .btn-outline-primary { color:#f0d691; border-color:#f0d691; }
 .snf-home-hero .small { color:#d4dbe6; }
-.snf-product-figure { margin:0; padding:1.5rem; background:#fff; border-radius:var(--snf-radius-md); }
+.snf-product-figure { --snf-focus:var(--snf-accent-strong); margin:0; padding:1.5rem; background:#fff; border-radius:var(--snf-radius-md); }
 .snf-product-figure img { width:100%; height:auto; object-fit:contain; }
 .snf-product-figure .small { color:#4c5460; }
 .snf-faq { max-width:900px; }

@@ -50,3 +50,5 @@ Besoin → action principale → blocs et états → primitives communes → lan
 ## Médias de présentation du matériel
 
 Réutiliser les cartes `media-card` dans la grille existante. La primitive `snf-proof-media` conserve intégralement les photos et cadres vidéo (`object-fit: contain`), avec hauteur fluide et espace réservé. Une vidéo démarre sur action du visiteur, avec commandes natives, sans lecture automatique ; une légende descriptive et un lien direct MP4 restent disponibles. Les médias fournis montrent le matériel et sa personnalisation ; leur présence ne suffit pas à qualifier une marque de cliente ni à inventer un témoignage ou un résultat.
+
+Le panneau produit blanc de l’accueil rétablit `--snf-focus` sur l’or foncé, afin que le contour du lecteur vidéo reste visible sur sa surface claire. Le focus clair reste réservé au fond sombre environnant.
