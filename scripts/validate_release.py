@@ -120,7 +120,7 @@ calculator = (ROOT / 'js/order-form.js').read_text()
 rates = {
     'autonomous': r"location_sans:\s*\{\s*type:\s*'rental',\s*dailyRate:\s*150\s*\}",
     'staff': r"location_avec:\s*\{\s*type:\s*'rental',\s*dailyRate:\s*390,\s*additionalAgentDailyRate:\s*100",
-    'subscription': r"abonnement:\s*\{\s*type:\s*'subscription',\s*pricePerPack:\s*19,\s*packSize:\s*50\s*\}",
+    'subscription': r"abonnement:\s*\{\s*type:\s*'subscription',\s*pricePerPack:\s*20,\s*packSize:\s*100\s*\}",
     'purchase': r"achat:\s*\{\s*type:\s*'purchase',\s*unitPrice:\s*3\.5,\s*minQuantity:\s*50\s*\}",
     'deposit': r'return blocks \* 300;'
 }
