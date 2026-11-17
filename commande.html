@@ -44,6 +44,7 @@
                 <option value="location_sans" data-i18n="option_location_without">Location sans personnel</option>
                 <option value="location_avec" data-i18n="option_location_with">Location avec personnel</option>
                 <option value="abonnement" data-i18n="option_subscription">Abonnement Starter</option>
+                <option value="abonnement_pro" data-i18n="option_subscription_pro">Abonnement Pro (devis)</option>
                 <option value="achat" data-i18n="option_custom_pouches">Pochettes personnalisées</option>
                 <option value="special_event" data-i18n="option_special_event">Service premium événements privés</option>
               </select>
@@ -110,7 +111,7 @@
             <div class="mb-3 d-none" data-caution-block>
               <label class="form-label" data-i18n="label_caution">Caution (obligatoire)</label>
               <input type="text" class="form-control" data-caution-display readonly value="0,00 €" />
-              <small class="text-muted" data-i18n="caution_help">Compte 300 € de caution par tranche de 700 pochettes pour les dispositifs de location et l’abonnement Starter. La caution est restituée après vérification.</small>
+              <small class="text-muted" data-i18n="caution_help">Compte 300 € de caution par tranche de 700 pochettes pour les locations et abonnements lorsque l'estimation est disponible. La caution est restituée après vérification.</small>
             </div>
 
             <div class="mb-3">
@@ -131,7 +132,7 @@
                 placeholder="Précisez le format, les lieux, les attentes protocole..."></textarea>
             </div>
 
-            <div class="price-box text-center fw-bold fs-5 my-3" data-total-display data-template="Total estimé : {price}" aria-live="polite"></div>            <p class="small text-muted text-center" data-i18n="caution_note">La caution est automatiquement ajoutée et précisée dans le récapitulatif envoyé par nos équipes.</p>
+            <div class="price-box text-center fw-bold fs-5 my-3" data-total-display data-template="Total estimé : {price}" aria-live="polite"></div>            <p class="small text-muted text-center" data-i18n="caution_note">La caution et les frais éventuels sont précisés dans le devis ; aucune somme n'est débitée ici.</p>
 
             <input type="hidden" name="montant_total_estime" data-total-value value="0">
             <input type="hidden" name="caution_total" data-caution-value value="0">
@@ -156,6 +157,10 @@
             <div class="mb-3">
               <h3 class="h6 text-uppercase text-muted mb-1" data-i18n="order_info_option2_title">Option 2 – Autonome accompagnée</h3>
               <p class="small mb-0" data-i18n="order_info_option2_desc">450 € TTC pour 3 jours. Kit expédié via Mondial Relay, guide pas-à-pas et hotline événementielle.</p>
+            </div>
+            <div class="mb-3">
+              <h3 class="h6 text-uppercase text-muted mb-1" data-i18n="pricing_pro_title">Abonnement Pro</h3>
+              <p class="small mb-0" data-i18n="pricing_pro_summary">100 € TTC / mois jusqu'à 100 pochettes ; engagement minimum de 3 mois et caution de 300 €, à confirmer dans le devis. Aucun paiement n'est prélevé par ce formulaire.</p>
             </div>
             <ul class="list-unstyled small mb-3">
               <li class="mb-1" data-i18n="order_info_point_1">• Livraison aller/retour incluse en France métropolitaine.</li>
