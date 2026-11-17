@@ -4,10 +4,10 @@
 
 | Offre | Prix de référence | Quantité incluse | Durée et conditions |
 | --- | --- | --- | --- |
-| Location autonome | 150 € / jour | Jusqu'à 700 pochettes | Matériel et ouverture magnétique, sans agent ; devis au-delà de 700 |
-| Location avec personnel | 390 € / jour | Jusqu'à 700 pochettes | 1 agent, jusqu'à 7 heures par jour ; devis au-delà de 700 |
-| Abonnement Starter | 19 € / mois | Jusqu'à 50 pochettes | Sans engagement ; au-delà de 50, demande de devis |
-| Abonnement Pro | 100 € / mois | Jusqu'à 100 pochettes | Engagement minimum de 3 mois annoncé sur l'ancien support ; demande de devis avant souscription, sans paiement en ligne |
+| Location autonome | 150 € / jour | Jusqu'à 500 pochettes | Matériel et ouverture magnétique, sans agent ; devis au-delà de 500 |
+| Location avec personnel | 390 € / jour | Jusqu'à 500 pochettes | 1 agent, jusqu'à 7 heures par jour ; devis au-delà de 500 |
+| Abonnement Starter | 20 € / mois | Jusqu'à 100 pochettes | Sans engagement ; au-delà de 100, demande de devis |
+| Abonnement Pro | 60 € / mois | Jusqu'à 300 pochettes | Engagement minimum de 3 mois annoncé sur l'ancien support ; demande de devis avant souscription, sans paiement en ligne |
 | Achat personnalisé | 3,50 € / pochette | Minimum 50 pochettes | Personnalisation à confirmer par bon à tirer ; délai convenu au devis |
 
 ## Personnel, transport et caution
@@ -21,7 +21,7 @@
 
 ## Gouvernance et points à valider
 
-1. Faire approuver contractuellement par le propriétaire les conditions de l'abonnement Pro (engagement trois mois, prix et renouvellement) avant toute acceptation ferme.
+1. Grille tarifaire officiellement modifiée par le propriétaire le 17/11/2026 (locations 500, Starter 20 €/100 et Pro 60 €/300). Faire approuver juridiquement les conditions de l'abonnement Pro (engagement trois mois, renouvellement) avant toute acceptation ferme.
 2. Revoir juridiquement les CGV, le droit de rétractation, l'assurance, les délais et la politique de caution ; ne jamais prétendre à une conformité certifiée sans vérification.
 3. Remplacer le PDF historique `Mention legale/3_CGV.pdf`, qui ne décrit pas Pro, par un document légal relu et approuvé. Tant que ce n'est pas fait, ne pas présenter ce PDF comme la version contractuelle à jour.
 4. Créer et tester une adresse de domaine avant de remplacer `snophone.info@gmail.com` ; le changement d'affichage ne crée pas la boîte mail.
