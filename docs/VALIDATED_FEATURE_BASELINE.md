@@ -6,7 +6,7 @@ Base de reprise : `a43dfd100abe8e5bdb95630c9090592e1219f7d1`, 29 octobre 2026.
 
 - Pages publiques et destinations : Accueil, Solutions, Accompagnement, Expérience, Publics, Secteurs, Contact, Guides, Ressources, Support, Commande, Suivi et documents légaux.
 - Langues communes : FR/EN/DE/AR ; AR en RTL. Le choix explicite persiste dans la navigation.
-- Offres et valeurs de référence : autonome 150 EUR/jour ; personnel 390 EUR/jour ; agent supplémentaire 100 EUR/jour ; déplacement 80 EUR ; logement 80 EUR/jour/agent ; achat 3,50 EUR/unité, minimum 50 ; Starter 19 EUR/mois jusqu'à 50 pochettes ; caution 300 EUR par tranche de 700 pour location/abonnement. Au-delà des quantités annoncées : devis.
+- Offres et valeurs de référence : autonome 150 EUR/jour ; personnel 390 EUR/jour ; agent supplémentaire 100 EUR/jour ; déplacement 80 EUR ; logement 80 EUR/jour/agent ; achat 3,50 EUR/unité, minimum 50 ; Starter 20 EUR/mois jusqu'à 100 pochettes ; Pro 60 EUR/mois jusqu'à 300 pochettes (sur devis, engagement minimum annoncé de 3 mois) ; caution 300 EUR par tranche de 700 pour location/abonnement. Location jusqu'à 500 pochettes par formule ; au-delà des quantités annoncées : devis.
 - Dates inclusives de location ; jours inversés ou dates manquantes bloqués ; quantités entières positives ; achat inférieur à 50 bloqué. Les champs masqués ne bloquent pas la demande.
 - Formulaire principal `commande.html` : action `https://formspree.io/f/xqaqogdv`, méthode POST, noms des champs et anti-robot conservés. Ce formulaire ne capture pas de paiement.
 - Présélections : `#rental`, `#autonomous`, `#custom`, `#abonnement`, `#special`. Saisie et choix restent préservés lors d'un changement de langue.
