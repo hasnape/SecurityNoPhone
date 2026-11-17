@@ -10,6 +10,8 @@
       maxHoursPerDay: 7
     },
     abonnement: { type: 'subscription', pricePerPack: 19, packSize: 50 },
+    // Pro : devis préalable. Pas d'estimation automatique d'engagement ou de renouvellement.
+    abonnement_pro: { type: 'custom' },
     achat: { type: 'purchase', unitPrice: 3.5, minQuantity: 50 },
     special_event: { type: 'custom' }
   };
@@ -383,7 +385,7 @@
     function applyOfferFromLink() {
       const offersByHash = {
         rental: 'location_avec', autonomous: 'location_sans',
-        custom: 'achat', abonnement: 'abonnement', special: 'special_event'
+        custom: 'achat', abonnement: 'abonnement', pro: 'abonnement_pro', special: 'special_event'
       };
       const selected = offersByHash[window.location.hash.slice(1)];
       if (selected && offerSelect) offerSelect.value = selected;
