@@ -9,7 +9,7 @@
       additionalAgentDailyRate: 100,
       maxHoursPerDay: 7
     },
-    abonnement: { type: 'subscription', pricePerPack: 19, packSize: 50 },
+    abonnement: { type: 'subscription', pricePerPack: 20, packSize: 100 },
     // Pro : devis préalable. Pas d'estimation automatique d'engagement ou de renouvellement.
     abonnement_pro: { type: 'custom' },
     achat: { type: 'purchase', unitPrice: 3.5, minQuantity: 50 },
@@ -265,7 +265,7 @@
 
       const quantityValid = validateQuantity(offerKey);
       const quantity = getQuantity();
-      const needsQuote = (offer.type === 'rental' && quantity > 700) || (offer.type === 'subscription' && quantity > 50);
+      const needsQuote = (offer.type === 'rental' && quantity > 500) || (offer.type === 'subscription' && quantity > 100);
       if (needsQuote) {
         const datesValid = validateDates(offerKey).valid;
         if (priceDisplay) priceDisplay.textContent = translated('quote_capacity', 'Sur devis.');
