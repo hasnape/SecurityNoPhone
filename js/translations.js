@@ -783,7 +783,14 @@ window.translations = {
     "option_subscription_pro": "Abonnement Pro (devis)",
     "pricing_starter_conditions": "Sans engagement ; au-delà de 50 pochettes : sur devis.",
     "support_offers_intro": "Référentiel commercial 2026 : mêmes montants, limites et conditions que sur l’accueil. Le devis confirme la disponibilité, la logistique et les options.",
-    "pricing_logistics_2026": "Livraison standard du matériel incluse en France métropolitaine. Déplacement et hébergement éventuels des agents facturés séparément selon le devis. Caution : 300 € par tranche entamée de 700 pochettes pour les locations et abonnements, restituée après vérification."
+    "pricing_logistics_2026": "Livraison standard du matériel incluse en France métropolitaine. Déplacement et hébergement éventuels des agents facturés séparément selon le devis. Caution : 300 € par tranche entamée de 700 pochettes pour les locations et abonnements, restituée après vérification.",
+    "legal_cgv_revision_status": "Informations tarifaires actualisées le 17/11/2026. Validation juridique des CGV à finaliser avant tout engagement contractuel.",
+    "legal_offers_2026_title": "Grille commerciale 2026",
+    "legal_offers_2026_intro": "Prix indicatifs TTC. Réservation, abonnement et options uniquement après validation d'un devis et de conditions contractuelles.",
+    "legal_agent_duration_2026": "1 agent jusqu'à 7 h/jour ; renforts sur devis.",
+    "legal_offers_2026_notice": "Ce formulaire demande un devis sans paiement. Les anciens PDF de CGV ne couvrent pas toutes les offres 2026 et ne constituent pas la référence contractuelle actuelle.",
+    "legal_offers_2026_cta": "Voir les offres détaillées",
+    "footer_pdf_archive_notice": "Attention : les PDF juridiques ci-dessous sont des archives à vérifier et peuvent ne pas reprendre les offres 2026. Consultez les pages HTML et le devis accepté pour les conditions actuelles."
   },
   "en": {
     "auto_key_1": "SecurityNoPhone",
@@ -1569,7 +1576,14 @@ window.translations = {
     "option_subscription_pro": "Pro subscription (request quote)",
     "pricing_starter_conditions": "No commitment; over 50 pouches: quote required.",
     "support_offers_intro": "2026 commercial reference: the same prices, quantities and conditions as on our homepage. The quote confirms availability, logistics and options.",
-    "pricing_logistics_2026": "Standard equipment shipping included in mainland France. Any agent travel or lodging is charged separately as specified in the quote. Deposit: €300 per block of up to 700 pouches for rentals and subscriptions, refunded after inspection."
+    "pricing_logistics_2026": "Standard equipment shipping included in mainland France. Any agent travel or lodging is charged separately as specified in the quote. Deposit: €300 per block of up to 700 pouches for rentals and subscriptions, refunded after inspection.",
+    "legal_cgv_revision_status": "Pricing information updated on 17 November 2026. Legal review of these terms is still required before any contractual commitment.",
+    "legal_offers_2026_title": "2026 commercial offer summary",
+    "legal_offers_2026_intro": "Indicative prices including taxes. Bookings, subscriptions and optional charges only take effect following approval of a quote and contractual terms.",
+    "legal_agent_duration_2026": "One agent for up to 7 hours/day; additional staff by quote.",
+    "legal_offers_2026_notice": "The form requests a quote and does not take payment. Older sales-terms PDFs do not cover all 2026 offers and must not be used as the current contractual reference.",
+    "legal_offers_2026_cta": "See detailed offers",
+    "footer_pdf_archive_notice": "Please note: the legal PDFs below are historical documents requiring review and may not reflect 2026 offers. Refer to current HTML pages and the accepted quote for current conditions."
   },
   "de": {
     "auto_key_1": "SecurityNoPhone",
@@ -2352,7 +2366,14 @@ window.translations = {
     "option_subscription_pro": "Pro-Abonnement (Angebot anfordern)",
     "pricing_starter_conditions": "Ohne Bindung; über 50 Hüllen: Angebot erforderlich.",
     "support_offers_intro": "Preisübersicht 2026: gleiche Preise, Mengen und Bedingungen wie auf der Startseite. Das Angebot bestätigt Verfügbarkeit, Logistik und Optionen.",
-    "pricing_logistics_2026": "Standardversand des Materials innerhalb des französischen Festlands inklusive. Etwaige Reise- und Übernachtungskosten des Personals werden laut Angebot separat berechnet. Kaution: 300 € je angefangene 700 Hüllen bei Miete und Abonnement, Rückzahlung nach Prüfung."
+    "pricing_logistics_2026": "Standardversand des Materials innerhalb des französischen Festlands inklusive. Etwaige Reise- und Übernachtungskosten des Personals werden laut Angebot separat berechnet. Kaution: 300 € je angefangene 700 Hüllen bei Miete und Abonnement, Rückzahlung nach Prüfung.",
+    "legal_cgv_revision_status": "Preisinformationen am 17.11.2026 aktualisiert. Rechtliche Prüfung dieser AGB vor verbindlichem Vertragsabschluss noch erforderlich.",
+    "legal_offers_2026_title": "Preisübersicht 2026",
+    "legal_offers_2026_intro": "Unverbindliche Preise inkl. Steuern. Buchungen, Abos und Zusatzkosten gelten erst nach Zustimmung zu Angebot und Vertragsbedingungen.",
+    "legal_agent_duration_2026": "Ein Mitarbeiter bis zu 7 Stunden/Tag; zusätzliche Mitarbeiter auf Anfrage.",
+    "legal_offers_2026_notice": "Das Formular dient nur der Angebotsanfrage; keine Zahlung. Ältere AGB-PDFs decken nicht alle Angebote 2026 ab und sind keine aktuelle Vertragsgrundlage.",
+    "legal_offers_2026_cta": "Angebote im Detail ansehen",
+    "footer_pdf_archive_notice": "Hinweis: Die nachstehenden juristischen PDFs sind ältere Fassungen, die überprüft werden müssen und möglicherweise nicht die Angebote 2026 abbilden. Maßgeblich sind die aktuellen HTML-Seiten und das angenommene Angebot."
   },
   "ar": {
     "auto_key_1": "سيكيوريتي نو فون",
@@ -3134,6 +3155,13 @@ window.translations = {
     "option_subscription_pro": "اشتراك Pro (طلب عرض سعر)",
     "pricing_starter_conditions": "دون التزام؛ أكثر من 50 حافظة حسب عرض السعر.",
     "support_offers_intro": "الأسعار التجارية لسنة 2026 متطابقة مع الصفحة الرئيسية من حيث السعر والكمية والشروط. يؤكد عرض السعر التوفر والخدمات اللوجستية والخيارات.",
-    "pricing_logistics_2026": "يشمل السعر النقل القياسي للمعدات داخل فرنسا القارية. تُحتسب تنقلات الموظفين وإقامتهم إن لزمت بشكل منفصل وفق عرض السعر. وديعة 300 € لكل شريحة تبدأ من 700 حافظة للتأجير والاشتراكات، تُعاد بعد الفحص."
+    "pricing_logistics_2026": "يشمل السعر النقل القياسي للمعدات داخل فرنسا القارية. تُحتسب تنقلات الموظفين وإقامتهم إن لزمت بشكل منفصل وفق عرض السعر. وديعة 300 € لكل شريحة تبدأ من 700 حافظة للتأجير والاشتراكات، تُعاد بعد الفحص.",
+    "legal_cgv_revision_status": "تم تحديث معلومات الأسعار بتاريخ 17/11/2026. يلزم استكمال المراجعة القانونية للشروط قبل إبرام أي التزام تعاقدي.",
+    "legal_offers_2026_title": "ملخص العروض التجارية 2026",
+    "legal_offers_2026_intro": "الأسعار إرشادية وشاملة الضرائب. لا يسري الحجز أو الاشتراك أو الرسوم الاختيارية إلا بعد قبول عرض السعر والشروط التعاقدية.",
+    "legal_agent_duration_2026": "موظف واحد حتى 7 ساعات يومياً؛ موظفون إضافيون حسب عرض السعر.",
+    "legal_offers_2026_notice": "هذا النموذج مخصص لطلب عرض سعر ولا يجري أي دفع. ملفات شروط البيع القديمة لا تشمل جميع عروض 2026 ولا تُعد مرجعاً تعاقدياً حالياً.",
+    "legal_offers_2026_cta": "عرض تفاصيل العروض",
+    "footer_pdf_archive_notice": "تنبيه: ملفات PDF القانونية أدناه نسخ تاريخية تحتاج إلى مراجعة وقد لا تعكس عروض 2026. يُرجى الرجوع إلى صفحات HTML الحالية وعرض السعر المقبول للاطلاع على الشروط المعمول بها."
   }
 };
