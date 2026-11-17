@@ -42,6 +42,49 @@ class CommercialOffers2026(unittest.TestCase):
         self.assertIn("7h/jour/agent", PAGES["index.html"])
         self.assertNotIn("Nos formules 2025", PAGES["support.html"])
 
+    def test_official_prices_and_limits_on_public_pages(self):
+        amounts = {
+            "pricing_rental_autonomous_qty": "500",
+            "pricing_rental_staff_qty": "500",
+            "pricing_subscription_qty": "100",
+            "pricing_pro_qty": "300",
+            "pricing_subscription_price": "20",
+            "pricing_pro_price": "60",
+        }
+        import re
+        for page in ("index.html", "support.html", "cgv.html"):
+            for key, expected in amounts.items():
+                with self.subTest(page=page, key=key):
+                    match = re.search(r'data-i18n="' + key + r'"[^>]*>([^<]+)', PAGES[page])
+                    self.assertIsNotNone(match)
+                    self.assertIn(expected, match.group(1))
+
+    def test_official_price_translations(self):
+        expected = {
+            "pricing_rental_staff_qty": 500,
+            "pricing_rental_autonomous_qty": 500,
+            "pricing_subscription_qty": 100,
+            "pricing_pro_qty": 300,
+        }
+        for lang in ("fr", "en", "de", "ar"):
+            for key, amount in expected.items():
+                with self.subTest(lang=lang, key=key):
+                    self.assertIn(str(amount), TRANSLATIONS[lang][key])
+            self.assertIn("20", TRANSLATIONS[lang]["pricing_subscription_price"])
+            self.assertIn("60", TRANSLATIONS[lang]["pricing_pro_price"])
+
+    def test_current_script_cache_across_all_pages(self):
+        pages = ("index", "solutions", "accompagnement", "experience", "clients",
+                 "secteurs", "contact", "blog", "ressources", "support", "commande",
+                 "suivi", "mentions-legales", "cgv", "cgu", "confidentialite",
+                 "cookies", "retraction", "mediation")
+        for name in pages:
+            with self.subTest(page=name):
+                content = (ROOT / (name + ".html")).read_text(encoding="utf-8")
+                self.assertIn("js/translations.js?v=20261117-offres-officielles", content)
+        self.assertIn("js/order-form.js?v=20261117-offres-officielles",
+                      PAGES["commande.html"])
+
     def test_pro_is_quote_only_not_auto_charge(self):
         self.assertIn('value="abonnement_pro"', PAGES["commande.html"])
         self.assertIn('commande.html#pro', PAGES["index.html"])
