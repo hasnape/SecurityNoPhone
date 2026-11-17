@@ -106,7 +106,7 @@ parsed.feed(order)
 form = next((f for f in parsed.forms if f.get('id') == 'orderForm'), {})
 if form.get('action') != 'https://formspree.io/f/xqaqogdv' or form.get('method', '').upper() != 'POST':
     errors.append('Primary form transport contract changed')
-for value in ['location_sans', 'location_avec', 'abonnement', 'achat', 'special_event']:
+for value in ['location_sans', 'location_avec', 'abonnement', 'abonnement_pro', 'achat', 'special_event']:
     if f'value="{value}"' not in order:
         errors.append('Offer missing: ' + value)
 for name in ['offre', 'quantite', 'date_debut', 'date_fin', 'nom', 'email', 'adresse', '_gotcha', 'montant_total_estime', 'caution_total']:
@@ -122,6 +122,9 @@ rates = {
     'staff': r"location_avec:\s*\{\s*type:\s*'rental',\s*dailyRate:\s*390,\s*additionalAgentDailyRate:\s*100",
     'subscription': r"abonnement:\s*\{\s*type:\s*'subscription',\s*pricePerPack:\s*20,\s*packSize:\s*100\s*\}",
     'purchase': r"achat:\s*\{\s*type:\s*'purchase',\s*unitPrice:\s*3\.5,\s*minQuantity:\s*50\s*\}",
+    'pro_quote': r"abonnement_pro:\s*\{\s*type:\s*'custom'\s*\}",
+    'rental_cap': r'quantity > 500',
+    'starter_cap': r'quantity > 100',
     'deposit': r'return blocks \* 300;'
 }
 for label, pattern in rates.items():
