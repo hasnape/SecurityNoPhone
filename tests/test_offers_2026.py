@@ -34,8 +34,8 @@ class CommercialOffers2026(unittest.TestCase):
     def test_same_quantity_and_staff_duration(self):
         for filename in ("index.html", "support.html"):
             with self.subTest(page=filename):
-                self.assertIn("700 pochettes", PAGES[filename])
-                self.assertNotIn("500 pochettes", PAGES[filename])
+                self.assertIn("500 pochettes", PAGES[filename])
+                self.assertNotIn("700 pochettes</span>", PAGES[filename])
                 self.assertIn("390 € TTC / jour", PAGES[filename])
                 self.assertIn("150 € TTC / jour", PAGES[filename])
         self.assertIn("7 h", PAGES["support.html"])
@@ -47,10 +47,12 @@ class CommercialOffers2026(unittest.TestCase):
         self.assertIn('commande.html#pro', PAGES["index.html"])
         self.assertIn("abonnement_pro: { type: 'custom' }", PAGES["js/order-form.js"])
         self.assertIn("pro: 'abonnement_pro'", PAGES["js/order-form.js"])
+        self.assertIn("quantity > 500", PAGES["js/order-form.js"])
+        self.assertIn("quantity > 100", PAGES["js/order-form.js"])
 
     def test_existing_form_and_rates_untouched(self):
         self.assertIn('action="https://formspree.io/f/xqaqogdv"', PAGES["commande.html"])
-        self.assertIn("abonnement: { type: 'subscription', pricePerPack: 19, packSize: 50 }",
+        self.assertIn("abonnement: { type: 'subscription', pricePerPack: 20, packSize: 100 }",
                       PAGES["js/order-form.js"])
         self.assertIn("return blocks * 300;", PAGES["js/order-form.js"])
 
@@ -62,6 +64,8 @@ class CommercialOffers2026(unittest.TestCase):
 
     def test_archival_pdf_and_nonfactual_examples_identified(self):
         self.assertIn('data-i18n="footer_pdf_archive_notice"', PAGES["includes/footer.html"])
+        self.assertIn('data-i18n="pricing_pro_summary"', PAGES["commande.html"])
+        self.assertIn('data-i18n="pricing_pro_price"', PAGES["cgv.html"])
         self.assertIn("illustratifs", PAGES["blog.html"])
         self.assertIn('data-i18n="legal_offers_2026_notice"', PAGES["cgv.html"])
 
