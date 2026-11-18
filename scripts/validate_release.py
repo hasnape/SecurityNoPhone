@@ -97,6 +97,21 @@ for name in PAGES + ['includes/navbar.html', 'includes/footer.html']:
             temp.flush()
             run(['node', '--check', temp.name])
 checks.append(f'{len(PAGES)} current pages + shared header/footer: H1, ids, local files, i18n keys, inline JS')
+# The operational PDF support documents are public deliverables: require real files,
+# not dead links or a regenerated source without its PDF binaries.
+for filename in ('fiche-retour-materiel.pdf', 'bon-livraison-retour.pdf',
+                 'protocole-confidentialite.pdf', 'notice-utilisation-rapide.pdf',
+                 'etiquette-contact.pdf', 'signaletique-bilingue.pdf',
+                 'guide-formation-equipes.pdf', 'grille-offres-2026.pdf'):
+    path = ROOT / 'documents' / 'support' / filename
+    if not path.is_file():
+        errors.append('Public PDF missing: ' + filename)
+        continue
+    data = path.read_bytes()
+    if len(data) < 2000 or not data.startswith(b'%PDF-') or b'%%EOF' not in data[-128:]:
+        errors.append('Invalid PDF header/EOF or unexpectedly small file: ' + filename)
+checks.append('Eight current public support and commercial PDFs: magic, EOF and size')
+
 ET.parse(ROOT / 'sitemap.xml')
 checks.append('Sitemap XML parses')
 
