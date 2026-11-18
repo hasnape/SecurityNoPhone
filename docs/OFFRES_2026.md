@@ -2,6 +2,8 @@
 
 > Source unique des quantités et prix publics. Le propriétaire a validé les neuf formules ci-dessous et la vente à prix dégressif. Montants affichés en euros TTC, indicatifs jusqu'à acceptation d'un devis. Toute demande commerciale exige un préavis d'au moins **30 jours calendaires**, **y compris les achats**. Le formulaire Formspree n'encaisse aucun paiement et ne confirme pas une réservation.
 
+La fiche PDF des offres en vigueur est disponible sous `documents/support/grille-offres-2026.pdf`. Les sept supports de formation et d'exploitation sont également régénérés au 18/11/2026 dans `documents/support/`.
+
 ## 1. Prestations événementielles ponctuelles
 
 | Formule | Pochettes réutilisables | Tarif par événement |

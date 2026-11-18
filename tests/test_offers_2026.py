@@ -89,8 +89,8 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
         for name in names:
             with self.subTest(name=name):
                 html = (ROOT / (name + ".html")).read_text(encoding="utf-8")
-                self.assertIn("js/translations.js?v=20261118-grille-30j", html)
-        self.assertIn("js/order-form.js?v=20261118-grille-30j", PAGES["commande.html"])
+                self.assertIn("js/translations.js?v=20261118-final-v2", html)
+        self.assertIn("js/order-form.js?v=20261118-final-v2", PAGES["commande.html"])
 
     def test_retired_three_day_and_old_price_offers_not_in_current_pages(self):
         for name in ("index.html", "solutions.html", "support.html", "cgv.html", "commande.html"):
@@ -100,6 +100,24 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
                                 "20 € / mois", "60 € / mois", "3 jours = 450",
                                 "1 170 € TTC", "300 € par tranche de 700"):
                     self.assertNotIn(retired, html)
+
+    def test_support_pdf_documents_current(self):
+        support = PAGES["support.html"]
+        home = PAGES["index.html"]
+        footer = PAGES["includes/footer.html"]
+        for filename in ("fiche-retour-materiel.pdf", "bon-livraison-retour.pdf",
+                         "protocole-confidentialite.pdf", "notice-utilisation-rapide.pdf",
+                         "etiquette-contact.pdf", "signaletique-bilingue.pdf",
+                         "guide-formation-equipes.pdf", "grille-offres-2026.pdf"):
+            path = ROOT / "documents" / "support" / filename
+            with self.subTest(pdf=filename):
+                self.assertGreater(path.stat().st_size, 2000)
+                data = path.read_bytes()
+                self.assertTrue(data.startswith(b"%PDF-"))
+                self.assertIn(b"%%EOF", data[-128:])
+                self.assertIn(filename, support)
+        self.assertIn("grille-offres-2026.pdf", home)
+        self.assertIn("grille-offres-2026.pdf", footer)
 
     def test_archival_pdf_notice(self):
         self.assertIn('data-i18n="footer_pdf_archive_notice"', PAGES["includes/footer.html"])

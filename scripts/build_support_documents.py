@@ -111,7 +111,9 @@ build('fiche-retour-materiel.pdf', 'Fiche de retour matériel', [
              'Détails : .........................................................................................................',
              '........................................................................................................................'),
     p('<b>Caution indicative :</b> 1,50 € par pochette temporairement mise à disposition. '
-      'Elle est restituée après inventaire, sous déduction des manquants ou dommages imputables au client selon le devis. '
+      'Elle est restituée après inventaire, moins les manquants ou dommages imputables au client. '
+      'Remplacement par pochette au tarif de vente unitaire du lot (5,90 / 5,50 / 4,90 EUR). '
+      'L usure normale n est pas facturée et aucune somme n est facturée deux fois. '
       'Consigner les écarts avant toute décision.'),
     Spacer(1, 8 * mm), fields(['Signature client / date', 'Responsable du contrôle'])])
 
@@ -124,15 +126,15 @@ build('bon-livraison-retour.pdf', 'Bon de livraison et retour', [
     *section('Retour du matériel',
              '1. Compter les pochettes et les aimants ; joindre la fiche de retour.',
              '2. Emballer le matériel et protéger les mécanismes de fermeture.',
-             '3. Utiliser le transporteur, le destinataire et les délais convenus au devis.',
-             '4. Conserver la preuve de dépôt et signaler les écarts au service.'),
-    fields(['Transporteur / suivi', 'Adresse de retour validée']),
+             '3. Utiliser l étiquette de retour prépayée Mondial Relay si le colis est compatible.',
+             '4. Déposer en Locker ou Point Relais adapté ; conserver la preuve de dépôt et signaler les écarts au service.'),
+    fields(['Suivi Mondial Relay aller / retour', 'Point Relais / Locker de retour']),
     p('<b>Important :</b> ce bon est une fiche d’inventaire, pas une étiquette '
       'd’affranchissement. Utiliser l’étiquette du transporteur prévue pour votre prestation.', SMALL)])
 
 build('protocole-confidentialite.pdf', 'Protocole de confidentialité', [
     p('Protocole de confidentialité', TITLE),
-    p('Modèle d’organisation à compléter avec le responsable du lieu ou de l’événement.'),
+    p('Modèle d’organisation à compléter avec le responsable du lieu ou de l’événement. La pochette ne garantit pas une confidentialité absolue.'),
     fields(['Événement / lieu', 'Zones et période concernées', 'Responsable / point d’ouverture']),
     *section('Consignes à communiquer',
              '1. Indiquer clairement les zones où les photos et vidéos sont interdites.',
@@ -198,7 +200,7 @@ build('guide-formation-equipes.pdf', 'Guide de formation des équipes', [
     p('Déroulement indicatif à adapter au lieu, au modèle choisi et aux modalités du devis.'),
     fields(['Prestation / dates', 'Responsable d’équipe', 'Point d’ouverture']),
     *section('1. Préparer le dispositif',
-             'Vérifier le stock et l’état des pochettes, les aimants et les documents prévus au devis.',
+             'Vérifier le stock et l état des pochettes, les aimants et les documents prévus au devis. Toute demande ou achat doit être anticipé de 30 jours calendaires.',
              'Identifier les zones sans photos ni vidéos, les accès et le point de sortie.',
              'Préparer la signalétique et informer les participants avant leur arrivée.'),
     *section('2. Former les personnes à l’accueil',
@@ -222,7 +224,7 @@ build('guide-formation-equipes.pdf', 'Guide de formation des équipes', [
              'Ouvrir les pochettes et vérifier que chaque participant reprend son téléphone.',
              'Collecter, compter et contrôler les pochettes et aimants.',
              'Noter les manques ou dommages sur la fiche de retour, puis faire valider le constat.',
-             'Organiser l’emballage et le retour selon le devis ; conserver les preuves utiles.'),
+             'Organiser l emballage et le retour avec l étiquette prépayée Mondial Relay si compatible ; conserver les preuves utiles.'),
     *section('Checklist de fin',
              '[  ] Téléphones récupérés par les participants',
              '[  ] Pochettes comptées et état relevé',
@@ -234,6 +236,34 @@ build('guide-formation-equipes.pdf', 'Guide de formation des équipes', [
              'notice rapide ; étiquette de contact ; signalétique bilingue.'),
     p('<b>Assistance :</b> snophone.info@gmail.com - +33 7 45 20 13 10. '
       'Préciser la référence, les dates et le lieu. Horaires selon le devis.')])
+
+# Brochure commerciale 2026 : les montants demeurent indicatifs jusqu'au devis accepté.
+build('grille-offres-2026.pdf', 'Grille des offres SecurityNoPhone 2026', [
+    p('Grille commerciale - novembre 2026', TITLE),
+    p('Les demandes doivent etre faites au moins 30 jours calendaires avant l evenement, '
+      'le debut du contrat ou la livraison souhaitee, meme pour les achats.'),
+    *section('Evenements ponctuels - une journee',
+             'Mini : 49 pochettes pour 69 EUR ; Essentiel : 97 pour 109 EUR ; '
+             'Confort : 182 pour 189 EUR ; Grand evenement : 303 pour 299 EUR ; '
+             'Prestige : 484 pour 449 EUR.'),
+    *section('Professionnels - minimum trois mois',
+             'Education : 92 pochettes / 69 EUR par mois ; Starter : 182 / 119 EUR ; '
+             'Business : 363 / 229 EUR ; Entreprise : 605 / 349 EUR. '
+             'Le client conserve les pochettes durant le contrat et les restitue ensuite.'),
+    *section('Vente definitive - minimum 50 unites',
+             '50-99 : 5,90 EUR par unite ; 100-299 : 5,50 EUR ; 300 et plus : 4,90 EUR.'),
+    *section('Logistique Mondial Relay',
+             'Pour les lots en pret, un envoi standard et un retour pre-paye sont prevus '
+             'si le colis est compatible avec le service Locker / Point Relais. '
+             'Pour les achats, livraison standard du colis confirme. Frais particuliers au devis.'),
+    *section('Caution et remplacement',
+             'Caution indicative : 1,50 EUR par pochette temporairement confiee. '
+             'Pochette manquante ou endommagee hors usure normale : prix de vente '
+             'unitaire applicable a la tranche du lot, sans double facturation avec la caution.'),
+    p('<b>Devis obligatoire :</b> les disponibilites, les frais eventuels et le prix '
+      'definitif sont confirmes avant tout engagement. Aucun paiement ne s effectue '
+      'sur le formulaire de demande.'),
+])
 
 for pdf in sorted(OUT.glob('*.pdf')):
     print(pdf.relative_to(ROOT))

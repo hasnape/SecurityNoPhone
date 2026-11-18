@@ -12,7 +12,7 @@ python3 scripts/validate_release.py
 
 Ce contrôle vérifie la syntaxe JS externe et inline, les fichiers liés et identifiants des pages du parcours principal, les clés FR/EN/DE/AR, les contrats minimaux du formulaire, les contrastes des paires communes et les tests de régression disponibles. Il produit une empreinte du contenu contrôlé dans `.release-validation/result.json` (ignoré par Git). Il échoue si un contrôle requis échoue ; ne pas supprimer un garde pour le contourner.
 
-Le contrôle source ne certifie ni le rendu, ni un navigateur mobile, ni la réception Formspree, ni les paiements, ni le contenu juridique des PDF. Les pages historiques et les validations externes restent explicitement séparées.
+Le contrôle source vérifie désormais en plus la présence et la structure PDF de huit documents opérationnels actuels (sept supports et une grille commerciale). Il ne certifie ni le rendu imprimé intégral, ni un navigateur mobile, ni la réception Formspree, ni les paiements, ni la conformité juridique des contrats/PDF d'archives. Les pages historiques et les validations externes restent explicitement séparées.
 
 ## Préférence propriétaire : publication manuelle
 
