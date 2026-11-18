@@ -123,7 +123,8 @@ rates = {
     'subscription': r"abonnement:\s*\{\s*type:\s*'subscription',\s*pricePerPack:\s*20,\s*packSize:\s*100\s*\}",
     'purchase': r"achat:\s*\{\s*type:\s*'purchase',\s*unitPrice:\s*3\.5,\s*minQuantity:\s*50\s*\}",
     'pro_quote': r"abonnement_pro:\s*\{\s*type:\s*'custom'\s*\}",
-    'rental_cap': r'quantity > 500',
+    'rental_quote_only': r"const needsQuote = offer\.type === 'rental'", 
+    'rental_min_term': r'function minimumRentalEndDate\(startValue\)',
     'starter_cap': r'quantity > 100',
     'deposit': r'return blocks \* 300;'
 }
