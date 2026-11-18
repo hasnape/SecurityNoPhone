@@ -42,6 +42,25 @@
     return Math.max(rawDays + 1, 1);
   }
 
+  // Trois mois calendaires minimum, date de retour incluse.
+  // L'anniversaire est borné au dernier jour du mois (ex. 31 janvier -> 30 avril).
+  function minimumRentalEndDate(startValue) {
+    const parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(startValue || '');
+    if (!parts) return null;
+    const year = Number(parts[1]);
+    const monthIndex = Number(parts[2]) - 1;
+    const day = Number(parts[3]);
+    const start = new Date(Date.UTC(year, monthIndex, day));
+    if (start.getUTCFullYear() !== year || start.getUTCMonth() !== monthIndex || start.getUTCDate() !== day) {
+      return null;
+    }
+    const nextMonth = monthIndex + 3;
+    const maxDay = new Date(Date.UTC(year, nextMonth + 1, 0)).getUTCDate();
+    const anniversary = new Date(Date.UTC(year, nextMonth, Math.min(day, maxDay)));
+    anniversary.setUTCDate(anniversary.getUTCDate() - 1);
+    return anniversary.toISOString().slice(0, 10);
+  }
+
   function computeCaution(offerKey, quantity) {
     const offer = OFFER_CONFIG[offerKey];
     if (!offer) {
@@ -236,6 +255,11 @@
         setDateValidity(translated('order_dates_range', 'La date de fin doit être postérieure ou égale à la date de début.'));
         return { valid: false, days: null };
       }
+      const minimumEnd = minimumRentalEndDate(startInput.value);
+      if (!minimumEnd || endInput.value < minimumEnd) {
+        setDateValidity(translated('order_dates_min_three_months', 'La location doit durer au minimum trois mois calendaires.'));
+        return { valid: false, days: null };
+      }
       setDateValidity('');
       return { valid: true, days };
     }
@@ -265,10 +289,18 @@
 
       const quantityValid = validateQuantity(offerKey);
       const quantity = getQuantity();
-      const needsQuote = (offer.type === 'rental' && quantity > 500) || (offer.type === 'subscription' && quantity > 100);
+      // Les locations >= 3 mois sont exclusivement chiffrées par devis : ne pas
+      // multiplier des tarifs journaliers par 90 jours sans conditions contractuelles.
+      const needsQuote = offer.type === 'rental' || (offer.type === 'subscription' && quantity > 100);
       if (needsQuote) {
         const datesValid = validateDates(offerKey).valid;
-        if (priceDisplay) priceDisplay.textContent = translated('quote_capacity', 'Sur devis.');
+        if (priceDisplay) {
+          priceDisplay.textContent = quantityValid && datesValid
+            ? (offer.type === 'rental'
+                ? translated('quote_rental_long_term', 'Location longue durée : devis personnalisé.')
+                : translated('quote_capacity', 'Sur devis.'))
+            : '';
+        }
         updateSummaryVisibility(summary, false);
         if (cautionBlock) cautionBlock.classList.add('d-none');
         if (totalHidden) totalHidden.value = '';
