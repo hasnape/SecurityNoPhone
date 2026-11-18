@@ -87,7 +87,7 @@ def frame(canvas, doc):
     canvas.setFont('SNF', 7)
     canvas.setFillColor(INK)
     canvas.drawString(18 * mm, 13 * mm, 'securitynophone.com | snophone.info@gmail.com | +33 7 45 20 13 10')
-    canvas.drawRightString(W - 18 * mm, 8 * mm, '29/10/2026 | ' + str(doc.page))
+    canvas.drawRightString(W - 18 * mm, 8 * mm, '18/11/2026 | ' + str(doc.page))
 
 
 def build(filename, title, story):
@@ -110,8 +110,8 @@ build('fiche-retour-materiel.pdf', 'Fiche de retour matériel', [
              '[  ] Bon état général   [  ] Matériel manquant   [  ] Matériel endommagé',
              'Détails : .........................................................................................................',
              '........................................................................................................................'),
-    p('<b>Caution :</b> 300 € par tranche de 700 pochettes pour location et abonnement. '
-      'La restitution intervient après vérification, selon les conditions du devis. '
+    p('<b>Caution indicative :</b> 1,50 € par pochette temporairement mise à disposition. '
+      'Elle est restituée après inventaire, sous déduction des manquants ou dommages imputables au client selon le devis. '
       'Consigner les écarts avant toute décision.'),
     Spacer(1, 8 * mm), fields(['Signature client / date', 'Responsable du contrôle'])])
 

@@ -1,466 +1,300 @@
-// Ne pas exposer de clés secrètes dans le front. Les chaînes type AVGPt… ou EKV-… appartiennent au serveur.
-// Regénérez les clés si elles ont été publiées.
+// SecurityNoPhone — offres publiques et validation des dates.
+// Client-side validation only: every request is rechecked manually before confirmation.
 (function () {
-  const OFFER_CONFIG = {
-    location_sans: { type: 'rental', dailyRate: 150 },
-    location_avec: {
-      type: 'rental',
-      dailyRate: 390,
-      additionalAgentDailyRate: 100,
-      maxHoursPerDay: 7
-    },
-    abonnement: { type: 'subscription', pricePerPack: 20, packSize: 100 },
-    // Pro : devis préalable. Pas d'estimation automatique d'engagement ou de renouvellement.
-    abonnement_pro: { type: 'custom' },
-    achat: { type: 'purchase', unitPrice: 3.5, minQuantity: 50 },
+  'use strict';
+  const OFFER_CONFIG = Object.freeze({
+    event_mini: { type: 'event', quantity: 49, price: 69 },
+    event_essentiel: { type: 'event', quantity: 97, price: 109 },
+    event_confort: { type: 'event', quantity: 182, price: 189 },
+    event_grand: { type: 'event', quantity: 303, price: 299 },
+    event_prestige: { type: 'event', quantity: 484, price: 449 },
+    pro_education: { type: 'professional', quantity: 92, monthlyPrice: 69, minMonths: 3 },
+    pro_starter: { type: 'professional', quantity: 182, monthlyPrice: 119, minMonths: 3 },
+    pro_business: { type: 'professional', quantity: 363, monthlyPrice: 229, minMonths: 3 },
+    pro_entreprise: { type: 'professional', quantity: 605, monthlyPrice: 349, minMonths: 3 },
+    achat: { type: 'purchase', minQuantity: 50 },
     special_event: { type: 'custom' }
-  };
+  });
+  const NOTICE_DAYS = 30;
+  const DEPOSIT_PER_POUCH = 1.50;
 
   function formatCurrency(locale, value, currency) {
     try {
-      return new Intl.NumberFormat(locale || 'fr-FR', { style: 'currency', currency: currency || 'EUR' }).format(value);
-    } catch (error) {
-      return `${value.toFixed(2)} ${currency || 'EUR'}`;
+      return new Intl.NumberFormat(locale || 'fr-FR', {
+        style: 'currency', currency: currency || 'EUR'
+      }).format(value);
+    } catch (_) {
+      return value.toFixed(2) + ' €';
     }
   }
 
-  function computeInclusiveDays(startValue, endValue) {
-    if (!startValue || !endValue) {
-      return null;
-    }
-    const start = new Date(startValue);
-    const end = new Date(endValue);
-    if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
-      return null;
-    }
-    const diff = end.getTime() - start.getTime();
-    if (diff < 0) {
-      return -1;
-    }
-    const MS_PER_DAY = 24 * 60 * 60 * 1000;
-    const rawDays = Math.ceil(diff / MS_PER_DAY);
-    return Math.max(rawDays + 1, 1);
+  // Calendar dates, deliberately processed in UTC to avoid DST issues.
+  function addCalendarDays(dateISO, days) {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateISO || '');
+    if (!match) return null;
+    const year = Number(match[1]), month = Number(match[2]) - 1, day = Number(match[3]);
+    const initial = new Date(Date.UTC(year, month, day));
+    if (initial.getUTCFullYear() !== year ||
+        initial.getUTCMonth() !== month || initial.getUTCDate() !== day) return null;
+    initial.setUTCDate(initial.getUTCDate() + days);
+    return initial.toISOString().slice(0, 10);
   }
 
-  // Trois mois calendaires minimum, date de retour incluse.
-  // L'anniversaire est borné au dernier jour du mois (ex. 31 janvier -> 30 avril).
+  function franceTodayISO() {
+    const parts = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit'
+    }).formatToParts(new Date());
+    const fields = Object.fromEntries(parts.map(part => [part.type, part.value]));
+    return fields.year + '-' + fields.month + '-' + fields.day;
+  }
+
+  function earliestRequestDate() {
+    return addCalendarDays(franceTodayISO(), NOTICE_DAYS);
+  }
+
+  // Three full calendar months, with the return date counted in the rental.
   function minimumRentalEndDate(startValue) {
-    const parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(startValue || '');
-    if (!parts) return null;
-    const year = Number(parts[1]);
-    const monthIndex = Number(parts[2]) - 1;
-    const day = Number(parts[3]);
-    const start = new Date(Date.UTC(year, monthIndex, day));
-    if (start.getUTCFullYear() !== year || start.getUTCMonth() !== monthIndex || start.getUTCDate() !== day) {
-      return null;
-    }
-    const nextMonth = monthIndex + 3;
-    const maxDay = new Date(Date.UTC(year, nextMonth + 1, 0)).getUTCDate();
-    const anniversary = new Date(Date.UTC(year, nextMonth, Math.min(day, maxDay)));
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(startValue || '');
+    if (!match) return null;
+    const year = Number(match[1]), month = Number(match[2]) - 1, day = Number(match[3]);
+    const start = new Date(Date.UTC(year, month, day));
+    if (start.getUTCFullYear() !== year || start.getUTCMonth() !== month ||
+        start.getUTCDate() !== day) return null;
+    const nextMonth = month + 3;
+    const lastDay = new Date(Date.UTC(year, nextMonth + 1, 0)).getUTCDate();
+    const anniversary = new Date(Date.UTC(year, nextMonth, Math.min(day, lastDay)));
     anniversary.setUTCDate(anniversary.getUTCDate() - 1);
     return anniversary.toISOString().slice(0, 10);
   }
 
-  function computeCaution(offerKey, quantity) {
-    const offer = OFFER_CONFIG[offerKey];
-    if (!offer) {
-      return 0;
-    }
-    if (offer.type === 'rental' || offer.type === 'subscription') {
-      const qty = Math.max(Number(quantity) || 0, 1);
-      const blocks = Math.ceil(qty / 700);
-      return blocks * 300;
-    }
-    return 0;
+  function purchaseUnitPrice(quantity) {
+    if (quantity >= 300) return 4.90;
+    if (quantity >= 100) return 5.50;
+    return 5.90;
   }
 
-  function updateSummaryVisibility(summaryEl, show, locale, days, total, currency) {
-    if (!summaryEl) {
-      return;
-    }
-    summaryEl.classList.toggle('d-none', !show);
-    if (!show) {
-      return;
-    }
-    const daysLabelEl = summaryEl.querySelector('[data-summary-days-label]');
-    const daysCountEl = summaryEl.querySelector('[data-summary-days-count]');
-    const totalLabel = summaryEl.querySelector('[data-summary-total-amount]');
-    if (daysLabelEl) {
-      const t = window.translations?.[document.documentElement.lang] || {};
-      const labelText = t.summary_duration_label || summaryEl.dataset.daysLabel || daysLabelEl.textContent || '';
-      daysLabelEl.textContent = labelText;
-    }
-    if (daysCountEl) {
-      if (days != null) {
-        const t = window.translations?.[document.documentElement.lang] || {};
-        const singular = t.order_day_singular || summaryEl.dataset.daySingular || '';
-        const plural = t.order_day_plural || summaryEl.dataset.dayPlural || singular;
-        const unit = singular || plural ? (Number(days) === 1 ? singular : plural) : '';
-        daysCountEl.textContent = unit ? `${days} ${unit}` : String(days);
-      } else {
-        daysCountEl.textContent = '—';
-      }
-    }
-    if (totalLabel) {
-      totalLabel.textContent = total != null ? formatCurrency(locale, total, currency) : '—';
-    }
+  function replacementUnitPrice(quantity) {
+    return purchaseUnitPrice(quantity);
   }
 
-  function updateSummaryBreakdown(summaryEl, locale, currency, breakdown) {
-    if (!summaryEl) {
-      return;
+  function showElement(element, visible) {
+    if (!element) return;
+    element.classList.toggle('d-none', !visible);
+    element.querySelectorAll('input, select, textarea').forEach(input => {
+      input.disabled = !visible;
+      if (!visible) input.setCustomValidity('');
+    });
+  }
+
+  function showError(input, container, message) {
+    if (input) {
+      input.setCustomValidity(message || '');
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
     }
-    const baseEl = summaryEl.querySelector('[data-summary-base]');
-    const extraAgentsEl = summaryEl.querySelector('[data-summary-extra-agents]');
-    const travelEl = summaryEl.querySelector('[data-summary-travel]');
-    const lodgingEl = summaryEl.querySelector('[data-summary-lodging]');
-    const cautionEl = summaryEl.querySelector('[data-summary-caution]');
-
-    if (baseEl) baseEl.textContent = formatCurrency(locale, breakdown.base || 0, currency);
-    if (extraAgentsEl) extraAgentsEl.textContent = formatCurrency(locale, breakdown.extraAgents || 0, currency);
-    if (travelEl) travelEl.textContent = formatCurrency(locale, breakdown.travel || 0, currency);
-    if (lodgingEl) lodgingEl.textContent = formatCurrency(locale, breakdown.lodging || 0, currency);
-    if (cautionEl) cautionEl.textContent = formatCurrency(locale, breakdown.caution || 0, currency);
-
-    const extraAgentsRow = summaryEl.querySelector('[data-summary-extra-agents-row]');
-    if (extraAgentsRow) extraAgentsRow.classList.toggle('d-none', !(breakdown.extraAgents > 0));
-    const travelRow = summaryEl.querySelector('[data-summary-travel-row]');
-    if (travelRow) travelRow.classList.toggle('d-none', !(breakdown.travel > 0));
-    const lodgingRow = summaryEl.querySelector('[data-summary-lodging-row]');
-    if (lodgingRow) lodgingRow.classList.toggle('d-none', !(breakdown.lodging > 0));
+    if (container) {
+      container.textContent = message || '';
+      container.style.display = message ? 'block' : 'none';
+    }
   }
 
   function initOrderForm(form) {
-    let locale = document.documentElement.getAttribute('lang') || form.dataset.locale || 'fr-FR';
-    function translated(key, fallback) {
-      return window.translations?.[document.documentElement.lang]?.[key] || fallback;
-    }
-    const currency = (form.dataset.currency || 'EUR').toUpperCase();
-
-    const offerSelect = form.querySelector('#offerType, [name="offre"]');
-    const quantityInput = form.querySelector('#quantity, [name="quantite"]');
+    const offerSelect = form.querySelector('#offerType');
+    const quantityInput = form.querySelector('#quantity');
+    const targetGroup = form.querySelector('[data-event-purchase-date]');
+    const targetInput = form.querySelector('[data-requested-date]');
+    const targetError = form.querySelector('[data-requested-date-error]');
+    const rentalGroup = form.querySelector('[data-rental-fields]');
     const startInput = form.querySelector('[data-start-date]');
     const endInput = form.querySelector('[data-end-date]');
-    const rentalFields = form.querySelector('[data-rental-fields]');
-    const agentOptions = form.querySelector('[data-agent-options]');
-    const additionalAgentsInput = form.querySelector('#additionalAgents, [name="agents_supplementaires"]');
-    const outsideRhoneInput = form.querySelector('#outsideRhone, [name="deplacement_hors_rhone"]');
-    const lodgingInput = form.querySelector('#lodgingRequired, [name="logement_requis"]');
-    const summary = form.querySelector('[data-summary]');
+    const dateError = form.querySelector('#dateError');
+    const quantityError = form.querySelector('#quantityError');
+    const agentGroup = form.querySelector('[data-agent-options]');
     const priceDisplay = form.querySelector('[data-total-display]');
-    const priceTemplate = priceDisplay ? (priceDisplay.dataset.template || priceDisplay.textContent || 'Total: {price}') : 'Total: {price}';
-    const customMessage = form.dataset.customMessage || '';
-    const quantityError = form.querySelector('#quantityError, [data-quantity-error]');
-    const dateError = form.querySelector('#dateError, [data-date-error]');
-    const cautionBlock = form.querySelector('[data-caution-block]');
+    const cautionGroup = form.querySelector('[data-caution-block]');
     const cautionDisplay = form.querySelector('[data-caution-display]');
     const totalHidden = form.querySelector('[data-total-value]');
     const cautionHidden = form.querySelector('[data-caution-value]');
+    const replacementHidden = form.querySelector('[data-replacement-price]');
+    const summary = form.querySelector('[data-summary]');
+    const currency = form.dataset.currency || 'EUR';
+    let currentOffer = null;
 
-    function showElement(element, show) {
-      if (!element) {
-        return;
-      }
-      element.classList.toggle('d-none', !show);
-      element.querySelectorAll('input, select, textarea').forEach(input => {
-        if (show) {
-          input.removeAttribute('disabled');
-        } else {
-          input.setAttribute('disabled', 'disabled');
+    function translate(key, fallback) {
+      return window.translations?.[document.documentElement.lang]?.[key] || fallback;
+    }
+
+    function format(value) {
+      return formatCurrency(document.documentElement.lang || 'fr-FR', value, currency);
+    }
+
+    function validateDates(offer) {
+      const earliest = earliestRequestDate();
+      if (targetInput) targetInput.min = earliest;
+      if (startInput) startInput.min = earliest;
+      if (endInput) endInput.min = startInput?.value
+        ? (minimumRentalEndDate(startInput.value) || earliest) : earliest;
+      showError(targetInput, targetError, '');
+      showError(endInput, dateError, '');
+      if (startInput) startInput.setCustomValidity('');
+
+      if (offer.type === 'professional') {
+        const start = startInput?.value || '';
+        const end = endInput?.value || '';
+        if (!start || !end) {
+          showError(endInput, dateError, translate('order_dates_missing',
+            'Indiquez les dates de début et de fin.'));
+          return false;
         }
-      });
-    }
-
-    function setQuantityValidity(message) {
-      if (!quantityInput) {
-        return;
-      }
-      quantityInput.setCustomValidity(message ? String(message) : '');
-      quantityInput.setAttribute('aria-invalid', message ? 'true' : 'false');
-      if (quantityError) {
-        quantityError.textContent = message || '';
-        quantityError.style.display = message ? 'block' : 'none';
-      }
-    }
-
-    function setDateValidity(message) {
-      if (!endInput) {
-        return;
-      }
-      endInput.setCustomValidity(message ? String(message) : '');
-      endInput.setAttribute('aria-invalid', message ? 'true' : 'false');
-      if (dateError) {
-        dateError.textContent = message || '';
-        dateError.style.display = message ? 'block' : 'none';
-      }
-    }
-
-    function getQuantity() {
-      const raw = Number.parseInt(quantityInput && quantityInput.value, 10);
-      return Number.isNaN(raw) ? 0 : raw;
-    }
-
-    function getAdditionalAgents() {
-      if (!additionalAgentsInput) {
-        return 0;
-      }
-      const raw = Number.parseInt(additionalAgentsInput.value, 10);
-      return Number.isNaN(raw) ? 0 : Math.max(raw, 0);
-    }
-
-    function validateQuantity(offerKey) {
-      const offer = OFFER_CONFIG[offerKey];
-      if (!offer || !quantityInput) {
-        setQuantityValidity('');
+        if (!addCalendarDays(start, 0) || start < earliest) {
+          const message = translate('booking_too_soon',
+            'Date trop proche : prévoir au moins 30 jours calendaires.');
+          showError(startInput, dateError, message);
+          return false;
+        }
+        if (!addCalendarDays(end, 0) || end < start) {
+          showError(endInput, dateError, translate('order_dates_range',
+            'La date de fin doit être après le début.'));
+          return false;
+        }
+        const minEnd = minimumRentalEndDate(start);
+        if (!minEnd || end < minEnd) {
+          showError(endInput, dateError, translate('order_dates_min_three_months',
+            'Location : trois mois calendaires minimum.'));
+          return false;
+        }
         return true;
       }
-      const qty = getQuantity();
-      let message = '';
-      if (!quantityInput.validity.badInput && (!Number.isInteger(Number(quantityInput.value)) || qty < 1)) {
-        message = translated('order_quantity_invalid', 'Indiquez un nombre entier de pochettes.');
-      }
-      if (offer.type === 'rental' && qty < 1) {
-        message = quantityInput.dataset.msgMinRental || 'Indiquez au moins une pochette.';
-      }
-      if (offer.type === 'purchase' && qty < (offer.minQuantity || 0)) {
-        message = quantityInput.dataset.msgMinCustom || `Minimum ${offer.minQuantity}`;
-      }
-      if (offer.type === 'subscription') {
-        if (qty < 1) {
-          message = quantityInput.dataset.msgMinSubscription || 'Indiquez au moins une pochette.';
-        } else if (offer.maxQuantity && qty > offer.maxQuantity) {
-          message = quantityInput.dataset.msgMaxSubscription || '';
-        }
-      }
-      if (message) message = translated('order_quantity_invalid', message);
-      setQuantityValidity(message);
-      return message === '';
-    }
 
-    function validateDates(offerKey) {
-      if (!startInput || !endInput) {
-        return { valid: true, days: null };
-      }
-      const offer = OFFER_CONFIG[offerKey];
-      if (!offer || offer.type !== 'rental') {
-        setDateValidity('');
-        return { valid: true, days: null };
-      }
-      if (!startInput.value || !endInput.value) {
-        setDateValidity(translated('order_dates_missing', 'Veuillez indiquer les dates de début et de fin.'));
-        return { valid: false, days: null };
-      }
-      const days = computeInclusiveDays(startInput.value, endInput.value);
-      if (days === -1 || days === null) {
-        setDateValidity(translated('order_dates_range', 'La date de fin doit être postérieure ou égale à la date de début.'));
-        return { valid: false, days: null };
-      }
-      const minimumEnd = minimumRentalEndDate(startInput.value);
-      if (!minimumEnd || endInput.value < minimumEnd) {
-        setDateValidity(translated('order_dates_min_three_months', 'La location doit durer au minimum trois mois calendaires.'));
-        return { valid: false, days: null };
-      }
-      setDateValidity('');
-      return { valid: true, days };
-    }
-
-    function computeTotals() {
-      const offerKey = offerSelect ? offerSelect.value : '';
-      const offer = OFFER_CONFIG[offerKey];
-      const isRental = offer?.type === 'rental';
-      showElement(rentalFields, isRental);
-      showElement(agentOptions, offerKey === 'location_avec');
-      if (startInput) startInput.required = isRental;
-      if (endInput) endInput.required = isRental;
-      if (!isRental) setDateValidity('');
-      if (!offer) {
-        setQuantityValidity('');
-        updateSummaryVisibility(summary, false);
-        if (priceDisplay) {
-          priceDisplay.textContent = formatCurrency(locale, 0, currency);
-        }
-        if (cautionBlock) {
-          cautionBlock.classList.add('d-none');
-        }
-        if (totalHidden) totalHidden.value = '0';
-        if (cautionHidden) cautionHidden.value = '0';
-        return;
-      }
-
-      const quantityValid = validateQuantity(offerKey);
-      const quantity = getQuantity();
-      // Les locations >= 3 mois sont exclusivement chiffrées par devis : ne pas
-      // multiplier des tarifs journaliers par 90 jours sans conditions contractuelles.
-      const needsQuote = offer.type === 'rental' || (offer.type === 'subscription' && quantity > 100);
-      if (needsQuote) {
-        const datesValid = validateDates(offerKey).valid;
-        if (priceDisplay) {
-          priceDisplay.textContent = quantityValid && datesValid
-            ? (offer.type === 'rental'
-                ? translated('quote_rental_long_term', 'Location longue durée : devis personnalisé.')
-                : translated('quote_capacity', 'Sur devis.'))
-            : '';
-        }
-        updateSummaryVisibility(summary, false);
-        if (cautionBlock) cautionBlock.classList.add('d-none');
-        if (totalHidden) totalHidden.value = '';
-        if (cautionHidden) cautionHidden.value = '';
-        return quantityValid && datesValid;
-      }
-      const caution = computeCaution(offerKey, quantity);
-
-      let total = 0;
-      let daysInfo = { valid: true, days: null };
-      let summaryDays = null;
-      let base = 0;
-      let extraAgentsCost = 0;
-      let travelFee = 0;
-      let lodgingFee = 0;
-
-      switch (offer.type) {
-        case 'rental': {
-          daysInfo = validateDates(offerKey);
-          const days = daysInfo.days || 1;
-          summaryDays = days;
-          base = (offer.dailyRate || 0) * days;
-          if (offerKey === 'location_avec') {
-            const additionalAgents = getAdditionalAgents();
-            extraAgentsCost = additionalAgents * (offer.additionalAgentDailyRate || 0) * days;
-            travelFee = outsideRhoneInput && outsideRhoneInput.checked ? 80 : 0;
-            if (lodgingInput && lodgingInput.checked) {
-              lodgingFee = (1 + additionalAgents) * 80 * days;
-            }
-          }
-          total = base + extraAgentsCost + travelFee + lodgingFee;
-          break;
-        }
-        case 'subscription': {
-          const qty = Math.max(quantity, 0);
-          const packs = Math.max(Math.ceil(qty / (offer.packSize || 1)), 0);
-          total = packs * (offer.pricePerPack || 0);
-          break;
-        }
-        case 'purchase': {
-          total = Math.max(quantity, 0) * (offer.unitPrice || 0);
-          break;
-        }
-        case 'custom':
-          total = 0;
-          break;
-        default:
-          total = 0;
-      }
-
-      const grandTotal = total + caution;
-
-      // An incomplete rental must not show a default one-day price as a quote.
-      if (!quantityValid || !daysInfo.valid) {
-        if (priceDisplay) priceDisplay.textContent = '';
-        updateSummaryVisibility(summary, false);
-        if (cautionBlock) cautionBlock.classList.add('d-none');
-        if (totalHidden) totalHidden.value = '';
-        if (cautionHidden) cautionHidden.value = '';
+      const requested = targetInput?.value || '';
+      if (!requested || !addCalendarDays(requested, 0)) {
+        showError(targetInput, targetError, translate('booking_date_required',
+          'Indiquez votre date d’événement ou de livraison souhaitée.'));
         return false;
       }
-
-      if (priceDisplay) {
-        if (offer.type === 'custom' && customMessage) {
-          priceDisplay.textContent = translated('quote_capacity', customMessage);
-        } else {
-          const label = translated('summary_total_label', '');
-          priceDisplay.textContent = label
-            ? `${label} : ${formatCurrency(locale, grandTotal, currency)}`
-            : priceTemplate.replace('{price}', formatCurrency(locale, grandTotal, currency));
-        }
+      if (requested < earliest) {
+        showError(targetInput, targetError, translate('booking_too_soon',
+          'Date trop proche : prévoir au moins 30 jours calendaires.'));
+        return false;
       }
+      return true;
+    }
 
-      const summaryValue = summaryDays != null ? summaryDays : daysInfo.days;
-      const fallbackDays = offer.type === 'rental' ? 1 : 1;
-      const showSummary = offer.type === 'rental';
-      updateSummaryVisibility(summary, showSummary, locale, summaryValue != null ? summaryValue : fallbackDays, grandTotal, currency);
-      if (showSummary) {
-        updateSummaryBreakdown(summary, locale, currency, {
-          base,
-          extraAgents: extraAgentsCost,
-          travel: travelFee,
-          lodging: lodgingFee,
-          caution
-        });
+    function validateQuantity(offer, quantity) {
+      let message = '';
+      if (!Number.isInteger(quantity) || quantity < 1) {
+        message = translate('order_quantity_invalid', 'Indiquez un nombre entier de pochettes.');
+      } else if (offer.quantity && quantity !== offer.quantity) {
+        message = translate('booking_package_fixed', 'Ce forfait comporte une quantité fixe.');
+      } else if (offer.type === 'purchase' && quantity < 50) {
+        message = translate('booking_purchase_minimum', 'Achat : minimum 50 pochettes.');
       }
-
-      if (cautionBlock) {
-        const shouldShow = caution > 0;
-        cautionBlock.classList.toggle('d-none', !shouldShow);
-        if (cautionDisplay) {
-          cautionDisplay.value = formatCurrency(locale, caution, currency);
-        }
-      }
-
-      if (totalHidden) {
-        totalHidden.value = grandTotal.toFixed(2);
-      }
-      if (cautionHidden) {
-        cautionHidden.value = caution.toFixed(2);
-      }
-
-      const summaryFieldsActive = offer.type === 'rental';
-      showElement(rentalFields, summaryFieldsActive);
-      showElement(agentOptions, offerKey === 'location_avec');
-
-      return quantityValid && daysInfo.valid;
+      showError(quantityInput, quantityError, message);
+      return !message;
     }
 
     function refresh() {
-      computeTotals();
+      const offer = OFFER_CONFIG[offerSelect?.value];
+      const professional = offer?.type === 'professional';
+      const dated = !!offer && !professional;
+      showElement(rentalGroup, professional);
+      showElement(targetGroup, dated);
+      showElement(agentGroup, offer?.type === 'custom');
+      if (startInput) startInput.required = professional;
+      if (endInput) endInput.required = professional;
+      if (targetInput) targetInput.required = dated;
+      if (summary) summary.classList.add('d-none');
+
+      if (offerSelect?.value !== currentOffer) {
+        currentOffer = offerSelect?.value || null;
+        if (offer?.quantity && quantityInput) quantityInput.value = String(offer.quantity);
+        else if (offer?.type === 'purchase' && quantityInput) quantityInput.value = '50';
+        if (quantityInput) quantityInput.readOnly = !!offer?.quantity;
+      }
+
+      if (!offer) {
+        showError(quantityInput, quantityError, '');
+        showError(targetInput, targetError, '');
+        showError(endInput, dateError, '');
+        if (startInput) startInput.setCustomValidity('');
+        if (priceDisplay) priceDisplay.textContent = '';
+        if (cautionGroup) cautionGroup.classList.add('d-none');
+        if (totalHidden) totalHidden.value = '';
+        if (cautionHidden) cautionHidden.value = '';
+        if (replacementHidden) replacementHidden.value = '';
+        return false;
+      }
+
+      const quantity = Number(quantityInput?.value);
+      const quantityOk = validateQuantity(offer, quantity);
+      const datesOk = validateDates(offer);
+      const valid = quantityOk && datesOk;
+      const caution = offer.type === 'event' || offer.type === 'professional'
+        ? quantity * DEPOSIT_PER_POUCH : 0;
+      const replacement = replacementUnitPrice(quantity);
+      let total = null;
+      let label = '';
+      if (offer.type === 'event') {
+        total = offer.price;
+        label = translate('booking_event_estimate', 'Tarif événement : {price} (caution distincte)')
+          .replace('{price}', format(total));
+      } else if (offer.type === 'professional') {
+        total = offer.monthlyPrice * offer.minMonths;
+        label = translate('booking_pro_estimate',
+          '{monthly} / mois ; minimum 3 mois : {total}, hors caution')
+          .replace('{monthly}', format(offer.monthlyPrice))
+          .replace('{total}', format(total));
+      } else if (offer.type === 'purchase') {
+        total = quantity * purchaseUnitPrice(quantity);
+        label = translate('booking_purchase_estimate',
+          'Achat : {unit}/unité, total indicatif {total}, sur devis')
+          .replace('{unit}', format(purchaseUnitPrice(quantity)))
+          .replace('{total}', format(total));
+      } else {
+        label = translate('offer_quote_only', 'Sur devis, sans réservation immédiate.');
+      }
+
+      if (priceDisplay) priceDisplay.textContent = valid ? label : '';
+      if (cautionGroup) cautionGroup.classList.toggle('d-none', !valid || caution <= 0);
+      if (cautionDisplay && valid) cautionDisplay.value = format(caution);
+      // For professional contracts this is only a 3-month reference, not a final
+      // total for arbitrarily longer requested periods. Quote determines final total.
+      if (totalHidden) totalHidden.value = valid && total != null && offer.type !== 'professional'
+        ? total.toFixed(2) : '';
+      if (cautionHidden) cautionHidden.value = valid ? caution.toFixed(2) : '';
+      if (replacementHidden) replacementHidden.value =
+        valid && caution > 0 ? replacement.toFixed(2) : '';
+      return valid;
     }
 
     function applyOfferFromLink() {
-      const offersByHash = {
-        rental: 'location_avec', autonomous: 'location_sans',
-        custom: 'achat', abonnement: 'abonnement', pro: 'abonnement_pro', special: 'special_event'
+      const hash = window.location.hash.slice(1);
+      const legacy = {
+        rental: 'pro_business', autonomous: 'pro_education',
+        abonnement: 'pro_starter', pro: 'pro_business',
+        custom: 'achat', special: 'special_event'
       };
-      const selected = offersByHash[window.location.hash.slice(1)];
-      if (selected && offerSelect) offerSelect.value = selected;
+      const offerKey = legacy[hash] || (OFFER_CONFIG[hash] ? hash : '');
+      if (offerKey && offerSelect) offerSelect.value = offerKey;
       refresh();
     }
-    window.addEventListener('hashchange', applyOfferFromLink);
-    document.addEventListener('language:changed', () => {
-      locale = document.documentElement.lang;
-      refresh();
-    });
 
-    if (offerSelect) {
-      offerSelect.addEventListener('change', refresh);
-    }
-    if (quantityInput) {
-      quantityInput.addEventListener('input', refresh);
-    }
-    if (additionalAgentsInput) {
-      additionalAgentsInput.addEventListener('input', refresh);
-    }
-    if (outsideRhoneInput) {
-      outsideRhoneInput.addEventListener('change', refresh);
-    }
-    if (lodgingInput) {
-      lodgingInput.addEventListener('change', refresh);
-    }
-    if (startInput) {
-      startInput.addEventListener('change', refresh);
-    }
-    if (endInput) {
-      endInput.addEventListener('change', refresh);
-    }
+    offerSelect?.addEventListener('change', refresh);
+    quantityInput?.addEventListener('input', refresh);
+    targetInput?.addEventListener('change', refresh);
+    startInput?.addEventListener('change', refresh);
+    endInput?.addEventListener('change', refresh);
+    form.querySelectorAll('[data-agent-options] input').forEach(input =>
+      input.addEventListener('change', refresh));
+    window.addEventListener('hashchange', applyOfferFromLink);
+    document.addEventListener('language:changed', refresh);
     form.addEventListener('submit', event => {
-      const valid = computeTotals();
-      if (!valid || !form.checkValidity()) {
+      if (!refresh() || !form.checkValidity()) {
         event.preventDefault();
         form.reportValidity();
       }
     });
-
     applyOfferFromLink();
   }
-
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-order-form]').forEach(initOrderForm);
   });

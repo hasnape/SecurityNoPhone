@@ -106,10 +106,13 @@ parsed.feed(order)
 form = next((f for f in parsed.forms if f.get('id') == 'orderForm'), {})
 if form.get('action') != 'https://formspree.io/f/xqaqogdv' or form.get('method', '').upper() != 'POST':
     errors.append('Primary form transport contract changed')
-for value in ['location_sans', 'location_avec', 'abonnement', 'abonnement_pro', 'achat', 'special_event']:
+for value in ['event_mini', 'event_essentiel', 'event_confort', 'event_grand',
+              'event_prestige', 'pro_education', 'pro_starter', 'pro_business',
+              'pro_entreprise', 'achat', 'special_event']:
     if f'value="{value}"' not in order:
         errors.append('Offer missing: ' + value)
-for name in ['offre', 'quantite', 'date_debut', 'date_fin', 'nom', 'email', 'adresse', '_gotcha', 'montant_total_estime', 'caution_total']:
+
+for name in ['offre', 'quantite', 'date_debut', 'date_fin', 'date_souhaitee', 'nom', 'email', 'adresse', '_gotcha', 'montant_total_estime', 'caution_total', 'tarif_remplacement_unitaire']:
     if f'name="{name}"' not in order:
         errors.append('Form field removed: ' + name)
 logo = hashlib.sha256((ROOT / 'images/IMG_20250421_182622-removebg-preview.png').read_bytes()).hexdigest()
@@ -118,20 +121,23 @@ if logo != 'd685886681a35b5fdfa8b5d628eb290371614d5d417ba7349991afa7be6d9531':
 checks.append('Form endpoint, fields, offers and logo contracts')
 calculator = (ROOT / 'js/order-form.js').read_text()
 rates = {
-    'autonomous': r"location_sans:\s*\{\s*type:\s*'rental',\s*dailyRate:\s*150\s*\}",
-    'staff': r"location_avec:\s*\{\s*type:\s*'rental',\s*dailyRate:\s*390,\s*additionalAgentDailyRate:\s*100",
-    'subscription': r"abonnement:\s*\{\s*type:\s*'subscription',\s*pricePerPack:\s*20,\s*packSize:\s*100\s*\}",
-    'purchase': r"achat:\s*\{\s*type:\s*'purchase',\s*unitPrice:\s*3\.5,\s*minQuantity:\s*50\s*\}",
-    'pro_quote': r"abonnement_pro:\s*\{\s*type:\s*'custom'\s*\}",
-    'rental_quote_only': r"const needsQuote = offer\.type === 'rental'", 
-    'rental_min_term': r'function minimumRentalEndDate\(startValue\)',
-    'starter_cap': r'quantity > 100',
-    'deposit': r'return blocks \* 300;'
+    'event_mini': r"event_mini:\s*\{\s*type:\s*'event',\s*quantity:\s*49,\s*price:\s*69\s*\}",
+    'event_prestige': r"event_prestige:\s*\{\s*type:\s*'event',\s*quantity:\s*484,\s*price:\s*449\s*\}",
+    'pro_education': r"pro_education:\s*\{\s*type:\s*'professional',\s*quantity:\s*92,\s*monthlyPrice:\s*69,\s*minMonths:\s*3\s*\}",
+    'pro_entreprise': r"pro_entreprise:\s*\{\s*type:\s*'professional',\s*quantity:\s*605,\s*monthlyPrice:\s*349,\s*minMonths:\s*3\s*\}",
+    'purchase_minimum': r"achat:\s*\{\s*type:\s*'purchase',\s*minQuantity:\s*50\s*\}",
+    'notice_days': r'const NOTICE_DAYS = 30;',
+    'stock_deposit': r'const DEPOSIT_PER_POUCH = 1\.50;',
+    'purchase_tiers': r'function purchaseUnitPrice\(quantity\)',
+    'dates_start': r'function earliestRequestDate\(\)',
+    'dates_duration': r'function minimumRentalEndDate\(startValue\)',
+    'target_date_required': r'targetInput\.required = dated',
+    'three_month_date_required': r'endInput\.required = professional',
 }
 for label, pattern in rates.items():
     if not re.search(pattern, calculator):
         errors.append('Pricing baseline changed: ' + label)
-checks.append('Existing pricing and deposit configuration contracts')
+checks.append('Approved offer prices, advance notice and refundable deposits')
 
 
 def luminance(color):
