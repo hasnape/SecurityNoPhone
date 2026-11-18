@@ -266,7 +266,7 @@ function setupAnnouncementBanner() {
 }
 
 function loadNavbar() {
-  fetch("includes/navbar.html")
+  fetch("includes/navbar.html?v=20261118-final-v2")
     .then(res => {
       if (!res.ok) {
         throw new Error(`Failed to load navbar.html: ${res.status} ${res.statusText}`);
@@ -291,7 +291,7 @@ function loadNavbar() {
 }
 
 function loadFooter() {
-  fetch("includes/footer.html")
+  fetch("includes/footer.html?v=20261118-final-v2")
     .then(res => {
       if (!res.ok) {
         throw new Error(`Failed to load footer.html: ${res.status} ${res.statusText}`);
@@ -328,7 +328,7 @@ async function initializePage() {
   document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
   const navbarPromise = new Promise((resolve, reject) => {
-    fetch("includes/navbar.html")
+    fetch("includes/navbar.html?v=20261118-final-v2")
       .then(res => {
         if (!res.ok) throw new Error(`Failed to load navbar.html: ${res.status}`);
         return res.text();
@@ -350,7 +350,7 @@ async function initializePage() {
   });
 
   const footerPromise = new Promise((resolve, reject) => {
-    fetch("includes/footer.html")
+    fetch("includes/footer.html?v=20261118-final-v2")
       .then(res => {
         if (!res.ok) throw new Error(`Failed to load footer.html: ${res.status}`);
         return res.text();
