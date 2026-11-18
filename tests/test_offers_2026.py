@@ -73,6 +73,18 @@ class CommercialOffers2026(unittest.TestCase):
             self.assertIn("20", TRANSLATIONS[lang]["pricing_subscription_price"])
             self.assertIn("60", TRANSLATIONS[lang]["pricing_pro_price"])
 
+    def test_minimum_three_months_on_public_pages(self):
+        for name in ("index.html", "support.html", "cgv.html"):
+            with self.subTest(page=name):
+                self.assertIn('data-i18n="pricing_rental_terms_note"', PAGES[name])
+        self.assertIn('data-i18n="rental_min_term_info"', PAGES["commande.html"])
+        for name in ("index.html", "commande.html"):
+            self.assertNotIn("3 jours = 450", PAGES[name])
+            self.assertNotIn("3 jours = 1 170", PAGES[name])
+        for lang in ("fr", "en", "de", "ar"):
+            for key in ("rental_min_term_info", "order_dates_min_three_months", "pricing_rental_terms_note", "quote_rental_long_term"):
+                self.assertTrue(TRANSLATIONS[lang].get(key), (lang, key))
+
     def test_current_script_cache_across_all_pages(self):
         pages = ("index", "solutions", "accompagnement", "experience", "clients",
                  "secteurs", "contact", "blog", "ressources", "support", "commande",
@@ -90,7 +102,9 @@ class CommercialOffers2026(unittest.TestCase):
         self.assertIn('commande.html#pro', PAGES["index.html"])
         self.assertIn("abonnement_pro: { type: 'custom' }", PAGES["js/order-form.js"])
         self.assertIn("pro: 'abonnement_pro'", PAGES["js/order-form.js"])
-        self.assertIn("quantity > 500", PAGES["js/order-form.js"])
+        self.assertIn("offer.type === 'rental'", PAGES["js/order-form.js"])
+        self.assertIn("minimumRentalEndDate", PAGES["js/order-form.js"])
+        self.assertIn("order_dates_min_three_months", PAGES["js/order-form.js"])
         self.assertIn("quantity > 100", PAGES["js/order-form.js"])
 
     def test_existing_form_and_rates_untouched(self):
