@@ -846,7 +846,8 @@ window.translations = {
     "offer_pro_entreprise": "Entreprise — 605 pochettes — 349 €/mois",
     "offer_purchase": "Achat définitif — dès 50 pochettes",
     "offer_custom_staff": "Accompagnement avec agent — sur devis",
-    "mondial_pickup_deadline": "Mondial Relay : une fois le colis arrivé, vous disposez normalement de 5 jours calendaires pour le retirer en Locker ou Point Relais en France. Vérifiez le message de disponibilité ; si le colis n'est pas retiré, il peut revenir à l'expéditeur."
+    "mondial_pickup_deadline": "Mondial Relay : une fois le colis arrivé, vous disposez normalement de 5 jours calendaires pour le retirer en Locker ou Point Relais en France. Vérifiez le message de disponibilité ; si le colis n'est pas retiré, il peut revenir à l'expéditeur.",
+    "support_pdf_reference_notice": "Ces PDF sont conservés comme supports pratiques historiques. Pour les tarifs, cautions, délais et réservations, seule la grille actuelle et le devis accepté font référence en cas de divergence."
   },
   "en": {
     "auto_key_1": "SecurityNoPhone",
@@ -1695,7 +1696,8 @@ window.translations = {
     "offer_pro_entreprise": "Enterprise — 605 pouches — €349/month",
     "offer_purchase": "Outright purchase — from 50 pouches",
     "offer_custom_staff": "On-site staff service — quote only",
-    "mondial_pickup_deadline": "Mondial Relay: after arrival in France you normally have 5 calendar days to collect a parcel from a Locker or pickup point. Check your collection notice; uncollected parcels may be returned."
+    "mondial_pickup_deadline": "Mondial Relay: after arrival in France you normally have 5 calendar days to collect a parcel from a Locker or pickup point. Check your collection notice; uncollected parcels may be returned.",
+    "support_pdf_reference_notice": "These PDFs are retained as historical practical guides. Current offers and the accepted quote take precedence for prices, deposits, lead times and bookings."
   },
   "de": {
     "auto_key_1": "SecurityNoPhone",
@@ -2541,7 +2543,8 @@ window.translations = {
     "offer_pro_entreprise": "Unternehmen — 605 Hüllen — 349 €/Monat",
     "offer_purchase": "Endgültiger Kauf — ab 50 Hüllen",
     "offer_custom_staff": "Personal vor Ort — auf Anfrage",
-    "mondial_pickup_deadline": "Mondial Relay: Nach Ankunft in Frankreich stehen in der Regel 5 Kalendertage zur Abholung am Locker oder Abholpunkt zur Verfügung. Bitte Benachrichtigung prüfen; nicht abgeholte Pakete können zurückgehen."
+    "mondial_pickup_deadline": "Mondial Relay: Nach Ankunft in Frankreich stehen in der Regel 5 Kalendertage zur Abholung am Locker oder Abholpunkt zur Verfügung. Bitte Benachrichtigung prüfen; nicht abgeholte Pakete können zurückgehen.",
+    "support_pdf_reference_notice": "Diese PDFs bleiben als ältere Praxisleitfäden verfügbar. Bei Preisen, Kaution, Vorlauf und Buchung gelten die aktuellen Angebote und das angenommene Angebot."
   },
   "ar": {
     "auto_key_1": "سيكيوريتي نو فون",
@@ -3386,6 +3389,7 @@ window.translations = {
     "offer_pro_entreprise": "شركات — 605 حافظة — 349 € شهريًا",
     "offer_purchase": "شراء نهائي — من 50 حافظة",
     "offer_custom_staff": "مساعدة بموظف — حسب العرض",
-    "mondial_pickup_deadline": "Mondial Relay: بعد وصول الطرد في فرنسا لديك عادة 5 أيام تقويمية لاستلامه من الخزانة أو نقطة الاستلام. راجع إشعار الوصول؛ قد يعاد الطرد إذا لم يُستلم."
+    "mondial_pickup_deadline": "Mondial Relay: بعد وصول الطرد في فرنسا لديك عادة 5 أيام تقويمية لاستلامه من الخزانة أو نقطة الاستلام. راجع إشعار الوصول؛ قد يعاد الطرد إذا لم يُستلم.",
+    "support_pdf_reference_notice": "تُحفظ ملفات PDF كأدلة عملية سابقة. عند اختلاف الأسعار أو التأمين أو المواعيد، يُعتمد جدول الأسعار الحالي وعرض السعر المقبول."
   }
 };
