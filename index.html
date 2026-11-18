@@ -56,14 +56,14 @@
         {
           "@type": "Offer",
           "name": "Location autonome",
-          "description": "Location de pochettes anti-smartphone sans personnel, jusqu'à 500 pochettes",
+          "description": "Location de pochettes sans personnel, jusqu'à 500 unités, durée minimale de 3 mois calendaires ; prix journalier indicatif, devis obligatoire",
           "price": "150",
           "priceCurrency": "EUR"
         },
         {
           "@type": "Offer",
           "name": "Location clé-en-main avec personnel",
-          "description": "Location de pochettes anti-smartphone avec chef de projet SecurityNoPhone, jusqu'à 500 pochettes",
+          "description": "Location avec personnel, jusqu'à 500 pochettes, durée minimale de 3 mois calendaires ; jours de présence et prix global à définir au devis",
           "price": "390",
           "priceCurrency": "EUR"
         },
@@ -138,7 +138,7 @@
       <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
           <h2 class="section-title" data-i18n="pricing_title">Tarifs &amp; Quantités</h2>
-          <p class="section-subtitle" data-i18n="pricing_subtitle">Des tarifs clairs, des quantités incluses explicites et des exemples pour 3 jours.</p>
+          <p class="section-subtitle" data-i18n="pricing_subtitle">Des tarifs indicatifs et des quantités explicites. Location de trois mois minimum : le client garde les pochettes pendant la période convenue.</p>
         </div>
 
         <!-- Pricing cards (visual overview) -->
@@ -150,7 +150,7 @@
               <p class="pricing-price my-2" data-i18n="pricing_rental_staff_price">390 € TTC / jour</p>
               <ul class="list-unstyled small text-muted flex-grow-1">
                 <li>📦 <span data-i18n="pricing_rental_staff_qty">Jusqu'à 500 pochettes</span></li>
-                <li>📅 <span data-i18n="pricing_rental_staff_example">3 jours = 1 170 € TTC</span></li>
+                <li>📅 <span data-i18n="pricing_rental_staff_example">3 mois minimum</span></li>
               </ul>
               <a class="btn btn-primary btn-sm mt-3 w-100" href="commande.html#rental" data-i18n="solutions_card_cta_reserve">Devis avec personnel</a>
             </div>
@@ -162,7 +162,7 @@
               <p class="pricing-price my-2" data-i18n="pricing_rental_autonomous_price">150 € TTC / jour</p>
               <ul class="list-unstyled small text-muted flex-grow-1">
                 <li>📦 <span data-i18n="pricing_rental_autonomous_qty">Jusqu'à 500 pochettes</span></li>
-                <li>📅 <span data-i18n="pricing_rental_autonomous_example">3 jours = 450 € TTC</span></li>
+                <li>📅 <span data-i18n="pricing_rental_autonomous_example">3 mois minimum</span></li>
               </ul>
               <a class="btn btn-outline-primary btn-sm mt-3 w-100" href="commande.html#autonomous" data-i18n="solutions_card_cta_custom">Devis en autonomie</a>
             </div>
@@ -213,7 +213,7 @@
                 <th scope="col" data-i18n="pricing_table_offer">Offre</th>
                 <th scope="col" data-i18n="pricing_table_price">Prix</th>
                 <th scope="col" class="pricing-highlight" data-i18n="pricing_table_qty">Quantité incluse</th>
-                <th scope="col" data-i18n="pricing_table_example">Exemple 3 jours</th>
+                <th scope="col" data-i18n="pricing_table_example">Durée minimale</th>
                 <th scope="col" data-i18n="pricing_table_notes">Notes</th>
               </tr>
             </thead>
@@ -222,14 +222,14 @@
                 <th scope="row" data-i18n="pricing_rental_autonomous_title">Location autonome (sans personnel)</th>
                 <td data-i18n="pricing_rental_autonomous_price">150 € TTC / jour</td>
                 <td class="pricing-highlight" data-i18n="pricing_rental_autonomous_qty">Jusqu’à 500 pochettes</td>
-                <td data-i18n="pricing_rental_autonomous_example">3 jours = 450 € TTC</td>
+                <td data-i18n="pricing_rental_autonomous_example">3 mois minimum</td>
                 <td data-i18n="pricing_rental_autonomous_note">Au-delà de 500 pochettes : sur devis.</td>
               </tr>
               <tr>
                 <th scope="row" data-i18n="pricing_rental_staff_title">Location clé-en-main (avec personnel)</th>
                 <td data-i18n="pricing_rental_staff_price">390 € TTC / jour</td>
                 <td class="pricing-highlight" data-i18n="pricing_rental_staff_qty">Jusqu’à 500 pochettes</td>
-                <td data-i18n="pricing_rental_staff_example">3 jours = 1 170 € TTC</td>
+                <td data-i18n="pricing_rental_staff_example">3 mois minimum</td>
                 <td data-i18n="pricing_rental_staff_note">Au-delà de 500 pochettes : sur devis. Max 7h/jour/agent. +100€/jour/agent supp. +80€ hors région Rhône. +80€/jour/agent logement (si requis).</td>
               </tr>
               <tr>
@@ -256,6 +256,7 @@
             </tbody>
           </table>
         </div>
+        <p class="small mt-3" data-i18n="pricing_rental_terms_note">Location : trois mois calendaires minimum. Le client conserve les pochettes pendant la période prévue et les restitue selon le devis. Les tarifs par jour sont indicatifs ; montant total, jours d’intervention des agents et conditions de facturation font l’objet d’un devis.</p>
         <p class="small text-muted mt-3" data-i18n="pricing_logistics_2026">Livraison standard du matériel incluse en France métropolitaine. Frais éventuels de déplacement et d'hébergement des agents distincts. Caution : 300 € par tranche de 700 pochettes pour les locations et abonnements, restituée après vérification.</p>
         <div class="row g-4 mt-4" data-aos="fade-up" data-aos-delay="150">
           <div class="col-lg-7">
@@ -339,5 +340,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>if(window.AOS) AOS.init({once:true});</script>
-<script src="js/translations.js?v=20261117-offres-officielles"></script><script src="js/main.js?v=e58a55cccce47860"></script>
+<script src="js/translations.js?v=20261118-location-3mois"></script><script src="js/main.js?v=e58a55cccce47860"></script>
 </body></html>

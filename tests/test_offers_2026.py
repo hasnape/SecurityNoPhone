@@ -5,7 +5,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {name: (ROOT / name).read_text(encoding="utf-8")
-         for name in ("index.html", "support.html", "commande.html", "cgv.html",
+         for name in ("index.html", "solutions.html", "support.html", "commande.html", "cgv.html",
                       "blog.html", "includes/footer.html", "js/order-form.js",
                       "sitemap.xml")}
 TRANSLATIONS = json.loads(
@@ -73,6 +73,18 @@ class CommercialOffers2026(unittest.TestCase):
             self.assertIn("20", TRANSLATIONS[lang]["pricing_subscription_price"])
             self.assertIn("60", TRANSLATIONS[lang]["pricing_pro_price"])
 
+    def test_minimum_three_months_on_public_pages(self):
+        for name in ("index.html", "solutions.html", "support.html", "cgv.html"):
+            with self.subTest(page=name):
+                self.assertIn('data-i18n="pricing_rental_terms_note"', PAGES[name])
+        self.assertIn('data-i18n="rental_min_term_info"', PAGES["commande.html"])
+        for name in ("index.html", "solutions.html", "commande.html"):
+            self.assertNotIn("3 jours = 450", PAGES[name])
+            self.assertNotIn("3 jours = 1 170", PAGES[name])
+        for lang in ("fr", "en", "de", "ar"):
+            for key in ("rental_min_term_info", "order_dates_min_three_months", "pricing_rental_terms_note", "quote_rental_long_term"):
+                self.assertTrue(TRANSLATIONS[lang].get(key), (lang, key))
+
     def test_current_script_cache_across_all_pages(self):
         pages = ("index", "solutions", "accompagnement", "experience", "clients",
                  "secteurs", "contact", "blog", "ressources", "support", "commande",
@@ -81,8 +93,8 @@ class CommercialOffers2026(unittest.TestCase):
         for name in pages:
             with self.subTest(page=name):
                 content = (ROOT / (name + ".html")).read_text(encoding="utf-8")
-                self.assertIn("js/translations.js?v=20261117-offres-officielles", content)
-        self.assertIn("js/order-form.js?v=20261117-offres-officielles",
+                self.assertIn("js/translations.js?v=20261118-location-3mois", content)
+        self.assertIn("js/order-form.js?v=20261118-location-3mois",
                       PAGES["commande.html"])
 
     def test_pro_is_quote_only_not_auto_charge(self):
@@ -90,7 +102,9 @@ class CommercialOffers2026(unittest.TestCase):
         self.assertIn('commande.html#pro', PAGES["index.html"])
         self.assertIn("abonnement_pro: { type: 'custom' }", PAGES["js/order-form.js"])
         self.assertIn("pro: 'abonnement_pro'", PAGES["js/order-form.js"])
-        self.assertIn("quantity > 500", PAGES["js/order-form.js"])
+        self.assertIn("offer.type === 'rental'", PAGES["js/order-form.js"])
+        self.assertIn("minimumRentalEndDate", PAGES["js/order-form.js"])
+        self.assertIn("order_dates_min_three_months", PAGES["js/order-form.js"])
         self.assertIn("quantity > 100", PAGES["js/order-form.js"])
 
     def test_existing_form_and_rates_untouched(self):
@@ -113,9 +127,9 @@ class CommercialOffers2026(unittest.TestCase):
         self.assertIn('data-i18n="legal_offers_2026_notice"', PAGES["cgv.html"])
 
     def test_sitemap_dates(self):
-        for path in ("", "support.html", "commande.html", "cgv.html"):
+        for path in ("", "solutions.html", "support.html", "commande.html", "cgv.html"):
             self.assertIn("<loc>https://securitynophone.com/" + path +
-                          "</loc>\n    <lastmod>2026-11-17</lastmod>",
+                          "</loc>\n    <lastmod>2026-11-18</lastmod>",
                           PAGES["sitemap.xml"])
 
 
