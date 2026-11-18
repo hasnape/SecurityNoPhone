@@ -93,8 +93,8 @@ class CommercialOffers2026(unittest.TestCase):
         for name in pages:
             with self.subTest(page=name):
                 content = (ROOT / (name + ".html")).read_text(encoding="utf-8")
-                self.assertIn("js/translations.js?v=20261117-offres-officielles", content)
-        self.assertIn("js/order-form.js?v=20261117-offres-officielles",
+                self.assertIn("js/translations.js?v=20261118-location-3mois", content)
+        self.assertIn("js/order-form.js?v=20261118-location-3mois",
                       PAGES["commande.html"])
 
     def test_pro_is_quote_only_not_auto_charge(self):
