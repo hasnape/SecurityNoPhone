@@ -94,17 +94,17 @@
               <h3 class="h6 text-uppercase text-muted" data-i18n="agent_options_title">Options pour accompagnement avec agent (sur devis)</h3>
               <div class="row g-3">
                 <div class="col-md-4">
-                  <label for="additionalAgents" class="form-label" data-i18n="label_additional_agents">Agents supplémentaires</label>
+                  <label for="additionalAgents" class="form-label" data-i18n="label_additional_agents">Nombre d'agents souhaités</label>
                   <input type="number" class="form-control" id="additionalAgents" name="agents_supplementaires" min="0" value="0" />
                 </div>
                 <div class="col-md-8">
                   <div class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" id="outsideRhone" name="deplacement_hors_rhone" />
-                    <label class="form-check-label" for="outsideRhone" data-i18n="label_outside_rhone">Déplacement hors région Rhône (+80€)</label>
+                    <label class="form-check-label" for="outsideRhone" data-i18n="label_outside_rhone">Déplacement du personnel hors Rhône — sur devis</label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="lodgingRequired" name="logement_requis" />
-                    <label class="form-check-label" for="lodgingRequired" data-i18n="label_lodging_required">Logement agents requis (+80€/jour/agent)</label>
+                    <label class="form-check-label" for="lodgingRequired" data-i18n="label_lodging_required">Hébergement du personnel — sur devis</label>
                   </div>
                 </div>
               </div>
@@ -151,6 +151,7 @@
 
             <input type="hidden" name="montant_total_estime" data-total-value value="0">
             <input type="hidden" name="caution_total" data-caution-value value="0">
+            <input type="hidden" name="tarif_remplacement_unitaire" data-replacement-price value="">
             <input type="hidden" name="submission_type" value="order">
             <input type="hidden" name="payment_status" value="to_be_confirmed">
 
@@ -177,9 +178,9 @@
             <div class="border rounded-3 p-3 bg-white mb-3">
               <h3 class="h6 text-uppercase text-muted" data-i18n="order_fees_title">Frais et conditions agents</h3>
               <ul class="list-unstyled small mb-0">
-                <li data-i18n="order_fee_additional_agent">Agent supplémentaire : +100€/jour/agent</li>
-                <li data-i18n="order_fee_outside_rhone">Déplacement hors région Rhône : +80€</li>
-                <li data-i18n="order_fee_lodging">Logement agents (si requis) : +80€/jour/agent</li>
+                <li data-i18n="order_fee_additional_agent">Agents supplémentaires : sur devis</li>
+                <li data-i18n="order_fee_outside_rhone">Déplacement du personnel : sur devis</li>
+                <li data-i18n="order_fee_lodging">Hébergement du personnel : sur devis</li>
                 <li data-i18n="order_fee_max_hours">Présence max : 7h/jour/agent</li>
               </ul>
             </div>
@@ -191,7 +192,7 @@
               <h3 class="h6 text-uppercase text-muted" data-i18n="order_rc_pro_title">RC Pro</h3>
               <p class="small mb-0" data-i18n="order_rc_pro_desc">Assurance Responsabilité Civile Professionnelle. Attestation disponible sur demande.</p>
             </div>
-            <p class="small text-muted mt-3 mb-0" data-i18n="order_info_footer">Indiquez dans le formulaire vos dates, lieux et besoins en langues : nous calons le dispositif comme sur la page Support &amp; Formation.</p>
+            <p class="small text-muted mt-3 mb-0" data-i18n="order_info_footer">Les dates doivent être prévues au moins 30 jours à l'avance. Indiquez le lieu, la personnalisation souhaitée et vos besoins de livraison.</p>
           </div>
         </div>
       </div>
