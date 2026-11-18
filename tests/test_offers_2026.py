@@ -129,7 +129,7 @@ class CommercialOffers2026(unittest.TestCase):
     def test_sitemap_dates(self):
         for path in ("", "support.html", "commande.html", "cgv.html"):
             self.assertIn("<loc>https://securitynophone.com/" + path +
-                          "</loc>\n    <lastmod>2026-11-17</lastmod>",
+                          "</loc>\n    <lastmod>2026-11-18</lastmod>",
                           PAGES["sitemap.xml"])
 
 
