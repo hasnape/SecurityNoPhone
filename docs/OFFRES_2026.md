@@ -1,31 +1,77 @@
-# Référentiel commercial SecurityNoPhone — 17 novembre 2026
+# Référentiel commercial SecurityNoPhone — grille approuvée le 18 novembre 2026
 
-> Référence de cohérence du site. Montants affichés à titre indicatif, en euros TTC, confirmés par devis avant toute commande. Ne crée ni réservation ni prélèvement automatique. Avant publication contractuelle définitive, faire valider les clauses juridiques et la faisabilité logistique.
+> Source unique des quantités et prix publics. Le propriétaire a validé les neuf formules ci-dessous et la vente à prix dégressif. Montants affichés en euros TTC, indicatifs jusqu'à acceptation d'un devis. Toute demande commerciale exige un préavis d'au moins **30 jours calendaires**, **y compris les achats**. Le formulaire Formspree n'encaisse aucun paiement et ne confirme pas une réservation.
 
-| Offre | Prix de référence | Quantité incluse | Durée et conditions |
-| --- | --- | --- | --- |
-| Location autonome | Référence indicative : 150 € / jour | Jusqu'à 500 pochettes | **Minimum trois mois calendaires** ; le client conserve les pochettes jusqu'au retour convenu ; devis obligatoire |
-| Location avec personnel | Référence indicative : 390 € / jour | Jusqu'à 500 pochettes | **Minimum trois mois calendaires** ; pochettes conservées par le client ; jours d'intervention d'agent (jusqu'à 7 h/jour/agent) définis au devis |
-| Abonnement Starter | 20 € / mois | Jusqu'à 100 pochettes | Sans engagement ; au-delà de 100, demande de devis |
-| Abonnement Pro | 60 € / mois | Jusqu'à 300 pochettes | Engagement minimum de 3 mois annoncé sur l'ancien support ; demande de devis avant souscription, sans paiement en ligne |
-| Achat personnalisé | 3,50 € / pochette | Minimum 50 pochettes | Personnalisation à confirmer par bon à tirer ; délai convenu au devis |
+## 1. Prestations événementielles ponctuelles
 
-## Personnel, transport et caution
+| Formule | Pochettes réutilisables | Tarif par événement |
+| --- | ---: | ---: |
+| Mini | 49 | 69 € |
+| Essentiel | 97 | 109 € |
+| Confort | 182 | 189 € |
+| Grand événement | 303 | 299 € |
+| Prestige | 484 | 449 € |
 
-- Un agent supplémentaire pour la location avec personnel : +100 € / jour / agent, selon devis ; déplacement hors Rhône : +80 € ; logement si requis : +80 € / jour / agent. Ne pas confondre ces frais de déplacement de personnel avec les frais de livraison du matériel.
-- Livraison aller-retour standard du matériel incluse en France métropolitaine pour les locations et les abonnements, selon le parcours commercial actuel. Livraison de l'achat personnalisé incluse en France métropolitaine d'après le parcours commercial antérieur ; confirmer la destination et toute prestation spéciale avant engagement.
-- Caution des locations et abonnements : 300 € par tranche entamée de 700 pochettes, distincte du prix du service ; restitution après vérification du matériel et application des conditions du devis.
-- **Nouvelle précision propriétaire, 18/11/2026 :** location d'au moins **trois mois calendaires** ; le client garde les pochettes pendant toute la période puis les retourne selon le devis. Les anciens exemples de 3 jours ne sont plus valables.
-- Les montants 150 €/jour et 390 €/jour sont des **références indicatives**, et non des forfaits trimestriels confirmés. Le prix global de la location, ses échéances et le nombre de jours de présence du personnel sont **sur devis**. Ne pas multiplier automatiquement le tarif journalier par 90 jours : la structure de facturation n'a pas encore été validée pour cette durée.
-- Aucune offre ne doit afficher un prix final ferme sans vérifier dates, quantité, logistique, et disponibilité. Le formulaire actuel envoie une demande via Formspree ; il ne réalise aucune transaction.
-- La prestation ne garantit ni « zéro fuite », ni « confidentialité absolue », ni l'inviolabilité de toutes les pochettes.
+Une journée d'utilisation ; expédition préalable et restitution après l'événement, calendrier précis défini au devis. Aucune présence d'agent incluse. Demande d'accompagnement avec personnel et interventions sur devis.
 
-## Gouvernance et points à valider
+Cette offre **ponctuelle** est distincte des contrats professionnels à engagement minimum trois mois. Ne pas appliquer automatiquement aux événements la règle des trois mois.
 
-1. Grille tarifaire officiellement modifiée par le propriétaire le 17/11/2026 (locations 500, Starter 20 €/100 et Pro 60 €/300), puis durée minimale de location précisée à trois mois le 18/11/2026. Faire approuver juridiquement les conditions de l'abonnement Pro (engagement trois mois, renouvellement) avant toute acceptation ferme.
-2. Revoir juridiquement les CGV, le droit de rétractation, l'assurance, les délais et la politique de caution ; ne jamais prétendre à une conformité certifiée sans vérification.
-3. Remplacer le PDF historique `Mention legale/3_CGV.pdf`, qui ne décrit pas Pro, par un document légal relu et approuvé. Tant que ce n'est pas fait, ne pas présenter ce PDF comme la version contractuelle à jour.
-4. Créer et tester une adresse de domaine avant de remplacer `snophone.info@gmail.com` ; le changement d'affichage ne crée pas la boîte mail.
-5. Conserver les supports de formation et PDF existants pendant les mises à jour ; toute correction future de ce référentiel exige une synchronisation des pages, traductions et calculateur et des tests ciblés.
+## 2. Professionnels — mise à disposition pendant trois mois minimum
 
-Sources internes : `docs/VALIDATED_FEATURE_BASELINE.md`, `js/order-form.js`, `index.html`, anciennes conditions de `support.html` (Pro). Le tarif Pro et son engagement restent à confirmer contractuellement.
+| Formule | Pochettes | Mensualité | Référence trois mois |
+| --- | ---: | ---: | ---: |
+| Éducation | 92 | 69 € | 207 € |
+| Starter | 182 | 119 € | 357 € |
+| Business | 363 | 229 € | 687 € |
+| Entreprise | 605 | 349 € | 1 047 € |
+
+Le client garde les pochettes pendant toute la durée convenue et les restitue à la fin du contrat. **Trois mois calendaires minimum** (date de retour incluse), facturation et renouvellement définis au devis. Les anciennes offres à 150/390 € par jour, 20 €/mois et 60 €/mois ne sont plus présentées comme des offres souscriptibles.
+
+## 3. Vente définitive — minimum 50 pochettes
+
+| Quantité achetée | Prix unitaire |
+| --- | ---: |
+| 50 à 99 | 5,90 € |
+| 100 à 299 | 5,50 € |
+| 300 et plus | 4,90 € |
+
+Le client devient propriétaire des pochettes. Vente avec ou sans personnalisation selon accord ; personnalisation spécifique, maquette, options et délais à confirmer au devis. **Date de livraison demandée au moins 30 jours calendaires après la demande.** Aucun achat immédiat en ligne.
+
+## 4. Logistique Mondial Relay incluse sous conditions
+
+- Événements et contrats professionnels : **un acheminement initial standard et un retour final standard prépayé**, en Locker ou Point Relais Mondial Relay (France métropolitaine, selon couverture de la prestation). Une étiquette de retour est fournie ; client dépose le colis de retour dans le réseau compatible.
+- Achat : livraison standard Mondial Relay selon le colis compatible confirmé au devis ; pas de retour commercial prépayé inclus systématiquement pour une vente définitive.
+- **Le poids, le volume, les limites des casiers et le nombre de colis sont vérifiés avant devis ferme**, particulièrement pour 303, 363, 484 et 605 pochettes. Si le matériel nécessite plusieurs colis ou une prestation spéciale, le surcoût est chiffré et accepté avant réservation ; ne jamais promettre un seul colis quelle que soit la quantité.
+- Les frais d'agents, déplacements de personnel, hébergement et interventions sur place ne sont pas inclus dans les forfaits sans personnel ; chiffrer séparément.
+- Les disponibilités reposent sur le calendrier d'affectation des lots ; ne pas attribuer le même stock à plusieurs événements se chevauchant.
+
+## 5. Caution, remplacement et usure
+
+- Caution **indicative** des lots remis temporairement : **1,50 € par pochette** ; séparée du prix, remboursable après inventaire de restitution, sous réserve des déductions justifiées et acceptées contractuellement.
+- Pochette manquante ou abîmée hors usure normale, imputable au client : prix unitaire de vente du lot loué, soit **5,90 €** si moins de 100 unités, **5,50 €** de 100 à 299, **4,90 €** dès 300. Usage normal : sans facturation.
+- Aucune double facturation : la somme retenue sur caution vient en déduction du remplacement réellement dû. Les dispositifs magnétiques perdus ou abîmés nécessitent une grille de remplacement propre, expressément prévue au devis.
+- État initial, inventaire, éventuelles photos et retour contrôlés. Restitution et délais détaillés contractuellement.
+
+## 6. Réservation : 30 jours minimum dans tous les parcours
+
+- **Événement :** date de l'événement au minimum J+30 à compter de la demande.
+- **Professionnel :** date de début de mise à disposition au minimum J+30, plus date de fin conforme aux trois mois calendaires minimum.
+- **Achat :** date de livraison souhaitée au minimum J+30, même lorsque les pochettes sont disponibles ; commande acceptée seulement après devis.
+- **Prestation spéciale ou agent :** date visée au minimum J+30.
+- Vérification Javascript sur la date civile de **France métropolitaine (Europe/Paris)**, +30 jours calendaires, y compris changements d'heure et fins de mois.
+- Ces contrôles sont **côté navigateur seulement** : une demande peut techniquement être envoyée directement à Formspree, qui ne bloque pas ces délais. Contrôle humain obligatoire avant tout accord ; ne pas prétendre à une enforcement serveur.
+- Les dates et quantités sont **demandées**, jamais garanties automatiquement. Confirmation par devis accepté et disponibilité après vérification.
+
+## 7. Gestion de stock et confidentialité
+
+- Simulation de travail définie par le propriétaire : **1 000 pochettes réutilisables**, dont une réserve de sécurité recommandée de 100 et 900 commercialisables simultanément. Il s'agit d'une **hypothèse**, pas d'une preuve de stock livré, et aucune disponibilité ferme n'est affichée publiquement.
+- Coûts d'approvisionnement, factures fournisseur, adresses et documents internes **ne sont pas publiés sur le site ni dans le dépôt**.
+- L'activité doit provisionner à chaque rotation le transport, le conditionnement, l'inventaire, l'usure et les frais professionnels, sans compter le stock acheté une deuxième fois comme nouvelle sortie de trésorerie.
+- La confidentialité renforcée ne garantit ni zéro fuite, ni inviolabilité absolue.
+
+## 8. Points de validation avant recette définitive
+
+- Réviser juridiquement les CGV et remplacer le PDF historique `Mention legale/3_CGV.pdf` avant de le présenter comme actuel. Vérifier rétractation, responsabilité, conditions de caution et règles des contrats professionnels.
+- Peser les kits et vérifier les limites de Mondial Relay, ainsi que le nombre de déverrouilleurs nécessaires par lot, avant engagement client.
+- Valider par tests navigateur le formulaire : sélection fixe des 9 forfaits, achat 50 unités, dates J+29 rejetées et J+30 admises, fin de contrat à 3 mois minimum, traductions FR/EN/DE/AR, RTL, retour des lots.
+- Vérifier la réception Formspree par envoi de test non client (après autorisation du compte), la navigation mobile, et les fichiers PDF de support.
