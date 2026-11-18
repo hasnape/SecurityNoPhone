@@ -158,6 +158,8 @@ if 'main { overflow-x: clip; }' in css:
 checks.append('Reference contrast pairs and horizontal-animation repair')
 test_result = run(['node', '--test', 'tests/order-tracking.test.cjs'])
 checks.append('Tracking contact regression tests')
+rental_test_result = run(['node', '--test', 'tests/rental-term.test.cjs'])
+checks.append('Calendar rental minimum and quote-only regression tests')
 inventory_test_result = run([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_*.py'])
 checks.append('Python regressions: committed deployment inventory and SEO contracts')
 warnings.append('Mobile, real form delivery, payment, logistics and legal validation require separate evidence.')
@@ -171,7 +173,7 @@ for name in sorted(files):
         digest.update(name.encode() + b'\0' + path.read_bytes() + b'\0')
 report = {'ok': not errors, 'head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
           'content_sha256': digest.hexdigest(), 'checks': checks, 'contrasts': contrasts,
-          'errors': errors, 'limits': warnings, 'regression_output': test_result.stdout,
+          'errors': errors, 'limits': warnings, 'regression_output': test_result.stdout + rental_test_result.stdout + rental_test_result.stderr,
           'deployment_inventory_test_output': inventory_test_result.stdout + inventory_test_result.stderr}
 folder = ROOT / '.release-validation'
 folder.mkdir(exist_ok=True)
