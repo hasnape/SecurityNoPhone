@@ -5,7 +5,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {name: (ROOT / name).read_text(encoding="utf-8")
-         for name in ("index.html", "support.html", "commande.html", "cgv.html",
+         for name in ("index.html", "solutions.html", "support.html", "commande.html", "cgv.html",
                       "blog.html", "includes/footer.html", "js/order-form.js",
                       "sitemap.xml")}
 TRANSLATIONS = json.loads(
@@ -74,11 +74,11 @@ class CommercialOffers2026(unittest.TestCase):
             self.assertIn("60", TRANSLATIONS[lang]["pricing_pro_price"])
 
     def test_minimum_three_months_on_public_pages(self):
-        for name in ("index.html", "support.html", "cgv.html"):
+        for name in ("index.html", "solutions.html", "support.html", "cgv.html"):
             with self.subTest(page=name):
                 self.assertIn('data-i18n="pricing_rental_terms_note"', PAGES[name])
         self.assertIn('data-i18n="rental_min_term_info"', PAGES["commande.html"])
-        for name in ("index.html", "commande.html"):
+        for name in ("index.html", "solutions.html", "commande.html"):
             self.assertNotIn("3 jours = 450", PAGES[name])
             self.assertNotIn("3 jours = 1 170", PAGES[name])
         for lang in ("fr", "en", "de", "ar"):
@@ -127,7 +127,7 @@ class CommercialOffers2026(unittest.TestCase):
         self.assertIn('data-i18n="legal_offers_2026_notice"', PAGES["cgv.html"])
 
     def test_sitemap_dates(self):
-        for path in ("", "support.html", "commande.html", "cgv.html"):
+        for path in ("", "solutions.html", "support.html", "commande.html", "cgv.html"):
             self.assertIn("<loc>https://securitynophone.com/" + path +
                           "</loc>\n    <lastmod>2026-11-18</lastmod>",
                           PAGES["sitemap.xml"])
