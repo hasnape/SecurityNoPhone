@@ -207,6 +207,7 @@
       if (offerSelect?.value !== currentOffer) {
         currentOffer = offerSelect?.value || null;
         if (offer?.quantity && quantityInput) quantityInput.value = String(offer.quantity);
+        else if (offer?.type === 'purchase' && quantityInput) quantityInput.value = '50';
         if (quantityInput) quantityInput.readOnly = !!offer?.quantity;
       }
 
@@ -255,7 +256,10 @@
       if (priceDisplay) priceDisplay.textContent = valid ? label : '';
       if (cautionGroup) cautionGroup.classList.toggle('d-none', !valid || caution <= 0);
       if (cautionDisplay && valid) cautionDisplay.value = format(caution);
-      if (totalHidden) totalHidden.value = valid && total != null ? total.toFixed(2) : '';
+      // For professional contracts this is only a 3-month reference, not a final
+      // total for arbitrarily longer requested periods. Quote determines final total.
+      if (totalHidden) totalHidden.value = valid && total != null && offer.type !== 'professional'
+        ? total.toFixed(2) : '';
       if (cautionHidden) cautionHidden.value = valid ? caution.toFixed(2) : '';
       if (replacementHidden) replacementHidden.value =
         valid && caution > 0 ? replacement.toFixed(2) : '';
