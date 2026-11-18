@@ -852,7 +852,9 @@ window.translations = {
     "support_prices_pdf_title": "Grille tarifaire 2026 — version PDF",
     "support_prices_pdf_description": "Les cinq formules événementielles, quatre abonnements professionnels, tarifs de vente dégressifs, préavis de 30 jours et conditions Mondial Relay sur une fiche imprimable.",
     "support_prices_pdf_cta": "Télécharger la grille commerciale (PDF)",
-    "footer_prices_pdf_link": "Grille commerciale actuelle (PDF)"
+    "footer_prices_pdf_link": "Grille commerciale actuelle (PDF)",
+    "order_privacy_notice": "Votre demande est transmise via Formspree pour préparer un devis et vous répondre. Aucun paiement n'est prélevé. Ne communiquez pas de données sensibles inutiles dans les commentaires.",
+    "order_privacy_link": "Consulter notre politique de confidentialité"
   },
   "en": {
     "auto_key_1": "SecurityNoPhone",
@@ -1707,7 +1709,9 @@ window.translations = {
     "support_prices_pdf_title": "2026 pricing guide — PDF",
     "support_prices_pdf_description": "Five event packages, four professional subscriptions, bulk purchase prices, the 30-day lead time and Mondial Relay shipping terms in one printable guide.",
     "support_prices_pdf_cta": "Download pricing guide (PDF)",
-    "footer_prices_pdf_link": "Current pricing guide (PDF)"
+    "footer_prices_pdf_link": "Current pricing guide (PDF)",
+    "order_privacy_notice": "Your request is submitted through Formspree to prepare a quote and reply to you. No payment is taken. Please avoid unnecessary sensitive information in the comments.",
+    "order_privacy_link": "Read our privacy policy"
   },
   "de": {
     "auto_key_1": "SecurityNoPhone",
@@ -2559,7 +2563,9 @@ window.translations = {
     "support_prices_pdf_title": "Preisliste 2026 — PDF",
     "support_prices_pdf_description": "Fünf Eventpakete, vier Gewerbeabos, Mengenpreise, 30 Tage Vorlauf und Mondial-Relay-Versandbedingungen als druckbare PDF.",
     "support_prices_pdf_cta": "Preisliste herunterladen (PDF)",
-    "footer_prices_pdf_link": "Aktuelle Preisliste (PDF)"
+    "footer_prices_pdf_link": "Aktuelle Preisliste (PDF)",
+    "order_privacy_notice": "Ihre Anfrage wird über Formspree zur Angebotserstellung und Antwort übermittelt. Keine Zahlung erfolgt. Bitte keine unnötigen sensiblen Daten in Bemerkungen angeben.",
+    "order_privacy_link": "Datenschutzerklärung lesen"
   },
   "ar": {
     "auto_key_1": "سيكيوريتي نو فون",
@@ -3410,6 +3416,8 @@ window.translations = {
     "support_prices_pdf_title": "جدول أسعار 2026 — PDF",
     "support_prices_pdf_description": "خمس باقات للفعاليات وأربع اشتراكات مهنية وأسعار البيع حسب الكمية ومهلة 30 يومًا وشروط Mondial Relay في ملف قابل للطباعة.",
     "support_prices_pdf_cta": "تحميل جدول الأسعار (PDF)",
-    "footer_prices_pdf_link": "جدول الأسعار الحالي (PDF)"
+    "footer_prices_pdf_link": "جدول الأسعار الحالي (PDF)",
+    "order_privacy_notice": "يُرسل طلبك عبر Formspree لإعداد عرض سعر والرد عليك. لا يتم تحصيل أي دفعة. لا تضع معلومات حساسة غير ضرورية في التعليقات.",
+    "order_privacy_link": "اقرأ سياسة الخصوصية"
   }
 };
