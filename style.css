@@ -1723,3 +1723,12 @@ a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible,
   border-radius: var(--snf-radius-sm);
 }
 .snf-proof-media:focus-visible { outline: 3px solid var(--snf-focus); outline-offset: 4px; }
+
+
+/* Présentations vidéo d'accueil : lecture volontaire et cadre intégral. */
+.snf-video-showcase .media-card { display: flex; flex-direction: column; min-width: 0; }
+.snf-video-showcase .snf-proof-media { height: clamp(19rem, 32vw, 26rem); }
+.snf-video-showcase .media-caption { margin-block-start: auto; }
+@media (max-width: 767.98px) {
+  .snf-video-showcase .snf-proof-media { height: min(65vh, 30rem); }
+}
