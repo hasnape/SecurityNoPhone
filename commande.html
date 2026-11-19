@@ -33,7 +33,7 @@
       <p class="text-muted text-center mb-4" data-i18n="order_intro">Choisissez une formule et une date à au moins 30 jours. Disponibilité, transport et prix définitif confirmés par devis ; aucun paiement ou réservation automatique.</p>
       <section class="mb-4" aria-labelledby="pack-simulator-title">
         <h2 class="h4" id="pack-simulator-title" data-i18n="order_simulator_title">Simulateur &amp; packs disponibles</h2>
-        <p class="text-muted" data-i18n="order_simulator_intro">Choisissez un pack : le tarif de base et la caution indicative s'affichent aussitôt. L'option avec agent est chiffrée séparément sur devis ; aucune réservation n'est confirmée ici.</p>
+        <p class="text-muted" data-i18n="order_simulator_intro">Choisissez un pack : le tarif de base et la caution indicative s'affichent aussitôt. L'option avec agent coûte 100 € par agent et par journée de 7 heures maximum, hors frais éventuels de déplacement et de logement hors de Lyon. Aucune réservation n'est confirmée ici.</p>
         <div class="d-flex flex-wrap gap-2 mb-3" aria-label="Packs événementiels">
           <a class="btn btn-sm btn-outline-primary" href="#event_mini" data-i18n="offer_event_mini">Mini — 49 pochettes — 69 €</a>
           <a class="btn btn-sm btn-outline-primary" href="#event_essentiel" data-i18n="offer_event_essentiel">Essentiel — 97 pochettes — 109 €</a>
@@ -78,9 +78,9 @@
               <label for="rentalMode" class="form-label" data-i18n="rental_mode_label">Mode de location :</label>
               <select class="form-select" id="rentalMode" name="mode_location" data-rental-mode>
                 <option value="sans" data-i18n="rental_mode_without">Sans agent : votre équipe gère les pochettes</option>
-                <option value="avec" data-i18n="rental_mode_with">Avec agent SecurityNoPhone : supplément sur devis</option>
+                <option value="avec" data-i18n="rental_mode_with">Avec agent SecurityNoPhone : 100 € / agent / journée (7 h max)</option>
               </select>
-              <p class="small text-muted mt-1" data-i18n="rental_mode_help">Le pack reste au tarif indiqué. L'intervention d'un agent, ses déplacements et ses frais éventuels ne sont pas compris dans ce montant.</p>
+              <p class="small text-muted mt-1" data-i18n="rental_mode_help">Le pack reste au tarif indiqué. Comptez 100 € par agent et par journée d'intervention (jusqu'à 7 h). Hors de Lyon, déplacement et hébergement éventuel sont en supplément, chiffrés au devis.</p>
             </div>
 
             <div class="mb-3">
@@ -119,24 +119,38 @@
             </div>
 
             <div class="mb-3 d-none" data-agent-options>
-              <h3 class="h6 text-uppercase text-muted" data-i18n="agent_options_title">Options pour accompagnement avec agent (sur devis)</h3>
+              <h3 class="h6 text-uppercase text-muted" data-i18n="agent_options_title">Prestation avec agent</h3>
+              <p class="alert alert-light border small" data-i18n="agent_price_notice">Forfait : 100 € par agent et par journée d'intervention de 7 heures maximum, même pour une durée plus courte. Les frais de déplacement et d'hébergement nécessaire hors de Lyon sont en supplément, chiffrés au devis.</p>
               <div class="row g-3">
                 <div class="col-md-4">
                   <label for="additionalAgents" class="form-label" data-i18n="label_additional_agents">Nombre d'agents souhaités</label>
-                  <input type="number" class="form-control" id="additionalAgents" name="agents_souhaites" min="1" max="20" step="1" value="1" />
+                  <input type="number" class="form-control" id="additionalAgents" name="agents_souhaites" min="1" max="20" step="1" value="1" data-agent-count />
                 </div>
                 <div class="col-md-4">
-                  <label for="agentHours" class="form-label" data-i18n="agent_duration_label">Heures / agent (max 7 h)</label>
-                  <input type="number" class="form-control" id="agentHours" name="heures_agent" min="1" max="7" step="1" value="4" />
+                  <label for="agentDays" class="form-label" data-i18n="agent_days_label">Journées d'intervention</label>
+                  <input type="number" class="form-control" id="agentDays" name="journees_intervention" min="1" max="365" step="1" value="1" data-agent-days />
                 </div>
-                <div class="col-md-8">
-                  <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" id="outsideRhone" name="deplacement_hors_rhone" />
-                    <label class="form-check-label" for="outsideRhone" data-i18n="label_outside_rhone">Déplacement du personnel hors Rhône — sur devis</label>
-                  </div>
+                <div class="col-md-4">
+                  <label for="agentHours" class="form-label" data-i18n="agent_duration_label">Heures / agent / jour (max. 7 h)</label>
+                  <input type="number" class="form-control" id="agentHours" name="heures_agent" min="1" max="7" step="1" value="7" data-agent-hours />
+                </div>
+                <div class="col-md-6">
+                  <label for="interventionZone" class="form-label" data-i18n="agent_zone_label">Zone d'intervention</label>
+                  <select class="form-select" id="interventionZone" name="zone_intervention" data-agent-zone>
+                    <option value="" data-i18n="agent_zone_choose">-- Sélectionner --</option>
+                    <option value="lyon" data-i18n="agent_zone_lyon">Lyon (commune)</option>
+                    <option value="hors_lyon" data-i18n="agent_zone_outside">Hors de Lyon — frais supplémentaires</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="interventionCity" class="form-label" data-i18n="agent_city_label">Ville de l'intervention</label>
+                  <input class="form-control" id="interventionCity" name="ville_intervention" type="text" maxlength="120" autocomplete="address-level2" data-agent-city />
+                </div>
+                <div class="col-12 d-none" data-outside-lyon-fields>
+                  <p class="small mb-2" data-i18n="agent_outside_lyon_notice">Hors de Lyon : frais de déplacement en supplément. Si un hébergement est nécessaire, il est également facturé en supplément. Montants définis au devis avant confirmation.</p>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="lodgingRequired" name="logement_requis" />
-                    <label class="form-check-label" for="lodgingRequired" data-i18n="label_lodging_required">Hébergement du personnel — sur devis</label>
+                    <label class="form-check-label" for="lodgingRequired" data-i18n="label_lodging_required">Un hébergement des agents est à prévoir (sur devis)</label>
                   </div>
                 </div>
               </div>
@@ -144,15 +158,15 @@
 
             <div class="alert alert-info d-none" data-summary data-days-label="Forfait" data-total-label="Total estimé"
               data-day-singular="jour" data-day-plural="jours" aria-live="polite">
-              <p class="mb-1"><strong><span data-summary-days-label data-i18n="summary_duration_label">Durée</span> : <span data-summary-days-count>—</span></strong></p>
+              <p class="mb-1"><strong><span data-summary-days-label data-i18n="agent_summary_days">Journées d'intervention</span> : <span data-summary-days-count>—</span></strong></p>
               <ul class="list-unstyled small mb-2" data-summary-breakdown>
                 <li><span data-summary-base-label data-i18n="summary_base_label">Base</span> : <span data-summary-base>—</span></li>
-                <li class="d-none" data-summary-extra-agents-row><span data-summary-extra-agents-label data-i18n="summary_extra_agents_label">Agents supp.</span> : <span data-summary-extra-agents>—</span></li>
+                <li class="d-none" data-summary-extra-agents-row><span data-summary-extra-agents-label data-i18n="agent_summary_agents">Coût des agents</span> : <span data-summary-extra-agents>—</span></li>
                 <li class="d-none" data-summary-travel-row><span data-summary-travel-label data-i18n="summary_travel_label">Déplacement</span> : <span data-summary-travel>—</span></li>
                 <li class="d-none" data-summary-lodging-row><span data-summary-lodging-label data-i18n="summary_lodging_label">Logement</span> : <span data-summary-lodging>—</span></li>
                 <li><span data-summary-caution-label data-i18n="summary_caution_label">Caution</span> : <span data-summary-caution>—</span></li>
               </ul>
-              <p class="mb-0"><span data-summary-total-label data-i18n="summary_total_label">Total estimé</span> : <span data-summary-total-amount>—</span></p>
+              <p class="mb-0"><span data-summary-total-label data-i18n="agent_summary_subtotal">Sous-total hors caution et frais extérieurs</span> : <span data-summary-total-amount>—</span></p>
             </div>
 
             <div class="mb-3 d-none" data-caution-block>
@@ -180,9 +194,13 @@
             </div>
 
             <div class="price-box text-center fw-bold fs-5 my-3" data-total-display aria-live="polite"></div>
-            <p class="small text-muted text-center" data-simulation-hint aria-live="polite" data-i18n="order_simulation_pick">Sélectionnez un pack pour afficher une estimation indicative.</p>            <p class="small text-muted text-center" data-i18n="caution_note">La caution et les frais éventuels sont précisés dans le devis ; aucune somme n'est débitée ici.</p>
+            <p class="small text-muted text-center" data-simulation-hint aria-live="polite" data-i18n="order_simulation_pick">Sélectionnez un pack pour afficher une estimation indicative.</p>
+            <p class="small text-muted text-center" data-i18n="caution_note">La caution et les frais éventuels sont précisés dans le devis ; aucune somme n'est débitée ici.</p>
 
             <input type="hidden" name="prix_base_pack" data-pack-base-value value="">
+            <input type="hidden" name="tarif_agent_jour" data-agent-rate-value value="">
+            <input type="hidden" name="montant_agents_estime" data-agent-charge-value value="">
+            <input type="hidden" name="frais_deplacement_logement" data-agent-extras-value value="">
             <input type="hidden" name="montant_total_estime" data-total-value value="0">
             <input type="hidden" name="caution_total" data-caution-value value="0">
             <input type="hidden" name="tarif_remplacement_unitaire" data-replacement-price value="">
@@ -207,6 +225,7 @@
             <p class="small" data-i18n="event_offers_summary">Mini 49 / 69 € · Essentiel 97 / 109 € · Confort 182 / 189 € · Grand 303 / 299 € · Prestige 484 / 449 €. Sans personnel.</p>
             <h3 class="h6" data-i18n="pro_offers_heading">Professionnels — minimum 3 mois</h3>
             <p class="small" data-i18n="pro_offers_summary">Éducation 92 / 69 €/mois · Starter 182 / 119 €/mois · Business 363 / 229 €/mois · Entreprise 605 / 349 €/mois.</p>
+            <p class="small text-muted" data-i18n="agent_public_price_notice">Accompagnement avec agent : 100 € TTC par agent pour une journée de 7 heures maximum, en supplément du pack. En dehors de Lyon, frais de déplacement et, si nécessaire, d’hébergement en supplément, sur devis.</p>
             <h3 class="h6" data-i18n="purchase_offers_heading">Achat définitif — minimum 50</h3>
             <p class="small" data-i18n="purchase_offers_summary">50–99 : 5,90 €/u · 100–299 : 5,50 €/u · 300 et plus : 4,90 €/u. Personnalisation spécifique sur devis.</p>
             <p class="small" data-i18n="offer_delivery_included">Mondial Relay aller-retour standard inclus pour les mises à disposition : retrait en Locker/Point Relais, retour prépayé, sous réserve de compatibilité poids/volume ; expéditions exceptionnelles chiffrées avant accord. Pour la vente, livraison standard incluse selon le colis confirmé au devis.</p>
@@ -216,10 +235,10 @@
             <div class="border rounded-3 p-3 bg-white mb-3">
               <h3 class="h6 text-uppercase text-muted" data-i18n="order_fees_title">Frais et conditions agents</h3>
               <ul class="list-unstyled small mb-0">
-                <li data-i18n="order_fee_additional_agent">Agents supplémentaires : sur devis</li>
-                <li data-i18n="order_fee_outside_rhone">Déplacement du personnel : sur devis</li>
-                <li data-i18n="order_fee_lodging">Hébergement du personnel : sur devis</li>
-                <li data-i18n="order_fee_max_hours">Présence max : 7h/jour/agent</li>
+                <li data-i18n="order_fee_additional_agent">100 € TTC par agent et par journée, jusqu'à 7 heures de présence</li>
+                <li data-i18n="order_fee_outside_lyon">Hors de Lyon : frais de déplacement supplémentaires, sur devis</li>
+                <li data-i18n="order_fee_lodging">Hors de Lyon : logement en supplément si nécessaire, sur devis</li>
+                <li data-i18n="order_fee_max_hours">Forfait par journée jusqu'à 7 h/agent, non proratisé en dessous de 7 h</li>
               </ul>
             </div>
             <div class="border rounded-3 p-3 bg-white mb-3">
