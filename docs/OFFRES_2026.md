@@ -71,9 +71,9 @@ Le client devient propriétaire des pochettes. Vente avec ou sans personnalisati
 - L'activité doit provisionner à chaque rotation le transport, le conditionnement, l'inventaire, l'usure et les frais professionnels, sans compter le stock acheté une deuxième fois comme nouvelle sortie de trésorerie.
 - La confidentialité renforcée ne garantit ni zéro fuite, ni inviolabilité absolue.
 
-## 8. Points de validation avant recette définitive- **Mise à jour tarif agent du 19/11/2026 :** 100 € TTC par agent et par intervention de 7 h maximum ; déplacements hors de Lyon et hébergement nécessaire à chiffrer en supplément. Les PDF de grille et les documents contractuels d’archive devront être réalignés avant de les présenter comme exhaustifs sur cette option.
-
 ## 8. Points de validation avant recette définitive
+
+- **Mise à jour tarif agent du 19/11/2026 :** 100 € TTC par agent et par journée d’intervention de 7 heures maximum ; frais de déplacement hors de Lyon et hébergement nécessaire en supplément, chiffrés sur devis. Les PDF commerciaux et documents contractuels d’archive doivent être réalignés avant d’être présentés comme exhaustifs sur cette option.
 
 - Réviser juridiquement les CGV et remplacer le PDF historique `Mention legale/3_CGV.pdf` avant de le présenter comme actuel. Vérifier rétractation, responsabilité, conditions de caution et règles des contrats professionnels.
 - Peser les kits et vérifier les limites de Mondial Relay, ainsi que le nombre de déverrouilleurs nécessaires par lot, avant engagement client.
