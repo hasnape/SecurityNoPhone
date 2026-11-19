@@ -37,11 +37,15 @@
       result.replaceChildren(message, reference, link);
     }
 
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      if (!form.reportValidity()) return;
+    // The HTML form sends the tracking request to the existing Formspree endpoint.
+    // The mailto link is only an optional alternative, never a fabricated status.
+    input.addEventListener('input', () => {
       requestedReference = input.value.trim();
-      render();
+      if (!requestedReference) {
+        result.replaceChildren();
+      } else {
+        render();
+      }
     });
     root.document.addEventListener('language:changed', render);
   });

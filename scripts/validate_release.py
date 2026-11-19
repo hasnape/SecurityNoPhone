@@ -179,6 +179,8 @@ if 'main { overflow-x: clip; }' in css:
 checks.append('Reference contrast pairs and horizontal-animation repair')
 test_result = run(['node', '--test', 'tests/order-tracking.test.cjs'])
 checks.append('Tracking contact regression tests')
+checkout_test_result = run(['node', '--test', 'tests/checkout-modules.test.cjs'])
+checks.append('Recovered commercial modules: packs, simulation, agent modes and tracking')
 rental_test_result = run(['node', '--test', 'tests/rental-term.test.cjs'])
 checks.append('Calendar rental minimum and quote-only regression tests')
 inventory_test_result = run([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_*.py'])

@@ -14,7 +14,7 @@ La fiche PDF des offres en vigueur est disponible sous `documents/support/grille
 | Grand événement | 303 | 299 € |
 | Prestige | 484 | 449 € |
 
-Une journée d'utilisation ; expédition préalable et restitution après l'événement, calendrier précis défini au devis. Aucune présence d'agent incluse. Demande d'accompagnement avec personnel et interventions sur devis.
+Une journée d'utilisation ; expédition préalable et restitution après l'événement, calendrier précis défini au devis. Aucune présence d'agent incluse dans les forfaits. **Option avec agent : 100 € TTC par agent et par journée d’intervention, pour 7 heures maximum** (même tarif pour une intervention plus courte). Pour plusieurs journées ou plusieurs agents, multiplier 100 € par le nombre d’agents et de journées. La disponibilité reste soumise à validation. **Hors de Lyon (commune)**, les frais de déplacement et, si un hébergement est nécessaire, les frais de logement sont en supplément, évalués sur devis avant accord.
 
 Cette offre **ponctuelle** est distincte des contrats professionnels à engagement minimum trois mois. Ne pas appliquer automatiquement aux événements la règle des trois mois.
 
@@ -44,7 +44,7 @@ Le client devient propriétaire des pochettes. Vente avec ou sans personnalisati
 - Événements et contrats professionnels : **un acheminement initial standard et un retour final standard prépayé**, en Locker ou Point Relais Mondial Relay (France métropolitaine, selon couverture de la prestation). Une étiquette de retour est fournie ; client dépose le colis de retour dans le réseau compatible.
 - Achat : livraison standard Mondial Relay selon le colis compatible confirmé au devis ; pas de retour commercial prépayé inclus systématiquement pour une vente définitive.
 - **Le poids, le volume, les limites des casiers et le nombre de colis sont vérifiés avant devis ferme**, particulièrement pour 303, 363, 484 et 605 pochettes. Si le matériel nécessite plusieurs colis ou une prestation spéciale, le surcoût est chiffré et accepté avant réservation ; ne jamais promettre un seul colis quelle que soit la quantité.
-- Les frais d'agents, déplacements de personnel, hébergement et interventions sur place ne sont pas inclus dans les forfaits sans personnel ; chiffrer séparément.
+- Les agents sont une option en supplément à **100 € TTC par agent et par journée d’intervention (jusqu’à 7 heures)**. Les déplacements du personnel en dehors de Lyon et les logements nécessaires sont facturés **en supplément, sur devis**, jamais estimés automatiquement sans adresse. Le forfait sans agent reste inchangé. Pour les contrats Pro, le prix de base affiché constitue une référence minimum de trois mois, à ajuster selon la durée réelle et les interventions demandées.
 - Les disponibilités reposent sur le calendrier d'affectation des lots ; ne pas attribuer le même stock à plusieurs événements se chevauchant.
 
 ## 5. Caution, remplacement et usure
@@ -72,6 +72,8 @@ Le client devient propriétaire des pochettes. Vente avec ou sans personnalisati
 - La confidentialité renforcée ne garantit ni zéro fuite, ni inviolabilité absolue.
 
 ## 8. Points de validation avant recette définitive
+
+- **Mise à jour tarif agent du 19/11/2026 :** 100 € TTC par agent et par journée d’intervention de 7 heures maximum ; frais de déplacement hors de Lyon et hébergement nécessaire en supplément, chiffrés sur devis. Les PDF commerciaux et documents contractuels d’archive doivent être réalignés avant d’être présentés comme exhaustifs sur cette option.
 
 - Réviser juridiquement les CGV et remplacer le PDF historique `Mention legale/3_CGV.pdf` avant de le présenter comme actuel. Vérifier rétractation, responsabilité, conditions de caution et règles des contrats professionnels.
 - Peser les kits et vérifier les limites de Mondial Relay, ainsi que le nombre de déverrouilleurs nécessaires par lot, avant engagement client.

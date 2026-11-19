@@ -17,6 +17,16 @@
   });
   const NOTICE_DAYS = 30;
   const DEPOSIT_PER_POUCH = 1.50;
+  const AGENT_DAY_RATE = 100; // EUR per agent per on-site day, up to 7 hours (flat fee).
+  const MAX_AGENT_HOURS = 7;
+
+  function calculateAgentCharge(agentCount, interventionDays) {
+    if (!Number.isInteger(agentCount) || agentCount < 1 || agentCount > 20 ||
+        !Number.isInteger(interventionDays) || interventionDays < 1 || interventionDays > 365) {
+      return null;
+    }
+    return agentCount * interventionDays * AGENT_DAY_RATE;
+  }
 
   function formatCurrency(locale, value, currency) {
     try {
@@ -109,6 +119,27 @@
     const dateError = form.querySelector('#dateError');
     const quantityError = form.querySelector('#quantityError');
     const agentGroup = form.querySelector('[data-agent-options]');
+    const rentalModeGroup = form.querySelector('[data-rental-mode-group]');
+    const rentalMode = form.querySelector('[data-rental-mode]');
+    const simulationHint = form.querySelector('[data-simulation-hint]');
+    const packBaseHidden = form.querySelector('[data-pack-base-value]');
+    const agentRateHidden = form.querySelector('[data-agent-rate-value]');
+    const agentChargeHidden = form.querySelector('[data-agent-charge-value]');
+    const agentExtrasHidden = form.querySelector('[data-agent-extras-value]');
+    const agentCountInput = form.querySelector('[data-agent-count]');
+    const agentDaysInput = form.querySelector('[data-agent-days]');
+    const agentHoursInput = form.querySelector('[data-agent-hours]');
+    const agentZoneInput = form.querySelector('[data-agent-zone]');
+    const agentCityInput = form.querySelector('[data-agent-city]');
+    const lodgingInput = form.querySelector('#lodgingRequired');
+    const outsideLyonFields = form.querySelector('[data-outside-lyon-fields]');
+    const summaryDaysCount = form.querySelector('[data-summary-days-count]');
+    const summaryBase = form.querySelector('[data-summary-base]');
+    const summaryAgents = form.querySelector('[data-summary-extra-agents]');
+    const summaryTravel = form.querySelector('[data-summary-travel]');
+    const summaryLodging = form.querySelector('[data-summary-lodging]');
+    const summaryCaution = form.querySelector('[data-summary-caution]');
+    const summaryTotal = form.querySelector('[data-summary-total-amount]');
     const priceDisplay = form.querySelector('[data-total-display]');
     const cautionGroup = form.querySelector('[data-caution-block]');
     const cautionDisplay = form.querySelector('[data-caution-display]');
@@ -198,10 +229,21 @@
       const dated = !!offer && !professional;
       showElement(rentalGroup, professional);
       showElement(targetGroup, dated);
-      showElement(agentGroup, offer?.type === 'custom');
+      const eligibleRental = offer?.type === 'event' || offer?.type === 'professional';
+      showElement(rentalModeGroup, eligibleRental);
+      const withAgent = offer?.type === 'custom' || (eligibleRental && rentalMode?.value === 'avec');
+      showElement(agentGroup, withAgent);
       if (startInput) startInput.required = professional;
       if (endInput) endInput.required = professional;
       if (targetInput) targetInput.required = dated;
+      const outsideLyon = withAgent && agentZoneInput?.value === 'hors_lyon';
+      showElement(outsideLyonFields, outsideLyon);
+      if (agentCountInput) agentCountInput.required = withAgent;
+      if (agentDaysInput) agentDaysInput.required = withAgent;
+      if (agentHoursInput) agentHoursInput.required = withAgent;
+      if (agentZoneInput) agentZoneInput.required = withAgent;
+      if (agentCityInput) agentCityInput.required = withAgent;
+      if (!outsideLyon && lodgingInput) lodgingInput.checked = false;
       if (summary) summary.classList.add('d-none');
 
       if (offerSelect?.value !== currentOffer) {
@@ -219,6 +261,12 @@
         if (priceDisplay) priceDisplay.textContent = '';
         if (cautionGroup) cautionGroup.classList.add('d-none');
         if (totalHidden) totalHidden.value = '';
+        if (packBaseHidden) packBaseHidden.value = '';
+        if (agentRateHidden) agentRateHidden.value = '';
+        if (agentChargeHidden) agentChargeHidden.value = '';
+        if (agentExtrasHidden) agentExtrasHidden.value = '';
+        if (simulationHint) simulationHint.textContent = translate('order_simulation_pick',
+          'Sélectionnez un pack pour afficher une estimation indicative.');
         if (cautionHidden) cautionHidden.value = '';
         if (replacementHidden) replacementHidden.value = '';
         return false;
@@ -227,7 +275,17 @@
       const quantity = Number(quantityInput?.value);
       const quantityOk = validateQuantity(offer, quantity);
       const datesOk = validateDates(offer);
-      const valid = quantityOk && datesOk;
+      const agentCount = Number(agentCountInput?.value);
+      const interventionDays = Number(agentDaysInput?.value);
+      const hoursPerDay = Number(agentHoursInput?.value);
+      const agentCharge = withAgent ? calculateAgentCharge(agentCount, interventionDays) : 0;
+      const agentValid = !withAgent || (
+        agentCharge !== null && Number.isInteger(hoursPerDay) &&
+        hoursPerDay >= 1 && hoursPerDay <= MAX_AGENT_HOURS &&
+        ['lyon', 'hors_lyon'].includes(agentZoneInput?.value) &&
+        Boolean(agentCityInput?.value.trim())
+      );
+      const valid = quantityOk && datesOk && agentValid;
       const caution = offer.type === 'event' || offer.type === 'professional'
         ? quantity * DEPOSIT_PER_POUCH : 0;
       const replacement = replacementUnitPrice(quantity);
@@ -253,13 +311,66 @@
         label = translate('offer_quote_only', 'Sur devis, sans réservation immédiate.');
       }
 
-      if (priceDisplay) priceDisplay.textContent = valid ? label : '';
-      if (cautionGroup) cautionGroup.classList.toggle('d-none', !valid || caution <= 0);
-      if (cautionDisplay && valid) cautionDisplay.value = format(caution);
+      const pricedSubtotal = total !== null ? total + (agentCharge || 0) : null;
+      if (withAgent && agentCharge !== null) {
+        if (total !== null) {
+          label = translate('booking_with_agent_subtotal',
+            'Pack : {base} + agents : {agents} = {total} (hors caution, déplacements et hébergement éventuel).')
+            .replace('{base}', format(total))
+            .replace('{agents}', format(agentCharge))
+            .replace('{total}', format(pricedSubtotal));
+        } else {
+          label = translate('booking_agent_service_only',
+            'Agents : {agents}. Pochettes, matériel et options à confirmer sur devis.')
+            .replace('{agents}', format(agentCharge));
+        }
+      } else if (withAgent) {
+        label = translate('booking_agent_invalid', 'Indiquez un nombre valide d’agents et de journées.');
+      }
+
+      if (withAgent && agentCharge !== null && summary) {
+        summary.classList.remove('d-none');
+        if (summaryDaysCount) summaryDaysCount.textContent = String(interventionDays);
+        if (summaryBase) summaryBase.textContent = total !== null
+          ? format(total) : translate('agent_summary_quote', 'Sur devis');
+        if (summaryAgents) summaryAgents.textContent = format(agentCharge);
+        const agentRow = summary.querySelector('[data-summary-extra-agents-row]');
+        const travelRow = summary.querySelector('[data-summary-travel-row]');
+        const lodgingRow = summary.querySelector('[data-summary-lodging-row]');
+        if (agentRow) agentRow.classList.remove('d-none');
+        if (travelRow) travelRow.classList.toggle('d-none', !outsideLyon);
+        if (lodgingRow) lodgingRow.classList.toggle('d-none', !outsideLyon);
+        if (summaryTravel) summaryTravel.textContent = translate('agent_summary_quote', 'Sur devis');
+        if (summaryLodging) summaryLodging.textContent = lodgingInput?.checked
+          ? translate('agent_summary_quote', 'Sur devis')
+          : translate('agent_summary_if_needed', 'Si nécessaire : sur devis');
+        if (summaryCaution) summaryCaution.textContent = caution > 0
+          ? format(caution) : translate('agent_summary_quote', 'Sur devis');
+        if (summaryTotal) summaryTotal.textContent = pricedSubtotal !== null
+          ? format(pricedSubtotal)
+          : translate('agent_summary_just_staff', '{agents} d’agents, hors matériel sur devis')
+              .replace('{agents}', format(agentCharge));
+      }
+      if (priceDisplay) priceDisplay.textContent = quantityOk ? label : '';
+      if (simulationHint) simulationHint.textContent = !quantityOk
+        ? translate('order_simulation_quantity', 'Corrigez la quantité pour simuler le pack.')
+        : !agentValid
+          ? translate('order_simulation_agent_incomplete',
+            'Pour demander un agent, renseignez ses horaires, le nombre de journées et le lieu.')
+        : !datesOk
+          ? translate('order_simulation_dates', 'Simulation indicative : précisez une date éligible (J+30 minimum) pour envoyer la demande.')
+          : translate('order_simulation_ready', 'Estimation indicative : montant et disponibilité définitifs soumis à devis.');
+      if (cautionGroup) cautionGroup.classList.toggle('d-none', !quantityOk || caution <= 0);
+      if (cautionDisplay && quantityOk && caution > 0) cautionDisplay.value = format(caution);
+      if (packBaseHidden) packBaseHidden.value = valid && total != null ? total.toFixed(2) : '';
+      if (agentRateHidden) agentRateHidden.value = valid && withAgent ? AGENT_DAY_RATE.toFixed(2) : '';
+      if (agentChargeHidden) agentChargeHidden.value = valid && withAgent ? agentCharge.toFixed(2) : '';
+      if (agentExtrasHidden) agentExtrasHidden.value = valid && withAgent && outsideLyon
+        ? 'Déplacement en supplément, logement si nécessaire : sur devis' : '';
       // For professional contracts this is only a 3-month reference, not a final
       // total for arbitrarily longer requested periods. Quote determines final total.
-      if (totalHidden) totalHidden.value = valid && total != null && offer.type !== 'professional'
-        ? total.toFixed(2) : '';
+      if (totalHidden) totalHidden.value = valid && pricedSubtotal !== null && offer.type !== 'professional'
+        ? pricedSubtotal.toFixed(2) : '';
       if (cautionHidden) cautionHidden.value = valid ? caution.toFixed(2) : '';
       if (replacementHidden) replacementHidden.value =
         valid && caution > 0 ? replacement.toFixed(2) : '';
@@ -269,22 +380,29 @@
     function applyOfferFromLink() {
       const hash = window.location.hash.slice(1);
       const legacy = {
-        rental: 'pro_business', autonomous: 'pro_education',
+        rental: 'event_essentiel', autonomous: 'event_essentiel',
+        location_avec: 'event_essentiel', location_sans: 'event_essentiel',
         abonnement: 'pro_starter', pro: 'pro_business',
         custom: 'achat', special: 'special_event'
       };
       const offerKey = legacy[hash] || (OFFER_CONFIG[hash] ? hash : '');
       if (offerKey && offerSelect) offerSelect.value = offerKey;
+      if (rentalMode && ['rental', 'location_avec'].includes(hash)) rentalMode.value = 'avec';
+      if (rentalMode && ['autonomous', 'location_sans'].includes(hash)) rentalMode.value = 'sans';
       refresh();
     }
 
     offerSelect?.addEventListener('change', refresh);
     quantityInput?.addEventListener('input', refresh);
+    rentalMode?.addEventListener('change', refresh);
+    agentZoneInput?.addEventListener('change', refresh);
     targetInput?.addEventListener('change', refresh);
     startInput?.addEventListener('change', refresh);
     endInput?.addEventListener('change', refresh);
-    form.querySelectorAll('[data-agent-options] input').forEach(input =>
-      input.addEventListener('change', refresh));
+    form.querySelectorAll('[data-agent-options] input').forEach(input => {
+      input.addEventListener('change', refresh);
+      input.addEventListener('input', refresh);
+    });
     window.addEventListener('hashchange', applyOfferFromLink);
     document.addEventListener('language:changed', refresh);
     form.addEventListener('submit', event => {

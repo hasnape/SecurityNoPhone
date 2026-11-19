@@ -44,14 +44,25 @@
             <div class="col-lg-6">
               <div class="tracking-box h-100">
                 <h2 class="mb-4 text-center" data-i18n="order_tracking_title">Suivi de commande</h2>
-                <form id="trackingForm">
+                <form id="trackingForm" action="https://formspree.io/f/xqaqogdv" method="POST">
+                  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+                  <input type="hidden" name="submission_type" value="tracking_request">
                   <div class="mb-3">
                     <label for="orderId" class="form-label" data-i18n="order_input_label">Numéro de commande reçu par mail :</label>
-                    <input type="text" class="form-control" id="orderId" maxlength="120" placeholder="Votre référence de commande" data-i18n-placeholder="order_placeholder" required />
+                    <input type="text" class="form-control" id="orderId" name="reference_commande" maxlength="120" placeholder="Votre référence de commande" data-i18n-placeholder="order_placeholder" required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="trackingEmail" class="form-label" data-i18n="tracking_request_email_label">Adresse e-mail pour notre réponse :</label>
+                    <input type="email" class="form-control" id="trackingEmail" name="email" autocomplete="email" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="trackingContext" class="form-label" data-i18n="tracking_request_note">Précisions (facultatif) :</label>
+                    <textarea id="trackingContext" class="form-control" name="infos" rows="3"></textarea>
                   </div>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary" data-i18n="order_check_button">Préparer ma demande de suivi</button>
+                    <button type="submit" class="btn btn-primary" data-i18n="tracking_request_send">Envoyer ma demande de suivi</button>
                   </div>
+                  <p class="small text-muted mt-3" data-i18n="tracking_request_privacy">Votre demande est transmise via Formspree. L’équipe répond à partir de votre dossier ; aucun statut automatique n’est fourni et aucune réservation n’est créée. Ne transmettez pas de données sensibles.</p>
                 </form>
                 <div id="statusResult" role="status" aria-live="polite" class="mt-4 text-center fw-bold"></div>
 
@@ -81,7 +92,7 @@
   <div id="footer-container"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/translations.js?v=20261118-final-v2"></script>
+  <script src="js/translations.js?v=20261119-agent100-v1"></script>
   <script src="js/main.js?v=20261118-final-v2"></script>
   <script src="js/order-tracking.js"></script>
 </body>
