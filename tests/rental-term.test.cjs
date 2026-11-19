@@ -10,8 +10,8 @@ const begin = source.indexOf('  const OFFER_CONFIG = Object.freeze(');
 const end = source.indexOf('  function showElement(', begin);
 assert.ok(begin > 0 && end > begin, 'Source pricing/date functions must be accessible');
 const funcs = vm.runInNewContext(source.slice(begin, end) +
-  '\n({ OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_PER_POUCH, addCalendarDays, franceTodayISO, earliestRequestDate, minimumRentalEndDate, purchaseUnitPrice, replacementUnitPrice });');
-const { OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_PER_POUCH,
+  '\n({ OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_PER_POUCH, AGENT_DAY_RATE, MAX_AGENT_HOURS, calculateAgentCharge, addCalendarDays, franceTodayISO, earliestRequestDate, minimumRentalEndDate, purchaseUnitPrice, replacementUnitPrice });');
+const { OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_PER_POUCH, AGENT_DAY_RATE, MAX_AGENT_HOURS, calculateAgentCharge,
         addCalendarDays, franceTodayISO, earliestRequestDate,
         minimumRentalEndDate, purchaseUnitPrice, replacementUnitPrice } = funcs;
 
@@ -76,4 +76,18 @@ test('all service requests require dates, without automatic booking', () => {
   assert.match(source, /start < earliest/);
   assert.match(source, /requested < earliest/);
   assert.match(source, /form\.addEventListener\('submit'/);
+});
+
+test('agent price is EUR 100 incl. VAT per person and on-site day, up to 7 hours', () => {
+  assert.equal(AGENT_DAY_RATE, 100);
+  assert.equal(MAX_AGENT_HOURS, 7);
+  assert.equal(calculateAgentCharge(1, 1), 100);
+  assert.equal(calculateAgentCharge(2, 1), 200);
+  assert.equal(calculateAgentCharge(2, 3), 600);
+  for (const [agents, days] of [[0, 1], [-1, 1], [1, 0], [1.5, 1], [1, 365.5], [21, 1], [1, 366]]) {
+    assert.equal(calculateAgentCharge(agents, days), null);
+  }
+  assert.match(source, /100 EUR|AGENT_DAY_RATE = 100/);
+  assert.match(source, /agentZoneInput\?\.value === 'hors_lyon'/);
+  assert.match(source, /Déplacement en supplément, logement si nécessaire/);
 });
