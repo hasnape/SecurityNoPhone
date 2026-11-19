@@ -26,10 +26,17 @@ test('rental options with and without staff exist for a selected package', () =>
   assert.match(order, /<option value="sans"/);
   assert.match(order, /<option value="avec"/);
   assert.match(order, /name="agents_souhaites"/);
+  assert.match(order, /name="journees_intervention"/);
+  assert.match(order, /name="zone_intervention"/);
+  assert.match(order, /name="ville_intervention"/);
+  assert.match(order, /data-agent-charge-value/);
+  assert.match(order, /data-outside-lyon-fields/);
   assert.match(order, /name="heures_agent" min="1" max="7"/);
   assert.match(calculator, /rentalMode\?\.value === 'avec'/);
   assert.match(calculator, /showElement\(agentGroup, withAgent\)/);
-  assert.match(calculator, /offer\.type !== 'professional' && !withAgent/);
+  assert.match(calculator, /calculateAgentCharge\(agentCount, interventionDays\)/);
+  assert.match(calculator, /agentZoneInput\?\.value === 'hors_lyon'/);
+  assert.match(calculator, /valid && pricedSubtotal !== null && offer\.type !== 'professional'/);
   assert.match(home, /href="commande\.html#location_avec"/);
   assert.match(home, /href="commande\.html#location_sans"/);
   assert.match(calculator, /location_avec: 'event_essentiel'/);
@@ -58,7 +65,9 @@ test('order tracking is reachable and requests contact rather than inventing sta
 test('recovered content exists in all supported translations', () => {
   const keys = ['nav_packs', 'nav_simulator', 'nav_tracking',
     'order_simulator_title', 'rental_mode_label', 'rental_mode_without',
-    'rental_mode_with', 'booking_with_agent_base', 'order_simulation_ready',
+    'rental_mode_with', 'agent_price_notice', 'agent_public_price_notice',
+    'agent_days_label', 'agent_zone_label', 'booking_with_agent_subtotal',
+    'order_simulation_ready',
     'tracking_request_email_label', 'tracking_request_send',
     'tracking_request_privacy'];
   for (const lang of ['fr', 'en', 'de', 'ar']) {
