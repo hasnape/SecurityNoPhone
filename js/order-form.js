@@ -109,6 +109,10 @@
     const dateError = form.querySelector('#dateError');
     const quantityError = form.querySelector('#quantityError');
     const agentGroup = form.querySelector('[data-agent-options]');
+    const rentalModeGroup = form.querySelector('[data-rental-mode-group]');
+    const rentalMode = form.querySelector('[data-rental-mode]');
+    const simulationHint = form.querySelector('[data-simulation-hint]');
+    const packBaseHidden = form.querySelector('[data-pack-base-value]');
     const priceDisplay = form.querySelector('[data-total-display]');
     const cautionGroup = form.querySelector('[data-caution-block]');
     const cautionDisplay = form.querySelector('[data-caution-display]');
@@ -198,7 +202,10 @@
       const dated = !!offer && !professional;
       showElement(rentalGroup, professional);
       showElement(targetGroup, dated);
-      showElement(agentGroup, offer?.type === 'custom');
+      const eligibleRental = offer?.type === 'event' || offer?.type === 'professional';
+      showElement(rentalModeGroup, eligibleRental);
+      const withAgent = offer?.type === 'custom' || (eligibleRental && rentalMode?.value === 'avec');
+      showElement(agentGroup, withAgent);
       if (startInput) startInput.required = professional;
       if (endInput) endInput.required = professional;
       if (targetInput) targetInput.required = dated;
@@ -219,6 +226,9 @@
         if (priceDisplay) priceDisplay.textContent = '';
         if (cautionGroup) cautionGroup.classList.add('d-none');
         if (totalHidden) totalHidden.value = '';
+        if (packBaseHidden) packBaseHidden.value = '';
+        if (simulationHint) simulationHint.textContent = translate('order_simulation_pick',
+          'Sélectionnez un pack pour afficher une estimation indicative.');
         if (cautionHidden) cautionHidden.value = '';
         if (replacementHidden) replacementHidden.value = '';
         return false;
@@ -253,12 +263,23 @@
         label = translate('offer_quote_only', 'Sur devis, sans réservation immédiate.');
       }
 
-      if (priceDisplay) priceDisplay.textContent = valid ? label : '';
-      if (cautionGroup) cautionGroup.classList.toggle('d-none', !valid || caution <= 0);
-      if (cautionDisplay && valid) cautionDisplay.value = format(caution);
+      if (withAgent && total != null) {
+        label = translate('booking_with_agent_base',
+          'Pack hors agent : {price}. Accompagnement avec agent sur devis.')
+          .replace('{price}', format(total));
+      }
+      if (priceDisplay) priceDisplay.textContent = quantityOk ? label : '';
+      if (simulationHint) simulationHint.textContent = !quantityOk
+        ? translate('order_simulation_quantity', 'Corrigez la quantité pour simuler le pack.')
+        : !datesOk
+          ? translate('order_simulation_dates', 'Simulation indicative : précisez une date éligible (J+30 minimum) pour envoyer la demande.')
+          : translate('order_simulation_ready', 'Estimation indicative : montant et disponibilité définitifs soumis à devis.');
+      if (cautionGroup) cautionGroup.classList.toggle('d-none', !quantityOk || caution <= 0);
+      if (cautionDisplay && quantityOk && caution > 0) cautionDisplay.value = format(caution);
+      if (packBaseHidden) packBaseHidden.value = valid && total != null ? total.toFixed(2) : '';
       // For professional contracts this is only a 3-month reference, not a final
       // total for arbitrarily longer requested periods. Quote determines final total.
-      if (totalHidden) totalHidden.value = valid && total != null && offer.type !== 'professional'
+      if (totalHidden) totalHidden.value = valid && total != null && offer.type !== 'professional' && !withAgent
         ? total.toFixed(2) : '';
       if (cautionHidden) cautionHidden.value = valid ? caution.toFixed(2) : '';
       if (replacementHidden) replacementHidden.value =
@@ -269,17 +290,21 @@
     function applyOfferFromLink() {
       const hash = window.location.hash.slice(1);
       const legacy = {
-        rental: 'pro_business', autonomous: 'pro_education',
+        rental: 'event_essentiel', autonomous: 'event_essentiel',
+        location_avec: 'event_essentiel', location_sans: 'event_essentiel',
         abonnement: 'pro_starter', pro: 'pro_business',
         custom: 'achat', special: 'special_event'
       };
       const offerKey = legacy[hash] || (OFFER_CONFIG[hash] ? hash : '');
       if (offerKey && offerSelect) offerSelect.value = offerKey;
+      if (rentalMode && ['rental', 'location_avec'].includes(hash)) rentalMode.value = 'avec';
+      if (rentalMode && ['autonomous', 'location_sans'].includes(hash)) rentalMode.value = 'sans';
       refresh();
     }
 
     offerSelect?.addEventListener('change', refresh);
     quantityInput?.addEventListener('input', refresh);
+    rentalMode?.addEventListener('change', refresh);
     targetInput?.addEventListener('change', refresh);
     startInput?.addEventListener('change', refresh);
     endInput?.addEventListener('change', refresh);
