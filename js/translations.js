@@ -1,5 +1,9 @@
 window.translations = {
   "fr": {
+    "tracking_request_email_label": "E-mail pour recevoir notre réponse :",
+    "tracking_request_note": "Informations complémentaires (facultatif) :",
+    "tracking_request_send": "Envoyer ma demande de suivi",
+    "tracking_request_privacy": "Cette demande est transmise via Formspree. Notre équipe consulte votre dossier et répond par e-mail ; aucun statut en temps réel n’est disponible ici. Ne communiquez pas de données sensibles.",
     "nav_packs": "Packs & tarifs",
     "nav_simulator": "Simuler mon devis",
     "nav_tracking": "Suivi de commande",
@@ -885,6 +889,10 @@ window.translations = {
     "order_privacy_link": "Consulter notre politique de confidentialité"
   },
   "en": {
+    "tracking_request_email_label": "Email address for our reply:",
+    "tracking_request_note": "Additional details (optional):",
+    "tracking_request_send": "Send tracking request",
+    "tracking_request_privacy": "This request is sent via Formspree. Our team checks your records and replies by email; no real-time status is available here. Do not submit sensitive information.",
     "nav_packs": "Packages & pricing",
     "nav_simulator": "Estimate my quote",
     "nav_tracking": "Order tracking",
@@ -1770,6 +1778,10 @@ window.translations = {
     "order_privacy_link": "Read our privacy policy"
   },
   "de": {
+    "tracking_request_email_label": "E-Mail-Adresse für unsere Antwort:",
+    "tracking_request_note": "Weitere Angaben (optional):",
+    "tracking_request_send": "Statusanfrage senden",
+    "tracking_request_privacy": "Die Anfrage wird über Formspree übermittelt. Unser Team prüft den Vorgang und antwortet per E-Mail; ein Live-Status ist hier nicht verfügbar. Keine sensiblen Daten eingeben.",
     "nav_packs": "Pakete & Preise",
     "nav_simulator": "Angebot berechnen",
     "nav_tracking": "Bestellverfolgung",
@@ -2652,6 +2664,10 @@ window.translations = {
     "order_privacy_link": "Datenschutzerklärung lesen"
   },
   "ar": {
+    "tracking_request_email_label": "البريد الإلكتروني لتلقي الرد:",
+    "tracking_request_note": "معلومات إضافية (اختياري):",
+    "tracking_request_send": "إرسال طلب متابعة",
+    "tracking_request_privacy": "يُرسل الطلب عبر Formspree. يراجع فريقنا ملفك ويرد عبر البريد الإلكتروني؛ لا تتوفر حالة لحظية هنا. لا ترسل معلومات حساسة.",
     "nav_packs": "الباقات والأسعار",
     "nav_simulator": "محاكاة عرض السعر",
     "nav_tracking": "متابعة الطلب",
