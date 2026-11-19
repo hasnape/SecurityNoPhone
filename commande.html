@@ -27,10 +27,29 @@
 
   <div id="navbar-container"></div>
 
-  <main class="container my-5">
+  <main class="container my-5" id="simulateur" style="scroll-margin-top:110px">
     <div class="border rounded-4 shadow-sm p-4 bg-white mt-5">
       <h1 class="text-center mb-5" data-i18n="order_title">Demander un devis</h1>
-      <p class="text-muted text-center mb-4" data-i18n="order_intro">Choisissez une formule et une date à au moins 30 jours. Disponibilité, transport et prix définitif confirmés par devis ; aucun paiement ou réservation automatique.</p><div class="row gy-5">
+      <p class="text-muted text-center mb-4" data-i18n="order_intro">Choisissez une formule et une date à au moins 30 jours. Disponibilité, transport et prix définitif confirmés par devis ; aucun paiement ou réservation automatique.</p>
+      <section class="mb-4" aria-labelledby="pack-simulator-title">
+        <h2 class="h4" id="pack-simulator-title" data-i18n="order_simulator_title">Simulateur &amp; packs disponibles</h2>
+        <p class="text-muted" data-i18n="order_simulator_intro">Choisissez un pack : le tarif de base et la caution indicative s'affichent aussitôt. L'option avec agent est chiffrée séparément sur devis ; aucune réservation n'est confirmée ici.</p>
+        <div class="d-flex flex-wrap gap-2 mb-3" aria-label="Packs événementiels">
+          <a class="btn btn-sm btn-outline-primary" href="#event_mini" data-i18n="offer_event_mini">Mini — 49 pochettes — 69 €</a>
+          <a class="btn btn-sm btn-outline-primary" href="#event_essentiel" data-i18n="offer_event_essentiel">Essentiel — 97 pochettes — 109 €</a>
+          <a class="btn btn-sm btn-outline-primary" href="#event_confort" data-i18n="offer_event_confort">Confort — 182 pochettes — 189 €</a>
+          <a class="btn btn-sm btn-outline-primary" href="#event_grand" data-i18n="offer_event_grand">Grand — 303 pochettes — 299 €</a>
+          <a class="btn btn-sm btn-outline-primary" href="#event_prestige" data-i18n="offer_event_prestige">Prestige — 484 pochettes — 449 €</a>
+        </div>
+        <p class="small text-muted mb-2" data-i18n="order_simulator_pro_prompt">Packs professionnels (minimum trois mois) :</p>
+        <div class="d-flex flex-wrap gap-2 mb-2">
+          <a class="btn btn-sm btn-outline-secondary" href="#pro_education" data-i18n="offer_pro_education">Éducation — 92 — 69 €/mois</a>
+          <a class="btn btn-sm btn-outline-secondary" href="#pro_starter" data-i18n="offer_pro_starter">Starter — 182 — 119 €/mois</a>
+          <a class="btn btn-sm btn-outline-secondary" href="#pro_business" data-i18n="offer_pro_business">Business — 363 — 229 €/mois</a>
+          <a class="btn btn-sm btn-outline-secondary" href="#pro_entreprise" data-i18n="offer_pro_entreprise">Entreprise — 605 — 349 €/mois</a>
+        </div>
+        <p class="small mb-0"><a href="suivi.html" data-i18n="nav_tracking">Suivi de commande</a> · <a href="documents/support/grille-offres-2026.pdf" data-i18n="support_prices_pdf_cta">Télécharger la grille commerciale (PDF)</a></p>
+      </section><div class="row gy-5">
         <div class="col-lg-7">
           <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm" data-order-form
             data-locale="fr-FR" data-currency="EUR"
@@ -53,6 +72,15 @@
                 <option value="achat" data-i18n="offer_purchase">Achat définitif personnalisé — 50 pochettes minimum</option>
                 <option value="special_event" data-i18n="offer_custom_staff">Accompagnement avec agent — devis personnalisé</option>
               </select>
+            </div>
+
+            <div class="mb-3 d-none" data-rental-mode-group>
+              <label for="rentalMode" class="form-label" data-i18n="rental_mode_label">Mode de location :</label>
+              <select class="form-select" id="rentalMode" name="mode_location" data-rental-mode>
+                <option value="sans" data-i18n="rental_mode_without">Sans agent : votre équipe gère les pochettes</option>
+                <option value="avec" data-i18n="rental_mode_with">Avec agent SecurityNoPhone : supplément sur devis</option>
+              </select>
+              <p class="small text-muted mt-1" data-i18n="rental_mode_help">Le pack reste au tarif indiqué. L'intervention d'un agent, ses déplacements et ses frais éventuels ne sont pas compris dans ce montant.</p>
             </div>
 
             <div class="mb-3">
@@ -95,7 +123,11 @@
               <div class="row g-3">
                 <div class="col-md-4">
                   <label for="additionalAgents" class="form-label" data-i18n="label_additional_agents">Nombre d'agents souhaités</label>
-                  <input type="number" class="form-control" id="additionalAgents" name="agents_supplementaires" min="0" value="0" />
+                  <input type="number" class="form-control" id="additionalAgents" name="agents_supplementaires" min="1" max="20" step="1" value="1" />
+                </div>
+                <div class="col-md-4">
+                  <label for="agentHours" class="form-label" data-i18n="agent_duration_label">Heures / agent (max 7 h)</label>
+                  <input type="number" class="form-control" id="agentHours" name="heures_agent" min="1" max="7" step="1" value="4" />
                 </div>
                 <div class="col-md-8">
                   <div class="form-check mb-2">
@@ -147,8 +179,10 @@
                 placeholder="Précisez le format, les lieux, les attentes protocole..."></textarea>
             </div>
 
-            <div class="price-box text-center fw-bold fs-5 my-3" data-total-display data-template="Total estimé : {price}" aria-live="polite"></div>            <p class="small text-muted text-center" data-i18n="caution_note">La caution et les frais éventuels sont précisés dans le devis ; aucune somme n'est débitée ici.</p>
+            <div class="price-box text-center fw-bold fs-5 my-3" data-total-display aria-live="polite"></div>
+            <p class="small text-muted text-center" data-simulation-hint aria-live="polite" data-i18n="order_simulation_pick">Sélectionnez un pack pour afficher une estimation indicative.</p>            <p class="small text-muted text-center" data-i18n="caution_note">La caution et les frais éventuels sont précisés dans le devis ; aucune somme n'est débitée ici.</p>
 
+            <input type="hidden" name="prix_base_pack" data-pack-base-value value="">
             <input type="hidden" name="montant_total_estime" data-total-value value="0">
             <input type="hidden" name="caution_total" data-caution-value value="0">
             <input type="hidden" name="tarif_remplacement_unitaire" data-replacement-price value="">
@@ -161,6 +195,7 @@
               <p class="small mt-1"><a href="confidentialite.html" data-i18n="order_privacy_link">Consulter notre politique de confidentialité</a></p>
             </div>
 
+            <p class="small text-center mt-3"><a href="suivi.html" data-i18n="nav_tracking">Suivi de commande</a></p>
             <div id="formSubmissionFeedback" class="mt-3" data-feedback></div>
           </form>
         </div>
