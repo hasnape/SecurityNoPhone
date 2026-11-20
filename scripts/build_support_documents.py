@@ -110,14 +110,14 @@ build('fiche-retour-materiel.pdf', 'Fiche de retour matériel', [
              '[  ] Bon état général   [  ] Matériel manquant   [  ] Matériel endommagé',
              'Détails : .........................................................................................................',
              '........................................................................................................................'),
-    *section('Caution remboursable - barème progressif'),
+    *section('Caution remboursable - selon le type de location'),
+    p('<b>Packs événementiels fixes :</b> caution 25 % du prix du pack, hors agents et suppléments : Mini 17,25 €, Essentiel 27,25 €, Confort 47,25 €, Grand 74,75 €, Prestige 112,25 €.', SMALL),
+    p('<b>Packs Pro et locations personnalisées :</b> barème progressif ci-dessous ; vente : aucune caution.', SMALL),
     table(['Rang des pochettes', 'Caution par pochette dans cette tranche'],
           [['1re à 49e', '1,50 €'], ['50e à 99e', '1,40 €'],
            ['100e à 299e', '1,25 €'], ['À partir de la 300e', '1,10 €']],
           [.52, .48]),
-    p('<b>Caution indicative et remboursable :</b> chaque taux s applique uniquement aux '
-      'pochettes de sa tranche. Exemple 182 pochettes : 49 × 1,50 € + 50 × 1,40 € '
-      '+ 83 × 1,25 € = <b>247,25 €</b>. Montant distinct du loyer, restitué après '
+    p('<b>Pro et personnalisé :</b> chaque taux s applique seulement aux pochettes de sa tranche. Exemple pour 182 pochettes : 49 × 1,50 € + 50 × 1,40 € + 83 × 1,25 € = <b>247,25 €</b>. Pack événementiel Confort : <b>47,25 €</b>. Montant distinct du loyer, restitué après '
       'inventaire et déductions justifiées éventuelles. Pochettes manquantes ou abimées '
       'hors usure normale, imputables au client : prix de vente unitaire du lot '
       '(5,90 / 5,50 / 4,90 EUR), sans double facturation. Ne pas facturer l usure normale.', SMALL),
@@ -243,17 +243,17 @@ build('guide-formation-equipes.pdf', 'Guide de formation des équipes', [
     p('<b>Assistance :</b> snophone.info@gmail.com - +33 7 45 20 13 10. '
       'Préciser la référence, les dates et le lieu. Horaires selon le devis.')])
 
-# Grille commerciale à jour au 20/11/2026 : forfaits, sur-mesure et caution progressive.
+# Grille commerciale : caution événementielle 25 % et cautions Pro progressives.
 build('grille-offres-2026.pdf', 'Grille des offres SecurityNoPhone 2026', [
     p('Grille commerciale - novembre 2026', TITLE),
     p('Tarifs indicatifs TTC jusqu au devis accepté ; demande au moins 30 jours calendaires '
       'avant événement, début de location ou livraison, y compris pour les achats. '
       'Aucun paiement ni réservation automatique.'),
     *section('1. Événements ponctuels - une journée'),
-    table(['Pack', 'Pochettes', 'Prix TTC'],
-          [['Mini','49','69 €'], ['Essentiel','97','109 €'],
-           ['Confort','182','189 €'], ['Grand événement','303','299 €'],
-           ['Prestige','484','449 €']], [.46,.22,.32]),
+    table(['Pack', 'Pochettes', 'Prix TTC', 'Caution (25 %)'],
+          [['Mini','49','69 €','17,25 €'], ['Essentiel','97','109 €','27,25 €'],
+           ['Confort','182','189 €','47,25 €'], ['Grand événement','303','299 €','74,75 €'],
+           ['Prestige','484','449 €','112,25 €']], [.28,.18,.23,.31]),
     *section('2. Packs Pro standards - trois mois minimum'),
     table(['Pack', 'Pochettes', 'Mensualité TTC', 'Référence 3 mois'],
           [['Éducation','92','69 €','207 €'], ['Starter','182','119 €','357 €'],
@@ -271,18 +271,15 @@ build('grille-offres-2026.pdf', 'Grille des offres SecurityNoPhone 2026', [
           [.55,.45]),
     PageBreak(),
     p('Caution, logistique et conditions', TITLE),
-    p('La caution dégressive s applique aux locations événementielles, Pro '
-      'et personnalisées ; aucune caution sur une vente définitive.'),
-    *section('5. Caution progressive remboursable'),
+    p('Packs événementiels : caution remboursable égale à 25 % du prix du pack, hors agents et suppléments. Packs Pro et locations personnalisées : barème progressif ci-dessous. Achat définitif : aucune caution.'),
+    *section('5. Caution progressive : Pro et location personnalisée uniquement'),
     table(['Rang des pochettes mises à disposition', 'Taux marginal'],
           [['1re à 49e','1,50 € / pochette'],
            ['50e à 99e','1,40 € / pochette'],
            ['100e à 299e','1,25 € / pochette'],
            ['À partir de la 300e','1,10 € / pochette']],
           [.55,.45]),
-    p('Chaque taux est appliqué seulement aux pochettes de sa tranche ; '
-      'aucune réduction rétroactive. Exemples : 37 pochettes 55,50 €, '
-      '182 : 247,25 €, 303 : 397,90 €, 484 : 597 €, 605 : 730,10 €.', SMALL),
+    p('Chaque taux s applique seulement aux pochettes de sa tranche. Pour Pro/personnalisé : 182 pochettes = 247,25 €. Pour le pack événementiel Confort : 47,25 € (25 % de 189 €).', SMALL),
     *section('6. Restitution, perte et remplacement',
              'Caution distincte du prix de location, remboursable après inventaire, '
              'sous réserve de déductions justifiées. Usure normale non facturée. '
