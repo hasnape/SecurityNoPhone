@@ -1,0 +1,154 @@
+// Browserless DOM contract tests for quote-only personalized rentals.
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const { readFileSync } = require('node:fs');
+const { join } = require('node:path');
+
+const source = readFileSync(join(__dirname, '..', 'js', 'order-form.js'), 'utf8');
+const translations = JSON.parse(readFileSync(join(__dirname, '..', 'js', 'translations.js'), 'utf8')
+  .replace(/^window.translations = /, '').replace(/;\s*$/, ''));
+
+function makeField(value = '') {
+  const classes = new Set();
+  return {
+    value, textContent: '', style: {}, dataset: {}, checked: false, readOnly: false,
+    disabled: false, required: false, validationMessage: '', listeners: {},
+    children: [], named: {},
+    classList: {
+      add: name => classes.add(name),
+      remove: name => classes.delete(name),
+      toggle: (name, show) => show ? classes.add(name) : classes.delete(name),
+      contains: name => classes.has(name)
+    },
+    setAttribute() {},
+    setCustomValidity(message) { this.validationMessage = message; },
+    addEventListener(type, listener) { this.listeners[type] = listener; },
+    querySelectorAll() { return this.children; },
+    querySelector(selector) { return this.named[selector] || null; }
+  };
+}
+
+function boot(hash = '#location_particulier') {
+  const names = [
+    '#offerType', '#quantity', '[data-custom-quantity-hint]', '[data-event-purchase-date]',
+    '[data-requested-date]', '[data-requested-date-error]', '[data-rental-fields]',
+    '[data-start-date]', '[data-end-date]', '#dateError', '#quantityError',
+    '[data-agent-options]', '[data-rental-mode-group]', '[data-rental-mode]',
+    '[data-simulation-hint]', '[data-pack-base-value]', '[data-total-display]',
+    '[data-caution-block]', '[data-caution-display]', '[data-total-value]',
+    '[data-caution-value]', '[data-replacement-price]', '[data-summary]',
+    '[data-agent-rate-value]', '[data-agent-charge-value]', '[data-agent-extras-value]',
+    '[data-agent-count]', '[data-agent-days]', '[data-agent-hours]', '[data-agent-zone]',
+    '[data-agent-city]', '#lodgingRequired', '[data-outside-lyon-fields]'
+  ];
+  const fields = Object.fromEntries(names.map(key => [key, makeField()]));
+  const set = (key, value) => { fields[key].value = value; };
+  set('#quantity', '49');
+  set('[data-requested-date]', '2099-01-01');
+  set('[data-start-date]', '2099-01-01');
+  set('[data-end-date]', '2099-03-31');
+  set('[data-agent-count]', '2');
+  set('[data-agent-days]', '3');
+  set('[data-agent-hours]', '7');
+  set('[data-agent-zone]', 'lyon');
+  set('[data-agent-city]', 'Lyon');
+  set('[data-rental-mode]', 'sans');
+
+  fields['[data-event-purchase-date]'].children = [fields['[data-requested-date]']];
+  fields['[data-rental-fields]'].children =
+    [fields['[data-start-date]'], fields['[data-end-date]']];
+  fields['[data-rental-mode-group]'].children = [fields['[data-rental-mode]']];
+  const agentInputs = ['[data-agent-count]', '[data-agent-days]', '[data-agent-hours]',
+    '[data-agent-zone]', '[data-agent-city]', '#lodgingRequired'];
+  fields['[data-agent-options]'].children = agentInputs.map(key => fields[key]);
+  fields['[data-outside-lyon-fields]'].children = [fields['#lodgingRequired']];
+  const summaryKeys = ['[data-summary-days-count]', '[data-summary-base]',
+    '[data-summary-extra-agents]', '[data-summary-travel]', '[data-summary-lodging]',
+    '[data-summary-caution]', '[data-summary-total-amount]',
+    '[data-summary-extra-agents-row]', '[data-summary-travel-row]',
+    '[data-summary-lodging-row]'];
+  for (const key of summaryKeys) fields['[data-summary]'].named[key] = makeField();
+
+  const form = {
+    dataset: { currency: 'EUR' }, listeners: {},
+    querySelector: key => fields[key] || null,
+    querySelectorAll: key => key === '[data-agent-options] input'
+      ? agentInputs.filter(input => input !== '[data-agent-zone]').map(input => fields[input]) : [],
+    addEventListener(key, listener) { this.listeners[key] = listener; },
+    checkValidity() { return true; },
+    reportValidity() { return true; }
+  };
+  const document = {
+    documentElement: { lang: 'fr' },
+    querySelectorAll: key => key === '[data-order-form]' ? [form] : [],
+    addEventListener(key, listener) { if (key === 'DOMContentLoaded') listener(); }
+  };
+  const window = { location: { hash }, translations, addEventListener() {} };
+  new Function('window', 'document', source)(window, document);
+  const trigger = (key, event = 'input') => fields[key].listeners[event]();
+  return { fields, form, trigger, set };
+}
+
+test('private customer chooses 37 pouches with no fabricated rental price', () => {
+  const { fields: f, trigger, set } = boot();
+  assert.equal(f['#offerType'].value, 'location_particulier');
+  assert.equal(f['#quantity'].readOnly, false);
+  assert.equal(f['#quantity'].value, '1');
+  assert.equal(f['[data-requested-date]'].required, true);
+  set('#quantity', '37'); trigger('#quantity');
+  assert.equal(f['#quantity'].validationMessage, '');
+  assert.equal(f['[data-caution-value]'].value, '55.50');
+  assert.equal(f['[data-total-value]'].value, '');
+  assert.match(f['[data-total-display]'].textContent, /sur devis/);
+});
+
+test('custom rental agent fee remains separate from unknown pouch rental price', () => {
+  const { fields: f, trigger, set } = boot();
+  set('#quantity', '37'); trigger('#quantity');
+  set('[data-rental-mode]', 'avec'); trigger('[data-rental-mode]', 'change');
+  assert.equal(f['[data-agent-charge-value]'].value, '600.00');
+  assert.equal(f['[data-caution-value]'].value, '55.50');
+  assert.equal(f['[data-total-value]'].value, '');
+  set('[data-agent-zone]', 'hors_lyon'); trigger('[data-agent-zone]', 'change');
+  assert.match(f['[data-agent-extras-value]'].value, /Déplacement en supplément/);
+  set('[data-rental-mode]', 'sans'); trigger('[data-rental-mode]', 'change');
+  assert.equal(f['[data-agent-charge-value]'].value, '');
+  assert.equal(f['[data-agent-extras-value]'].value, '');
+});
+
+test('professional custom rental requires three months and accepts arbitrary quantities', () => {
+  const { fields: f, trigger, set } = boot('#location_pro');
+  assert.equal(f['#offerType'].value, 'location_pro');
+  assert.equal(f['[data-start-date]'].required, true);
+  assert.equal(f['[data-end-date]'].required, true);
+  assert.equal(f['[data-requested-date]'].required, false);
+  set('#quantity', '182'); trigger('#quantity');
+  assert.equal(f['[data-caution-value]'].value, '273.00');
+  assert.equal(f['[data-total-value]'].value, '');
+  set('[data-end-date]', '2099-02-01'); trigger('[data-end-date]', 'change');
+  assert.notEqual(f['[data-end-date]'].validationMessage, '');
+  set('[data-end-date]', '2099-03-31'); trigger('[data-end-date]', 'change');
+  assert.equal(f['[data-end-date]'].validationMessage, '');
+});
+
+test('existing fixed packs and minimum purchase quantity stay unchanged', () => {
+  const { fields: f, trigger, set } = boot();
+  set('#offerType', 'event_mini'); trigger('#offerType', 'change');
+  assert.equal(f['#quantity'].value, '49');
+  assert.equal(f['#quantity'].readOnly, true);
+  assert.equal(f['[data-total-value]'].value, '69.00');
+  set('#offerType', 'achat'); trigger('#offerType', 'change');
+  assert.equal(f['#quantity'].value, '50');
+  assert.equal(f['[data-total-value]'].value, '295.00');
+  set('#offerType', 'location_particulier'); trigger('#offerType', 'change');
+  assert.equal(f['#quantity'].readOnly, false);
+  set('#quantity', '1.5'); trigger('#quantity');
+  assert.notEqual(f['#quantity'].validationMessage, '');
+});
+
+test('required 30-day notice still rejects a past custom rental date', () => {
+  const { fields: f, trigger, set } = boot();
+  set('[data-requested-date]', '2020-01-01');
+  trigger('[data-requested-date]', 'change');
+  assert.notEqual(f['[data-requested-date]'].validationMessage, '');
+});
