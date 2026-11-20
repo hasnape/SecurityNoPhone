@@ -4,6 +4,9 @@ Base de reprise : `a43dfd100abe8e5bdb95630c9090592e1219f7d1`, 29 octobre 2026.
 
 ## Contrats à préserver
 
+- **Nouvelle caution événementielle validée le 20/11/2026** : les cinq packs événementiels ont une caution remboursable égale à **25 % du prix de location de base du pack**, hors agent et suppléments : Mini 17,25 € ; Essentiel 27,25 € ; Confort 47,25 € ; Grand 74,75 € ; Prestige 112,25 €. Les locations Pro et sur mesure conservent le barème progressif, les ventes définitives restent sans caution. Les loyers, tarifs d'agents, frais de remplacement, J+30 et Formspree sont inchangés. Ne jamais publier les coûts d'achat internes.
+
+
 - Pages publiques et destinations : Accueil, Solutions, Accompagnement, Expérience, Publics, Secteurs, Contact, Guides, Ressources, Support, Commande, Suivi et documents légaux.
 - Langues communes : FR/EN/DE/AR ; AR en RTL. Le choix explicite persiste dans la navigation.
 - **Mise à jour agent du 19/11/2026** : 100 € TTC par agent par journée d’intervention de 7 heures maximum, même pour une durée plus courte ; hors de Lyon, déplacement et hébergement si nécessaire en supplément sur devis. La simulation additionne le prix de référence du pack et le personnel connu, hors caution et surcoûts non chiffrables. Les forfaits, conditions de commande et réception du formulaire demeurent inchangés.
