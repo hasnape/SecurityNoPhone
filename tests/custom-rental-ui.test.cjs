@@ -259,6 +259,19 @@ test('larger-than-event volumes and absent dates keep price quote-only', () => {
   assert.match(f['[data-total-display]'].textContent, /69/);
 });
 
+test('agent option does not inflate the 25% event-pack deposit', () => {
+  const { fields: f, trigger, set } = boot('#event_confort');
+  set('[data-rental-mode]', 'avec'); trigger('[data-rental-mode]', 'change');
+  set('[data-agent-count]', '1'); trigger('[data-agent-count]');
+  set('[data-agent-days]', '1'); trigger('[data-agent-days]');
+  assert.equal(f['[data-caution-value]'].value, '47.25');
+  assert.equal(f['[data-total-value]'].value, '289.00');
+  assert.match(f['[data-payable-estimate-amount]'].textContent, /336,25/);
+  set('[data-rental-mode]', 'sans'); trigger('[data-rental-mode]', 'change');
+  assert.equal(f['[data-caution-value]'].value, '47.25');
+  assert.match(f['[data-payable-estimate-amount]'].textContent, /236,25/);
+});
+
 test('event packs use a 25% deposit and Pro packs remain progressive', () => {
   const { fields: f, trigger, set } = boot();
   set('#offerType', 'event_mini'); trigger('#offerType', 'change');
