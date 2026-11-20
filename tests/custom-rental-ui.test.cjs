@@ -30,7 +30,8 @@ function makeField(value = '') {
 
 function boot(hash = '#location_particulier') {
   const names = [
-    '#offerType', '#quantity', '[data-custom-quantity-hint]', '[data-event-purchase-date]',
+    '#offerType', '#quantity', '[data-custom-quantity-hint]', '[data-pro-min-term-note]',
+    '[data-custom-no-min-term-note]', '[data-event-purchase-date]',
     '[data-requested-date]', '[data-requested-date-error]', '[data-rental-fields]',
     '[data-start-date]', '[data-end-date]', '#dateError', '#quantityError',
     '[data-agent-options]', '[data-rental-mode-group]', '[data-rental-mode]',
@@ -93,8 +94,11 @@ test('private customer chooses 37 pouches with no fabricated rental price', () =
   const { fields: f, trigger, set } = boot();
   assert.equal(f['#offerType'].value, 'location_particulier');
   assert.equal(f['#quantity'].readOnly, false);
-  assert.equal(f['#quantity'].value, '1');
-  assert.equal(f['[data-requested-date]'].required, true);
+  assert.equal(f['#quantity'].value, '10');
+  assert.equal(f['#quantity'].min, '10');
+  assert.equal(f['[data-requested-date]'].required, false);
+  assert.equal(f['[data-start-date]'].required, true);
+  assert.equal(f['[data-end-date]'].required, true);
   set('#quantity', '37'); trigger('#quantity');
   assert.equal(f['#quantity'].validationMessage, '');
   assert.equal(f['[data-caution-value]'].value, '55.50');
@@ -116,7 +120,7 @@ test('custom rental agent fee remains separate from unknown pouch rental price',
   assert.equal(f['[data-agent-extras-value]'].value, '');
 });
 
-test('professional custom rental requires three months and accepts arbitrary quantities', () => {
+test('professional custom rental allows short and one-day bookings with 10+ pouches', () => {
   const { fields: f, trigger, set } = boot('#location_pro');
   assert.equal(f['#offerType'].value, 'location_pro');
   assert.equal(f['[data-start-date]'].required, true);
@@ -125,7 +129,12 @@ test('professional custom rental requires three months and accepts arbitrary qua
   set('#quantity', '182'); trigger('#quantity');
   assert.equal(f['[data-caution-value]'].value, '273.00');
   assert.equal(f['[data-total-value]'].value, '');
-  set('[data-end-date]', '2099-02-01'); trigger('[data-end-date]', 'change');
+  set('[data-end-date]', '2099-01-01'); trigger('[data-end-date]', 'change');
+  assert.equal(f['[data-end-date]'].validationMessage, '');
+  assert.equal(f['[data-end-date]'].min, '2099-01-01');
+  set('[data-end-date]', '2099-01-02'); trigger('[data-end-date]', 'change');
+  assert.equal(f['[data-end-date]'].validationMessage, '');
+  set('[data-end-date]', '2098-12-31'); trigger('[data-end-date]', 'change');
   assert.notEqual(f['[data-end-date]'].validationMessage, '');
   set('[data-end-date]', '2099-03-31'); trigger('[data-end-date]', 'change');
   assert.equal(f['[data-end-date]'].validationMessage, '');
@@ -148,7 +157,46 @@ test('existing fixed packs and minimum purchase quantity stay unchanged', () => 
 
 test('required 30-day notice still rejects a past custom rental date', () => {
   const { fields: f, trigger, set } = boot();
-  set('[data-requested-date]', '2020-01-01');
-  trigger('[data-requested-date]', 'change');
-  assert.notEqual(f['[data-requested-date]'].validationMessage, '');
+  set('[data-start-date]', '2020-01-01');
+  trigger('[data-start-date]', 'change');
+  assert.notEqual(f['[data-start-date]'].validationMessage, '');
+});
+
+test('both custom profiles enforce 10 whole pouches and accept exactly 10', () => {
+  for (const profile of ['#location_particulier', '#location_pro']) {
+    const { fields: f, trigger, set } = boot(profile);
+    assert.equal(f['#quantity'].value, '10');
+    assert.equal(f['#quantity'].min, '10');
+    assert.equal(f['[data-caution-value]'].value, '15.00');
+    set('#quantity', '9'); trigger('#quantity');
+    assert.notEqual(f['#quantity'].validationMessage, '');
+    assert.equal(f['[data-caution-value]'].value, '');
+    set('#quantity', '10'); trigger('#quantity');
+    assert.equal(f['#quantity'].validationMessage, '');
+    assert.equal(f['[data-caution-value]'].value, '15.00');
+    set('#quantity', '10.5'); trigger('#quantity');
+    assert.notEqual(f['#quantity'].validationMessage, '');
+  }
+});
+
+test('one-day custom rental accepted for private customers and professionals', () => {
+  for (const profile of ['#location_particulier', '#location_pro']) {
+    const { fields: f, trigger, set } = boot(profile);
+    set('[data-start-date]', '2099-01-01'); trigger('[data-start-date]', 'change');
+    set('[data-end-date]', '2099-01-01'); trigger('[data-end-date]', 'change');
+    assert.equal(f['[data-start-date]'].validationMessage, '');
+    assert.equal(f['[data-end-date]'].validationMessage, '');
+    assert.equal(f['[data-end-date]'].min, '2099-01-01');
+  }
+});
+
+test('three-calendar-month requirement remains only on standard professional packages', () => {
+  const { fields: f, trigger, set } = boot();
+  set('#offerType', 'pro_education'); trigger('#offerType', 'change');
+  set('[data-start-date]', '2099-01-01'); trigger('[data-start-date]', 'change');
+  set('[data-end-date]', '2099-01-02'); trigger('[data-end-date]', 'change');
+  assert.notEqual(f['[data-end-date]'].validationMessage, '');
+  assert.equal(f['[data-end-date]'].min, '2099-03-31');
+  set('[data-end-date]', '2099-03-31'); trigger('[data-end-date]', 'change');
+  assert.equal(f['[data-end-date]'].validationMessage, '');
 });
