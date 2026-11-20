@@ -53,8 +53,8 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
         self.assertIn("function minimumRentalEndDate(startValue)", script)
         self.assertIn("function purchaseUnitPrice(quantity)", script)
         self.assertIn("targetInput.required = dated", script)
-        self.assertIn("startInput.required = professional", script)
-        self.assertIn("endInput.required = professional", script)
+        self.assertIn("startInput.required = usesRentalDates", script)
+        self.assertIn("endInput.required = usesRentalDates", script)
         self.assertIn("priceDisplay.textContent = quantityOk ? label : ''", script)
         self.assertIn("replacementUnitPrice(quantity)", script)
 
@@ -69,7 +69,9 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
             "offer_location_particulier", "offer_location_pro",
             "custom_rental_price_pending", "custom_rental_agent_price_pending",
             "custom_rental_quantity_help", "custom_rental_section_title",
-            "custom_rental_pro_title", "custom_rental_private_title"]
+            "custom_rental_pro_title", "custom_rental_private_title",
+            "custom_rental_min_quantity", "custom_rental_duration_help",
+            "custom_rental_dates_order"]
         keys += ["offer_event_"+k for k in EVENTS]
         keys += ["offer_pro_"+k for k in PROFESSIONAL]
         for lang in ("fr", "en", "de", "ar"):
@@ -95,8 +97,14 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
             self.assertIn(key + ":", script)
         self.assertIn('data-custom-quantity-hint', form)
         self.assertIn("const customRental =", script)
-        self.assertIn("const professional = offer?.type === 'professional' || offer?.type === 'custom_professional'", script)
-        self.assertIn("customRental && quantityInput) quantityInput.value = '1'", script)
+        self.assertIn("const professional = offer?.type === 'professional';", script)
+        self.assertIn("const usesRentalDates = professional || customRental", script)
+        self.assertIn("showElement(rentalGroup, usesRentalDates)", script)
+        self.assertIn("if (standardPro) {", script)
+        self.assertIn('data-custom-no-min-term-note', form)
+        self.assertIn('data-pro-min-term-note', form)
+        self.assertIn("customRental && quantityInput) quantityInput.value = '10'", script)
+        self.assertIn("quantityInput.min = customRental ? '10'", script)
         self.assertIn("const pricedSubtotal = total !== null", script)
         self.assertIn("const NOTICE_DAYS = 30;", script)
         self.assertIn("const DEPOSIT_PER_POUCH = 1.50;", script)
