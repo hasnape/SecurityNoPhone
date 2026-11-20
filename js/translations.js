@@ -1,5 +1,6 @@
 window.translations = {
   "fr": {
+    "nav_custom_rental": "Location personnalisée",
     "offer_location_particulier": "Location personnalisée — particulier — quantité libre — sur devis",
     "offer_location_pro": "Location personnalisée — professionnel — quantité libre — sur devis",
     "custom_rental_section_title": "Louez exactement le nombre de pochettes nécessaire",
@@ -925,6 +926,7 @@ window.translations = {
     "order_privacy_link": "Consulter notre politique de confidentialité"
   },
   "en": {
+    "nav_custom_rental": "Custom rental",
     "offer_location_particulier": "Custom rental — private customer — choose your quantity — by quote",
     "offer_location_pro": "Custom rental — business customer — choose your quantity — by quote",
     "custom_rental_section_title": "Rent exactly the number of pouches you need",
@@ -1850,6 +1852,7 @@ window.translations = {
     "order_privacy_link": "Read our privacy policy"
   },
   "de": {
+    "nav_custom_rental": "Individuelle Miete",
     "offer_location_particulier": "Individuelle Miete — Privatkunden — freie Stückzahl — auf Anfrage",
     "offer_location_pro": "Individuelle Miete — Geschäftskunden — freie Stückzahl — auf Anfrage",
     "custom_rental_section_title": "Mieten Sie genau die benötigte Anzahl an Hüllen",
@@ -2772,6 +2775,7 @@ window.translations = {
     "order_privacy_link": "Datenschutzerklärung lesen"
   },
   "ar": {
+    "nav_custom_rental": "تأجير مخصص",
     "offer_location_particulier": "تأجير مخصص — للأفراد — عدد حر — حسب عرض السعر",
     "offer_location_pro": "تأجير مخصص — للمؤسسات — عدد حر — حسب عرض السعر",
     "custom_rental_section_title": "استأجر العدد الذي تحتاجه بالضبط من الحقائب",
