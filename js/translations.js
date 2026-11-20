@@ -1,5 +1,9 @@
 window.translations = {
   "fr": {
+    "deposit_tier_rate_1": "1,50 €",
+    "deposit_tier_rate_2": "1,40 €",
+    "deposit_tier_rate_3": "1,25 €",
+    "deposit_tier_rate_4": "1,10 €",
     "pdf_deposit_update_notice": "La grille PDF récapitule les forfaits standards ; la caution applicable est désormais progressive et dégressive. Consultez son barème à jour dans le simulateur et dans votre devis.",
     "deposit_tiers_summary": "Consulter le barème de caution dégressive",
     "deposit_tiers_explainer": "Calcul progressif : seules les pochettes situées dans une nouvelle tranche bénéficient de son taux. La caution totale ne diminue jamais lorsque l'on ajoute une pochette.",
@@ -946,6 +950,10 @@ window.translations = {
     "order_privacy_link": "Consulter notre politique de confidentialité"
   },
   "en": {
+    "deposit_tier_rate_1": "€1.50",
+    "deposit_tier_rate_2": "€1.40",
+    "deposit_tier_rate_3": "€1.25",
+    "deposit_tier_rate_4": "€1.10",
     "pdf_deposit_update_notice": "The PDF summarizes standard package rates. The current refundable deposit now uses progressive discounted bands. See the updated calculator and your final quote.",
     "deposit_tiers_summary": "View progressive deposit rates",
     "deposit_tiers_explainer": "Progressive calculation: only pouches within a higher quantity band get that band's lower rate. Adding a pouch never decreases the total deposit.",
@@ -1892,6 +1900,10 @@ window.translations = {
     "order_privacy_link": "Read our privacy policy"
   },
   "de": {
+    "deposit_tier_rate_1": "1,50 €",
+    "deposit_tier_rate_2": "1,40 €",
+    "deposit_tier_rate_3": "1,25 €",
+    "deposit_tier_rate_4": "1,10 €",
     "pdf_deposit_update_notice": "Die PDF-Datei enthält die Standardpakete. Die aktuelle erstattbare Kaution ist nun progressiv gestaffelt. Der gültige Betrag steht im Rechner und Ihrem Angebot.",
     "deposit_tiers_summary": "Progressive Kautionsstaffel anzeigen",
     "deposit_tiers_explainer": "Progressiv: Nur Hüllen innerhalb der höheren Mengenstufe erhalten deren günstigeren Satz. Die Gesamtkaution sinkt nicht, wenn eine Hülle hinzukommt.",
@@ -2835,6 +2847,10 @@ window.translations = {
     "order_privacy_link": "Datenschutzerklärung lesen"
   },
   "ar": {
+    "deposit_tier_rate_1": "1.50 €",
+    "deposit_tier_rate_2": "1.40 €",
+    "deposit_tier_rate_3": "1.25 €",
+    "deposit_tier_rate_4": "1.10 €",
     "pdf_deposit_update_notice": "يلخص ملف PDF أسعار الباقات القياسية. أصبح التأمين القابل للاسترداد محسوبًا بشرائح متدرجة ومخفضة. راجع الحاسبة والجدول الحالي في عرض السعر.",
     "deposit_tiers_summary": "عرض شرائح التأمين المتدرج",
     "deposit_tiers_explainer": "يُحسب التأمين تدريجيًا: يطبق السعر الأقل فقط على الحقائب الواقعة في الشريحة الجديدة. إضافة حقيبة لا تقلل قيمة التأمين الإجمالية.",
