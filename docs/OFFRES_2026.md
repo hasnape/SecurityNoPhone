@@ -2,7 +2,7 @@
 
 > Source unique des quantités et prix publics. Le propriétaire a validé les neuf formules ci-dessous et la vente à prix dégressif. Montants affichés en euros TTC, indicatifs jusqu'à acceptation d'un devis. Toute demande commerciale exige un préavis d'au moins **30 jours calendaires**, **y compris les achats**. Le formulaire Formspree n'encaisse aucun paiement et ne confirme pas une réservation.
 
-La fiche PDF `documents/support/grille-offres-2026.pdf` présente les forfaits publics de référence. **Attention : la caution dégressive du 20/11/2026 est décrite sur le site, dans le simulateur et dans ce référentiel ; si la fiche PDF n'est pas encore régénérée, sa mention antérieure de caution forfaitaire n'est pas à jour. Le devis accepté prévaut.** Les sept supports de formation/exploitation restent conservés dans `documents/support/`.
+La grille commerciale PDF `documents/support/grille-offres-2026.pdf` a été harmonisée le 20/11/2026 avec les packs publics, les références de location personnalisée, les tarifs d'agents, la caution dégressive progressive et les conditions de restitution. La fiche de retour `documents/support/fiche-retour-materiel.pdf` utilise le même barème. Les six autres PDF opérationnels ont été conservés sans modification de leurs procédures. Seul le devis accepté fixe les montants et les prestations définitifs.
 
 ## 1. Prestations événementielles ponctuelles
 
