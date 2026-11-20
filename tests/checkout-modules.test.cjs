@@ -86,10 +86,14 @@ test('private/pro custom rental is accessible, quantity-editable and never given
   assert.match(order, /data-custom-quantity-hint/);
   assert.match(order, /min="1" step="1" value="49"/);
   assert.match(calculator, /quantityInput\.readOnly = !!offer\?\.quantity/);
-  assert.match(calculator, /customRental && quantityInput\) quantityInput\.value = '1'/);
-  assert.match(calculator, /showElement\(rentalGroup, professional\)/);
+  assert.match(calculator, /customRental && quantityInput\) quantityInput\.value = '10'/);
+  assert.match(calculator, /quantityInput\.min = customRental \? '10'/);
+  assert.match(calculator, /const usesRentalDates = professional \|\| customRental/);
+  assert.match(order, /data-custom-no-min-term-note/);
+  assert.match(order, /data-pro-min-term-note/);
+  assert.match(calculator, /showElement\(rentalGroup, usesRentalDates\)/);
   assert.match(calculator, /const caution = offer\.type === 'event' \|\| professional \|\| customRental/);
-  assert.match(calculator, /const eligibleRental = offer\?\.type === 'event' \|\| professional \|\| customRental/);
+  assert.match(calculator, /const eligibleRental = offer\?\.type === 'event' \|\| usesRentalDates/);
   assert.match(calculator, /label = translate\('custom_rental_price_pending'/);
   assert.match(calculator, /label = translate\('custom_rental_agent_price_pending'/);
   assert.match(calculator, /const pricedSubtotal = total !== null/);
@@ -97,7 +101,9 @@ test('private/pro custom rental is accessible, quantity-editable and never given
   for (const lang of ['fr', 'en', 'de', 'ar']) {
     for (const key of ['offer_location_particulier', 'offer_location_pro',
       'custom_rental_section_title', 'custom_rental_quantity_help',
-      'custom_rental_price_pending', 'custom_rental_agent_price_pending']) {
+      'custom_rental_price_pending', 'custom_rental_agent_price_pending',
+      'custom_rental_min_quantity', 'custom_rental_duration_help',
+      'custom_rental_dates_order']) {
       assert.equal(typeof translations[lang][key], 'string', lang + ': ' + key);
     }
   }
