@@ -19,7 +19,29 @@
     special_event: { type: 'custom' }
   });
   const NOTICE_DAYS = 30;
-  const DEPOSIT_PER_POUCH = 1.50;
+  // Progressive refundable deposit for every temporarily loaned pouch.
+  // Rates apply only to incremental units: thresholds never reduce total deposit.
+  const DEPOSIT_TIERS = Object.freeze([
+    { upTo: 49, cents: 150 },
+    { upTo: 99, cents: 140 },
+    { upTo: 299, cents: 125 },
+    { upTo: Infinity, cents: 110 }
+  ]);
+  function calculateDeposit(quantity) {
+    if (!Number.isSafeInteger(quantity) || quantity < 1) return null;
+    let remaining = quantity;
+    let previous = 0;
+    let cents = 0;
+    for (const tier of DEPOSIT_TIERS) {
+      const width = tier.upTo - previous;
+      const count = Math.min(remaining, width);
+      cents += count * tier.cents;
+      remaining -= count;
+      previous = tier.upTo;
+      if (remaining === 0) break;
+    }
+    return cents / 100;
+  }
   const AGENT_DAY_RATE = 100; // EUR per agent per on-site day, up to 7 hours (flat fee).
   const MAX_AGENT_HOURS = 7;
 
@@ -192,6 +214,8 @@
     const priceDisplay = form.querySelector('[data-total-display]');
     const cautionGroup = form.querySelector('[data-caution-block]');
     const cautionDisplay = form.querySelector('[data-caution-display]');
+    const payableGroup = form.querySelector('[data-payable-estimate-group]');
+    const payableAmount = form.querySelector('[data-payable-estimate-amount]');
     const totalHidden = form.querySelector('[data-total-value]');
     const cautionHidden = form.querySelector('[data-caution-value]');
     const replacementHidden = form.querySelector('[data-replacement-price]');
@@ -325,6 +349,7 @@
         if (startInput) startInput.setCustomValidity('');
         if (priceDisplay) priceDisplay.textContent = '';
         if (cautionGroup) cautionGroup.classList.add('d-none');
+        if (payableGroup) payableGroup.classList.add('d-none');
         if (totalHidden) totalHidden.value = '';
         if (packBaseHidden) packBaseHidden.value = '';
         if (pricingMethodHidden) pricingMethodHidden.value = '';
@@ -353,7 +378,7 @@
       );
       const valid = quantityOk && datesOk && agentValid;
       const caution = offer.type === 'event' || professional || customRental
-        ? quantity * DEPOSIT_PER_POUCH : 0;
+        ? calculateDeposit(quantity) : 0;
       const replacement = replacementUnitPrice(quantity);
       let total = null;
       let label = '';
@@ -399,6 +424,8 @@
       }
 
       const pricedSubtotal = total !== null ? total + (agentCharge || 0) : null;
+      const estimatedOutlay = pricedSubtotal !== null && caution !== null
+        ? pricedSubtotal + caution : null;
       if (withAgent && agentCharge !== null) {
         if (customRental) {
           if (customReference?.estimate != null) {
@@ -462,6 +489,10 @@
           : translate('order_simulation_ready', 'Estimation indicative : montant et disponibilité définitifs soumis à devis.');
       if (cautionGroup) cautionGroup.classList.toggle('d-none', !quantityOk || caution <= 0);
       if (cautionDisplay && quantityOk && caution > 0) cautionDisplay.value = format(caution);
+      if (payableGroup) payableGroup.classList.toggle('d-none',
+        !eligibleRental || !quantityOk || !agentValid || estimatedOutlay === null);
+      if (payableAmount && eligibleRental && quantityOk && agentValid &&
+          estimatedOutlay !== null) payableAmount.textContent = format(estimatedOutlay);
       if (packBaseHidden) packBaseHidden.value = valid && total != null ? total.toFixed(2) : '';
       if (pricingMethodHidden) pricingMethodHidden.value = valid && customRental
         ? (customReference?.estimate != null
@@ -476,7 +507,8 @@
       // terms. Custom rental totals are estimates only, subject to an accepted quote.
       if (totalHidden) totalHidden.value = valid && pricedSubtotal !== null && offer.type !== 'professional'
         ? pricedSubtotal.toFixed(2) : '';
-      if (cautionHidden) cautionHidden.value = valid ? caution.toFixed(2) : '';
+      if (cautionHidden) cautionHidden.value = valid && caution !== null
+        ? caution.toFixed(2) : '';
       if (replacementHidden) replacementHidden.value =
         valid && caution > 0 ? replacement.toFixed(2) : '';
       return valid;
