@@ -152,12 +152,17 @@ rates = {
     'custom_quantity_minimum': r"quantityInput\.min = customRental \? '10'",
     'custom_quantity_validation': r"quantity < 10",
     'custom_duration_no_minimum': r'custom_rental_dates_order',
+    'custom_pro_reference': r'CUSTOM_PRO_REFERENCE = Object\.freeze',
+    'custom_event_floor': r'CUSTOM_EVENT_FLOOR = Object\.freeze',
+    'custom_billing_blocks': r'CUSTOM_BILLING_DAYS = 30',
+    'custom_reference_calculation': r'function customRentalReference\(quantity, startISO, endISO\)',
+
     'custom_rental_dates_visible': r'showElement\(rentalGroup, usesRentalDates\)',
 }
 for label, pattern in rates.items():
     if not re.search(pattern, calculator):
         errors.append('Pricing baseline changed: ' + label)
-checks.append('Approved standard packs, custom quantity from 10, flexible custom dates and existing deposits')
+checks.append('Approved fixed packs, 10-pouch custom minimum, Pro reference tiers, short-term floor and deposit')
 
 
 def luminance(color):
