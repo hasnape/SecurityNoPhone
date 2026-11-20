@@ -123,7 +123,7 @@ if form.get('action') != 'https://formspree.io/f/xqaqogdv' or form.get('method',
     errors.append('Primary form transport contract changed')
 for value in ['event_mini', 'event_essentiel', 'event_confort', 'event_grand',
               'event_prestige', 'pro_education', 'pro_starter', 'pro_business',
-              'pro_entreprise', 'achat', 'special_event']:
+              'pro_entreprise', 'location_particulier', 'location_pro', 'achat', 'special_event']:
     if f'value="{value}"' not in order:
         errors.append('Offer missing: ' + value)
 
@@ -147,12 +147,17 @@ rates = {
     'dates_start': r'function earliestRequestDate\(\)',
     'dates_duration': r'function minimumRentalEndDate\(startValue\)',
     'target_date_required': r'targetInput\.required = dated',
-    'three_month_date_required': r'endInput\.required = professional',
+    'rental_dates_required': r'endInput\.required = usesRentalDates',
+    'fixed_three_month_condition': r'if \(standardPro\):?',
+    'custom_quantity_minimum': r"quantityInput\.min = customRental \? '10'",
+    'custom_quantity_validation': r"quantity < 10",
+    'custom_duration_no_minimum': r'custom_rental_dates_order',
+    'custom_rental_dates_visible': r'showElement\(rentalGroup, usesRentalDates\)',
 }
 for label, pattern in rates.items():
     if not re.search(pattern, calculator):
         errors.append('Pricing baseline changed: ' + label)
-checks.append('Approved offer prices, advance notice and refundable deposits')
+checks.append('Approved standard packs, custom quantity from 10, flexible custom dates and existing deposits')
 
 
 def luminance(color):
@@ -184,7 +189,7 @@ custom_rental_test_result = run(['node', '--test', 'tests/custom-rental-ui.test.
 checks.append('Private/business custom rentals: DOM-like simulation, pricing and dates')
 checks.append('Recovered commercial modules: packs, simulation, agent modes and tracking')
 rental_test_result = run(['node', '--test', 'tests/rental-term.test.cjs'])
-checks.append('Calendar rental minimum and quote-only regression tests')
+checks.append('Three-month fixed professional minimum, flexible custom periods and quote-only regression tests')
 inventory_test_result = run([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_*.py'])
 checks.append('Python regressions: committed deployment inventory and SEO contracts')
 warnings.append('Mobile, real form delivery, payment, logistics and legal validation require separate evidence.')
