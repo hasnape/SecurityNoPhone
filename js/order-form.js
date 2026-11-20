@@ -155,6 +155,7 @@
     const offerSelect = form.querySelector('#offerType');
     const quantityInput = form.querySelector('#quantity');
     const customQuantityHint = form.querySelector('[data-custom-quantity-hint]');
+    const customPricingNotice = form.querySelector('[data-custom-pricing-notice]');
     const standardProMinTermNote = form.querySelector('[data-pro-min-term-note]');
     const customNoMinTermNote = form.querySelector('[data-custom-no-min-term-note]');
     const targetGroup = form.querySelector('[data-event-purchase-date]');
@@ -170,6 +171,7 @@
     const rentalMode = form.querySelector('[data-rental-mode]');
     const simulationHint = form.querySelector('[data-simulation-hint]');
     const packBaseHidden = form.querySelector('[data-pack-base-value]');
+    const pricingMethodHidden = form.querySelector('[data-pricing-method-value]');
     const agentRateHidden = form.querySelector('[data-agent-rate-value]');
     const agentChargeHidden = form.querySelector('[data-agent-charge-value]');
     const agentExtrasHidden = form.querySelector('[data-agent-extras-value]');
@@ -291,6 +293,7 @@
       const eligibleRental = offer?.type === 'event' || usesRentalDates;
       showElement(rentalModeGroup, eligibleRental);
       if (customQuantityHint) customQuantityHint.classList.toggle('d-none', !customRental);
+      showElement(customPricingNotice, customRental);
       const withAgent = offer?.type === 'custom' || (eligibleRental && rentalMode?.value === 'avec');
       showElement(agentGroup, withAgent);
       if (startInput) startInput.required = usesRentalDates;
@@ -324,6 +327,7 @@
         if (cautionGroup) cautionGroup.classList.add('d-none');
         if (totalHidden) totalHidden.value = '';
         if (packBaseHidden) packBaseHidden.value = '';
+        if (pricingMethodHidden) pricingMethodHidden.value = '';
         if (agentRateHidden) agentRateHidden.value = '';
         if (agentChargeHidden) agentChargeHidden.value = '';
         if (agentExtrasHidden) agentExtrasHidden.value = '';
@@ -459,6 +463,11 @@
       if (cautionGroup) cautionGroup.classList.toggle('d-none', !quantityOk || caution <= 0);
       if (cautionDisplay && quantityOk && caution > 0) cautionDisplay.value = format(caution);
       if (packBaseHidden) packBaseHidden.value = valid && total != null ? total.toFixed(2) : '';
+      if (pricingMethodHidden) pricingMethodHidden.value = valid && customRental
+        ? (customReference?.estimate != null
+          ? 'Reference Pro 30j + plancher evenementiel (estimation, devis requis)'
+          : 'Reference Pro informative, montant sur devis')
+        : '';
       if (agentRateHidden) agentRateHidden.value = valid && withAgent ? AGENT_DAY_RATE.toFixed(2) : '';
       if (agentChargeHidden) agentChargeHidden.value = valid && withAgent ? agentCharge.toFixed(2) : '';
       if (agentExtrasHidden) agentExtrasHidden.value = valid && withAgent && outsideLyon
