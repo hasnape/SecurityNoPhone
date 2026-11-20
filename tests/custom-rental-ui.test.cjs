@@ -259,16 +259,20 @@ test('larger-than-event volumes and absent dates keep price quote-only', () => {
   assert.match(f['[data-total-display]'].textContent, /69/);
 });
 
-test('progressive deposits apply to event and professional standard packs too', () => {
+test('event packs use a 25% deposit and Pro packs remain progressive', () => {
   const { fields: f, trigger, set } = boot();
   set('#offerType', 'event_mini'); trigger('#offerType', 'change');
-  assert.equal(f['[data-caution-value]'].value, '73.50');
+  assert.equal(f['[data-caution-value]'].value, '17.25');
   assert.equal(f['[data-total-value]'].value, '69.00');
-  assert.match(f['[data-payable-estimate-amount]'].textContent, /142,50/);
+  assert.match(f['[data-payable-estimate-amount]'].textContent, /86,25/);
   set('#offerType', 'event_confort'); trigger('#offerType', 'change');
-  assert.equal(f['[data-caution-value]'].value, '247.25');
+  assert.equal(f['[data-caution-value]'].value, '47.25');
   assert.equal(f['[data-total-value]'].value, '189.00');
-  assert.match(f['[data-payable-estimate-amount]'].textContent, /436,25/);
+  assert.match(f['[data-payable-estimate-amount]'].textContent, /236,25/);
+  for (const [key, amount] of [['event_essentiel','27.25'],['event_grand','74.75'],['event_prestige','112.25']]) {
+    set('#offerType',key); trigger('#offerType','change');
+    assert.equal(f['[data-caution-value]'].value,amount,key);
+  }
   set('#offerType', 'pro_entreprise'); trigger('#offerType', 'change');
   assert.equal(f['[data-caution-value]'].value, '730.10');
   assert.equal(f['[data-total-value]'].value, '');
