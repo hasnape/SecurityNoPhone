@@ -176,13 +176,10 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
         self.assertIn('data-i18n="legal_offers_2026_notice"', PAGES["cgv.html"])
 
     def test_sitemap_modified_dates(self):
-        for path in ("", "solutions.html", "commande.html"):
+        for path in ("", "solutions.html", "commande.html", "support.html",
+                     "cgv.html", "ressources.html"):
             self.assertIn("<loc>https://securitynophone.com/" + path +
                           "</loc>\n    <lastmod>2026-11-20</lastmod>",
-                          PAGES["sitemap.xml"])
-        for path in ("support.html", "cgv.html"):
-            self.assertIn("<loc>https://securitynophone.com/" + path +
-                          "</loc>\n    <lastmod>2026-11-18</lastmod>",
                           PAGES["sitemap.xml"])
 
 if __name__ == "__main__":
