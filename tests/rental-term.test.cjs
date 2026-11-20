@@ -11,7 +11,7 @@ const end = source.indexOf('  function showElement(', begin);
 assert.ok(begin > 0 && end > begin, 'Source pricing/date functions must be accessible');
 const funcs = vm.runInNewContext(source.slice(begin, end) +
   '\n({ OFFER_CONFIG, NOTICE_DAYS, EVENT_DEPOSIT_PERCENT, calculateEventDeposit, DEPOSIT_TIERS, calculateDeposit, AGENT_DAY_RATE, MAX_AGENT_HOURS, CUSTOM_PRO_REFERENCE, CUSTOM_EVENT_FLOOR, CUSTOM_BILLING_DAYS, customRentalReference, calculateAgentCharge, addCalendarDays, franceTodayISO, earliestRequestDate, minimumRentalEndDate, purchaseUnitPrice, replacementUnitPrice });');
-const { OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_TIERS, calculateDeposit, AGENT_DAY_RATE, MAX_AGENT_HOURS, CUSTOM_PRO_REFERENCE, CUSTOM_EVENT_FLOOR, CUSTOM_BILLING_DAYS, customRentalReference, calculateAgentCharge,
+const { OFFER_CONFIG, NOTICE_DAYS, EVENT_DEPOSIT_PERCENT, calculateEventDeposit, DEPOSIT_TIERS, calculateDeposit, AGENT_DAY_RATE, MAX_AGENT_HOURS, CUSTOM_PRO_REFERENCE, CUSTOM_EVENT_FLOOR, CUSTOM_BILLING_DAYS, customRentalReference, calculateAgentCharge,
         addCalendarDays, franceTodayISO, earliestRequestDate,
         minimumRentalEndDate, purchaseUnitPrice, replacementUnitPrice } = funcs;
 
