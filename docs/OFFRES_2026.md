@@ -29,14 +29,14 @@ Cette offre **ponctuelle** est distincte des contrats professionnels à engageme
 
 Le client garde les pochettes pendant toute la durée convenue et les restitue à la fin du contrat. **Trois mois calendaires minimum** (date de retour incluse), facturation et renouvellement définis au devis. Les anciennes offres à 150/390 € par jour, 20 €/mois et 60 €/mois ne sont plus présentées comme des offres souscriptibles.
 
-## 2 bis. Location personnalisée — particulier et professionnel (quantité libre)
+## 2 bis. Location personnalisée — particulier et professionnel (à partir de 10 pochettes, durée libre)
 
-La location personnalisée **ne remplace pas les neuf packs standards à quantité fixe**. Elle permet d'indiquer **n'importe quelle quantité entière d'au moins une pochette**, selon le besoin réel du client. Aucune quantité minimale de 50 (réservée à l'achat définitif) ne s'applique à ce parcours de location.
+La location personnalisée **ne remplace pas les neuf packs standards à quantité fixe**. Elle permet de choisir librement **une quantité entière à partir de 10 pochettes** et la période de location souhaitée **sans durée minimale contractuelle**. La durée peut être d'une journée (mêmes dates de début et de fin) ou davantage. Le minimum de 50 unités concerne uniquement l'achat définitif. La durée de trois mois minimum concerne uniquement les **packs Pro standards**, pas l'offre personnalisée.
 
-- **Particulier :** événement ponctuel d'une journée d'utilisation, date d'événement au moins J+30, matériel envoyé et rendu selon les modalités du devis.
-- **Professionnel :** nombre libre de pochettes conservées pendant une location de **trois mois calendaires minimum** (date de fin incluse), date de début au moins J+30.
-- Pour les deux profils : **tarif de location des pochettes exclusivement sur devis**, après confirmation de la quantité, du stock, des dates, des colis et des modalités logistiques. **Ne pas calculer un prix par pochette en interpolant ou en proratisant les anciens packs.**
-- **Caution indicative : 1,50 € par pochette** confiée, affichée distinctement, sous réserve des conditions d'inventaire. Exemple : 37 pochettes → caution indicative 55,50 € ; cela **ne constitue pas le prix de location**.
+- **Particulier :** date de début au moins J+30 et date de fin choisie librement (égale ou postérieure au début). Aucun engagement minimal de durée pour la location personnalisée ; matériel envoyé et rendu selon les modalités du devis.
+- **Professionnel :** minimum **10 pochettes** avec date de début au moins J+30 et fin librement choisie (égale ou postérieure au début). **Aucune durée minimale de location n'est imposée pour cette offre personnalisée**, à la différence des packs Pro standards.
+- Pour les deux profils : **tarif de location des pochettes exclusivement sur devis**, selon la quantité (dès 10), la durée réelle, le stock, les dates, les colis et les modalités logistiques. **Ne pas extrapoler ni proratiser les tarifs des packs fixes** et ne pas garantir qu'une location personnalisée soit moins chère : proposer le pack existant s'il convient mieux aux dates et à la quantité du client.
+- **Caution indicative : 1,50 € par pochette** confiée, affichée distinctement, sous réserve des conditions d'inventaire. Exemple : 10 pochettes → caution indicative 15 € ; 37 pochettes → 55,50 € ; ces montants **ne constituent pas le prix de location**.
 - Option sans agent, ou avec agent à **100 € TTC par agent et par journée d'intervention de sept heures maximum**. En dehors de Lyon, déplacements et hébergement si nécessaire en supplément, sur devis. Le montant connu des agents ne vaut jamais devis total de la location personnalisée.
 - Formspree transmet une **demande de devis** et non une réservation ou un paiement. Vérification humaine obligatoire pour les quantités et disponibilités, en particulier lorsque les lots doivent être constitués sur mesure.
 - Les tarifs et caractéristiques des neuf packs fixes, les conditions d'achat minimum 50 unités et la logistique en vigueur restent inchangés.
@@ -69,7 +69,7 @@ Le client devient propriétaire des pochettes. Vente avec ou sans personnalisati
 ## 6. Réservation : 30 jours minimum dans tous les parcours
 
 - **Événement :** date de l'événement au minimum J+30 à compter de la demande.
-- **Professionnel :** date de début de mise à disposition au minimum J+30, plus date de fin conforme aux trois mois calendaires minimum.
+- **Pack Pro standard :** date de début au minimum J+30 et date de fin conforme aux trois mois calendaires minimum. **Location personnalisée particulier/pro :** début au minimum J+30, fin le même jour ou ultérieurement, **aucun minimum de durée**, minimum 10 pochettes.
 - **Achat :** date de livraison souhaitée au minimum J+30, même lorsque les pochettes sont disponibles ; commande acceptée seulement après devis.
 - **Prestation spéciale ou agent :** date visée au minimum J+30.
 - Vérification Javascript sur la date civile de **France métropolitaine (Europe/Paris)**, +30 jours calendaires, y compris changements d'heure et fins de mois.

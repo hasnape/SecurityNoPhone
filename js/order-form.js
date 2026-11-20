@@ -114,6 +114,8 @@
     const offerSelect = form.querySelector('#offerType');
     const quantityInput = form.querySelector('#quantity');
     const customQuantityHint = form.querySelector('[data-custom-quantity-hint]');
+    const standardProMinTermNote = form.querySelector('[data-pro-min-term-note]');
+    const customNoMinTermNote = form.querySelector('[data-custom-no-min-term-note]');
     const targetGroup = form.querySelector('[data-event-purchase-date]');
     const targetInput = form.querySelector('[data-requested-date]');
     const targetError = form.querySelector('[data-requested-date-error]');
@@ -166,13 +168,16 @@
       const earliest = earliestRequestDate();
       if (targetInput) targetInput.min = earliest;
       if (startInput) startInput.min = earliest;
+      const standardPro = offer.type === 'professional';
+      const customRental = offer.type === 'custom_event' || offer.type === 'custom_professional';
       if (endInput) endInput.min = startInput?.value
-        ? (minimumRentalEndDate(startInput.value) || earliest) : earliest;
+        ? (standardPro ? (minimumRentalEndDate(startInput.value) || earliest) : startInput.value)
+        : earliest;
       showError(targetInput, targetError, '');
       showError(endInput, dateError, '');
       if (startInput) startInput.setCustomValidity('');
 
-      if (offer.type === 'professional' || offer.type === 'custom_professional') {
+      if (standardPro || customRental) {
         const start = startInput?.value || '';
         const end = endInput?.value || '';
         if (!start || !end) {
@@ -187,15 +192,18 @@
           return false;
         }
         if (!addCalendarDays(end, 0) || end < start) {
-          showError(endInput, dateError, translate('order_dates_range',
-            'La date de fin doit être après le début.'));
+          showError(endInput, dateError, customRental
+            ? translate('custom_rental_dates_order', 'La fin doit être le jour du début ou après.')
+            : translate('order_dates_range', 'La date de fin doit être après le début.'));
           return false;
         }
-        const minEnd = minimumRentalEndDate(start);
-        if (!minEnd || end < minEnd) {
-          showError(endInput, dateError, translate('order_dates_min_three_months',
-            'Location : trois mois calendaires minimum.'));
-          return false;
+        if (standardPro) {
+          const minEnd = minimumRentalEndDate(start);
+          if (!minEnd || end < minEnd) {
+            showError(endInput, dateError, translate('order_dates_min_three_months',
+              'Location : trois mois calendaires minimum.'));
+            return false;
+          }
         }
         return true;
       }
@@ -220,6 +228,8 @@
         message = translate('order_quantity_invalid', 'Indiquez un nombre entier de pochettes.');
       } else if (offer.quantity && quantity !== offer.quantity) {
         message = translate('booking_package_fixed', 'Ce forfait comporte une quantité fixe.');
+      } else if ((offer.type === 'custom_event' || offer.type === 'custom_professional') && quantity < 10) {
+        message = translate('custom_rental_min_quantity', 'Location personnalisée : minimum 10 pochettes.');
       } else if (offer.type === 'purchase' && quantity < 50) {
         message = translate('booking_purchase_minimum', 'Achat : minimum 50 pochettes.');
       }
@@ -229,18 +239,21 @@
 
     function refresh() {
       const offer = OFFER_CONFIG[offerSelect?.value];
-      const professional = offer?.type === 'professional' || offer?.type === 'custom_professional';
+      const professional = offer?.type === 'professional';
       const customRental = offer?.type === 'custom_event' || offer?.type === 'custom_professional';
-      const dated = !!offer && !professional;
-      showElement(rentalGroup, professional);
+      const usesRentalDates = professional || customRental;
+      const dated = !!offer && !usesRentalDates;
+      showElement(rentalGroup, usesRentalDates);
       showElement(targetGroup, dated);
-      const eligibleRental = offer?.type === 'event' || professional || customRental;
+      showElement(standardProMinTermNote, professional);
+      showElement(customNoMinTermNote, customRental);
+      const eligibleRental = offer?.type === 'event' || usesRentalDates;
       showElement(rentalModeGroup, eligibleRental);
       if (customQuantityHint) customQuantityHint.classList.toggle('d-none', !customRental);
       const withAgent = offer?.type === 'custom' || (eligibleRental && rentalMode?.value === 'avec');
       showElement(agentGroup, withAgent);
-      if (startInput) startInput.required = professional;
-      if (endInput) endInput.required = professional;
+      if (startInput) startInput.required = usesRentalDates;
+      if (endInput) endInput.required = usesRentalDates;
       if (targetInput) targetInput.required = dated;
       const outsideLyon = withAgent && agentZoneInput?.value === 'hors_lyon';
       showElement(outsideLyonFields, outsideLyon);
@@ -256,10 +269,11 @@
         currentOffer = offerSelect?.value || null;
         if (offer?.quantity && quantityInput) quantityInput.value = String(offer.quantity);
         else if (offer?.type === 'purchase' && quantityInput) quantityInput.value = '50';
-        else if (customRental && quantityInput) quantityInput.value = '1';
+        else if (customRental && quantityInput) quantityInput.value = '10';
         if (quantityInput) quantityInput.readOnly = !!offer?.quantity;
       }
 
+      if (quantityInput) quantityInput.min = customRental ? '10' : offer?.type === 'purchase' ? '50' : '1';
       if (!offer) {
         showError(quantityInput, quantityError, '');
         showError(targetInput, targetError, '');
