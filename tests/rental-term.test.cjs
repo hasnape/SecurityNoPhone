@@ -108,7 +108,9 @@ test('custom rentals retain freely selectable quantity and duration and use indi
   assert.match(source, /custom_rental_dates_order/);
   assert.match(source, /const caution = offer\.type === 'event' \|\| professional \|\| customRental/);
   assert.match(source, /quantity \* DEPOSIT_PER_POUCH/);
-  assert.match(source, /price.*custom|Tarif des pochettes sur devis/);
+  assert.match(source, /function customRentalReference\(quantity, startISO, endISO\)/);
+  assert.match(source, /custom_rental_pro_estimate/);
+  assert.match(source, /custom_rental_price_pending/);
   assert.match(source, /const pricedSubtotal = total !== null/);
   assert.match(source, /const valid = quantityOk && datesOk && agentValid/);
 });
