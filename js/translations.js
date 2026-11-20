@@ -1,5 +1,6 @@
 window.translations = {
   "fr": {
+    "pdf_deposit_update_notice": "La grille PDF récapitule les forfaits standards ; la caution applicable est désormais progressive et dégressive. Consultez son barème à jour dans le simulateur et dans votre devis.",
     "deposit_tiers_summary": "Consulter le barème de caution dégressive",
     "deposit_tiers_explainer": "Calcul progressif : seules les pochettes situées dans une nouvelle tranche bénéficient de son taux. La caution totale ne diminue jamais lorsque l'on ajoute une pochette.",
     "deposit_tier_column": "Pochettes dans la tranche",
@@ -940,11 +941,12 @@ window.translations = {
     "support_prices_pdf_title": "Grille tarifaire 2026 — version PDF",
     "support_prices_pdf_description": "Les cinq formules événementielles, quatre abonnements professionnels, tarifs de vente dégressifs, préavis de 30 jours et conditions Mondial Relay sur une fiche imprimable.",
     "support_prices_pdf_cta": "Télécharger la grille commerciale (PDF)",
-    "footer_prices_pdf_link": "Grille commerciale actuelle (PDF)",
+    "footer_prices_pdf_link": "Grille des forfaits standards (PDF)",
     "order_privacy_notice": "Votre demande est transmise via Formspree pour préparer un devis et vous répondre. Aucun paiement n'est prélevé. Ne communiquez pas de données sensibles inutiles dans les commentaires.",
     "order_privacy_link": "Consulter notre politique de confidentialité"
   },
   "en": {
+    "pdf_deposit_update_notice": "The PDF summarizes standard package rates. The current refundable deposit now uses progressive discounted bands. See the updated calculator and your final quote.",
     "deposit_tiers_summary": "View progressive deposit rates",
     "deposit_tiers_explainer": "Progressive calculation: only pouches within a higher quantity band get that band's lower rate. Adding a pouch never decreases the total deposit.",
     "deposit_tier_column": "Pouches in band",
@@ -1885,11 +1887,12 @@ window.translations = {
     "support_prices_pdf_title": "2026 pricing guide — PDF",
     "support_prices_pdf_description": "Five event packages, four professional subscriptions, bulk purchase prices, the 30-day lead time and Mondial Relay shipping terms in one printable guide.",
     "support_prices_pdf_cta": "Download pricing guide (PDF)",
-    "footer_prices_pdf_link": "Current pricing guide (PDF)",
+    "footer_prices_pdf_link": "Standard package rate sheet (PDF)",
     "order_privacy_notice": "Your request is submitted through Formspree to prepare a quote and reply to you. No payment is taken. Please avoid unnecessary sensitive information in the comments.",
     "order_privacy_link": "Read our privacy policy"
   },
   "de": {
+    "pdf_deposit_update_notice": "Die PDF-Datei enthält die Standardpakete. Die aktuelle erstattbare Kaution ist nun progressiv gestaffelt. Der gültige Betrag steht im Rechner und Ihrem Angebot.",
     "deposit_tiers_summary": "Progressive Kautionsstaffel anzeigen",
     "deposit_tiers_explainer": "Progressiv: Nur Hüllen innerhalb der höheren Mengenstufe erhalten deren günstigeren Satz. Die Gesamtkaution sinkt nicht, wenn eine Hülle hinzukommt.",
     "deposit_tier_column": "Hüllen in der Stufe",
@@ -2827,11 +2830,12 @@ window.translations = {
     "support_prices_pdf_title": "Preisliste 2026 — PDF",
     "support_prices_pdf_description": "Fünf Eventpakete, vier Gewerbeabos, Mengenpreise, 30 Tage Vorlauf und Mondial-Relay-Versandbedingungen als druckbare PDF.",
     "support_prices_pdf_cta": "Preisliste herunterladen (PDF)",
-    "footer_prices_pdf_link": "Aktuelle Preisliste (PDF)",
+    "footer_prices_pdf_link": "Preisliste der Standardpakete (PDF)",
     "order_privacy_notice": "Ihre Anfrage wird über Formspree zur Angebotserstellung und Antwort übermittelt. Keine Zahlung erfolgt. Bitte keine unnötigen sensiblen Daten in Bemerkungen angeben.",
     "order_privacy_link": "Datenschutzerklärung lesen"
   },
   "ar": {
+    "pdf_deposit_update_notice": "يلخص ملف PDF أسعار الباقات القياسية. أصبح التأمين القابل للاسترداد محسوبًا بشرائح متدرجة ومخفضة. راجع الحاسبة والجدول الحالي في عرض السعر.",
     "deposit_tiers_summary": "عرض شرائح التأمين المتدرج",
     "deposit_tiers_explainer": "يُحسب التأمين تدريجيًا: يطبق السعر الأقل فقط على الحقائب الواقعة في الشريحة الجديدة. إضافة حقيبة لا تقلل قيمة التأمين الإجمالية.",
     "deposit_tier_column": "الحقائب ضمن الشريحة",
@@ -3768,7 +3772,7 @@ window.translations = {
     "support_prices_pdf_title": "جدول أسعار 2026 — PDF",
     "support_prices_pdf_description": "خمس باقات للفعاليات وأربع اشتراكات مهنية وأسعار البيع حسب الكمية ومهلة 30 يومًا وشروط Mondial Relay في ملف قابل للطباعة.",
     "support_prices_pdf_cta": "تحميل جدول الأسعار (PDF)",
-    "footer_prices_pdf_link": "جدول الأسعار الحالي (PDF)",
+    "footer_prices_pdf_link": "جدول أسعار الباقات القياسية (PDF)",
     "order_privacy_notice": "يُرسل طلبك عبر Formspree لإعداد عرض سعر والرد عليك. لا يتم تحصيل أي دفعة. لا تضع معلومات حساسة غير ضرورية في التعليقات.",
     "order_privacy_link": "اقرأ سياسة الخصوصية"
   }
