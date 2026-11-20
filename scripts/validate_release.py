@@ -142,7 +142,12 @@ rates = {
     'pro_entreprise': r"pro_entreprise:\s*\{\s*type:\s*'professional',\s*quantity:\s*605,\s*monthlyPrice:\s*349,\s*minMonths:\s*3\s*\}",
     'purchase_minimum': r"achat:\s*\{\s*type:\s*'purchase',\s*minQuantity:\s*50\s*\}",
     'notice_days': r'const NOTICE_DAYS = 30;',
-    'stock_deposit': r'const DEPOSIT_PER_POUCH = 1\.50;',
+    'progressive_deposit_tiers': r'const DEPOSIT_TIERS = Object\.freeze',
+    'progressive_deposit_calculation': r'function calculateDeposit\(quantity\)',
+    'deposit_first_49': r'upTo: 49, cents: 150',
+    'deposit_next_50': r'upTo: 99, cents: 140',
+    'deposit_next_200': r'upTo: 299, cents: 125',
+    'deposit_300_plus': r'upTo: Infinity, cents: 110',
     'purchase_tiers': r'function purchaseUnitPrice\(quantity\)',
     'dates_start': r'function earliestRequestDate\(\)',
     'dates_duration': r'function minimumRentalEndDate\(startValue\)',
@@ -162,7 +167,7 @@ rates = {
 for label, pattern in rates.items():
     if not re.search(pattern, calculator):
         errors.append('Pricing baseline changed: ' + label)
-checks.append('Approved fixed packs, 10-pouch custom minimum, Pro reference tiers, short-term floor and deposit')
+checks.append('Approved fixed offers, custom rental price reference and progressive refundable deposit')
 
 
 def luminance(color):
