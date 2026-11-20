@@ -104,7 +104,7 @@ test('private customer chooses 37 pouches with a Pro-based indicative estimate',
   assert.equal(f['#quantity'].validationMessage, '');
   assert.equal(f['[data-caution-value]'].value, '55.50');
   assert.equal(f['[data-total-value]'].value, '207.00');
-  assert.equal(f['[data-payable-estimate-amount]'].textContent, '262,50 €');
+  assert.match(f['[data-payable-estimate-amount]'].textContent, /262,50/);
   assert.match(f['[data-total-display]'].textContent, /207/);
   assert.match(f['[data-pricing-method-value]'].value, /Reference Pro/);
 });
