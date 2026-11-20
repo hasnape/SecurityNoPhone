@@ -140,8 +140,8 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
         for name in names:
             with self.subTest(name=name):
                 html = (ROOT / (name + ".html")).read_text(encoding="utf-8")
-                self.assertIn("js/translations.js?v=20261120-pdf-sync-v5", html)
-        self.assertIn("js/order-form.js?v=20261120-deposit-tiers-v4", PAGES["commande.html"])
+                self.assertIn("js/translations.js?v=20261120-event25-v6", html)
+        self.assertIn("js/order-form.js?v=20261120-event25-v5", PAGES["commande.html"])
 
     def test_retired_three_day_and_old_price_offers_not_in_current_pages(self):
         for name in ("index.html", "solutions.html", "support.html", "cgv.html", "commande.html"):

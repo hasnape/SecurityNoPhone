@@ -1,4 +1,6 @@
-# Recette — caution dégressive progressive SecurityNoPhone
+# Recette historique — caution dégressive progressive SecurityNoPhone
+
+> **Historique :** une décision ultérieure le 20/11/2026 applique **25 % du prix du pack aux cinq locations événementielles**. Le barème progressif ci-dessous reste en vigueur **uniquement pour les packs Pro et locations personnalisées**. Voir `CAUTION_EVENEMENT_25_2026-11-20.md`. Ne pas réintroduire le barème progressif sur les événements.
 Date : 20 novembre 2026 — règle proposée puis validée dans la conversation.
 
 ## Contrat métier

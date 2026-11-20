@@ -1,198 +1,93 @@
 %PDF-1.4
-%SecurityNoPhone
+%“Œ‹ž ReportLab Generated PDF document (opensource)
 1 0 obj
-<< /Type /Catalog /Pages 2 0 R >>
+<<
+/F1 2 0 R /F2 3 0 R
+>>
 endobj
 2 0 obj
-<< /Type /Pages /Count 2 /Kids [ 5 0 R 7 0 R ] >>
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
 endobj
 3 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
 endobj
 4 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+<<
+/Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
 endobj
 5 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
+<<
+/Contents 10 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
 endobj
 6 0 obj
-<< /Length 6495 >>
-stream
-0.770 0.630 0.300 rg BT /F2 12 Tf 42 800 Td (SECURITY NO PHONE) Tj ET
-0.370 0.400 0.450 rg BT /F2 8 Tf 318 800 Td (SUPPORT  |  OFFRES  |  CONFIDENTIALIT\311) Tj ET
-0.770 0.630 0.300 RG 1.3 w 42 784 m 553 784 l S
-0.800 0.820 0.850 RG 0.5 w 42 55 m 553 55 l S
-0.370 0.400 0.450 rg BT /F1 7 Tf 42 37 Td (securitynophone.com  |  snophone.info@gmail.com  |  07 45 20 13 10) Tj ET
-0.370 0.400 0.450 rg BT /F1 7 Tf 465 37 Td (\311dition 20/11/2026  |  1) Tj ET
-0.110 0.140 0.190 rg BT /F2 20 Tf 42 752 Td (Grille commerciale 2026) Tj ET
-0.110 0.140 0.190 rg BT /F1 9 Tf 42 731 Td (SecurityNoPhone - tarifs TTC indicatifs, sous r\351serve de devis accept\351.) Tj ET
-0.990 0.980 0.950 rg 42 678 511 37 re f
-0.110 0.140 0.190 rg BT /F1 8 Tf 52 702 Td (Toute demande doit \352tre faite au moins 30 jours calendaires avant l'\351v\351nement, la mise \340 disposition ou la livraison, y) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 52 689 Td (compris les achats. Aucune r\351servation et aucun encaissement imm\351diats.) Tj ET
-0.110 0.140 0.190 rg BT /F2 12 Tf 42 660 Td (1. \311v\351nements ponctuels - une journ\351e) Tj ET
-0.950 0.960 0.980 rg 42 625 511 24 re f
-0.770 0.800 0.840 RG 0.55 w 42 649 m 553 649 l S
-0.110 0.140 0.190 rg BT /F2 8 Tf 49 633 Td (Pack) Tj ET
-0.110 0.140 0.190 rg BT /F2 8 Tf 284.06 633 Td (Pochettes) Tj ET
-0.110 0.140 0.190 rg BT /F2 8 Tf 427.14 633 Td (Prix TTC) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 625 m 553 625 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 609 Td (Mini) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 284.06 609 Td (49) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 427.14 609 Td (69 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 601 m 553 601 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 585 Td (Essentiel) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 284.06 585 Td (97) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 427.14 585 Td (109 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 577 m 553 577 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 561 Td (Confort) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 284.06 561 Td (182) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 427.14 561 Td (189 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 553 m 553 553 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 537 Td (Grand \351v\351nement) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 284.06 537 Td (303) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 427.14 537 Td (299 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 529 m 553 529 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 513 Td (Prestige) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 284.06 513 Td (484) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 427.14 513 Td (449 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 505 m 553 505 l S
-0.770 0.800 0.840 RG 0.4 w 42 649 m 42 505 l S
-0.770 0.800 0.840 RG 0.4 w 277.06 649 m 277.06 505 l S
-0.770 0.800 0.840 RG 0.4 w 420.14 649 m 420.14 505 l S
-0.770 0.800 0.840 RG 0.4 w 553 649 m 553 505 l S
-0.110 0.140 0.190 rg BT /F2 12 Tf 42 479 Td (2. Professionnels - packs standards \050minimum trois mois\051) Tj ET
-0.950 0.960 0.980 rg 42 443 511 24 re f
-0.770 0.800 0.840 RG 0.55 w 42 467 m 553 467 l S
-0.110 0.140 0.190 rg BT /F2 8 Tf 49 451 Td (Pack) Tj ET
-0.110 0.140 0.190 rg BT /F2 8 Tf 222.74 451 Td (Pochettes) Tj ET
-0.110 0.140 0.190 rg BT /F2 8 Tf 314.72 451 Td (Mensualit\351) Tj ET
-0.110 0.140 0.190 rg BT /F2 8 Tf 432.25 451 Td (3 mois) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 443 m 553 443 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 427 Td (\311ducation) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 222.74 427 Td (92) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 314.72 427 Td (69 \200) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 432.25 427 Td (207 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 419 m 553 419 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 403 Td (Starter) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 222.74 403 Td (182) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 314.72 403 Td (119 \200) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 432.25 403 Td (357 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 395 m 553 395 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 379 Td (Business) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 222.74 379 Td (363) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 314.72 379 Td (229 \200) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 432.25 379 Td (687 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 371 m 553 371 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 355 Td (Entreprise) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 222.74 355 Td (605) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 314.72 355 Td (349 \200) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 432.25 355 Td (1 047 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 347 m 553 347 l S
-0.770 0.800 0.840 RG 0.4 w 42 467 m 42 347 l S
-0.770 0.800 0.840 RG 0.4 w 215.74 467 m 215.74 347 l S
-0.770 0.800 0.840 RG 0.4 w 307.72 467 m 307.72 347 l S
-0.770 0.800 0.840 RG 0.4 w 425.25 467 m 425.25 347 l S
-0.770 0.800 0.840 RG 0.4 w 553 467 m 553 347 l S
-0.110 0.140 0.190 rg BT /F2 11 Tf 42 322 Td (3. Location personnalis\351e : 10 pochettes ou plus, dur\351e libre) Tj ET
-0.110 0.140 0.190 rg BT /F1 8.6 Tf 42 306 Td (Particuliers et professionnels : aucune dur\351e minimale, m\352me pour une seule journ\351e. R\351f\351rences Pro par p\351riode de 30) Tj ET
-0.110 0.140 0.190 rg BT /F1 8.6 Tf 42 293 Td (jours commenc\351e : 10-92 pochettes = 69 \200, 93-182 = 119 \200, 183-363 = 229 \200, 364-605 = 349 \200. Jusqu'\340 484 pochettes, le) Tj ET
-0.110 0.140 0.190 rg BT /F1 8.6 Tf 42 280 Td (tarif \351v\351nementiel comparable sert de plancher. \300 partir de 485 pochettes, montant de location sur devis uniquement.) Tj ET
-0.110 0.140 0.190 rg BT /F2 11 Tf 42 227 Td (4. Vente d\351finitive - minimum 50 unit\351s) Tj ET
-0.950 0.960 0.980 rg 42 191 511 24 re f
-0.770 0.800 0.840 RG 0.55 w 42 215 m 553 215 l S
-0.110 0.140 0.190 rg BT /F2 8 Tf 49 199 Td (Quantit\351) Tj ET
-0.110 0.140 0.190 rg BT /F2 8 Tf 330.05 199 Td (Prix TTC par pochette) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 191 m 553 191 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 175 Td (50 \340 99) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 330.05 175 Td (5,90 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 167 m 553 167 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 151 Td (100 \340 299) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 330.05 151 Td (5,50 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 143 m 553 143 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 127 Td (300 et plus) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 330.05 127 Td (4,90 \200) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 119 m 553 119 l S
-0.770 0.800 0.840 RG 0.4 w 42 215 m 42 119 l S
-0.770 0.800 0.840 RG 0.4 w 323.05 215 m 323.05 119 l S
-0.770 0.800 0.840 RG 0.4 w 553 215 m 553 119 l S
-endstream
+<<
+/PageMode /UseNone /Pages 8 0 R /Type /Catalog
+>>
 endobj
 7 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 8 0 R >>
+<<
+/Author (SecurityNoPhone - R\351p&Web) /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (Support et formation - documents op\351rationnels) /Title (Grille des offres SecurityNoPhone 2026) /Trapped /False
+>>
 endobj
 8 0 obj
-<< /Length 4842 >>
-stream
-0.770 0.630 0.300 rg BT /F2 12 Tf 42 800 Td (SECURITY NO PHONE) Tj ET
-0.370 0.400 0.450 rg BT /F2 8 Tf 318 800 Td (SUPPORT  |  OFFRES  |  CONFIDENTIALIT\311) Tj ET
-0.770 0.630 0.300 RG 1.3 w 42 784 m 553 784 l S
-0.800 0.820 0.850 RG 0.5 w 42 55 m 553 55 l S
-0.370 0.400 0.450 rg BT /F1 7 Tf 42 37 Td (securitynophone.com  |  snophone.info@gmail.com  |  07 45 20 13 10) Tj ET
-0.370 0.400 0.450 rg BT /F1 7 Tf 465 37 Td (\311dition 20/11/2026  |  2) Tj ET
-0.110 0.140 0.190 rg BT /F2 19 Tf 42 751 Td (Caution, logistique et conditions) Tj ET
-0.110 0.140 0.190 rg BT /F1 9 Tf 42 730 Td (Bar\350me applicable \340 toutes les locations \351v\351nementielles, Pro et personnalis\351es. Aucune caution pour un achat) Tj ET
-0.110 0.140 0.190 rg BT /F1 9 Tf 42 717 Td (d\351finitif.) Tj ET
-0.110 0.140 0.190 rg BT /F2 12 Tf 42 695 Td (5. Caution d\351gressive, progressive et remboursable) Tj ET
-0.950 0.960 0.980 rg 42 657 511 25 re f
-0.770 0.800 0.840 RG 0.55 w 42 682 m 553 682 l S
-0.110 0.140 0.190 rg BT /F2 8 Tf 49 666 Td (Pochettes concern\351es) Tj ET
-0.110 0.140 0.190 rg BT /F2 8 Tf 335.16 666 Td (Caution marginale) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 657 m 553 657 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 641 Td (De la 1re \340 la 49e) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 335.16 641 Td (1,50 \200 par pochette) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 632 m 553 632 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 616 Td (De la 50e \340 la 99e) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 335.16 616 Td (1,40 \200 par pochette) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 607 m 553 607 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 591 Td (De la 100e \340 la 299e) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 335.16 591 Td (1,25 \200 par pochette) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 582 m 553 582 l S
-0.110 0.140 0.190 rg BT /F1 8 Tf 49 566 Td (\300 partir de la 300e) Tj ET
-0.110 0.140 0.190 rg BT /F1 8 Tf 335.16 566 Td (1,10 \200 par pochette) Tj ET
-0.770 0.800 0.840 RG 0.45 w 42 557 m 553 557 l S
-0.770 0.800 0.840 RG 0.4 w 42 682 m 42 557 l S
-0.770 0.800 0.840 RG 0.4 w 328.16 682 m 328.16 557 l S
-0.770 0.800 0.840 RG 0.4 w 553 682 m 553 557 l S
-0.990 0.980 0.950 rg 42 505 511 47 re f
-0.110 0.140 0.190 rg BT /F1 8.6 Tf 52 536 Td (Calcul progressif : chaque taux s'applique uniquement aux pochettes de sa tranche. Exemples : 37 pochettes = 55,50) Tj ET
-0.110 0.140 0.190 rg BT /F1 8.6 Tf 52 523 Td (\200 ; 182 = 247,25 \200 ; 303 = 397,90 \200 ; 484 = 597,00 \200 ; 605 = 730,10 \200.) Tj ET
-0.110 0.140 0.190 rg BT /F2 12 Tf 42 488 Td (6. Restitution et remplacement) Tj ET
-0.110 0.140 0.190 rg BT /F1 8.9 Tf 42 473 Td (La caution est distincte du loyer. Elle est remboursable apr\350s inventaire, sous r\351serve des seules retenues) Tj ET
-0.110 0.140 0.190 rg BT /F1 8.9 Tf 42 460 Td (justifi\351es pr\351vues au devis. L'usure normale n'est pas factur\351e. Pour les pertes ou d\351g\342ts imputables au client :) Tj ET
-0.110 0.140 0.190 rg BT /F1 8.9 Tf 42 447 Td (prix de vente unitaire du lot \0505,90 \200 sous 100 ; 5,50 \200 de 100 \340 299 ; 4,90 \200 d\350s 300\051, moins toute somme d\351j\340) Tj ET
-0.110 0.140 0.190 rg BT /F1 8.9 Tf 42 434 Td (retenue. Pas de double facturation.) Tj ET
-0.110 0.140 0.190 rg BT /F2 12 Tf 42 391 Td (7. Agent avec ou sans accompagnement) Tj ET
-0.110 0.140 0.190 rg BT /F1 9 Tf 42 374 Td (Prestation avec agent : 100 \200 TTC par agent et par journ\351e jusqu'\340 7 heures. Hors de la commune de Lyon,) Tj ET
-0.110 0.140 0.190 rg BT /F1 9 Tf 42 361 Td (d\351placement et h\351bergement \351ventuel en suppl\351ment sur devis. Sans agent : l'\351quipe du client g\350re les pochettes) Tj ET
-0.110 0.140 0.190 rg BT /F1 9 Tf 42 348 Td (selon le protocole convenu.) Tj ET
-0.110 0.140 0.190 rg BT /F2 12 Tf 42 309 Td (8. Livraison et retour) Tj ET
-0.110 0.140 0.190 rg BT /F1 9 Tf 42 292 Td (Pour toute location : envoi initial standard et retour final pr\351pay\351 via Mondial Relay \050Point Relais ou Locker\051) Tj ET
-0.110 0.140 0.190 rg BT /F1 9 Tf 42 279 Td (sous r\351serve des limites de poids, de dimensions et de compatibilit\351. Tout colis multiple ou transport) Tj ET
-0.110 0.140 0.190 rg BT /F1 9 Tf 42 266 Td (exceptionnel est chiffr\351 au devis. Pour la vente : livraison standard, retour non syst\351matiquement inclus.) Tj ET
-0.110 0.140 0.190 rg BT /F2 12 Tf 42 214 Td (9. Devis et assistance) Tj ET
-0.110 0.140 0.190 rg BT /F1 9 Tf 42 195 Td (securitynophone.com/commande.html | snophone.info@gmail.com | 07 45 20 13 10) Tj ET
-0.990 0.980 0.950 rg 42 121 511 48 re f
-0.110 0.140 0.190 rg BT /F1 8.5 Tf 52 151 Td (Les montants sont des estimations non contractuelles ; seuls le devis accept\351, la disponibilit\351 et les modalit\351s) Tj ET
-0.110 0.140 0.190 rg BT /F1 8.5 Tf 52 138 Td (convenues valident la prestation. Aucun paiement n'est r\351alis\351 dans le formulaire du site.) Tj ET
-endstream
+<<
+/Count 2 /Kids [ 4 0 R 5 0 R ] /Type /Pages
+>>
 endobj
 9 0 obj
-<< /Title (Grille commerciale SecurityNoPhone 2026) /Author (SecurityNoPhone) /Creator (SecurityNoPhone PDF) >>
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2312
+>>
+stream
+Gau`U9lo&I&A@sBm%k`3PnAD*+PC)TB$s@78`M(2:VJLsPTZefKcb1odi[IQ:m>WT&fDW_a(&91!dG*c?$IG7JE)^[T>_#ma!EkE8Uuo,>_@i7"NtHIA9mn-bZc=ujXi493su]g,r,\es3TX[Pq%Ob/I`<(q.%7N<*DVO.@+qE_K#bAY>*Ep[f-*TlLJ6BbZD#r&'M.jef@r6@Ljj[Nf<+ZABM8KaI@8MG'WoCeIoTLT3f0Vrkn<i(Vc!mAI1C8A\bZ>IhaZVA+URD4ZsGe=7PIA)u6K[Ma`rI#3%$toB9$XY:#W2ql!XerhiGeGQ$FZ.*^2-X3CIum.S@t>M9`k<#bT;R\=HO]))En-F`*^nr6P/5SSk37#p1aGB"/53A)H%+=5K.+qbD5q'.%(8M2mG,Xs"c,3/Qoafll."-/W`.;5;C4GT;cLeMn%pB!kC:7OPND-7dm2/GrlfGqY5J?,itk"T]C4M'Lr8,^iWIJaZ`bBfKX`g?2bV-*3:19^)V!UEdpaBSMP>WuK0ql]bA>tHL:%T_`G2NS`/fsXs3(@W>.g>m-_!3Ma5\crk(pJk9R:uJq?.^uh%+kO8?TqlC9gbjL>ZSAUg!3Uc>m5J=/ZOJEL0.ZUfE_pmTk"sdt3k%iF(@X9MgpT[J[KqQHaea3,gG&Dr.lmpih"nRt=f?'"`miW=A9ld-)uTQ+1Mk&X8(g$`fq06Im=Nei6"br0@_ptpM=L.N%BaA+;`5HpSMP`d*-Esarl':N&,p-;bd/!c(@+q0IV1)VQ6cJMNKX\n4>!@&'jO:iZt$JF^HU\,g-aj,+00JlmZ,$_=/.5?[(YtFeaGr<43dW(\BKjqN\4/d^2mIc5eO+ABA1on7mWuijG<?1$4$EDLgeN'UUUYl^dtMVY`CN]$+7bTKi0XTK/n*tN`1CHp!lo(1o)$;\=X/gQ4)$@Zd\ON"H9X#@KXL3%'Cl=PGAD9'ZgE3T1%5&FWe%=9nUKM2<?ZQ_(`3+R_rN@K$U5H(o!Nf?k`hRR)]rm96E<j?pIDJb%V?<ilu!g+D*Hc7i;[$BoVd#go?g?3=U_H\=."d(n/Z\nehijM&+3T<X&r'9.Yj&qt>8SGK@pG!LlP7Otn"^1cHf"*<SX"aN7fYpH?[V9_/D1j&Aj'N.7UU`u3!+er/G"7c#,bA87:[Fl%b5J_t^r7ib**N_C]Xb30d6s'ROU+<T:@2&N^13R"r;@jK&@C^gSUkDr<Nh&AeYqFDi4pPjg+;MmXpaM)R4lq27n,FO>UKD"=\aV&/p8Tdt%H?'6cpEUgk%]\ek!#?s_$gU!LmOS9M:dgGWgM+hNAS>EZA(mWhUiYQ(=ET/jnLnYGAYtNXI4]mHY!NGa^\&5a[*WpLD+Woo(N$du3sX(L4@9oCQ"tI+NZo43/>bEW]=m&\rtm004>,%oED(nK2rKaR[MsNqGE'B`VAD4Af,Sn7Ta>M`)V<qm<9ksgXk/WY%##WH8Pk*k)-hJ'0'`i_glGHAY=RBUF_,9JkQA6/VV=d+V\6haCjG?Qkb/(P!VQ;e.GQmo)83Hd#rjMV,@ikN=\.'*`\h%.gAZfQ8YN1Bj0;?GU;%o%21<uo'aBm5Z-OSTkXEdslgo@ik&;7'7"%5&)[pO\jUR6(dmuUsN!eflS(FdAVs4(`$>Em%,bCAr@R*a):XU)]JH)liX>A,kUu/Kq:(uk*RV:V5S0jD?)%6_Ke*/[t(+`6d>8qm\ImOk:'/A8]4<Dhi_f-JJ.>mh5(bYK47n7k&"As8EYacIuUTR+_dJp%l@bHO$=$K&^m#?rl*sH!N%#o6;V0UCTQU!pud,V&3_Kocufflq4<[^6<9sHQ5.M.@]=lX&n(>i?o2eS&O[&0_dZu'*Nn\E)gcBJ]dqhBt1X5`MW"aO2NfCogd8dnA&HiN<umSM/MFmlc*$$g7)(Oe:ra;E\bs%%:j@U\REfkTX!dG[]\DHpJpci5T"p]C-+SOF'#cN5kEJcDmPV\gJ3<*eGPO3`PjH%F10(O2J.ZQ[Lh"d(Q/J1-Be#RaP(G16'DnCP8.H#("Fhk=pXU>c%$90[2a>"t,hVd6jhFR->O:j!\f=ld5.\u'@B)BXLW[6*+6TTaAa]"d!jTbq>Z"]^KnKAY(3h'MP/8T3uR"mmonj%g"TOeqYf6rWnh]m0"_pU60/fcc88<c_I4kpp/@-&[rY!L<C"ognV(1#ZIpSCDOE9CNd>nANl5Yfr2bMi<.oi`'lG+m1C1(h1.6-^PXRXMH^5['2-o'5nob,_gZbI"K93L!A"Sj((`fn+Z?uk.e!#A?>[!oG,KpfHKt-#+YW"3*i/f~>endstream
+endobj
+10 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2136
+>>
+stream
+Gatm<gN)%,&:O:Slq9ETlG*CEG@$`L8MB*LNhc<i0/*](E-RKOd]mH]n_F@%P%#k@>YQQ25R=u7pFI'b'Ys72E.?=<i7BEJ]G2P79P5Jqk/6g2hFruJO5,ZsiOPA,L&DDn_M_q)b^IiN*(qr8H;7+$Da+el9.uM@,p%t(O'u5-jHE?ng,'?/X,BDHlCVI1"4J&s[J,uk^pt+'O>WNAN*.!lb>"IU?X.ugSAL?Vp;?"(f@)rK]O/"g+p@-X^d8S%HGDWa+C;SUrCAW$ilb30L,G2H&4m!."MTrGCQEN2oL.o-a,hU#5@u["N.:K[Ke*_DQT4oOcUh7k.46[K$MYG(0JqmmqINt]PP6jtHQGT5#9Z$h,PYjd7q\?%!)X#"Z7q/(jIAej,/f?!1.4cUD<48uHs@R!q*6!?Xi*iJl2?G$&<J7`'*2PpE!9i_Ei.R1<95jqe_JfsgpS,C")1bIL*l6kR&t>EBH>BQ:D#=J:#RhiY,`j7rcc87ad"6lh3Ae4;AZo\/=\a8`+6W/!bhlZC0b(GD/IgGY$kr1Bpj]+cf`Y.)I6+bh%,UTd&>[BkfZl#T-'P/<4.Epl--1g!hbM)G.Gi=\3n1U)o"XB(,"kZIm#&oP#nW'BnW=cD,llO2qC:M)O)^MUJ&*t2?&=H)O>M'YI1bD(FcW#G%oXhrH5\JR&Gt@B;S)bB%oJUBj9jGHYa49rT"j8juQOEDLtfJU0cpg/n!&Xga]fq$kt^T>Rq-oD^=abb^o4;Z,3%+!Dd048J&lbp6m8H9eH`n8aA@E'(E/M8JumE;K<c.=A(<-\21d4,JrgfC<Cr\*^#2hLUcW];WP8SQ_M!.Y$Hc7<B5gC;mEFPKl.h,<Z$aE>u>7S/h?8]k0?B96o#fTs,a1VWkF0SeT6@Bm.;8a(d?EBpr];/qeb[IqWUN]kOpmnE$[N"PECB6K^/lhcLBGW"5X9QlkAjh*K+G-HU=#'o?2oFj^')PcLEWlrXOr!QK]n1I4eOUQl:0.j9kCm5%GasCU"E%J)UDH<,"qF,OCr*T[nslI`-kl<#Y'Zg<`$A<<MV0O=i%(S@'f[nX+7mFR;R[NM/UBS&<W-&W09kDELVh@XSSR_h@@JCK#-+9hOcB0(Xa.*3@M7gj/Ob&[=\33D*UuL/QXD,Orsub"1!j7+'[SOZ7-T&*!t6YG@Bi22RN5\#gV/eEYDr!j`6&)F_V3_^hfMpPbo%aP+"":GcbM9&]871O*uEMe1`ea.p^pfHpY5^9WbSL");JYH)gp+\lI*Woqd_4mJ0T,+O8WUN&)%.pW2mHNPD.CLY]T*6p$5kB6CKgNI4*$OT+Tf*0.n(-s*r99!\ul,>UDWH#M]VY$q=7C!.LT0ERHhhgn]>r_'>agi=D2<#jcd?l[XCa><^F76\@cRr6kNho(W)anou^=CZR<stn<_`3m[oeG+![9^>*MUc5c>H:."2_FlpR82e%S4q5-YZokV)CVYt;!>0[8*#scHA89N3kMu,)Uc)^R@n"<Dd-6$\#RE1af;(3o+%WHQ>PZb%B>+=8)`:^2+Vq2[O@gUpkXQGc5J^-OM#=5oYGOqpJ_qS*c#Z(MtIp"#=3nfBPog"Li7cJRWU'so74ZaC([[=XF67LgmVD*\nkH00I`K-Fnmj7?(5N2ka$WXaT&>Vh0$j$:@5Y"`*kSj`8J&8?$05N;X]p:,6ff]Sq1=[L2Nu8Cr\l"^it4MYsW%qVe:*FYAShH\A@/S]@+g"!Y&119a+;f7rBPRBIm(]lg!=@D8G-@\k(i)q#bJS8'd&*[(;nXf=IPt:TW5cUX!#"(F1Iul?=1k:u"r#WJEWGpE7ciK7f=',C-f<$<)u4@!Q49p42/uLZNJq0jGd?>9e#rF&slEV[qELQ'nYY'h3-O8hAKpID@pjfqEG&agl^_(9i.Q$r(7:6aNpUiR3Vk$$X-=p>ikY5O1&T8Qlj%FGtRhiq9asist^0We\0oe9m-3Dp4A@V@,2LFfga/:IcT+UT$nWD?Fd!Nl0B":%<$UFl?X/m#c(t>E1i7h99dU>AC%7c$%1;]k,jeo'@Wuer)'3U+(,I,J.9Y]mBT+D06a><LB#*Ng@m#f/(G\?AV<rD=YF*DSEsP)K)0+"Kq1>!iRrXlKmgN_U3jb/U+u~>endstream
 endobj
 xref
-0 10
+0 11
 0000000000 65535 f 
-0000000026 00000 n 
-0000000075 00000 n 
-0000000140 00000 n 
-0000000237 00000 n 
-0000000339 00000 n 
-0000000481 00000 n 
-0000007027 00000 n 
-0000007169 00000 n 
-0000012062 00000 n 
+0000000061 00000 n 
+0000000102 00000 n 
+0000000209 00000 n 
+0000000321 00000 n 
+00000000524 00000 n 
+0000000728 00000 n 
+000000796 00000 n 
+0000001150 00000 n 
+0000001215 00000 n 
+0000003618 00000 n 
 trailer
-<< /Size 10 /Root 1 0 R /Info 9 0 R >>
+<<
+/ID 
+[<01585a5cc1655a09dbcefceb05005525><01585a5cc1655a09dbcefceb05005525>]
+% ReportLab generated PDF document -- digest (opensource)
+
+/Info 7 0 R
+/Root 6 0 R
+/Size 11
+>>
 startxref
-12189
+5846
 %%EOF

@@ -19,7 +19,13 @@
     special_event: { type: 'custom' }
   });
   const NOTICE_DAYS = 30;
-  // Progressive refundable deposit for every temporarily loaned pouch.
+  // Pro and custom rentals retain marginal progressive deposits.
+  // Fixed event packs use 25% of the base rental price, excluding staff and extras.
+  const EVENT_DEPOSIT_PERCENT = 25;
+  function calculateEventDeposit(price) {
+    if (!Number.isFinite(price) || price < 0) return null;
+    return Math.round(price * EVENT_DEPOSIT_PERCENT) / 100;
+  }
   // Rates apply only to incremental units: thresholds never reduce total deposit.
   const DEPOSIT_TIERS = Object.freeze([
     { upTo: 49, cents: 150 },
@@ -213,6 +219,8 @@
     const summaryTotal = form.querySelector('[data-summary-total-amount]');
     const priceDisplay = form.querySelector('[data-total-display]');
     const cautionGroup = form.querySelector('[data-caution-block]');
+    const cautionHelp = form.querySelector('[data-caution-help]');
+    const depositTiers = form.querySelector('[data-deposit-tiers]');
     const cautionDisplay = form.querySelector('[data-caution-display]');
     const payableGroup = form.querySelector('[data-payable-estimate-group]');
     const payableAmount = form.querySelector('[data-payable-estimate-amount]');
@@ -377,8 +385,9 @@
         Boolean(agentCityInput?.value.trim())
       );
       const valid = quantityOk && datesOk && agentValid;
-      const caution = offer.type === 'event' || professional || customRental
-        ? calculateDeposit(quantity) : 0;
+      const caution = offer.type === 'event'
+        ? calculateEventDeposit(offer.price)
+        : (professional || customRental ? calculateDeposit(quantity) : 0);
       const replacement = replacementUnitPrice(quantity);
       let total = null;
       let label = '';
@@ -488,6 +497,10 @@
           ? translate('order_simulation_dates', 'Simulation indicative : précisez une date éligible (J+30 minimum) pour envoyer la demande.')
           : translate('order_simulation_ready', 'Estimation indicative : montant et disponibilité définitifs soumis à devis.');
       if (cautionGroup) cautionGroup.classList.toggle('d-none', !quantityOk || caution <= 0);
+      if (depositTiers) depositTiers.classList.toggle('d-none', offer.type === 'event');
+      if (cautionHelp) cautionHelp.textContent = offer.type === 'event'
+        ? translate('caution_help_event', 'Event packages: refundable deposit of 25% of the base rental price, excluding staff and extras.')
+        : translate('caution_help_progressive', 'Pro and custom rentals: progressive deposit, refunded after inventory less justified deductions.');
       if (cautionDisplay && quantityOk && caution > 0) cautionDisplay.value = format(caution);
       if (payableGroup) payableGroup.classList.toggle('d-none',
         !eligibleRental || !quantityOk || !agentValid || estimatedOutlay === null);
