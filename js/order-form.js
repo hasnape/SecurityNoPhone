@@ -12,7 +12,7 @@
     pro_starter: { type: 'professional', quantity: 182, monthlyPrice: 119, minMonths: 3 },
     pro_business: { type: 'professional', quantity: 363, monthlyPrice: 229, minMonths: 3 },
     pro_entreprise: { type: 'professional', quantity: 605, monthlyPrice: 349, minMonths: 3 },
-    // Custom rentals retain quote-only pouch pricing; no tier is inferred from the fixed packs.
+    // Custom rentals use transparent indicative benchmarks from the approved Pro and event grids.
     location_particulier: { type: 'custom_event' },
     location_pro: { type: 'custom_professional' },
     achat: { type: 'purchase', minQuantity: 50 },
@@ -22,6 +22,47 @@
   const DEPOSIT_PER_POUCH = 1.50;
   const AGENT_DAY_RATE = 100; // EUR per agent per on-site day, up to 7 hours (flat fee).
   const MAX_AGENT_HOURS = 7;
+
+  // Fixed Pro packages are 3-month commitments. These monthly reference prices
+  // inform custom rentals but never change the fixed-pack contract.
+  const CUSTOM_PRO_REFERENCE = Object.freeze([
+    { upTo: 92, monthly: 69 },
+    { upTo: 182, monthly: 119 },
+    { upTo: 363, monthly: 229 },
+    { upTo: 605, monthly: 349 }
+  ]);
+  const CUSTOM_EVENT_FLOOR = Object.freeze([
+    { upTo: 49, amount: 69 },
+    { upTo: 97, amount: 109 },
+    { upTo: 182, amount: 189 },
+    { upTo: 303, amount: 299 },
+    { upTo: 484, amount: 449 }
+  ]);
+  const CUSTOM_BILLING_DAYS = 30;
+
+  // Short rentals may last one day, but must not undercut the corresponding
+  // public one-day event package. For longer rentals, each started 30-day
+  // tranche uses the approved Pro monthly price for the volume band.
+  // Beyond the 484-pouch event reference there is no safe short-term floor,
+  // so this calculator deliberately returns quote-only (no invented price).
+  function customRentalReference(quantity, startISO, endISO) {
+    if (!Number.isInteger(quantity) || quantity < 10) return null;
+    const pro = CUSTOM_PRO_REFERENCE.find(band => quantity <= band.upTo);
+    if (!pro) return { monthly: null, eventFloor: null, estimate: null, days: null, periods: null };
+    const event = CUSTOM_EVENT_FLOOR.find(band => quantity <= band.upTo);
+    const reference = { monthly: pro.monthly, eventFloor: event?.amount ?? null,
+      estimate: null, days: null, periods: null };
+    const start = addCalendarDays(startISO, 0);
+    const end = addCalendarDays(endISO, 0);
+    if (!start || !end || end < start) return reference;
+    const days = Math.round((Date.parse(end + 'T00:00:00Z') -
+      Date.parse(start + 'T00:00:00Z')) / 86400000) + 1;
+    const periods = Math.ceil(days / CUSTOM_BILLING_DAYS);
+    reference.days = days;
+    reference.periods = periods;
+    reference.estimate = event ? Math.max(event.amount, pro.monthly * periods) : null;
+    return reference;
+  }
 
   function calculateAgentCharge(agentCount, interventionDays) {
     if (!Number.isInteger(agentCount) || agentCount < 1 || agentCount > 20 ||
@@ -114,6 +155,7 @@
     const offerSelect = form.querySelector('#offerType');
     const quantityInput = form.querySelector('#quantity');
     const customQuantityHint = form.querySelector('[data-custom-quantity-hint]');
+    const customPricingNotice = form.querySelector('[data-custom-pricing-notice]');
     const standardProMinTermNote = form.querySelector('[data-pro-min-term-note]');
     const customNoMinTermNote = form.querySelector('[data-custom-no-min-term-note]');
     const targetGroup = form.querySelector('[data-event-purchase-date]');
@@ -129,6 +171,7 @@
     const rentalMode = form.querySelector('[data-rental-mode]');
     const simulationHint = form.querySelector('[data-simulation-hint]');
     const packBaseHidden = form.querySelector('[data-pack-base-value]');
+    const pricingMethodHidden = form.querySelector('[data-pricing-method-value]');
     const agentRateHidden = form.querySelector('[data-agent-rate-value]');
     const agentChargeHidden = form.querySelector('[data-agent-charge-value]');
     const agentExtrasHidden = form.querySelector('[data-agent-extras-value]');
@@ -250,6 +293,7 @@
       const eligibleRental = offer?.type === 'event' || usesRentalDates;
       showElement(rentalModeGroup, eligibleRental);
       if (customQuantityHint) customQuantityHint.classList.toggle('d-none', !customRental);
+      showElement(customPricingNotice, customRental);
       const withAgent = offer?.type === 'custom' || (eligibleRental && rentalMode?.value === 'avec');
       showElement(agentGroup, withAgent);
       if (startInput) startInput.required = usesRentalDates;
@@ -283,6 +327,7 @@
         if (cautionGroup) cautionGroup.classList.add('d-none');
         if (totalHidden) totalHidden.value = '';
         if (packBaseHidden) packBaseHidden.value = '';
+        if (pricingMethodHidden) pricingMethodHidden.value = '';
         if (agentRateHidden) agentRateHidden.value = '';
         if (agentChargeHidden) agentChargeHidden.value = '';
         if (agentExtrasHidden) agentExtrasHidden.value = '';
@@ -312,6 +357,8 @@
       const replacement = replacementUnitPrice(quantity);
       let total = null;
       let label = '';
+      const customReference = customRental && quantityOk
+        ? customRentalReference(quantity, startInput?.value, endInput?.value) : null;
       if (offer.type === 'event') {
         total = offer.price;
         label = translate('booking_event_estimate', 'Tarif événement : {price} (caution distincte)')
@@ -323,11 +370,24 @@
           .replace('{monthly}', format(offer.monthlyPrice))
           .replace('{total}', format(total));
       } else if (customRental) {
-        // No public per-pouch rental rate for arbitrary quantities: only the caution
-        // and optional staffed service can be estimated without a custom quote.
-        label = translate('custom_rental_price_pending',
-          'Location personnalisée : {quantity} pochettes. Tarif des pochettes sur devis (caution indicative à part).')
-          .replace('{quantity}', String(quantity));
+        if (customReference?.estimate != null) {
+          total = customReference.estimate;
+          label = translate('custom_rental_pro_estimate',
+            '{quantity} pochettes pendant {days} jour(s) : base estimée {price} (références Pro sur {periods} tranche(s) de 30 jours, avec plancher événementiel ; caution distincte, devis à confirmer).')
+            .replace('{quantity}', String(quantity))
+            .replace('{days}', String(customReference.days))
+            .replace('{periods}', String(customReference.periods))
+            .replace('{price}', format(total));
+        } else if (customReference?.monthly != null) {
+          label = translate('custom_rental_pro_reference_pending',
+            '{quantity} pochettes : référence Pro {monthly}/30 jours, prix final sur devis selon volume, durée et logistique.')
+            .replace('{quantity}', String(quantity))
+            .replace('{monthly}', format(customReference.monthly));
+        } else {
+          label = translate('custom_rental_price_pending',
+            'Location personnalisée : {quantity} pochettes, montant et conditions sur devis.')
+            .replace('{quantity}', String(quantity));
+        }
       } else if (offer.type === 'purchase') {
         total = quantity * purchaseUnitPrice(quantity);
         label = translate('booking_purchase_estimate',
@@ -341,10 +401,18 @@
       const pricedSubtotal = total !== null ? total + (agentCharge || 0) : null;
       if (withAgent && agentCharge !== null) {
         if (customRental) {
-          label = translate('custom_rental_agent_price_pending',
-            'Location de {quantity} pochettes : sur devis. Agents : {agents} (hors caution et éventuels frais de déplacement/logement).')
-            .replace('{quantity}', String(quantity))
-            .replace('{agents}', format(agentCharge));
+          if (customReference?.estimate != null) {
+            label = translate('custom_rental_with_agent_estimate',
+              'Location estimée : {base} + agent(s) : {agents} = {total} (hors caution et frais éventuels de déplacement/logement, devis à confirmer).')
+              .replace('{base}', format(total))
+              .replace('{agents}', format(agentCharge))
+              .replace('{total}', format(pricedSubtotal));
+          } else {
+            label = translate('custom_rental_agent_price_pending',
+              '{quantity} pochettes : prix de location sur devis. Agents : {agents}, hors caution et frais éventuels de déplacement/logement.')
+              .replace('{quantity}', String(quantity))
+              .replace('{agents}', format(agentCharge));
+          }
         } else if (total !== null) {
           label = translate('booking_with_agent_subtotal',
             'Pack : {base} + agents : {agents} = {total} (hors caution, déplacements et hébergement éventuel).')
@@ -395,12 +463,17 @@
       if (cautionGroup) cautionGroup.classList.toggle('d-none', !quantityOk || caution <= 0);
       if (cautionDisplay && quantityOk && caution > 0) cautionDisplay.value = format(caution);
       if (packBaseHidden) packBaseHidden.value = valid && total != null ? total.toFixed(2) : '';
+      if (pricingMethodHidden) pricingMethodHidden.value = valid && customRental
+        ? (customReference?.estimate != null
+          ? 'Reference Pro 30j + plancher evenementiel (estimation, devis requis)'
+          : 'Reference Pro informative, montant sur devis')
+        : '';
       if (agentRateHidden) agentRateHidden.value = valid && withAgent ? AGENT_DAY_RATE.toFixed(2) : '';
       if (agentChargeHidden) agentChargeHidden.value = valid && withAgent ? agentCharge.toFixed(2) : '';
       if (agentExtrasHidden) agentExtrasHidden.value = valid && withAgent && outsideLyon
         ? 'Déplacement en supplément, logement si nécessaire : sur devis' : '';
-      // For professional contracts this is only a 3-month reference, not a final
-      // total for arbitrarily longer requested periods. Quote determines final total.
+      // Fixed Pro prices are a 3-month reference, not the final amount for longer
+      // terms. Custom rental totals are estimates only, subject to an accepted quote.
       if (totalHidden) totalHidden.value = valid && pricedSubtotal !== null && offer.type !== 'professional'
         ? pricedSubtotal.toFixed(2) : '';
       if (cautionHidden) cautionHidden.value = valid ? caution.toFixed(2) : '';

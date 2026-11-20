@@ -111,7 +111,8 @@
             </div>
 
             <p class="small text-muted" data-i18n="order_fixed_quantity_note">Les neuf packs standards ont une quantité et des conditions définies. En location personnalisée, vous choisissez votre quantité dès 10 pochettes et vos dates sans durée minimale ; tarif sur devis.</p>
-            <p class="small text-muted d-none" data-custom-quantity-hint data-i18n="custom_rental_quantity_help">Choisissez le nombre exact de pochettes dès 10 et vos dates de location, sans durée minimale. Le tarif sera établi sur devis selon la quantité, la durée et la logistique. Comparez aussi les packs standards si leur volume correspond à votre événement. Caution indicative : 1,50 € par pochette.</p>
+            <p class="small text-muted d-none" data-custom-quantity-hint data-i18n="custom_rental_quantity_help">Dès 10 pochettes, durée libre. Le simulateur affiche une estimation fondée sur les paliers Pro, par tranches commencées de 30 jours, avec un plancher équivalent aux packs événementiels. Le montant définitif dépend du devis et de la logistique. Caution : 1,50 € par pochette, distincte du tarif.</p>
+            <div class="alert alert-light border small d-none" data-custom-pricing-notice data-i18n="custom_rental_pricing_policy">Références Pro : jusqu'à 92 pochettes 69 € / 30 jours ; 93–182 : 119 € ; 183–363 : 229 € ; 364–605 : 349 €. Chaque tranche de 30 jours commencée est comptée. Pour éviter de concurrencer les offres événementielles, l'estimation ne descend pas sous le tarif du pack événementiel correspondant (jusqu'à 484 pochettes). Au-delà de 484 pochettes, prix sur devis. Estimation non contractuelle.</div>
             <p class="alert alert-light border" data-i18n="booking_30_days_notice">Anticipation obligatoire : demande au moins 30 jours calendaires avant la date d'événement, le début de mise à disposition ou la livraison souhaitée d'un achat. Selon disponibilité ; aucune réservation automatique.</p>
             <div class="mb-3 d-none" data-event-purchase-date>
               <label for="requestedDate" class="form-label" data-i18n="booking_requested_date_label">Date de l'événement ou de livraison souhaitée :</label>
@@ -218,6 +219,7 @@
             <p class="small text-muted text-center" data-i18n="caution_note">La caution et les frais éventuels sont précisés dans le devis ; aucune somme n'est débitée ici.</p>
 
             <input type="hidden" name="prix_base_pack" data-pack-base-value value="">
+            <input type="hidden" name="methode_estimation" data-pricing-method-value value="">
             <input type="hidden" name="tarif_agent_jour" data-agent-rate-value value="">
             <input type="hidden" name="montant_agents_estime" data-agent-charge-value value="">
             <input type="hidden" name="frais_deplacement_logement" data-agent-extras-value value="">
@@ -247,7 +249,8 @@
             <p class="small" data-i18n="pro_offers_summary">Éducation 92 / 69 €/mois · Starter 182 / 119 €/mois · Business 363 / 229 €/mois · Entreprise 605 / 349 €/mois.</p>
             <p class="small text-muted" data-i18n="agent_public_price_notice">Accompagnement avec agent : 100 € TTC par agent pour une journée de 7 heures maximum, en supplément du pack. En dehors de Lyon, frais de déplacement et, si nécessaire, d’hébergement en supplément, sur devis.</p>
             <h3 class="h6" data-i18n="custom_rental_side_title">Location personnalisée — quantité libre</h3>
-            <p class="small" data-i18n="custom_rental_side_desc">Particuliers et professionnels : dès 10 pochettes, dates libres et sans durée minimale. Avec ou sans agent. Tarif de location adapté sur devis selon le volume, les dates et la logistique ; caution indicative : 1,50 € par pochette.</p>
+            <p class="small" data-i18n="custom_rental_side_desc">Particuliers et professionnels : dès 10 pochettes, dates libres sans durée minimale, avec ou sans agent. Estimation selon les paliers Pro (référence mensuelle) et les prix événementiels pour les séjours courts ; prix final sur devis. Caution : 1,50 € par pochette.</p>
+            <p class="small text-muted" data-i18n="custom_rental_public_price_logic">Référence pour la location personnalisée : 69 € / 30 j jusqu'à 92 pochettes, 119 € jusqu'à 182, 229 € jusqu'à 363, 349 € jusqu'à 605. Les tarifs événementiels fixent un plancher sur les volumes comparables. Prix non contractuel, à confirmer par devis.</p>
             <h3 class="h6" data-i18n="purchase_offers_heading">Achat définitif — minimum 50</h3>
             <p class="small" data-i18n="purchase_offers_summary">50–99 : 5,90 €/u · 100–299 : 5,50 €/u · 300 et plus : 4,90 €/u. Personnalisation spécifique sur devis.</p>
             <p class="small" data-i18n="offer_delivery_included">Mondial Relay aller-retour standard inclus pour les mises à disposition : retrait en Locker/Point Relais, retour prépayé, sous réserve de compatibilité poids/volume ; expéditions exceptionnelles chiffrées avant accord. Pour la vente, livraison standard incluse selon le colis confirmé au devis.</p>
@@ -284,10 +287,10 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
 
-  <script src="js/translations.js?v=20261120-custom-rental-min10-v2"></script>
+  <script src="js/translations.js?v=20261120-pro-reference-v3"></script>
 
   <script src="js/main.js?v=20261118-final-v2"></script>
-  <script src="js/order-form.js?v=20261120-custom-rental-min10-v2"></script>
+  <script src="js/order-form.js?v=20261120-pro-reference-v3"></script>
 </body>
 
 </html>

@@ -76,7 +76,7 @@ test('recovered content exists in all supported translations', () => {
   }
 });
 
-test('private/pro custom rental is accessible, quantity-editable and never given a fabricated price', () => {
+test('private/pro custom rental is accessible, priced indicatively from Pro tiers and remains quote-led', () => {
   for (const offer of ['location_particulier', 'location_pro']) {
     assert.match(order, new RegExp('value="' + offer + '"'));
     assert.match(order, new RegExp('href="#' + offer + '"'));
@@ -84,6 +84,12 @@ test('private/pro custom rental is accessible, quantity-editable and never given
     assert.match(calculator, new RegExp(offer + ':'));
   }
   assert.match(order, /data-custom-quantity-hint/);
+  assert.match(order, /data-custom-pricing-notice/);
+  assert.match(order, /data-pricing-method-value/);
+  assert.match(calculator, /function customRentalReference\(quantity, startISO, endISO\)/);
+  assert.match(calculator, /CUSTOM_PRO_REFERENCE/);
+  assert.match(calculator, /CUSTOM_EVENT_FLOOR/);
+  assert.match(calculator, /CUSTOM_BILLING_DAYS = 30/);
   assert.match(order, /min="1" step="1" value="49"/);
   assert.match(calculator, /quantityInput\.readOnly = !!offer\?\.quantity/);
   assert.match(calculator, /customRental && quantityInput\) quantityInput\.value = '10'/);
@@ -96,6 +102,8 @@ test('private/pro custom rental is accessible, quantity-editable and never given
   assert.match(calculator, /const eligibleRental = offer\?\.type === 'event' \|\| usesRentalDates/);
   assert.match(calculator, /label = translate\('custom_rental_price_pending'/);
   assert.match(calculator, /label = translate\('custom_rental_agent_price_pending'/);
+  assert.match(calculator, /label = translate\('custom_rental_pro_estimate'/);
+  assert.match(calculator, /label = translate\('custom_rental_with_agent_estimate'/);
   assert.match(calculator, /const pricedSubtotal = total !== null/);
   assert.match(order, /data-caution-value/);
   for (const lang of ['fr', 'en', 'de', 'ar']) {
@@ -103,7 +111,9 @@ test('private/pro custom rental is accessible, quantity-editable and never given
       'custom_rental_section_title', 'custom_rental_quantity_help',
       'custom_rental_price_pending', 'custom_rental_agent_price_pending',
       'custom_rental_min_quantity', 'custom_rental_duration_help',
-      'custom_rental_dates_order']) {
+      'custom_rental_dates_order', 'custom_rental_pricing_policy',
+      'custom_rental_public_price_logic', 'custom_rental_pro_estimate',
+      'custom_rental_pro_reference_pending', 'custom_rental_with_agent_estimate']) {
       assert.equal(typeof translations[lang][key], 'string', lang + ': ' + key);
     }
   }

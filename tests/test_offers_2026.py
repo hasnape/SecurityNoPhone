@@ -71,7 +71,9 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
             "custom_rental_quantity_help", "custom_rental_section_title",
             "custom_rental_pro_title", "custom_rental_private_title",
             "custom_rental_min_quantity", "custom_rental_duration_help",
-            "custom_rental_dates_order"]
+            "custom_rental_dates_order", "custom_rental_pro_estimate",
+            "custom_rental_pro_reference_pending", "custom_rental_with_agent_estimate",
+            "custom_rental_pricing_policy", "custom_rental_public_price_logic"]
         keys += ["offer_event_"+k for k in EVENTS]
         keys += ["offer_pro_"+k for k in PROFESSIONAL]
         for lang in ("fr", "en", "de", "ar"):
@@ -109,6 +111,14 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
         self.assertIn("const NOTICE_DAYS = 30;", script)
         self.assertIn("const DEPOSIT_PER_POUCH = 1.50;", script)
         self.assertIn("const AGENT_DAY_RATE = 100;", script)
+        self.assertIn("CUSTOM_PRO_REFERENCE", script)
+        self.assertIn("CUSTOM_EVENT_FLOOR", script)
+        self.assertIn("const CUSTOM_BILLING_DAYS = 30;", script)
+        self.assertIn("function customRentalReference(quantity, startISO, endISO)", script)
+        self.assertIn("data-custom-pricing-notice", form)
+        self.assertIn('name="methode_estimation"', form)
+        self.assertIn("data-pricing-method-value", form)
+        self.assertIn("custom_rental_public_price_logic", form)
 
     def test_cache_busting_on_all_19_pages(self):
         names = ("index", "solutions", "accompagnement", "experience", "clients",
@@ -118,8 +128,8 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
         for name in names:
             with self.subTest(name=name):
                 html = (ROOT / (name + ".html")).read_text(encoding="utf-8")
-                self.assertIn("js/translations.js?v=20261120-custom-rental-min10-v2", html)
-        self.assertIn("js/order-form.js?v=20261120-custom-rental-min10-v2", PAGES["commande.html"])
+                self.assertIn("js/translations.js?v=20261120-pro-reference-v3", html)
+        self.assertIn("js/order-form.js?v=20261120-pro-reference-v3", PAGES["commande.html"])
 
     def test_retired_three_day_and_old_price_offers_not_in_current_pages(self):
         for name in ("index.html", "solutions.html", "support.html", "cgv.html", "commande.html"):

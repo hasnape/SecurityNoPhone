@@ -28,3 +28,9 @@ Permettre à un particulier ou à un professionnel de choisir librement le nombr
 ## Correction commerciale du 20 novembre 2026
 
 L'offre de **location personnalisée** est disponible dès **10 pochettes**, pour particuliers et professionnels, sans durée minimale ; la date de début de mise à disposition est demandée **au moins 30 jours calendaires à l'avance**, ce préavis n'étant pas une durée de location. Les forfaits événementiels et les packs Pro restent à quantités fixes, ces derniers conservant leur engagement de trois mois minimum. Le devis personnalisé dépend du volume, de la durée, de la logistique, du stock et des éventuels agents, sans prix unitaire public inventé.
+
+## Référence de simulation tarifaire (complément du 20/11/2026)
+
+Le simulateur affiche désormais une **estimation TTC non contractuelle** pour les locations personnalisées de 10 à 484 pochettes, fondée sur les références Pro mensuelles approuvées : 10–92 = 69 € ; 93–182 = 119 € ; 183–363 = 229 € ; 364–605 = 349 € par tranche de **30 jours commencée**. L'estimation retient le maximum de cette référence pour le nombre de tranches et du tarif de la formule événementielle couvrant le volume demandé (69/109/189/299/449 € selon les cinq paliers). Pour 485 pochettes ou plus, l'estimation totale reste « sur devis », même si une référence Pro reste affichée jusqu'à 605 pochettes. L'utilisateur reste libre de louer une journée ou plusieurs jours, sans durée minimale.
+
+Exemples de contrôle : 10 pochettes pour 1 jour → 69 € indicatifs, caution 15 € ; 37 pochettes pour 90 jours → 207 € indicatifs, caution 55,50 € ; 182 pochettes pour 1 jour → 189 € indicatifs, caution 273 € ; 182 pochettes pour 90 jours → 357 € indicatifs. L'agent optionnel reste 100 € TTC par agent/jour, en sus ; frais de déplacement et hébergement éventuels hors de Lyon sur devis. **Ces montants ne sont pas des prix garantis ni des réservations**.

@@ -10,8 +10,8 @@ const begin = source.indexOf('  const OFFER_CONFIG = Object.freeze(');
 const end = source.indexOf('  function showElement(', begin);
 assert.ok(begin > 0 && end > begin, 'Source pricing/date functions must be accessible');
 const funcs = vm.runInNewContext(source.slice(begin, end) +
-  '\n({ OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_PER_POUCH, AGENT_DAY_RATE, MAX_AGENT_HOURS, calculateAgentCharge, addCalendarDays, franceTodayISO, earliestRequestDate, minimumRentalEndDate, purchaseUnitPrice, replacementUnitPrice });');
-const { OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_PER_POUCH, AGENT_DAY_RATE, MAX_AGENT_HOURS, calculateAgentCharge,
+  '\n({ OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_PER_POUCH, AGENT_DAY_RATE, MAX_AGENT_HOURS, CUSTOM_PRO_REFERENCE, CUSTOM_EVENT_FLOOR, CUSTOM_BILLING_DAYS, customRentalReference, calculateAgentCharge, addCalendarDays, franceTodayISO, earliestRequestDate, minimumRentalEndDate, purchaseUnitPrice, replacementUnitPrice });');
+const { OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_PER_POUCH, AGENT_DAY_RATE, MAX_AGENT_HOURS, CUSTOM_PRO_REFERENCE, CUSTOM_EVENT_FLOOR, CUSTOM_BILLING_DAYS, customRentalReference, calculateAgentCharge,
         addCalendarDays, franceTodayISO, earliestRequestDate,
         minimumRentalEndDate, purchaseUnitPrice, replacementUnitPrice } = funcs;
 
@@ -92,7 +92,7 @@ test('agent price is EUR 100 incl. VAT per person and on-site day, up to 7 hours
   assert.match(source, /Déplacement en supplément, logement si nécessaire/);
 });
 
-test('custom rentals allow flexible periods from 10 whole pouches without a fabricated fixed pack price', () => {
+test('custom rentals retain freely selectable quantity and duration and use indicative Pro rates', () => {
   assert.equal(OFFER_CONFIG.location_particulier.type, 'custom_event');
   assert.equal(OFFER_CONFIG.location_pro.type, 'custom_professional');
   assert.equal(OFFER_CONFIG.location_particulier.quantity, undefined);
@@ -108,7 +108,40 @@ test('custom rentals allow flexible periods from 10 whole pouches without a fabr
   assert.match(source, /custom_rental_dates_order/);
   assert.match(source, /const caution = offer\.type === 'event' \|\| professional \|\| customRental/);
   assert.match(source, /quantity \* DEPOSIT_PER_POUCH/);
-  assert.match(source, /price.*custom|Tarif des pochettes sur devis/);
+  assert.match(source, /function customRentalReference\(quantity, startISO, endISO\)/);
+  assert.match(source, /custom_rental_pro_estimate/);
+  assert.match(source, /custom_rental_price_pending/);
   assert.match(source, /const pricedSubtotal = total !== null/);
   assert.match(source, /const valid = quantityOk && datesOk && agentValid/);
+});
+
+test('custom reference uses approved professional tiers and event floors', () => {
+  assert.equal(CUSTOM_BILLING_DAYS, 30);
+  assert.deepEqual(Array.from(CUSTOM_PRO_REFERENCE, x => [x.upTo, x.monthly]),
+    [[92, 69], [182, 119], [363, 229], [605, 349]]);
+  assert.deepEqual(Array.from(CUSTOM_EVENT_FLOOR, x => [x.upTo, x.amount]),
+    [[49, 69], [97, 109], [182, 189], [303, 299], [484, 449]]);
+  for (const [quantity, amount] of [[10, 69], [49, 69], [50, 109],
+     [92, 109], [93, 119], [98, 189], [182, 189],
+     [183, 299], [303, 299], [304, 449], [484, 449]]) {
+    assert.equal(customRentalReference(quantity, '2099-01-01', '2099-01-01').estimate,
+      amount, quantity + ' pouches one day');
+  }
+  assert.equal(customRentalReference(182, '2099-01-01', '2099-01-30').estimate, 189);
+  assert.equal(customRentalReference(182, '2099-01-01', '2099-01-31').estimate, 238);
+  assert.equal(customRentalReference(182, '2099-01-01', '2099-03-31').estimate, 357);
+  assert.equal(customRentalReference(363, '2099-01-01', '2099-03-31').estimate, 687);
+  assert.equal(customRentalReference(10, '2099-01-01', '2099-03-31').estimate, 207);
+});
+
+test('custom quote-only handling beyond available event benchmark and invalid inputs', () => {
+  assert.equal(customRentalReference(9, '2099-01-01', '2099-01-01'), null);
+  assert.equal(customRentalReference(10.5, '2099-01-01', '2099-01-01'), null);
+  const fiveHundred = customRentalReference(500, '2099-01-01', '2099-01-01');
+  assert.equal(fiveHundred.monthly, 349);
+  assert.equal(fiveHundred.estimate, null);
+  assert.equal(customRentalReference(606, '2099-01-01', '2099-01-01').estimate, null);
+  assert.equal(customRentalReference(10, '2099-01-02', '2099-01-01').estimate, null);
+  assert.equal(customRentalReference(10, '', '').estimate, null);
+  assert.equal(customRentalReference(10, '2099-01-01', '2099-01-01').days, 1);
 });

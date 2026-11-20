@@ -1,4 +1,4 @@
-// Browserless DOM contract tests for quote-only personalized rentals.
+// Browserless DOM contract tests for Pro-based indicative personalized rental pricing.
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
@@ -31,11 +31,11 @@ function makeField(value = '') {
 function boot(hash = '#location_particulier') {
   const names = [
     '#offerType', '#quantity', '[data-custom-quantity-hint]', '[data-pro-min-term-note]',
-    '[data-custom-no-min-term-note]', '[data-event-purchase-date]',
+    '[data-custom-no-min-term-note]', '[data-custom-pricing-notice]', '[data-event-purchase-date]',
     '[data-requested-date]', '[data-requested-date-error]', '[data-rental-fields]',
     '[data-start-date]', '[data-end-date]', '#dateError', '#quantityError',
     '[data-agent-options]', '[data-rental-mode-group]', '[data-rental-mode]',
-    '[data-simulation-hint]', '[data-pack-base-value]', '[data-total-display]',
+    '[data-simulation-hint]', '[data-pack-base-value]', '[data-pricing-method-value]', '[data-total-display]',
     '[data-caution-block]', '[data-caution-display]', '[data-total-value]',
     '[data-caution-value]', '[data-replacement-price]', '[data-summary]',
     '[data-agent-rate-value]', '[data-agent-charge-value]', '[data-agent-extras-value]',
@@ -90,7 +90,7 @@ function boot(hash = '#location_particulier') {
   return { fields, form, trigger, set };
 }
 
-test('private customer chooses 37 pouches with no fabricated rental price', () => {
+test('private customer chooses 37 pouches with a Pro-based indicative estimate', () => {
   const { fields: f, trigger, set } = boot();
   assert.equal(f['#offerType'].value, 'location_particulier');
   assert.equal(f['#quantity'].readOnly, false);
@@ -102,22 +102,24 @@ test('private customer chooses 37 pouches with no fabricated rental price', () =
   set('#quantity', '37'); trigger('#quantity');
   assert.equal(f['#quantity'].validationMessage, '');
   assert.equal(f['[data-caution-value]'].value, '55.50');
-  assert.equal(f['[data-total-value]'].value, '');
-  assert.match(f['[data-total-display]'].textContent, /sur devis/);
+  assert.equal(f['[data-total-value]'].value, '207.00');
+  assert.match(f['[data-total-display]'].textContent, /207/);
+  assert.match(f['[data-pricing-method-value]'].value, /Reference Pro/);
 });
 
-test('custom rental agent fee remains separate from unknown pouch rental price', () => {
+test('custom rental agent fee adds to Pro estimate but deposit and travel remain separate', () => {
   const { fields: f, trigger, set } = boot();
   set('#quantity', '37'); trigger('#quantity');
   set('[data-rental-mode]', 'avec'); trigger('[data-rental-mode]', 'change');
   assert.equal(f['[data-agent-charge-value]'].value, '600.00');
   assert.equal(f['[data-caution-value]'].value, '55.50');
-  assert.equal(f['[data-total-value]'].value, '');
+  assert.equal(f['[data-total-value]'].value, '807.00');
   set('[data-agent-zone]', 'hors_lyon'); trigger('[data-agent-zone]', 'change');
   assert.match(f['[data-agent-extras-value]'].value, /Déplacement en supplément/);
   set('[data-rental-mode]', 'sans'); trigger('[data-rental-mode]', 'change');
   assert.equal(f['[data-agent-charge-value]'].value, '');
   assert.equal(f['[data-agent-extras-value]'].value, '');
+  assert.equal(f['[data-total-value]'].value, '207.00');
 });
 
 test('professional custom rental allows short and one-day bookings with 10+ pouches', () => {
@@ -128,16 +130,20 @@ test('professional custom rental allows short and one-day bookings with 10+ pouc
   assert.equal(f['[data-requested-date]'].required, false);
   set('#quantity', '182'); trigger('#quantity');
   assert.equal(f['[data-caution-value]'].value, '273.00');
-  assert.equal(f['[data-total-value]'].value, '');
+  assert.equal(f['[data-total-value]'].value, '357.00');
   set('[data-end-date]', '2099-01-01'); trigger('[data-end-date]', 'change');
   assert.equal(f['[data-end-date]'].validationMessage, '');
+  assert.equal(f['[data-total-value]'].value, '189.00');
   assert.equal(f['[data-end-date]'].min, '2099-01-01');
   set('[data-end-date]', '2099-01-02'); trigger('[data-end-date]', 'change');
   assert.equal(f['[data-end-date]'].validationMessage, '');
+  assert.equal(f['[data-total-value]'].value, '189.00');
   set('[data-end-date]', '2098-12-31'); trigger('[data-end-date]', 'change');
   assert.notEqual(f['[data-end-date]'].validationMessage, '');
+  assert.equal(f['[data-total-value]'].value, '');
   set('[data-end-date]', '2099-03-31'); trigger('[data-end-date]', 'change');
   assert.equal(f['[data-end-date]'].validationMessage, '');
+  assert.equal(f['[data-total-value]'].value, '357.00');
 });
 
 test('existing fixed packs and minimum purchase quantity stay unchanged', () => {
@@ -168,12 +174,15 @@ test('both custom profiles enforce 10 whole pouches and accept exactly 10', () =
     assert.equal(f['#quantity'].value, '10');
     assert.equal(f['#quantity'].min, '10');
     assert.equal(f['[data-caution-value]'].value, '15.00');
+    assert.equal(f['[data-total-value]'].value, '207.00');
     set('#quantity', '9'); trigger('#quantity');
     assert.notEqual(f['#quantity'].validationMessage, '');
     assert.equal(f['[data-caution-value]'].value, '');
+    assert.equal(f['[data-total-value]'].value, '');
     set('#quantity', '10'); trigger('#quantity');
     assert.equal(f['#quantity'].validationMessage, '');
     assert.equal(f['[data-caution-value]'].value, '15.00');
+    assert.equal(f['[data-total-value]'].value, '207.00');
     set('#quantity', '10.5'); trigger('#quantity');
     assert.notEqual(f['#quantity'].validationMessage, '');
   }
@@ -187,6 +196,7 @@ test('one-day custom rental accepted for private customers and professionals', (
     assert.equal(f['[data-start-date]'].validationMessage, '');
     assert.equal(f['[data-end-date]'].validationMessage, '');
     assert.equal(f['[data-end-date]'].min, '2099-01-01');
+    assert.equal(f['[data-total-value]'].value, '69.00');
   }
 });
 
@@ -199,4 +209,47 @@ test('three-calendar-month requirement remains only on standard professional pac
   assert.equal(f['[data-end-date]'].min, '2099-03-31');
   set('[data-end-date]', '2099-03-31'); trigger('[data-end-date]', 'change');
   assert.equal(f['[data-end-date]'].validationMessage, '');
+});
+
+test('custom pricing follows Pro quantity bands and never undercuts comparable event package', () => {
+  const cases = [
+    [10, '69.00'], [49, '69.00'], [50, '109.00'], [92, '109.00'],
+    [93, '119.00'], [97, '119.00'], [98, '189.00'],
+    [182, '189.00'], [183, '299.00'], [303, '299.00'],
+    [304, '449.00'], [363, '449.00'], [364, '449.00'],
+    [484, '449.00']
+  ];
+  for (const [count, price] of cases) {
+    const { fields: f, trigger, set } = boot('#location_particulier');
+    set('#quantity', String(count)); trigger('#quantity');
+    set('[data-end-date]', '2099-01-01'); trigger('[data-end-date]', 'change');
+    assert.equal(f['[data-total-value]'].value, price, count + ' pouches, one day');
+  }
+});
+
+test('custom pricing respects started 30-day periods and Pro reference prices', () => {
+  const { fields: f, trigger, set } = boot('#location_pro');
+  set('#quantity', '182'); trigger('#quantity');
+  set('[data-end-date]', '2099-01-30'); trigger('[data-end-date]', 'change');
+  assert.equal(f['[data-total-value]'].value, '189.00'); // 30 days, event floor.
+  set('[data-end-date]', '2099-01-31'); trigger('[data-end-date]', 'change');
+  assert.equal(f['[data-total-value]'].value, '238.00'); // 31 days, 2 x 119.
+  set('[data-end-date]', '2099-03-31'); trigger('[data-end-date]', 'change');
+  assert.equal(f['[data-total-value]'].value, '357.00'); // 90 days, 3 x 119.
+  assert.match(f['[data-total-display]'].textContent, /357/);
+});
+
+test('larger-than-event volumes and absent dates keep price quote-only', () => {
+  const { fields: f, trigger, set } = boot('#location_pro');
+  set('#quantity', '500'); trigger('#quantity');
+  set('[data-end-date]', '2099-01-01'); trigger('[data-end-date]', 'change');
+  assert.equal(f['[data-total-value]'].value, '');
+  assert.match(f['[data-total-display]'].textContent, /349/);
+  set('#quantity', '606'); trigger('#quantity');
+  assert.equal(f['[data-total-value]'].value, '');
+  assert.match(f['[data-total-display]'].textContent, /sur devis/);
+  set('#quantity', '10'); trigger('#quantity');
+  set('[data-start-date]', ''); trigger('[data-start-date]', 'change');
+  assert.equal(f['[data-total-value]'].value, '');
+  assert.match(f['[data-total-display]'].textContent, /69/);
 });
