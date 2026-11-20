@@ -89,8 +89,8 @@ stream
 0.770 0.800 0.840 RG 0.4 w 42 408 m 42 288 l S
 0.770 0.800 0.840 RG 0.4 w 323.05 408 m 323.05 288 l S
 0.770 0.800 0.840 RG 0.4 w 553 408 m 553 288 l S
-0.990 0.980 0.950 rg 42 267 511 32 re f
-0.110 0.140 0.190 rg BT /F1 8.4 Tf 52 287 Td (Exemple : 182 pochettes = 49 x 1,50 \200 + 50 x 1,40 \200 + 83 x 1,25 \200 = 247,25 \200 de caution indicative.) Tj ET
+0.990 0.980 0.950 rg 42 255 511 32 re f
+0.110 0.140 0.190 rg BT /F1 8.4 Tf 52 269 Td (Exemple : 182 pochettes = 49 x 1,50 \200 + 50 x 1,40 \200 + 83 x 1,25 \200 = 247,25 \200 de caution indicative.) Tj ET
 0.110 0.140 0.190 rg BT /F2 11 Tf 42 247 Td (Restitution et remplacement) Tj ET
 0.110 0.140 0.190 rg BT /F1 8.5 Tf 42 231 Td (Caution s\351par\351e du loyer et restitu\351e apr\350s inventaire et d\351ductions justifi\351es. Pochettes perdues ou endommag\351es hors) Tj ET
 0.110 0.140 0.190 rg BT /F1 8.5 Tf 42 219 Td (usure normale imputables au client : prix de vente unitaire du lot \0505,90 \200 sous 100 ; 5,50 \200 de 100 \340 299 ; 4,90 \200 d\350s) Tj ET

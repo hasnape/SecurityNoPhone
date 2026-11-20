@@ -153,9 +153,9 @@ stream
 0.770 0.800 0.840 RG 0.4 w 42 682 m 42 557 l S
 0.770 0.800 0.840 RG 0.4 w 328.16 682 m 328.16 557 l S
 0.770 0.800 0.840 RG 0.4 w 553 682 m 553 557 l S
-0.990 0.980 0.950 rg 42 516 511 47 re f
-0.110 0.140 0.190 rg BT /F1 8.6 Tf 52 547 Td (Calcul progressif : chaque taux s'applique uniquement aux pochettes de sa tranche. Exemples : 37 pochettes = 55,50) Tj ET
-0.110 0.140 0.190 rg BT /F1 8.6 Tf 52 534 Td (\200 ; 182 = 247,25 \200 ; 303 = 397,90 \200 ; 484 = 597,00 \200 ; 605 = 730,10 \200.) Tj ET
+0.990 0.980 0.950 rg 42 505 511 47 re f
+0.110 0.140 0.190 rg BT /F1 8.6 Tf 52 536 Td (Calcul progressif : chaque taux s'applique uniquement aux pochettes de sa tranche. Exemples : 37 pochettes = 55,50) Tj ET
+0.110 0.140 0.190 rg BT /F1 8.6 Tf 52 523 Td (\200 ; 182 = 247,25 \200 ; 303 = 397,90 \200 ; 484 = 597,00 \200 ; 605 = 730,10 \200.) Tj ET
 0.110 0.140 0.190 rg BT /F2 12 Tf 42 488 Td (6. Restitution et remplacement) Tj ET
 0.110 0.140 0.190 rg BT /F1 8.9 Tf 42 473 Td (La caution est distincte du loyer. Elle est remboursable apr\350s inventaire, sous r\351serve des seules retenues) Tj ET
 0.110 0.140 0.190 rg BT /F1 8.9 Tf 42 460 Td (justifi\351es pr\351vues au devis. L'usure normale n'est pas factur\351e. Pour les pertes ou d\351g\342ts imputables au client :) Tj ET
