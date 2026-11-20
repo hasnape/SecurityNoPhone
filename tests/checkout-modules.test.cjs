@@ -99,7 +99,8 @@ test('private/pro custom rental is accessible, priced indicatively from Pro tier
   assert.match(order, /data-custom-no-min-term-note/);
   assert.match(order, /data-pro-min-term-note/);
   assert.match(calculator, /showElement\(rentalGroup, usesRentalDates\)/);
-  assert.match(calculator, /const caution = offer\.type === 'event' \|\| professional \|\| customRental/);
+  assert.match(calculator, /const caution = offer\.type === 'event'/);
+  assert.match(calculator, /calculateEventDeposit\(offer\.price\)/);
   assert.match(calculator, /const eligibleRental = offer\?\.type === 'event' \|\| usesRentalDates/);
   assert.match(calculator, /label = translate\('custom_rental_price_pending'/);
   assert.match(calculator, /label = translate\('custom_rental_agent_price_pending'/);
@@ -117,6 +118,7 @@ test('private/pro custom rental is accessible, priced indicatively from Pro tier
       'custom_rental_price_pending', 'custom_rental_agent_price_pending',
       'custom_rental_min_quantity', 'custom_rental_duration_help',
       'custom_rental_dates_order', 'custom_rental_pricing_policy',
+      'event_deposit_banner', 'caution_help_event', 'caution_help_progressive',
       'deposit_tiers_summary', 'deposit_tiers_explainer',
       'deposit_tier_column', 'deposit_tier_rate_column',
       'deposit_tiers_example', 'estimated_outlay_label',
