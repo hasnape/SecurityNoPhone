@@ -2,7 +2,7 @@
 
 > Source unique des quantités et prix publics. Le propriétaire a validé les neuf formules ci-dessous et la vente à prix dégressif. Montants affichés en euros TTC, indicatifs jusqu'à acceptation d'un devis. Toute demande commerciale exige un préavis d'au moins **30 jours calendaires**, **y compris les achats**. Le formulaire Formspree n'encaisse aucun paiement et ne confirme pas une réservation.
 
-La grille commerciale PDF `documents/support/grille-offres-2026.pdf` a été harmonisée le 20/11/2026 avec les packs publics, les références de location personnalisée, les tarifs d'agents, la caution dégressive progressive et les conditions de restitution. La fiche de retour `documents/support/fiche-retour-materiel.pdf` utilise le même barème. Les six autres PDF opérationnels ont été conservés sans modification de leurs procédures. Seul le devis accepté fixe les montants et les prestations définitifs.
+La grille commerciale PDF `documents/support/grille-offres-2026.pdf` présente désormais la caution événementielle de 25 % du prix du pack, le barème progressif conservé pour Pro et sur mesure, les agents et la restitution. La fiche de retour `documents/support/fiche-retour-materiel.pdf` utilise le même barème. Les six autres PDF opérationnels ont été conservés sans modification de leurs procédures. Seul le devis accepté fixe les montants et les prestations définitifs.
 
 ## 1. Prestations événementielles ponctuelles
 
@@ -13,6 +13,8 @@ La grille commerciale PDF `documents/support/grille-offres-2026.pdf` a été har
 | Confort | 182 | 189 € |
 | Grand événement | 303 | 299 € |
 | Prestige | 484 | 449 € |
+
+**Caution remboursable des cinq packs événementiels : 25 % du tarif de location de base du pack (hors agents et suppléments).** Mini 17,25 € ; Essentiel 27,25 € ; Confort 47,25 € ; Grand événement 74,75 € ; Prestige 112,25 €. Les cautions sont distinctes des loyers et remboursables après inventaire, moins retenues justifiées. Les packs Pro et locations personnalisées gardent le barème progressif.
 
 Une journée d'utilisation ; expédition préalable et restitution après l'événement, calendrier précis défini au devis. Aucune présence d'agent incluse dans les forfaits. **Option avec agent : 100 € TTC par agent et par journée d’intervention, pour 7 heures maximum** (même tarif pour une intervention plus courte). Pour plusieurs journées ou plusieurs agents, multiplier 100 € par le nombre d’agents et de journées. La disponibilité reste soumise à validation. **Hors de Lyon (commune)**, les frais de déplacement et, si un hébergement est nécessaire, les frais de logement sont en supplément, évalués sur devis avant accord.
 
@@ -40,7 +42,7 @@ La location personnalisée **ne remplace pas les neuf packs standards à quantit
 - **Plancher commercial sur les locations courtes** : lorsque le volume est couvert par les packs événementiels, l'estimation ne descend pas sous le forfait événementiel de quantité suffisante le plus proche : jusqu'à 49 pochettes → 69 € ; jusqu'à 97 → 109 € ; jusqu'à 182 → 189 € ; jusqu'à 303 → 299 € ; jusqu'à 484 → 449 €. Formule indicative : **max(plancher événementiel, prix Pro de la tranche × nombre de tranches de 30 jours commencées)**.
 - **Hors grille** : pour 485 pochettes ou davantage, les références événementielles ne couvrent pas le volume ; même lorsque la référence Pro 349 €/30 jours (jusqu'à 605) est connue, **ne pas générer automatiquement de total** : prix de location sur devis. Au-delà de 605, toutes les références sont sur devis.
 - Cette méthode est une **proposition d'estimation publique et de cohérence commerciale**, pas une modification des prix des neuf packs approuvés ni un nouveau devis automatiquement accepté. Les devis signés restent seuls contractuels.
-- **Caution indicative dégressive et progressive pour toutes les locations** : pochettes nº 1 à 49 à 1,50 € par unité, 50 à 99 à 1,40 €, 100 à 299 à 1,25 €, à partir de la 300e à 1,10 €. Le taux inférieur s'applique uniquement aux unités supplémentaires de la tranche. Exemples : 10 pochettes → 15 € de caution ; 37 → 55,50 € ; 182 → 247,25 €. Ces montants sont **distincts du prix de location** et sous réserve d'inventaire et de devis.
+- **Caution indicative dégressive et progressive pour les locations Pro et personnalisées** : pochettes nº 1 à 49 à 1,50 € par unité, 50 à 99 à 1,40 €, 100 à 299 à 1,25 €, à partir de la 300e à 1,10 €. Le taux inférieur s'applique uniquement aux unités supplémentaires de la tranche. Exemples : 10 pochettes → 15 € de caution ; 37 → 55,50 € ; 182 → 247,25 €. Ces montants sont **distincts du prix de location** et sous réserve d'inventaire et de devis.
 - Option sans agent, ou avec agent à **100 € TTC par agent et par journée d'intervention de sept heures maximum**. En dehors de Lyon, déplacements et hébergement si nécessaire en supplément, sur devis. Le montant connu des agents ne vaut jamais devis total de la location personnalisée.
 - Formspree transmet une **demande de devis** et non une réservation ou un paiement. Vérification humaine obligatoire pour les quantités et disponibilités, en particulier lorsque les lots doivent être constitués sur mesure.
 - Les tarifs et caractéristiques des neuf packs fixes, les conditions d'achat minimum 50 unités et la logistique en vigueur restent inchangés.
@@ -65,8 +67,9 @@ Le client devient propriétaire des pochettes. Vente avec ou sans personnalisati
 
 ## 5. Caution, remplacement et usure
 
-- Caution **indicative, progressive et remboursable pour tous les lots remis temporairement**, qu'il s'agisse d'un pack événementiel, d'un pack Pro standard ou d'une location personnalisée. Aucun dépôt de garantie en cas de vente définitive.
-- Barème approuvé le 20/11/2026, **calcul marginal** (ne pas appliquer le tarif de la dernière tranche à l'intégralité du lot) :
+- **Packs événementiels standards : caution de 25 % du prix de location de base**, hors agents et suppléments (Mini 17,25 € ; Essentiel 27,25 € ; Confort 47,25 € ; Grand 74,75 € ; Prestige 112,25 €). Caution remboursable après contrôle, sous réserve de retenues justifiées.
+- **Packs Pro et locations personnalisées : barème marginal progressif conservé** selon les quatre tranches ci-dessous. Aucun dépôt en cas de vente définitive.
+- Barème applicable **uniquement aux locations Pro et personnalisées**, **calcul marginal** (ne pas appliquer le tarif de la dernière tranche à l'intégralité du lot) :
 
   | Rang des pochettes | Taux de caution appliqué aux unités de la tranche |
   | --- | ---: |
@@ -76,7 +79,7 @@ Le client devient propriétaire des pochettes. Vente avec ou sans personnalisati
   | Nº 300 et au-delà | 1,10 € / pochette |
 
   Formule : **1,50 × min(N,49) + 1,40 × min(max(N−49,0),50) + 1,25 × min(max(N−99,0),200) + 1,10 × max(N−299,0)**, pour toute quantité entière N ≥ 1. Calculer en centimes entiers, sans erreur d'arrondi.
-- Exemples : **49 → 73,50 € ; 50 → 74,90 € ; 97 → 140,70 € ; 99 → 143,50 € ; 100 → 144,75 € ; 182 → 247,25 € ; 299 → 393,50 € ; 300 → 394,60 € ; 303 → 397,90 € ; 484 → 597,00 € ; 605 → 730,10 €**. Le montant de caution ne diminue jamais si l'on ajoute des pochettes.
+- Exemples pour **Pro et sur mesure uniquement** : **49 → 73,50 € ; 50 → 74,90 € ; 97 → 140,70 € ; 99 → 143,50 € ; 100 → 144,75 € ; 182 → 247,25 € ; 299 → 393,50 € ; 300 → 394,60 € ; 303 → 397,90 € ; 484 → 597,00 € ; 605 → 730,10 €**. Le calcul Pro est strictement croissant. **Attention : le pack événementiel Confort de 182 pochettes coûte seulement 47,25 € de caution**, et non 247,25 €.
 - La caution reste **distincte du prix de la location**, remboursable après inventaire, sous réserve des déductions justifiées et acceptées contractuellement. Une simulation peut afficher **loyer estimé + agents estimés + caution** comme montant indicatif à prévoir avant restitution, sans le présenter comme un paiement, une réservation ou un montant final contractuel.
 - Pochette manquante ou abîmée hors usure normale, imputable au client : prix unitaire de vente du lot loué, soit **5,90 €** si moins de 100 unités, **5,50 €** de 100 à 299, **4,90 €** dès 300. Usage normal : sans facturation.
 - Aucune double facturation : la somme retenue sur caution vient en déduction du remplacement réellement dû. Les dispositifs magnétiques perdus ou abîmés nécessitent une grille de remplacement propre, expressément prévue au devis.
