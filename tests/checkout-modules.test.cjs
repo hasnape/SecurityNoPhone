@@ -47,7 +47,8 @@ test('estimate is visible without requested dates but cannot be booked automatic
   assert.match(calculator, /priceDisplay\.textContent = quantityOk \? label : ''/);
   assert.match(calculator, /const valid = quantityOk && datesOk/);
   assert.match(calculator, /const NOTICE_DAYS = 30;/);
-  assert.match(calculator, /const DEPOSIT_PER_POUCH = 1\.50;/);
+  assert.match(calculator, /const DEPOSIT_TIERS = Object\.freeze/);
+  assert.match(calculator, /function calculateDeposit\(quantity\)/);
   assert.match(calculator, /form\.addEventListener\('submit'/);
   assert.match(order, /https:\/\/formspree\.io\/f\/xqaqogdv/);
 });
@@ -106,12 +107,20 @@ test('private/pro custom rental is accessible, priced indicatively from Pro tier
   assert.match(calculator, /label = translate\('custom_rental_with_agent_estimate'/);
   assert.match(calculator, /const pricedSubtotal = total !== null/);
   assert.match(order, /data-caution-value/);
+  assert.match(order, /data-deposit-tiers/);
+  assert.match(order, /data-payable-estimate-group/);
+  assert.match(order, /data-payable-estimate-amount/);
+  assert.match(calculator, /const estimatedOutlay = pricedSubtotal !== null/);
   for (const lang of ['fr', 'en', 'de', 'ar']) {
     for (const key of ['offer_location_particulier', 'offer_location_pro',
       'custom_rental_section_title', 'custom_rental_quantity_help',
       'custom_rental_price_pending', 'custom_rental_agent_price_pending',
       'custom_rental_min_quantity', 'custom_rental_duration_help',
       'custom_rental_dates_order', 'custom_rental_pricing_policy',
+      'deposit_tiers_summary', 'deposit_tiers_explainer',
+      'deposit_tier_column', 'deposit_tier_rate_column',
+      'deposit_tiers_example', 'estimated_outlay_label',
+      'estimated_outlay_notice', 'pdf_deposit_update_notice',
       'custom_rental_public_price_logic', 'custom_rental_pro_estimate',
       'custom_rental_pro_reference_pending', 'custom_rental_with_agent_estimate']) {
       assert.equal(typeof translations[lang][key], 'string', lang + ': ' + key);

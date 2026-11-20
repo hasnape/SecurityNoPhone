@@ -10,8 +10,8 @@ const begin = source.indexOf('  const OFFER_CONFIG = Object.freeze(');
 const end = source.indexOf('  function showElement(', begin);
 assert.ok(begin > 0 && end > begin, 'Source pricing/date functions must be accessible');
 const funcs = vm.runInNewContext(source.slice(begin, end) +
-  '\n({ OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_PER_POUCH, AGENT_DAY_RATE, MAX_AGENT_HOURS, CUSTOM_PRO_REFERENCE, CUSTOM_EVENT_FLOOR, CUSTOM_BILLING_DAYS, customRentalReference, calculateAgentCharge, addCalendarDays, franceTodayISO, earliestRequestDate, minimumRentalEndDate, purchaseUnitPrice, replacementUnitPrice });');
-const { OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_PER_POUCH, AGENT_DAY_RATE, MAX_AGENT_HOURS, CUSTOM_PRO_REFERENCE, CUSTOM_EVENT_FLOOR, CUSTOM_BILLING_DAYS, customRentalReference, calculateAgentCharge,
+  '\n({ OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_TIERS, calculateDeposit, AGENT_DAY_RATE, MAX_AGENT_HOURS, CUSTOM_PRO_REFERENCE, CUSTOM_EVENT_FLOOR, CUSTOM_BILLING_DAYS, customRentalReference, calculateAgentCharge, addCalendarDays, franceTodayISO, earliestRequestDate, minimumRentalEndDate, purchaseUnitPrice, replacementUnitPrice });');
+const { OFFER_CONFIG, NOTICE_DAYS, DEPOSIT_TIERS, calculateDeposit, AGENT_DAY_RATE, MAX_AGENT_HOURS, CUSTOM_PRO_REFERENCE, CUSTOM_EVENT_FLOOR, CUSTOM_BILLING_DAYS, customRentalReference, calculateAgentCharge,
         addCalendarDays, franceTodayISO, earliestRequestDate,
         minimumRentalEndDate, purchaseUnitPrice, replacementUnitPrice } = funcs;
 
@@ -57,7 +57,7 @@ test('approved professional monthly prices/quantities and minimum commitment', (
     assert.equal(OFFER_CONFIG[key].minMonths, 3);
   });
 });
-test('sales tiers, replacements and distinct refundable deposit', () => {
+test('sales tiers, replacements and progressive refundable deposit', () => {
   const prices = [[49, 5.9], [50, 5.9], [99, 5.9], [100, 5.5],
                   [182, 5.5], [299, 5.5], [300, 4.9], [484, 4.9], [605, 4.9]];
   prices.forEach(([quantity, rate]) => {
@@ -65,8 +65,22 @@ test('sales tiers, replacements and distinct refundable deposit', () => {
     assert.equal(replacementUnitPrice(quantity), rate);
   });
   assert.equal(OFFER_CONFIG.achat.minQuantity, 50);
-  assert.equal(DEPOSIT_PER_POUCH, 1.5);
-  assert.equal(605 * DEPOSIT_PER_POUCH, 907.5);
+  assert.deepEqual(Array.from(DEPOSIT_TIERS, tier => [tier.upTo, tier.cents]),
+    [[49, 150], [99, 140], [299, 125], [Infinity, 110]]);
+  const deposits = [[1,1.5],[10,15],[37,55.5],[49,73.5],[50,74.9],
+    [97,140.7],[99,143.5],[100,144.75],[182,247.25],
+    [299,393.5],[300,394.6],[303,397.9],[484,597],[605,730.1]];
+  for (const [quantity, expected] of deposits) {
+    assert.equal(calculateDeposit(quantity), expected, quantity + ' pouches');
+  }
+  for (let quantity = 1; quantity < 1000; quantity++) {
+    assert.ok(calculateDeposit(quantity + 1) > calculateDeposit(quantity),
+      'adding a pouch cannot reduce total deposit');
+  }
+  for (const quantity of [0, -1, 1.5, Infinity, NaN, '49']) {
+    assert.equal(calculateDeposit(quantity), null);
+  }
+  assert.match(source, /calculateDeposit\(quantity\)/);
 });
 test('all service requests require dates, without automatic booking', () => {
   assert.match(source, /targetInput\.required = dated/);
@@ -107,7 +121,7 @@ test('custom rentals retain freely selectable quantity and duration and use indi
   assert.match(source, /if \(standardPro\) \{/);
   assert.match(source, /custom_rental_dates_order/);
   assert.match(source, /const caution = offer\.type === 'event' \|\| professional \|\| customRental/);
-  assert.match(source, /quantity \* DEPOSIT_PER_POUCH/);
+  assert.match(source, /calculateDeposit\(quantity\)/);
   assert.match(source, /function customRentalReference\(quantity, startISO, endISO\)/);
   assert.match(source, /custom_rental_pro_estimate/);
   assert.match(source, /custom_rental_price_pending/);

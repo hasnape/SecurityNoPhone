@@ -64,7 +64,7 @@
             </div>
           </div>
         </div>
-        <p class="small mb-0"><a href="suivi.html" data-i18n="nav_tracking">Suivi de commande</a> · <a href="documents/support/grille-offres-2026.pdf" data-i18n="support_prices_pdf_cta">Télécharger la grille commerciale (PDF)</a></p>
+        <p class="small mb-0"><a href="suivi.html" data-i18n="nav_tracking">Suivi de commande</a> · <a href="documents/support/grille-offres-2026.pdf" data-i18n="support_prices_pdf_cta">Télécharger la grille commerciale (PDF)</a> <span class="small text-muted d-block mt-2" data-i18n="pdf_deposit_update_notice">La grille PDF récapitule les forfaits standards. La caution applicable est désormais dégressive : consultez le barème à jour dans le simulateur et le devis.</span></p>
       </section><div class="row gy-5">
         <div class="col-lg-7">
           <form action="https://formspree.io/f/xqaqogdv" method="POST" id="orderForm" data-order-form
@@ -111,7 +111,7 @@
             </div>
 
             <p class="small text-muted" data-i18n="order_fixed_quantity_note">Les neuf packs standards ont une quantité et des conditions définies. En location personnalisée, vous choisissez votre quantité dès 10 pochettes et vos dates sans durée minimale ; tarif sur devis.</p>
-            <p class="small text-muted d-none" data-custom-quantity-hint data-i18n="custom_rental_quantity_help">Dès 10 pochettes, durée libre. Le simulateur affiche une estimation fondée sur les paliers Pro, par tranches commencées de 30 jours, avec un plancher équivalent aux packs événementiels. Le montant définitif dépend du devis et de la logistique. Caution : 1,50 € par pochette, distincte du tarif.</p>
+            <p class="small text-muted d-none" data-custom-quantity-hint data-i18n="custom_rental_quantity_help">Location personnalisée dès 10 pochettes, sans durée minimale. Estimation selon les paliers Pro et les packs événementiels, puis devis final. Caution progressive dégressive remboursable, affichée séparément.</p>
             <div class="alert alert-light border small d-none" data-custom-pricing-notice data-i18n="custom_rental_pricing_policy">Références Pro : jusqu'à 92 pochettes 69 € / 30 jours ; 93–182 : 119 € ; 183–363 : 229 € ; 364–605 : 349 €. Chaque tranche de 30 jours commencée est comptée. Pour éviter de concurrencer les offres événementielles, l'estimation ne descend pas sous le tarif du pack événementiel correspondant (jusqu'à 484 pochettes). Au-delà de 484 pochettes, prix sur devis. Estimation non contractuelle.</div>
             <p class="alert alert-light border" data-i18n="booking_30_days_notice">Anticipation obligatoire : demande au moins 30 jours calendaires avant la date d'événement, le début de mise à disposition ou la livraison souhaitée d'un achat. Selon disponibilité ; aucune réservation automatique.</p>
             <div class="mb-3 d-none" data-event-purchase-date>
@@ -193,7 +193,26 @@
             <div class="mb-3 d-none" data-caution-block>
               <label class="form-label" data-i18n="label_caution">Caution (obligatoire)</label>
               <input type="text" class="form-control" data-caution-display readonly value="0,00 €" />
-              <small class="text-muted" data-i18n="caution_help">Caution indicative de 1,50 € par pochette louée ou mise à disposition, distincte du tarif, remboursable après inventaire. Les pertes/dégradations anormales sont facturées au prix unitaire de vente correspondant à la tranche.</small>
+              <small class="text-muted" data-i18n="caution_help">Caution indicative dégressive calculée par tranche de pochettes : 1 à 49 à 1,50 €, 50 à 99 à 1,40 €, 100 à 299 à 1,25 €, dès 300 à 1,10 €. Chaque taux ne s'applique qu'aux pochettes de sa tranche. Caution distincte du loyer, remboursable après inventaire et déductions justifiées.</small>
+              <details class="mt-2 small" data-deposit-tiers>
+                <summary class="fw-semibold" data-i18n="deposit_tiers_summary">Consulter le barème de caution dégressive</summary>
+                <p class="text-muted mt-2 mb-2" data-i18n="deposit_tiers_explainer">Calcul progressif : les 49 premières pochettes restent à 1,50 € ; les suivantes bénéficient du tarif de leur tranche. La caution totale ne diminue jamais lorsqu'on ajoute des pochettes.</p>
+                <table class="table table-sm table-bordered align-middle mb-2">
+                  <thead><tr><th scope="col" data-i18n="deposit_tier_column">Pochettes concernées</th><th scope="col" data-i18n="deposit_tier_rate_column">Caution par pochette</th></tr></thead>
+                  <tbody>
+                    <tr><td data-i18n="deposit_tier_1">De la 1re à la 49e</td><td data-i18n="deposit_tier_rate_1">1,50 €</td></tr>
+                    <tr><td data-i18n="deposit_tier_2">De la 50e à la 99e</td><td data-i18n="deposit_tier_rate_2">1,40 €</td></tr>
+                    <tr><td data-i18n="deposit_tier_3">De la 100e à la 299e</td><td data-i18n="deposit_tier_rate_3">1,25 €</td></tr>
+                    <tr><td data-i18n="deposit_tier_4">À partir de la 300e</td><td data-i18n="deposit_tier_rate_4">1,10 €</td></tr>
+                  </tbody>
+                </table>
+                <p class="text-muted mb-0" data-i18n="deposit_tiers_example">Exemple : 182 pochettes = 49 × 1,50 € + 50 × 1,40 € + 83 × 1,25 € = 247,25 € de caution indicative.</p>
+              </details>
+              <p class="border-top pt-2 mt-3 mb-1 d-none" data-payable-estimate-group aria-live="polite">
+                <span data-i18n="estimated_outlay_label">Montant indicatif à prévoir avant restitution (location + caution remboursable)</span> :
+                <strong data-payable-estimate-amount>—</strong>
+              </p>
+              <p class="small text-muted mb-0" data-i18n="estimated_outlay_notice">Ce montant inclut la caution remboursable et ne constitue pas un paiement : le devis final précise transport exceptionnel, agents et frais éventuels. Aucun prélèvement sur ce formulaire.</p>
             </div>
 
             <div class="mb-3">
@@ -249,13 +268,13 @@
             <p class="small" data-i18n="pro_offers_summary">Éducation 92 / 69 €/mois · Starter 182 / 119 €/mois · Business 363 / 229 €/mois · Entreprise 605 / 349 €/mois.</p>
             <p class="small text-muted" data-i18n="agent_public_price_notice">Accompagnement avec agent : 100 € TTC par agent pour une journée de 7 heures maximum, en supplément du pack. En dehors de Lyon, frais de déplacement et, si nécessaire, d’hébergement en supplément, sur devis.</p>
             <h3 class="h6" data-i18n="custom_rental_side_title">Location personnalisée — quantité libre</h3>
-            <p class="small" data-i18n="custom_rental_side_desc">Particuliers et professionnels : dès 10 pochettes, dates libres sans durée minimale, avec ou sans agent. Estimation selon les paliers Pro (référence mensuelle) et les prix événementiels pour les séjours courts ; prix final sur devis. Caution : 1,50 € par pochette.</p>
+            <p class="small" data-i18n="custom_rental_side_desc">Particuliers et professionnels : dès 10 pochettes, durée libre, avec ou sans agent. Estimation des locations selon les références Pro et les forfaits événementiels. Caution dégressive remboursable, distincte du tarif.</p>
             <p class="small text-muted" data-i18n="custom_rental_public_price_logic">Référence pour la location personnalisée : 69 € / 30 j jusqu'à 92 pochettes, 119 € jusqu'à 182, 229 € jusqu'à 363, 349 € jusqu'à 605. Les tarifs événementiels fixent un plancher sur les volumes comparables. Prix non contractuel, à confirmer par devis.</p>
             <h3 class="h6" data-i18n="purchase_offers_heading">Achat définitif — minimum 50</h3>
             <p class="small" data-i18n="purchase_offers_summary">50–99 : 5,90 €/u · 100–299 : 5,50 €/u · 300 et plus : 4,90 €/u. Personnalisation spécifique sur devis.</p>
             <p class="small" data-i18n="offer_delivery_included">Mondial Relay aller-retour standard inclus pour les mises à disposition : retrait en Locker/Point Relais, retour prépayé, sous réserve de compatibilité poids/volume ; expéditions exceptionnelles chiffrées avant accord. Pour la vente, livraison standard incluse selon le colis confirmé au devis.</p>
     <p class="small text-muted" data-i18n="mondial_pickup_deadline">Après arrivée du colis en France, vous disposez normalement de cinq jours calendaires pour le récupérer en Locker ou Point Relais. Vérifiez l'avis de mise à disposition.</p>
-            <p class="small" data-i18n="offer_replacement_terms">Caution indicative : 1,50 € par pochette mise à disposition, restituable après contrôle. Perte ou casse imputable au client : prix de vente unitaire applicable à la tranche (5,90 €, 5,50 € ou 4,90 €). Usure normale non facturée.</p>
+            <p class="small" data-i18n="offer_replacement_terms">Caution indicative dégressive : 49 premières pochettes à 1,50 € chacune ; 50e–99e à 1,40 € ; 100e–299e à 1,25 € ; dès la 300e à 1,10 €. Les taux s'appliquent progressivement. Caution remboursable après inventaire, moins retenues justifiées ; remplacement au prix unitaire de vente de la tranche (5,90 €, 5,50 € ou 4,90 €), sans facturation de l'usure normale ni double retenue.</p>
             <p class="small" data-i18n="offer_quote_only">Formulaire de demande, sans paiement ni réservation immédiate. Disponibilité, prix total et logistique confirmés par devis.</p>
             <div class="border rounded-3 p-3 bg-white mb-3">
               <h3 class="h6 text-uppercase text-muted" data-i18n="order_fees_title">Frais et conditions agents</h3>
@@ -287,10 +306,10 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
 
-  <script src="js/translations.js?v=20261120-pro-reference-v3"></script>
+  <script src="js/translations.js?v=20261120-deposit-tiers-v4"></script>
 
   <script src="js/main.js?v=20261118-final-v2"></script>
-  <script src="js/order-form.js?v=20261120-pro-reference-v3"></script>
+  <script src="js/order-form.js?v=20261120-deposit-tiers-v4"></script>
 </body>
 
 </html>

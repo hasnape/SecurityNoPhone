@@ -36,7 +36,8 @@ function boot(hash = '#location_particulier') {
     '[data-start-date]', '[data-end-date]', '#dateError', '#quantityError',
     '[data-agent-options]', '[data-rental-mode-group]', '[data-rental-mode]',
     '[data-simulation-hint]', '[data-pack-base-value]', '[data-pricing-method-value]', '[data-total-display]',
-    '[data-caution-block]', '[data-caution-display]', '[data-total-value]',
+    '[data-caution-block]', '[data-caution-display]', '[data-payable-estimate-group]',
+    '[data-payable-estimate-amount]', '[data-total-value]',
     '[data-caution-value]', '[data-replacement-price]', '[data-summary]',
     '[data-agent-rate-value]', '[data-agent-charge-value]', '[data-agent-extras-value]',
     '[data-agent-count]', '[data-agent-days]', '[data-agent-hours]', '[data-agent-zone]',
@@ -103,6 +104,7 @@ test('private customer chooses 37 pouches with a Pro-based indicative estimate',
   assert.equal(f['#quantity'].validationMessage, '');
   assert.equal(f['[data-caution-value]'].value, '55.50');
   assert.equal(f['[data-total-value]'].value, '207.00');
+  assert.match(f['[data-payable-estimate-amount]'].textContent, /262,50/);
   assert.match(f['[data-total-display]'].textContent, /207/);
   assert.match(f['[data-pricing-method-value]'].value, /Reference Pro/);
 });
@@ -114,6 +116,7 @@ test('custom rental agent fee adds to Pro estimate but deposit and travel remain
   assert.equal(f['[data-agent-charge-value]'].value, '600.00');
   assert.equal(f['[data-caution-value]'].value, '55.50');
   assert.equal(f['[data-total-value]'].value, '807.00');
+  assert.match(f['[data-payable-estimate-amount]'].textContent, /862,50/);
   set('[data-agent-zone]', 'hors_lyon'); trigger('[data-agent-zone]', 'change');
   assert.match(f['[data-agent-extras-value]'].value, /Déplacement en supplément/);
   set('[data-rental-mode]', 'sans'); trigger('[data-rental-mode]', 'change');
@@ -129,7 +132,7 @@ test('professional custom rental allows short and one-day bookings with 10+ pouc
   assert.equal(f['[data-end-date]'].required, true);
   assert.equal(f['[data-requested-date]'].required, false);
   set('#quantity', '182'); trigger('#quantity');
-  assert.equal(f['[data-caution-value]'].value, '273.00');
+  assert.equal(f['[data-caution-value]'].value, '247.25');
   assert.equal(f['[data-total-value]'].value, '357.00');
   set('[data-end-date]', '2099-01-01'); trigger('[data-end-date]', 'change');
   assert.equal(f['[data-end-date]'].validationMessage, '');
@@ -155,6 +158,8 @@ test('existing fixed packs and minimum purchase quantity stay unchanged', () => 
   set('#offerType', 'achat'); trigger('#offerType', 'change');
   assert.equal(f['#quantity'].value, '50');
   assert.equal(f['[data-total-value]'].value, '295.00');
+  assert.equal(f['[data-caution-value]'].value, '0.00');
+  assert.equal(f['[data-payable-estimate-group]'].classList.contains('d-none'), true);
   set('#offerType', 'location_particulier'); trigger('#offerType', 'change');
   assert.equal(f['#quantity'].readOnly, false);
   set('#quantity', '1.5'); trigger('#quantity');
@@ -252,4 +257,34 @@ test('larger-than-event volumes and absent dates keep price quote-only', () => {
   set('[data-start-date]', ''); trigger('[data-start-date]', 'change');
   assert.equal(f['[data-total-value]'].value, '');
   assert.match(f['[data-total-display]'].textContent, /69/);
+});
+
+test('progressive deposits apply to event and professional standard packs too', () => {
+  const { fields: f, trigger, set } = boot();
+  set('#offerType', 'event_mini'); trigger('#offerType', 'change');
+  assert.equal(f['[data-caution-value]'].value, '73.50');
+  assert.equal(f['[data-total-value]'].value, '69.00');
+  assert.match(f['[data-payable-estimate-amount]'].textContent, /142,50/);
+  set('#offerType', 'event_confort'); trigger('#offerType', 'change');
+  assert.equal(f['[data-caution-value]'].value, '247.25');
+  assert.equal(f['[data-total-value]'].value, '189.00');
+  assert.match(f['[data-payable-estimate-amount]'].textContent, /436,25/);
+  set('#offerType', 'pro_entreprise'); trigger('#offerType', 'change');
+  assert.equal(f['[data-caution-value]'].value, '730.10');
+  assert.equal(f['[data-total-value]'].value, '');
+  assert.match(f['[data-payable-estimate-amount]'].textContent, /1.?777,10/);
+  set('#offerType', 'achat'); trigger('#offerType', 'change');
+  assert.equal(f['[data-caution-value]'].value, '0.00');
+  assert.equal(f['[data-payable-estimate-group]'].classList.contains('d-none'), true);
+});
+
+test('the displayed amount to plan is indicative and preserves unpriced custom volumes', () => {
+  const { fields: f, trigger, set } = boot('#location_pro');
+  set('#quantity', '500'); trigger('#quantity');
+  assert.equal(f['[data-total-value]'].value, '');
+  assert.equal(f['[data-caution-value]'].value, '614.60');
+  assert.equal(f['[data-payable-estimate-group]'].classList.contains('d-none'), true);
+  set('#quantity', '182'); trigger('#quantity');
+  assert.equal(f['[data-caution-value]'].value, '247.25');
+  assert.equal(f['[data-payable-estimate-group]'].classList.contains('d-none'), false);
 });

@@ -48,7 +48,8 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
             self.assertIn(f'value="{offer}"', form)
             self.assertIn(offer + ":", script)
         self.assertIn("const NOTICE_DAYS = 30;", script)
-        self.assertIn("const DEPOSIT_PER_POUCH = 1.50;", script)
+        self.assertIn("const DEPOSIT_TIERS = Object.freeze(", script)
+        self.assertIn("function calculateDeposit(quantity)", script)
         self.assertIn("function earliestRequestDate()", script)
         self.assertIn("function minimumRentalEndDate(startValue)", script)
         self.assertIn("function purchaseUnitPrice(quantity)", script)
@@ -73,7 +74,13 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
             "custom_rental_min_quantity", "custom_rental_duration_help",
             "custom_rental_dates_order", "custom_rental_pro_estimate",
             "custom_rental_pro_reference_pending", "custom_rental_with_agent_estimate",
-            "custom_rental_pricing_policy", "custom_rental_public_price_logic"]
+            "custom_rental_pricing_policy", "custom_rental_public_price_logic",
+            "caution_help", "offer_replacement_terms", "legal_section_deposit_desc",
+            "deposit_tiers_summary", "deposit_tiers_explainer", "deposit_tier_column",
+            "deposit_tier_rate_column", "deposit_tier_1", "deposit_tier_2",
+            "deposit_tier_3", "deposit_tier_4", "deposit_tiers_example",
+            "estimated_outlay_label", "estimated_outlay_notice",
+            "pdf_deposit_update_notice"]
         keys += ["offer_event_"+k for k in EVENTS]
         keys += ["offer_pro_"+k for k in PROFESSIONAL]
         for lang in ("fr", "en", "de", "ar"):
@@ -108,8 +115,13 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
         self.assertIn("customRental && quantityInput) quantityInput.value = '10'", script)
         self.assertIn("quantityInput.min = customRental ? '10'", script)
         self.assertIn("const pricedSubtotal = total !== null", script)
+        self.assertIn("const estimatedOutlay = pricedSubtotal !== null", script)
+        self.assertIn("data-deposit-tiers", form)
+        self.assertIn("data-payable-estimate-amount", form)
+        self.assertIn("calculateDeposit(quantity)", script)
         self.assertIn("const NOTICE_DAYS = 30;", script)
-        self.assertIn("const DEPOSIT_PER_POUCH = 1.50;", script)
+        self.assertIn("const DEPOSIT_TIERS = Object.freeze(", script)
+        self.assertIn("function calculateDeposit(quantity)", script)
         self.assertIn("const AGENT_DAY_RATE = 100;", script)
         self.assertIn("CUSTOM_PRO_REFERENCE", script)
         self.assertIn("CUSTOM_EVENT_FLOOR", script)
@@ -128,8 +140,8 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
         for name in names:
             with self.subTest(name=name):
                 html = (ROOT / (name + ".html")).read_text(encoding="utf-8")
-                self.assertIn("js/translations.js?v=20261120-pro-reference-v3", html)
-        self.assertIn("js/order-form.js?v=20261120-pro-reference-v3", PAGES["commande.html"])
+                self.assertIn("js/translations.js?v=20261120-deposit-tiers-v4", html)
+        self.assertIn("js/order-form.js?v=20261120-deposit-tiers-v4", PAGES["commande.html"])
 
     def test_retired_three_day_and_old_price_offers_not_in_current_pages(self):
         for name in ("index.html", "solutions.html", "support.html", "cgv.html", "commande.html"):
@@ -164,13 +176,10 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
         self.assertIn('data-i18n="legal_offers_2026_notice"', PAGES["cgv.html"])
 
     def test_sitemap_modified_dates(self):
-        for path in ("", "solutions.html", "commande.html"):
+        for path in ("", "solutions.html", "commande.html", "support.html",
+                     "cgv.html", "ressources.html"):
             self.assertIn("<loc>https://securitynophone.com/" + path +
                           "</loc>\n    <lastmod>2026-11-20</lastmod>",
-                          PAGES["sitemap.xml"])
-        for path in ("support.html", "cgv.html"):
-            self.assertIn("<loc>https://securitynophone.com/" + path +
-                          "</loc>\n    <lastmod>2026-11-18</lastmod>",
                           PAGES["sitemap.xml"])
 
 if __name__ == "__main__":

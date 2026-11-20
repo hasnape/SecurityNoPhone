@@ -2,7 +2,7 @@
 
 > Source unique des quantités et prix publics. Le propriétaire a validé les neuf formules ci-dessous et la vente à prix dégressif. Montants affichés en euros TTC, indicatifs jusqu'à acceptation d'un devis. Toute demande commerciale exige un préavis d'au moins **30 jours calendaires**, **y compris les achats**. Le formulaire Formspree n'encaisse aucun paiement et ne confirme pas une réservation.
 
-La fiche PDF des offres en vigueur est disponible sous `documents/support/grille-offres-2026.pdf`. Les sept supports de formation et d'exploitation sont également régénérés au 18/11/2026 dans `documents/support/`.
+La fiche PDF `documents/support/grille-offres-2026.pdf` présente les forfaits publics de référence. **Attention : la caution dégressive du 20/11/2026 est décrite sur le site, dans le simulateur et dans ce référentiel ; si la fiche PDF n'est pas encore régénérée, sa mention antérieure de caution forfaitaire n'est pas à jour. Le devis accepté prévaut.** Les sept supports de formation/exploitation restent conservés dans `documents/support/`.
 
 ## 1. Prestations événementielles ponctuelles
 
@@ -40,7 +40,7 @@ La location personnalisée **ne remplace pas les neuf packs standards à quantit
 - **Plancher commercial sur les locations courtes** : lorsque le volume est couvert par les packs événementiels, l'estimation ne descend pas sous le forfait événementiel de quantité suffisante le plus proche : jusqu'à 49 pochettes → 69 € ; jusqu'à 97 → 109 € ; jusqu'à 182 → 189 € ; jusqu'à 303 → 299 € ; jusqu'à 484 → 449 €. Formule indicative : **max(plancher événementiel, prix Pro de la tranche × nombre de tranches de 30 jours commencées)**.
 - **Hors grille** : pour 485 pochettes ou davantage, les références événementielles ne couvrent pas le volume ; même lorsque la référence Pro 349 €/30 jours (jusqu'à 605) est connue, **ne pas générer automatiquement de total** : prix de location sur devis. Au-delà de 605, toutes les références sont sur devis.
 - Cette méthode est une **proposition d'estimation publique et de cohérence commerciale**, pas une modification des prix des neuf packs approuvés ni un nouveau devis automatiquement accepté. Les devis signés restent seuls contractuels.
-- **Caution indicative : 1,50 € par pochette** confiée, affichée distinctement, sous réserve des conditions d'inventaire. Exemple : 10 pochettes → caution indicative 15 € ; 37 pochettes → 55,50 € ; ces montants **ne constituent pas le prix de location**.
+- **Caution indicative dégressive et progressive pour toutes les locations** : pochettes nº 1 à 49 à 1,50 € par unité, 50 à 99 à 1,40 €, 100 à 299 à 1,25 €, à partir de la 300e à 1,10 €. Le taux inférieur s'applique uniquement aux unités supplémentaires de la tranche. Exemples : 10 pochettes → 15 € de caution ; 37 → 55,50 € ; 182 → 247,25 €. Ces montants sont **distincts du prix de location** et sous réserve d'inventaire et de devis.
 - Option sans agent, ou avec agent à **100 € TTC par agent et par journée d'intervention de sept heures maximum**. En dehors de Lyon, déplacements et hébergement si nécessaire en supplément, sur devis. Le montant connu des agents ne vaut jamais devis total de la location personnalisée.
 - Formspree transmet une **demande de devis** et non une réservation ou un paiement. Vérification humaine obligatoire pour les quantités et disponibilités, en particulier lorsque les lots doivent être constitués sur mesure.
 - Les tarifs et caractéristiques des neuf packs fixes, les conditions d'achat minimum 50 unités et la logistique en vigueur restent inchangés.
@@ -65,7 +65,19 @@ Le client devient propriétaire des pochettes. Vente avec ou sans personnalisati
 
 ## 5. Caution, remplacement et usure
 
-- Caution **indicative** des lots remis temporairement : **1,50 € par pochette** ; séparée du prix, remboursable après inventaire de restitution, sous réserve des déductions justifiées et acceptées contractuellement.
+- Caution **indicative, progressive et remboursable pour tous les lots remis temporairement**, qu'il s'agisse d'un pack événementiel, d'un pack Pro standard ou d'une location personnalisée. Aucun dépôt de garantie en cas de vente définitive.
+- Barème approuvé le 20/11/2026, **calcul marginal** (ne pas appliquer le tarif de la dernière tranche à l'intégralité du lot) :
+
+  | Rang des pochettes | Taux de caution appliqué aux unités de la tranche |
+  | --- | ---: |
+  | Nº 1 à 49 | 1,50 € / pochette |
+  | Nº 50 à 99 | 1,40 € / pochette |
+  | Nº 100 à 299 | 1,25 € / pochette |
+  | Nº 300 et au-delà | 1,10 € / pochette |
+
+  Formule : **1,50 × min(N,49) + 1,40 × min(max(N−49,0),50) + 1,25 × min(max(N−99,0),200) + 1,10 × max(N−299,0)**, pour toute quantité entière N ≥ 1. Calculer en centimes entiers, sans erreur d'arrondi.
+- Exemples : **49 → 73,50 € ; 50 → 74,90 € ; 97 → 140,70 € ; 99 → 143,50 € ; 100 → 144,75 € ; 182 → 247,25 € ; 299 → 393,50 € ; 300 → 394,60 € ; 303 → 397,90 € ; 484 → 597,00 € ; 605 → 730,10 €**. Le montant de caution ne diminue jamais si l'on ajoute des pochettes.
+- La caution reste **distincte du prix de la location**, remboursable après inventaire, sous réserve des déductions justifiées et acceptées contractuellement. Une simulation peut afficher **loyer estimé + agents estimés + caution** comme montant indicatif à prévoir avant restitution, sans le présenter comme un paiement, une réservation ou un montant final contractuel.
 - Pochette manquante ou abîmée hors usure normale, imputable au client : prix unitaire de vente du lot loué, soit **5,90 €** si moins de 100 unités, **5,50 €** de 100 à 299, **4,90 €** dès 300. Usage normal : sans facturation.
 - Aucune double facturation : la somme retenue sur caution vient en déduction du remplacement réellement dû. Les dispositifs magnétiques perdus ou abîmés nécessitent une grille de remplacement propre, expressément prévue au devis.
 - État initial, inventaire, éventuelles photos et retour contrôlés. Restitution et délais détaillés contractuellement.
