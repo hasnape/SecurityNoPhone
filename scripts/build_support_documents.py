@@ -87,7 +87,7 @@ def frame(canvas, doc):
     canvas.setFont('SNF', 7)
     canvas.setFillColor(INK)
     canvas.drawString(18 * mm, 13 * mm, 'securitynophone.com | snophone.info@gmail.com | +33 7 45 20 13 10')
-    canvas.drawRightString(W - 18 * mm, 8 * mm, '18/11/2026 | ' + str(doc.page))
+    canvas.drawRightString(W - 18 * mm, 8 * mm, ('20/11/2026' if doc.title in ('Fiche de retour matériel', 'Grille des offres SecurityNoPhone 2026') else '18/11/2026') + ' | ' + str(doc.page))
 
 
 def build(filename, title, story):
@@ -110,11 +110,17 @@ build('fiche-retour-materiel.pdf', 'Fiche de retour matériel', [
              '[  ] Bon état général   [  ] Matériel manquant   [  ] Matériel endommagé',
              'Détails : .........................................................................................................',
              '........................................................................................................................'),
-    p('<b>Caution indicative :</b> 1,50 € par pochette temporairement mise à disposition. '
-      'Elle est restituée après inventaire, moins les manquants ou dommages imputables au client. '
-      'Remplacement par pochette au tarif de vente unitaire du lot (5,90 / 5,50 / 4,90 EUR). '
-      'L usure normale n est pas facturée et aucune somme n est facturée deux fois. '
-      'Consigner les écarts avant toute décision.'),
+    *section('Caution remboursable - barème progressif'),
+    table(['Rang des pochettes', 'Caution par pochette dans cette tranche'],
+          [['1re à 49e', '1,50 €'], ['50e à 99e', '1,40 €'],
+           ['100e à 299e', '1,25 €'], ['À partir de la 300e', '1,10 €']],
+          [.52, .48]),
+    p('<b>Caution indicative et remboursable :</b> chaque taux s applique uniquement aux '
+      'pochettes de sa tranche. Exemple 182 pochettes : 49 × 1,50 € + 50 × 1,40 € '
+      '+ 83 × 1,25 € = <b>247,25 €</b>. Montant distinct du loyer, restitué après '
+      'inventaire et déductions justifiées éventuelles. Pochettes manquantes ou abimées '
+      'hors usure normale, imputables au client : prix de vente unitaire du lot '
+      '(5,90 / 5,50 / 4,90 EUR), sans double facturation. Ne pas facturer l usure normale.', SMALL),
     Spacer(1, 8 * mm), fields(['Signature client / date', 'Responsable du contrôle'])])
 
 build('bon-livraison-retour.pdf', 'Bon de livraison et retour', [
@@ -237,32 +243,64 @@ build('guide-formation-equipes.pdf', 'Guide de formation des équipes', [
     p('<b>Assistance :</b> snophone.info@gmail.com - +33 7 45 20 13 10. '
       'Préciser la référence, les dates et le lieu. Horaires selon le devis.')])
 
-# Brochure commerciale 2026 : les montants demeurent indicatifs jusqu'au devis accepté.
+# Grille commerciale à jour au 20/11/2026 : forfaits, sur-mesure et caution progressive.
 build('grille-offres-2026.pdf', 'Grille des offres SecurityNoPhone 2026', [
     p('Grille commerciale - novembre 2026', TITLE),
-    p('Les demandes doivent etre faites au moins 30 jours calendaires avant l evenement, '
-      'le debut du contrat ou la livraison souhaitee, meme pour les achats.'),
-    *section('Evenements ponctuels - une journee',
-             'Mini : 49 pochettes pour 69 EUR ; Essentiel : 97 pour 109 EUR ; '
-             'Confort : 182 pour 189 EUR ; Grand evenement : 303 pour 299 EUR ; '
-             'Prestige : 484 pour 449 EUR.'),
-    *section('Professionnels - minimum trois mois',
-             'Education : 92 pochettes / 69 EUR par mois ; Starter : 182 / 119 EUR ; '
-             'Business : 363 / 229 EUR ; Entreprise : 605 / 349 EUR. '
-             'Le client conserve les pochettes durant le contrat et les restitue ensuite.'),
-    *section('Vente definitive - minimum 50 unites',
-             '50-99 : 5,90 EUR par unite ; 100-299 : 5,50 EUR ; 300 et plus : 4,90 EUR.'),
-    *section('Logistique Mondial Relay',
-             'Pour les lots en pret, un envoi standard et un retour pre-paye sont prevus '
-             'si le colis est compatible avec le service Locker / Point Relais. '
-             'Pour les achats, livraison standard du colis confirme. Frais particuliers au devis.'),
-    *section('Caution et remplacement',
-             'Caution indicative : 1,50 EUR par pochette temporairement confiee. '
-             'Pochette manquante ou endommagee hors usure normale : prix de vente '
-             'unitaire applicable a la tranche du lot, sans double facturation avec la caution.'),
-    p('<b>Devis obligatoire :</b> les disponibilites, les frais eventuels et le prix '
-      'definitif sont confirmes avant tout engagement. Aucun paiement ne s effectue '
-      'sur le formulaire de demande.'),
+    p('Tarifs indicatifs TTC jusqu au devis accepté ; demande au moins 30 jours calendaires '
+      'avant événement, début de location ou livraison, y compris pour les achats. '
+      'Aucun paiement ni réservation automatique.'),
+    *section('1. Événements ponctuels - une journée'),
+    table(['Pack', 'Pochettes', 'Prix TTC'],
+          [['Mini','49','69 €'], ['Essentiel','97','109 €'],
+           ['Confort','182','189 €'], ['Grand événement','303','299 €'],
+           ['Prestige','484','449 €']], [.46,.22,.32]),
+    *section('2. Packs Pro standards - trois mois minimum'),
+    table(['Pack', 'Pochettes', 'Mensualité TTC', 'Référence 3 mois'],
+          [['Éducation','92','69 €','207 €'], ['Starter','182','119 €','357 €'],
+           ['Business','363','229 €','687 €'], ['Entreprise','605','349 €','1 047 €']],
+          [.33,.17,.24,.26]),
+    *section('3. Location personnalisée - particulier ou professionnel, dès 10 pochettes',
+             'Aucune durée minimale, y compris une journée. Référence Pro par période '
+             'de 30 jours commencée : 10-92 pochettes 69 €, 93-182 119 €, '
+             '183-363 229 €, 364-605 349 €. Pour 10-484 pochettes, le prix '
+             'indicatif n est pas inférieur au pack événementiel couvrant '
+             'la quantité. À partir de 485 : prix de location sur devis uniquement.'),
+    *section('4. Vente définitive - dès 50 pochettes'),
+    table(['Quantité achetée', 'Prix unitaire TTC'],
+          [['50-99','5,90 €'], ['100-299','5,50 €'], ['300 et plus','4,90 €']],
+          [.55,.45]),
+    PageBreak(),
+    p('Caution, logistique et conditions', TITLE),
+    p('La caution dégressive s applique aux locations événementielles, Pro '
+      'et personnalisées ; aucune caution sur une vente définitive.'),
+    *section('5. Caution progressive remboursable'),
+    table(['Rang des pochettes mises à disposition', 'Taux marginal'],
+          [['1re à 49e','1,50 € / pochette'],
+           ['50e à 99e','1,40 € / pochette'],
+           ['100e à 299e','1,25 € / pochette'],
+           ['À partir de la 300e','1,10 € / pochette']],
+          [.55,.45]),
+    p('Chaque taux est appliqué seulement aux pochettes de sa tranche ; '
+      'aucune réduction rétroactive. Exemples : 37 pochettes 55,50 €, '
+      '182 : 247,25 €, 303 : 397,90 €, 484 : 597 €, 605 : 730,10 €.', SMALL),
+    *section('6. Restitution, perte et remplacement',
+             'Caution distincte du prix de location, remboursable après inventaire, '
+             'sous réserve de déductions justifiées. Usure normale non facturée. '
+             'Pochette manquante ou endommagée imputable au client : prix '
+             'unitaire de vente du lot (5,90 € sous 100, 5,50 € de 100 à 299, '
+             '4,90 € dès 300), en déduisant toute somme déjà retenue sur caution. '
+             'Aucune double facturation.'),
+    *section('7. Agent optionnel',
+             '100 € TTC par agent et par journée de 7 heures maximum. '
+             'Hors de Lyon, déplacement et hébergement si nécessaire en supplément, sur devis.'),
+    *section('8. Acheminement et retour',
+             'Pour les locations, livraison standard et retour prépayé Mondial Relay '
+             'si dimensions, poids et Point Relais/Locker compatibles. '
+             'Colis exceptionnels ou multiples chiffrés au devis. '
+             'Achat : livraison standard selon le colis confirmé.'),
+    p('<b>Demander un devis :</b> securitynophone.com/commande.html ; '
+      'snophone.info@gmail.com ; +33 7 45 20 13 10. '
+      'Montants indicatifs, disponibilités et conditions à confirmer avant accord.'),
 ])
 
 for pdf in sorted(OUT.glob('*.pdf')):

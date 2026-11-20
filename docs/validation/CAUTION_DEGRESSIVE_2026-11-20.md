@@ -21,8 +21,15 @@ Date : 20 novembre 2026 — règle proposée puis validée dans la conversation.
 - `js/translations.js` : traductions FR/EN/DE/AR, y compris montants au format local et rappel sur les documents PDF.
 - `docs/OFFRES_2026.md` et la baseline enregistrent la règle approuvée.
 
-## Suivi PDF
-La grille commerciale PDF existante a été produite avant le présent ajustement. **Elle ne doit pas être invoquée comme source du nouveau barème de caution.** Un avertissement explicite est affiché à côté de ses liens publics ; les packs standards dans le PDF restent des références de tarif. Une éventuelle réédition du binaire PDF nécessite une recette graphique distincte. Le devis accepté et le simulateur à jour préviennent la confusion.
+## Harmonisation PDF et site au 20 novembre 2026
+
+La **grille commerciale** `documents/support/grille-offres-2026.pdf` est désormais un PDF A4 de deux pages intégrant les neuf packs, les locations personnalisées à partir de 10 pochettes sans durée minimale, les références tarifaires Pro, la caution marginale 1,50 / 1,40 / 1,25 / 1,10 €, les agents 100 € TTC jusqu'à 7 h et les conditions logistiques et de remplacement.
+
+La **fiche de retour matériel** `documents/support/fiche-retour-materiel.pdf` reprend les quatre tranches et l'exemple de 182 pochettes à 247,25 €, en laissant les champs de contrôle et signatures.
+
+Les six autres PDF du kit restent accessibles ; leurs sources ne présentaient aucune caution fixe obsolète. Les descriptions commerciales des téléchargements, le pied de page et les textes FR/EN/DE/AR ont été harmonisés.
+
+Les contrôles de structure PDF portent sur les en-têtes, fins, références croisées et nombre de pages. Le rendu des exemplaires de composition ReportLab a été contrôlé localement ; la recette complète avec lecteur PDF sur téléphone demeure distincte.
 
 ## Validation
 - Les suites `tests/rental-term.test.cjs`, `tests/custom-rental-ui.test.cjs` et `tests/checkout-modules.test.cjs` couvrent les seuils, la monotonie, les changements d'offres et la caution nulle pour achat, les totaux estimés, l'absence de devis ferme et les offres historiques.
