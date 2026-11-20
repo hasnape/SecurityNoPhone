@@ -12,6 +12,9 @@
     pro_starter: { type: 'professional', quantity: 182, monthlyPrice: 119, minMonths: 3 },
     pro_business: { type: 'professional', quantity: 363, monthlyPrice: 229, minMonths: 3 },
     pro_entreprise: { type: 'professional', quantity: 605, monthlyPrice: 349, minMonths: 3 },
+    // Custom rentals retain quote-only pouch pricing; no tier is inferred from the fixed packs.
+    location_particulier: { type: 'custom_event' },
+    location_pro: { type: 'custom_professional' },
     achat: { type: 'purchase', minQuantity: 50 },
     special_event: { type: 'custom' }
   });
@@ -110,6 +113,7 @@
   function initOrderForm(form) {
     const offerSelect = form.querySelector('#offerType');
     const quantityInput = form.querySelector('#quantity');
+    const customQuantityHint = form.querySelector('[data-custom-quantity-hint]');
     const targetGroup = form.querySelector('[data-event-purchase-date]');
     const targetInput = form.querySelector('[data-requested-date]');
     const targetError = form.querySelector('[data-requested-date-error]');
@@ -168,7 +172,7 @@
       showError(endInput, dateError, '');
       if (startInput) startInput.setCustomValidity('');
 
-      if (offer.type === 'professional') {
+      if (offer.type === 'professional' || offer.type === 'custom_professional') {
         const start = startInput?.value || '';
         const end = endInput?.value || '';
         if (!start || !end) {
@@ -225,12 +229,14 @@
 
     function refresh() {
       const offer = OFFER_CONFIG[offerSelect?.value];
-      const professional = offer?.type === 'professional';
+      const professional = offer?.type === 'professional' || offer?.type === 'custom_professional';
+      const customRental = offer?.type === 'custom_event' || offer?.type === 'custom_professional';
       const dated = !!offer && !professional;
       showElement(rentalGroup, professional);
       showElement(targetGroup, dated);
-      const eligibleRental = offer?.type === 'event' || offer?.type === 'professional';
+      const eligibleRental = offer?.type === 'event' || professional || customRental;
       showElement(rentalModeGroup, eligibleRental);
+      if (customQuantityHint) customQuantityHint.classList.toggle('d-none', !customRental);
       const withAgent = offer?.type === 'custom' || (eligibleRental && rentalMode?.value === 'avec');
       showElement(agentGroup, withAgent);
       if (startInput) startInput.required = professional;
@@ -250,6 +256,7 @@
         currentOffer = offerSelect?.value || null;
         if (offer?.quantity && quantityInput) quantityInput.value = String(offer.quantity);
         else if (offer?.type === 'purchase' && quantityInput) quantityInput.value = '50';
+        else if (customRental && quantityInput) quantityInput.value = '1';
         if (quantityInput) quantityInput.readOnly = !!offer?.quantity;
       }
 
@@ -286,7 +293,7 @@
         Boolean(agentCityInput?.value.trim())
       );
       const valid = quantityOk && datesOk && agentValid;
-      const caution = offer.type === 'event' || offer.type === 'professional'
+      const caution = offer.type === 'event' || professional || customRental
         ? quantity * DEPOSIT_PER_POUCH : 0;
       const replacement = replacementUnitPrice(quantity);
       let total = null;
@@ -301,6 +308,12 @@
           '{monthly} / mois ; minimum 3 mois : {total}, hors caution')
           .replace('{monthly}', format(offer.monthlyPrice))
           .replace('{total}', format(total));
+      } else if (customRental) {
+        // No public per-pouch rental rate for arbitrary quantities: only the caution
+        // and optional staffed service can be estimated without a custom quote.
+        label = translate('custom_rental_price_pending',
+          'Location personnalisée : {quantity} pochettes. Tarif des pochettes sur devis (caution indicative à part).')
+          .replace('{quantity}', String(quantity));
       } else if (offer.type === 'purchase') {
         total = quantity * purchaseUnitPrice(quantity);
         label = translate('booking_purchase_estimate',
@@ -313,7 +326,12 @@
 
       const pricedSubtotal = total !== null ? total + (agentCharge || 0) : null;
       if (withAgent && agentCharge !== null) {
-        if (total !== null) {
+        if (customRental) {
+          label = translate('custom_rental_agent_price_pending',
+            'Location de {quantity} pochettes : sur devis. Agents : {agents} (hors caution et éventuels frais de déplacement/logement).')
+            .replace('{quantity}', String(quantity))
+            .replace('{agents}', format(agentCharge));
+        } else if (total !== null) {
           label = translate('booking_with_agent_subtotal',
             'Pack : {base} + agents : {agents} = {total} (hors caution, déplacements et hébergement éventuel).')
             .replace('{base}', format(total))

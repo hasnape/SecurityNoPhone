@@ -29,6 +29,18 @@ Cette offre **ponctuelle** est distincte des contrats professionnels à engageme
 
 Le client garde les pochettes pendant toute la durée convenue et les restitue à la fin du contrat. **Trois mois calendaires minimum** (date de retour incluse), facturation et renouvellement définis au devis. Les anciennes offres à 150/390 € par jour, 20 €/mois et 60 €/mois ne sont plus présentées comme des offres souscriptibles.
 
+## 2 bis. Location personnalisée — particulier et professionnel (quantité libre)
+
+La location personnalisée **ne remplace pas les neuf packs standards à quantité fixe**. Elle permet d'indiquer **n'importe quelle quantité entière d'au moins une pochette**, selon le besoin réel du client. Aucune quantité minimale de 50 (réservée à l'achat définitif) ne s'applique à ce parcours de location.
+
+- **Particulier :** événement ponctuel d'une journée d'utilisation, date d'événement au moins J+30, matériel envoyé et rendu selon les modalités du devis.
+- **Professionnel :** nombre libre de pochettes conservées pendant une location de **trois mois calendaires minimum** (date de fin incluse), date de début au moins J+30.
+- Pour les deux profils : **tarif de location des pochettes exclusivement sur devis**, après confirmation de la quantité, du stock, des dates, des colis et des modalités logistiques. **Ne pas calculer un prix par pochette en interpolant ou en proratisant les anciens packs.**
+- **Caution indicative : 1,50 € par pochette** confiée, affichée distinctement, sous réserve des conditions d'inventaire. Exemple : 37 pochettes → caution indicative 55,50 € ; cela **ne constitue pas le prix de location**.
+- Option sans agent, ou avec agent à **100 € TTC par agent et par journée d'intervention de sept heures maximum**. En dehors de Lyon, déplacements et hébergement si nécessaire en supplément, sur devis. Le montant connu des agents ne vaut jamais devis total de la location personnalisée.
+- Formspree transmet une **demande de devis** et non une réservation ou un paiement. Vérification humaine obligatoire pour les quantités et disponibilités, en particulier lorsque les lots doivent être constitués sur mesure.
+- Les tarifs et caractéristiques des neuf packs fixes, les conditions d'achat minimum 50 unités et la logistique en vigueur restent inchangés.
+
 ## 3. Vente définitive — minimum 50 pochettes
 
 | Quantité achetée | Prix unitaire |
