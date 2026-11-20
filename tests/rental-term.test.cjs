@@ -70,8 +70,8 @@ test('sales tiers, replacements and distinct refundable deposit', () => {
 });
 test('all service requests require dates, without automatic booking', () => {
   assert.match(source, /targetInput\.required = dated/);
-  assert.match(source, /startInput\.required = professional/);
-  assert.match(source, /endInput\.required = professional/);
+  assert.match(source, /startInput\.required = usesRentalDates/);
+  assert.match(source, /endInput\.required = usesRentalDates/);
   assert.match(source, /const earliest = earliestRequestDate\(\)/);
   assert.match(source, /start < earliest/);
   assert.match(source, /requested < earliest/);
@@ -92,7 +92,7 @@ test('agent price is EUR 100 incl. VAT per person and on-site day, up to 7 hours
   assert.match(source, /Déplacement en supplément, logement si nécessaire/);
 });
 
-test('custom rentals allow any positive whole-number quantity without a fabricated fixed pack price', () => {
+test('custom rentals allow flexible periods from 10 whole pouches without a fabricated fixed pack price', () => {
   assert.equal(OFFER_CONFIG.location_particulier.type, 'custom_event');
   assert.equal(OFFER_CONFIG.location_pro.type, 'custom_professional');
   assert.equal(OFFER_CONFIG.location_particulier.quantity, undefined);
@@ -100,7 +100,12 @@ test('custom rentals allow any positive whole-number quantity without a fabricat
   assert.equal(OFFER_CONFIG.location_particulier.price, undefined);
   assert.equal(OFFER_CONFIG.location_pro.monthlyPrice, undefined);
   assert.match(source, /const customRental = offer\?\.type === 'custom_event' \|\| offer\?\.type === 'custom_professional'/);
-  assert.match(source, /const professional = offer\?\.type === 'professional' \|\| offer\?\.type === 'custom_professional'/);
+  assert.match(source, /const professional = offer\?\.type === 'professional';/);
+  assert.match(source, /const usesRentalDates = professional \|\| customRental/);
+  assert.match(source, /quantityInput\.min = customRental \? '10'/);
+  assert.match(source, /customRental && quantityInput\) quantityInput\.value = '10'/);
+  assert.match(source, /if \(standardPro\) \{/);
+  assert.match(source, /custom_rental_dates_order/);
   assert.match(source, /const caution = offer\.type === 'event' \|\| professional \|\| customRental/);
   assert.match(source, /quantity \* DEPOSIT_PER_POUCH/);
   assert.match(source, /price.*custom|Tarif des pochettes sur devis/);
