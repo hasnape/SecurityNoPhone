@@ -75,3 +75,30 @@ test('recovered content exists in all supported translations', () => {
       lang + ': missing ' + key));
   }
 });
+
+test('private/pro custom rental is accessible, quantity-editable and never given a fabricated price', () => {
+  for (const offer of ['location_particulier', 'location_pro']) {
+    assert.match(order, new RegExp('value="' + offer + '"'));
+    assert.match(order, new RegExp('href="#' + offer + '"'));
+    assert.match(home, new RegExp('href="commande\\.html#' + offer + '"'));
+    assert.match(calculator, new RegExp(offer + ':'));
+  }
+  assert.match(order, /data-custom-quantity-hint/);
+  assert.match(order, /min="1" step="1" value="49"/);
+  assert.match(calculator, /quantityInput\.readOnly = !!offer\?\.quantity/);
+  assert.match(calculator, /customRental && quantityInput\) quantityInput\.value = '1'/);
+  assert.match(calculator, /showElement\(rentalGroup, professional\)/);
+  assert.match(calculator, /const caution = offer\.type === 'event' \|\| professional \|\| customRental/);
+  assert.match(calculator, /const eligibleRental = offer\?\.type === 'event' \|\| professional \|\| customRental/);
+  assert.match(calculator, /label = translate\('custom_rental_price_pending'/);
+  assert.match(calculator, /label = translate\('custom_rental_agent_price_pending'/);
+  assert.match(calculator, /const pricedSubtotal = total !== null/);
+  assert.match(order, /data-caution-value/);
+  for (const lang of ['fr', 'en', 'de', 'ar']) {
+    for (const key of ['offer_location_particulier', 'offer_location_pro',
+      'custom_rental_section_title', 'custom_rental_quantity_help',
+      'custom_rental_price_pending', 'custom_rental_agent_price_pending']) {
+      assert.equal(typeof translations[lang][key], 'string', lang + ': ' + key);
+    }
+  }
+});
