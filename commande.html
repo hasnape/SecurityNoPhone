@@ -48,6 +48,22 @@
           <a class="btn btn-sm btn-outline-secondary" href="#pro_business" data-i18n="offer_pro_business">Business — 363 — 229 €/mois</a>
           <a class="btn btn-sm btn-outline-secondary" href="#pro_entreprise" data-i18n="offer_pro_entreprise">Entreprise — 605 — 349 €/mois</a>
         </div>
+        <div class="row g-3 mt-2 mb-3">
+          <div class="col-md-6">
+            <div class="border rounded-3 p-3 h-100 bg-light">
+              <h3 class="h6" data-i18n="custom_rental_private_title">Location personnalisée — Particulier</h3>
+              <p class="small mb-3" data-i18n="custom_rental_private_desc">Choisissez librement le nombre de pochettes pour un événement ponctuel. Prix sur devis, avec ou sans agent.</p>
+              <a class="btn btn-primary btn-sm" href="#location_particulier" data-i18n="custom_rental_private_cta">Personnaliser ma location</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="border rounded-3 p-3 h-100 bg-light">
+              <h3 class="h6" data-i18n="custom_rental_pro_title">Location personnalisée — Professionnel</h3>
+              <p class="small mb-3" data-i18n="custom_rental_pro_desc">Définissez votre quantité et votre période de mise à disposition (trois mois minimum). Prix sur devis, avec ou sans agent.</p>
+              <a class="btn btn-outline-primary btn-sm" href="#location_pro" data-i18n="custom_rental_pro_cta">Créer une demande pro</a>
+            </div>
+          </div>
+        </div>
         <p class="small mb-0"><a href="suivi.html" data-i18n="nav_tracking">Suivi de commande</a> · <a href="documents/support/grille-offres-2026.pdf" data-i18n="support_prices_pdf_cta">Télécharger la grille commerciale (PDF)</a></p>
       </section><div class="row gy-5">
         <div class="col-lg-7">
@@ -69,6 +85,8 @@
                 <option value="pro_starter" data-i18n="offer_pro_starter">Pro Starter — 182 pochettes — 119 €/mois</option>
                 <option value="pro_business" data-i18n="offer_pro_business">Pro Business — 363 pochettes — 229 €/mois</option>
                 <option value="pro_entreprise" data-i18n="offer_pro_entreprise">Pro Entreprise — 605 pochettes — 349 €/mois</option>
+                <option value="location_particulier" data-i18n="offer_location_particulier">Location personnalisée — particulier — quantité libre — sur devis</option>
+                <option value="location_pro" data-i18n="offer_location_pro">Location personnalisée — professionnel — quantité libre — sur devis</option>
                 <option value="achat" data-i18n="offer_purchase">Achat définitif personnalisé — 50 pochettes minimum</option>
                 <option value="special_event" data-i18n="offer_custom_staff">Accompagnement avec agent — devis personnalisé</option>
               </select>
@@ -92,7 +110,8 @@
               <div class="text-danger mt-1" id="quantityError" role="status" style="display:none"></div>
             </div>
 
-            <p class="small text-muted" data-i18n="order_fixed_quantity_note">Les formules événementielles et professionnelles ont une quantité fixe. Pour un volume différent, demandez un devis.</p>
+            <p class="small text-muted" data-i18n="order_fixed_quantity_note">Les neuf packs standards ont une quantité fixe. En location personnalisée, vous choisissez librement votre quantité.</p>
+            <p class="small text-muted d-none" data-custom-quantity-hint data-i18n="custom_rental_quantity_help">Vous choisissez le nombre exact de pochettes, à partir de 1. Le prix des pochettes et leur disponibilité seront confirmés par devis. La caution indicative est de 1,50 € par pochette.</p>
             <p class="alert alert-light border" data-i18n="booking_30_days_notice">Anticipation obligatoire : demande au moins 30 jours calendaires avant la date d'événement, le début de mise à disposition ou la livraison souhaitée d'un achat. Selon disponibilité ; aucune réservation automatique.</p>
             <div class="mb-3 d-none" data-event-purchase-date>
               <label for="requestedDate" class="form-label" data-i18n="booking_requested_date_label">Date de l'événement ou de livraison souhaitée :</label>
@@ -226,6 +245,8 @@
             <h3 class="h6" data-i18n="pro_offers_heading">Professionnels — minimum 3 mois</h3>
             <p class="small" data-i18n="pro_offers_summary">Éducation 92 / 69 €/mois · Starter 182 / 119 €/mois · Business 363 / 229 €/mois · Entreprise 605 / 349 €/mois.</p>
             <p class="small text-muted" data-i18n="agent_public_price_notice">Accompagnement avec agent : 100 € TTC par agent pour une journée de 7 heures maximum, en supplément du pack. En dehors de Lyon, frais de déplacement et, si nécessaire, d’hébergement en supplément, sur devis.</p>
+            <h3 class="h6" data-i18n="custom_rental_side_title">Location personnalisée — quantité libre</h3>
+            <p class="small" data-i18n="custom_rental_side_desc">Particuliers : événement ponctuel. Professionnels : période de trois mois minimum. Dans les deux cas, sélectionnez votre nombre de pochettes (dès 1), avec ou sans agent. Prix des pochettes sur devis ; caution indicative de 1,50 € par pochette.</p>
             <h3 class="h6" data-i18n="purchase_offers_heading">Achat définitif — minimum 50</h3>
             <p class="small" data-i18n="purchase_offers_summary">50–99 : 5,90 €/u · 100–299 : 5,50 €/u · 300 et plus : 4,90 €/u. Personnalisation spécifique sur devis.</p>
             <p class="small" data-i18n="offer_delivery_included">Mondial Relay aller-retour standard inclus pour les mises à disposition : retrait en Locker/Point Relais, retour prépayé, sous réserve de compatibilité poids/volume ; expéditions exceptionnelles chiffrées avant accord. Pour la vente, livraison standard incluse selon le colis confirmé au devis.</p>
