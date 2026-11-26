@@ -34,8 +34,10 @@ class SupportDocuments(unittest.TestCase):
                 parsed = Downloads()
                 source = (ROOT / page).read_text()
                 parsed.feed(source)
-                self.assertEqual(set(parsed.downloads), expected)
-                self.assertEqual(len(parsed.downloads), len(expected))
+                expected_downloads = expected
+                if page == 'support.html':
+                    expected_downloads = expected | {PREFIX + 'grille-offres-2026.pdf'}
+                self.assertCountEqual(parsed.downloads, expected_downloads)
                 self.assertEqual(set(parsed.open_links), expected)
                 self.assertIn('id="documents-kit"', source)
                 self.assertIn('data-i18n="support_docs_languages"', source)

@@ -88,7 +88,6 @@ test('sales tiers, replacements and progressive refundable deposit', () => {
   for (const quantity of [0, -1, 1.5, Infinity, NaN, '49']) {
     assert.equal(calculateDeposit(quantity), null);
   }
-  assert.match(source, /calculateDeposit\(quantity\)/);
 });
 test('all service requests require dates, without automatic booking', () => {
   assert.match(source, /targetInput\.required = dated/);
@@ -128,8 +127,7 @@ test('custom rentals retain freely selectable quantity and duration and use indi
   assert.match(source, /customRental && quantityInput\) quantityInput\.value = '10'/);
   assert.match(source, /if \(standardPro\) \{/);
   assert.match(source, /custom_rental_dates_order/);
-  assert.match(source, /const caution = offer\.type === 'event' \|\| professional \|\| customRental/);
-  assert.match(source, /calculateDeposit\(quantity\)/);
+  assert.match(source, /const caution = offer\.type === 'event'\s*\? calculateEventDeposit\(offer\.price\)\s*:\s*\(professional \|\| customRental \? calculateDeposit\(quantity\) : 0\)/);
   assert.match(source, /function customRentalReference\(quantity, startISO, endISO\)/);
   assert.match(source, /custom_rental_pro_estimate/);
   assert.match(source, /custom_rental_price_pending/);

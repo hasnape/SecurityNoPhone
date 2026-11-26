@@ -1,8 +1,10 @@
 """Public SecurityNoPhone offer and 30-day booking regression checks."""
+from datetime import date
 from pathlib import Path
 import json
 import re
 import unittest
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {name: (ROOT / name).read_text(encoding="utf-8")
@@ -176,11 +178,16 @@ class SecurityNoPhoneOffers2026(unittest.TestCase):
         self.assertIn('data-i18n="legal_offers_2026_notice"', PAGES["cgv.html"])
 
     def test_sitemap_modified_dates(self):
+        namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+        dates = {entry.findtext("s:loc", namespaces=namespace):
+                 date.fromisoformat(entry.findtext("s:lastmod", namespaces=namespace))
+                 for entry in ET.fromstring(PAGES["sitemap.xml"])}
         for path in ("", "solutions.html", "commande.html", "support.html",
                      "cgv.html", "ressources.html"):
-            self.assertIn("<loc>https://securitynophone.com/" + path +
-                          "</loc>\n    <lastmod>2026-11-20</lastmod>",
-                          PAGES["sitemap.xml"])
+            with self.subTest(path=path):
+                self.assertGreaterEqual(dates["https://securitynophone.com/" + path],
+                                        date(2026, 11, 20))
+
 
 if __name__ == "__main__":
     unittest.main()
